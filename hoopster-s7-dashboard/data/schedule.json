@@ -8,7 +8,9 @@
   "home_tl": "Nestor",
   "away": "Sta Lucia",
   "venue": "Dubai Club for People of Determination",
-  "map": "https://share.google/Qz18Z7MwlLmsa4b1v"
+  "map": "https://share.google/Qz18Z7MwlLmsa4b1v",
+  "home_score": "53",
+  "away_score": "48"
  },
  {
   "round": "1",
@@ -19,7 +21,9 @@
   "home_tl": "Gwyn",
   "away": "Purefoods",
   "venue": "Dubai Club for People of Determination",
-  "map": "https://share.google/Qz18Z7MwlLmsa4b1v"
+  "map": "https://share.google/Qz18Z7MwlLmsa4b1v",
+  "home_score": "58",
+  "away_score": "69"
  },
  {
   "round": "1",
@@ -30,7 +34,9 @@
   "home_tl": "Patz",
   "away": "Toyota",
   "venue": "Dubai Club for People of Determination",
-  "map": "https://share.google/Qz18Z7MwlLmsa4b1v"
+  "map": "https://share.google/Qz18Z7MwlLmsa4b1v",
+  "home_score": "42",
+  "away_score": "47"
  },
  {
   "round": "1",
@@ -41,7 +47,9 @@
   "home_tl": "Markie",
   "away": "Tender Juicy",
   "venue": "Dubai Club for People of Determination",
-  "map": "https://share.google/Qz18Z7MwlLmsa4b1v"
+  "map": "https://share.google/Qz18Z7MwlLmsa4b1v",
+  "home_score": "63",
+  "away_score": "51"
  },
  {
   "round": "1",
@@ -52,7 +60,9 @@
   "home_tl": "Ryan",
   "away": "Sunkist",
   "venue": "Dubai Club for People of Determination",
-  "map": "https://share.google/Qz18Z7MwlLmsa4b1v"
+  "map": "https://share.google/Qz18Z7MwlLmsa4b1v",
+  "home_score": "48",
+  "away_score": "72"
  },
  {
   "round": "2",
@@ -63,7 +73,9 @@
   "home_tl": "John",
   "away": "Crispa",
   "venue": "Al Ahli Sports Club",
-  "map": "https://share.google/D3WC9mfWwdI9j6UkS"
+  "map": "https://share.google/D3WC9mfWwdI9j6UkS",
+  "home_score": "62",
+  "away_score": "51"
  },
  {
   "round": "2",
@@ -74,7 +86,9 @@
   "home_tl": "Patz",
   "away": "Shell",
   "venue": "Al Ahli Sports Club",
-  "map": "https://share.google/D3WC9mfWwdI9j6UkS"
+  "map": "https://share.google/D3WC9mfWwdI9j6UkS",
+  "home_score": "53",
+  "away_score": "83"
  },
  {
   "round": "2",
@@ -85,7 +99,9 @@
   "home_tl": "Nestor",
   "away": "Alaska",
   "venue": "Al Ahli Sports Club",
-  "map": "https://share.google/D3WC9mfWwdI9j6UkS"
+  "map": "https://share.google/D3WC9mfWwdI9j6UkS",
+  "home_score": "69",
+  "away_score": "49"
  },
  {
   "round": "2",
@@ -96,7 +112,9 @@
   "home_tl": "Marlo",
   "away": "Toyota",
   "venue": "Al Ahli Sports Club",
-  "map": "https://share.google/D3WC9mfWwdI9j6UkS"
+  "map": "https://share.google/D3WC9mfWwdI9j6UkS",
+  "home_score": "73",
+  "away_score": "57"
  },
  {
   "round": "2",
@@ -107,7 +125,9 @@
   "home_tl": "Wael",
   "away": "Purefoods",
   "venue": "Al Ahli Sports Club",
-  "map": "https://share.google/D3WC9mfWwdI9j6UkS"
+  "map": "https://share.google/D3WC9mfWwdI9j6UkS",
+  "home_score": "51",
+  "away_score": "64"
  },
  {
   "round": "3",
@@ -118,7 +138,9 @@
   "home_tl": "Patz",
   "away": "Purefoods",
   "venue": "Al Nasr Basketball Court",
-  "map": "https://share.google/WQaYw0LaCRiUkjNJK"
+  "map": "https://share.google/WQaYw0LaCRiUkjNJK",
+  "home_score": "55",
+  "away_score": "51"
  },
  {
   "round": "3",
@@ -129,7 +151,9 @@
   "home_tl": "Marlo",
   "away": "Alaska",
   "venue": "Al Nasr Basketball Court",
-  "map": "https://share.google/WQaYw0LaCRiUkjNJK"
+  "map": "https://share.google/WQaYw0LaCRiUkjNJK",
+  "home_score": "56",
+  "away_score": "51"
  },
  {
   "round": "3",
@@ -140,7 +164,9 @@
   "home_tl": "Josh",
   "away": "Shell",
   "venue": "Al Nasr Basketball Court",
-  "map": "https://share.google/WQaYw0LaCRiUkjNJK"
+  "map": "https://share.google/WQaYw0LaCRiUkjNJK",
+  "home_score": "54",
+  "away_score": "63"
  },
  {
   "round": "3",
@@ -151,7 +177,9 @@
   "home_tl": "John",
   "away": "Tender Juicy",
   "venue": "Al Nasr Basketball Court",
-  "map": "https://share.google/WQaYw0LaCRiUkjNJK"
+  "map": "https://share.google/WQaYw0LaCRiUkjNJK",
+  "home_score": "62",
+  "away_score": "61"
  },
  {
   "round": "3",
@@ -162,7 +190,9 @@
   "home_tl": "Nestor",
   "away": "Crispa",
   "venue": "Al Nasr Basketball Court",
-  "map": "https://share.google/WQaYw0LaCRiUkjNJK"
+  "map": "https://share.google/WQaYw0LaCRiUkjNJK",
+  "home_score": "56",
+  "away_score": "53"
  },
  {
   "round": "4",
@@ -173,7 +203,9 @@
   "home_tl": "Marlo",
   "away": "Shell",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "4",
@@ -184,7 +216,9 @@
   "home_tl": "Nestor",
   "away": "Tender Juicy",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "4",
@@ -195,7 +229,9 @@
   "home_tl": "Ryan",
   "away": "Crispa",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "4",
@@ -206,7 +242,9 @@
   "home_tl": "Josh",
   "away": "Purefoods",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "4",
@@ -217,7 +255,9 @@
   "home_tl": "Patz",
   "away": "Sunkist",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "5",
@@ -228,7 +268,9 @@
   "home_tl": "Nestor",
   "away": "San Miguel",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "5",
@@ -239,7 +281,9 @@
   "home_tl": "Josh",
   "away": "Sunkist",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "5",
@@ -250,7 +294,9 @@
   "home_tl": "Markie",
   "away": "Purefoods",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "5",
@@ -261,7 +307,9 @@
   "home_tl": "Marlo",
   "away": "Crispa",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "5",
@@ -272,7 +320,9 @@
   "home_tl": "Ryan",
   "away": "Tender Juicy",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "6",
@@ -283,7 +333,9 @@
   "home_tl": "Gwyn",
   "away": "Tender Juicy",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "6",
@@ -294,7 +346,9 @@
   "home_tl": "Ryan",
   "away": "San Miguel",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "6",
@@ -305,7 +359,9 @@
   "home_tl": "Josh",
   "away": "Ginebra",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "6",
@@ -316,7 +372,9 @@
   "home_tl": "Markie",
   "away": "Sunkist",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "6",
@@ -327,7 +385,9 @@
   "home_tl": "Marlo",
   "away": "Purefoods",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "7",
@@ -338,7 +398,9 @@
   "home_tl": "Beng",
   "away": "Sunkist",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "7",
@@ -349,7 +411,9 @@
   "home_tl": "Marlo",
   "away": "Tender Juicy",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "7",
@@ -360,7 +424,9 @@
   "home_tl": "Gwyn",
   "away": "San Miguel",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "7",
@@ -371,7 +437,9 @@
   "home_tl": "Ryan",
   "away": "Toyota",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "7",
@@ -382,7 +450,9 @@
   "home_tl": "Markie",
   "away": "Ginebra",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "8",
@@ -393,7 +463,9 @@
   "home_tl": "Markie",
   "away": "Alaska",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "8",
@@ -404,7 +476,9 @@
   "home_tl": "Beng",
   "away": "Ginebra",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "8",
@@ -415,7 +489,9 @@
   "home_tl": "Marlo",
   "away": "Sunkist",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "8",
@@ -426,7 +502,9 @@
   "home_tl": "Wael",
   "away": "San Miguel",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "8",
@@ -437,7 +515,9 @@
   "home_tl": "Gwyn",
   "away": "Toyota",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "9",
@@ -448,7 +528,9 @@
   "home_tl": "Wael",
   "away": "Toyota",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "9",
@@ -459,7 +541,9 @@
   "home_tl": "Gwyn",
   "away": "Shell",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "9",
@@ -470,7 +554,9 @@
   "home_tl": "Beng",
   "away": "Alaska",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "9",
@@ -481,7 +567,9 @@
   "home_tl": "John",
   "away": "Ginebra",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  },
  {
   "round": "9",
@@ -492,6 +580,8 @@
   "home_tl": "Marlo",
   "away": "San Miguel",
   "venue": "TBC",
-  "map": ""
+  "map": "",
+  "home_score": "",
+  "away_score": ""
  }
 ]

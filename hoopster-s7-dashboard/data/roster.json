@@ -3,618 +3,824 @@
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Marlo David",
-  "jersey": "14"
+  "jersey": "14",
+  "rating": "C",
+  "role": "TL"
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Jonathan Ferrer",
-  "jersey": "4"
+  "jersey": "4",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Jeremy Villarin",
-  "jersey": "7"
+  "jersey": "7",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Amman Abellar",
-  "jersey": "17"
+  "jersey": "17",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Deo Calasicas",
-  "jersey": "23"
+  "jersey": "23",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Mark Gabiana",
-  "jersey": "25"
+  "jersey": "25",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Alister Lance Escabarte",
-  "jersey": "01"
+  "jersey": "01",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "John Piere Zamora",
-  "jersey": "5"
+  "jersey": "5",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Jake Castro",
-  "jersey": "8"
+  "jersey": "8",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 1,
   "team": "Sta Lucia",
   "player": "Regil Reyes",
-  "jersey": "10"
+  "jersey": "10",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Patrick Lalas",
-  "jersey": "7"
+  "jersey": "7",
+  "rating": "B",
+  "role": "TL"
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "AJ Sinamban",
-  "jersey": "12"
+  "jersey": "12",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Bij Amora",
-  "jersey": "4"
+  "jersey": "4",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "DJ Baligat",
-  "jersey": "75"
+  "jersey": "75",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Emmanuel Canlas",
-  "jersey": "16"
+  "jersey": "16",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Louie Lozano",
-  "jersey": "47"
+  "jersey": "47",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Hazzend Raymundo",
-  "jersey": "11"
+  "jersey": "11",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "JV Ariola",
-  "jersey": "30"
+  "jersey": "30",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Cedrik Padiernos",
-  "jersey": "3"
+  "jersey": "3",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Edi Distor",
-  "jersey": "26"
+  "jersey": "26",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 2,
   "team": "San Miguel",
   "player": "Jasper Guevarra",
-  "jersey": "18"
+  "jersey": "18",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "John Dela Cruz",
-  "jersey": "10"
+  "jersey": "10",
+  "rating": "A",
+  "role": "TL"
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Jonathan Pascua",
-  "jersey": "21"
+  "jersey": "21",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Ronald Magsino",
-  "jersey": "19"
+  "jersey": "19",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Adon Caesar B. Corpuz",
-  "jersey": "15"
+  "jersey": "15",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Denmark Cruzat",
-  "jersey": "18"
+  "jersey": "18",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Glenn Moreno",
-  "jersey": "25"
+  "jersey": "25",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Jayr Songco",
-  "jersey": "8"
+  "jersey": "8",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Mark Manzano",
-  "jersey": "00"
+  "jersey": "00",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "John Canimo",
-  "jersey": "22"
+  "jersey": "22",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Ralph Anthony Morales",
-  "jersey": "27"
+  "jersey": "27",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 3,
   "team": "Sunkist",
   "player": "Rommel Bitara Matusalem",
-  "jersey": "12"
+  "jersey": "12",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Wael Al Khodor",
-  "jersey": "3"
+  "jersey": "3",
+  "rating": "C",
+  "role": "TL"
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Jethro Cangas",
-  "jersey": "23"
+  "jersey": "23",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Celerino Valencia Jr",
-  "jersey": "52"
+  "jersey": "52",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Joaquim Dael",
-  "jersey": "1"
+  "jersey": "1",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Angel Balderama",
-  "jersey": "18"
+  "jersey": "18",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Jhenricko Magtoto Banate",
-  "jersey": "5"
+  "jersey": "5",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Richard Estolero",
-  "jersey": "27"
+  "jersey": "27",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "HJ Sanaga",
-  "jersey": "77"
+  "jersey": "77",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Jethroe Canonigo",
-  "jersey": "26"
+  "jersey": "26",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Anon Futrakul",
-  "jersey": "13"
+  "jersey": "13",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 4,
   "team": "Tender Juicy",
   "player": "Jedidiah Borleo",
-  "jersey": "14"
+  "jersey": "14",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Melover Medenilla",
-  "jersey": "31"
+  "jersey": "31",
+  "rating": "B",
+  "role": "TL"
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "John Paolo C. Delos Santos",
-  "jersey": "4"
+  "jersey": "4",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Art Anthony T. Antonio",
-  "jersey": "01"
+  "jersey": "01",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Butch Morales",
-  "jersey": "12"
+  "jersey": "12",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Don Victoria",
-  "jersey": "7"
+  "jersey": "7",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Harvey Manaligod",
-  "jersey": "27"
+  "jersey": "27",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Jay Escaran",
-  "jersey": "53"
+  "jersey": "53",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Mark Anthony Anit",
-  "jersey": "23"
+  "jersey": "23",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Klyde Morales",
-  "jersey": "16"
+  "jersey": "16",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 5,
   "team": "Purefoods",
   "player": "Renjie Dumaguing",
-  "jersey": "9"
+  "jersey": "9",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Gwyn Tanate",
-  "jersey": "33"
+  "jersey": "33",
+  "rating": "C",
+  "role": "TL"
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Raymond Cabral",
-  "jersey": "16"
+  "jersey": "16",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Marl Estan Ilagan",
-  "jersey": "3"
+  "jersey": "3",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Billy Apostol",
-  "jersey": "5"
+  "jersey": "5",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Jagge Soriano",
-  "jersey": "9"
+  "jersey": "9",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Kirby Young",
-  "jersey": "7"
+  "jersey": "7",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Jeafter Baret",
-  "jersey": "11"
+  "jersey": "11",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Jose Leandro Fermin",
-  "jersey": "1"
+  "jersey": "1",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Benedict Labaste",
-  "jersey": "19"
+  "jersey": "19",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 6,
   "team": "Crispa",
   "player": "Rhegie Samonte",
-  "jersey": "4"
+  "jersey": "4",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Mark Jayson Aranda",
-  "jersey": "3"
+  "jersey": "3",
+  "rating": "B",
+  "role": "TL"
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Phillip Rosal",
-  "jersey": "20"
+  "jersey": "20",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Richard Alabon",
-  "jersey": "13"
+  "jersey": "13",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "JR Andaya",
-  "jersey": "99"
+  "jersey": "99",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Josevic Santos",
-  "jersey": "22"
+  "jersey": "22",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Tyrone Cariño",
-  "jersey": "24"
+  "jersey": "24",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Jani Cagara",
-  "jersey": "1"
+  "jersey": "1",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Leianne Emmanuel Fariolen",
-  "jersey": "0"
+  "jersey": "0",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Benedict Valera",
-  "jersey": "9"
+  "jersey": "9",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 7,
   "team": "Shell",
   "player": "Rj Conde",
-  "jersey": "16"
+  "jersey": "16",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Ryan Dammay",
-  "jersey": "14"
+  "jersey": "14",
+  "rating": "A",
+  "role": "TL"
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Dino Salva",
-  "jersey": "11"
+  "jersey": "11",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Ron James Manuel",
-  "jersey": "1"
+  "jersey": "1",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Earnest Ortega",
-  "jersey": "12"
+  "jersey": "12",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Richie Manuel",
-  "jersey": "8"
+  "jersey": "8",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Ariel Joy Benitez",
-  "jersey": "5"
+  "jersey": "5",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Marvin Palomar",
-  "jersey": "23"
+  "jersey": "23",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Franco Morales",
-  "jersey": "7"
+  "jersey": "7",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Jeff Ian Prego",
-  "jersey": "25"
+  "jersey": "25",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 8,
   "team": "Alaska",
   "player": "Donnie Leo Arzaga",
-  "jersey": "999"
+  "jersey": "999",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Joshua Piadozo",
-  "jersey": "12"
+  "jersey": "12",
+  "rating": "B++",
+  "role": "TL"
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Jayvee Concha",
-  "jersey": "8"
+  "jersey": "8",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Eric Maricaban",
-  "jersey": "42"
+  "jersey": "42",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Franklin Gabriel Ayala",
-  "jersey": "18"
+  "jersey": "18",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Christian John Lago",
-  "jersey": "10"
+  "jersey": "10",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Earvin Maricaban",
-  "jersey": "9"
+  "jersey": "9",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Raven Orario",
-  "jersey": "08"
+  "jersey": "08",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Arien Perez",
-  "jersey": "21"
+  "jersey": "21",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Jonathan Maranan De Chavez",
-  "jersey": "32"
+  "jersey": "32",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 9,
   "team": "Toyota",
   "player": "Jay Manalang",
-  "jersey": "13"
+  "jersey": "13",
+  "rating": "C",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Nestor Matondo",
-  "jersey": "8"
+  "jersey": "8",
+  "rating": "B",
+  "role": "TL"
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Jess De Guzman",
-  "jersey": "67"
+  "jersey": "67",
+  "rating": "A",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Jay Marcel Brotonel",
-  "jersey": "1"
+  "jersey": "1",
+  "rating": "B++",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Jaj Baltazar",
-  "jersey": "12"
+  "jersey": "12",
+  "rating": "B+",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Alfred Amponin",
-  "jersey": "4"
+  "jersey": "4",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Gerald Trinidad",
-  "jersey": "13"
+  "jersey": "13",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Jess Lawrence Tajado",
-  "jersey": "07"
+  "jersey": "07",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Lance Omega",
-  "jersey": "19"
+  "jersey": "19",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Mark Louie Eslava",
-  "jersey": "27"
+  "jersey": "27",
+  "rating": "B",
+  "role": ""
  },
  {
   "team_no": 10,
   "team": "Ginebra",
   "player": "Jayson Adriano",
-  "jersey": "25"
+  "jersey": "25",
+  "rating": "C",
+  "role": ""
  }
 ]
