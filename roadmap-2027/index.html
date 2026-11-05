@@ -272,7 +272,7 @@ h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 
 .btn.danger { background: transparent; color: var(--innovation); border-color: var(--innovation); }
 .btn:disabled { opacity: .5; cursor: default; }
 
-.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .pillar { position: relative; text-align: left; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 10px; padding: 14px 52px 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .pillar.off { opacity: .45; }
 .pillar input { position: absolute; top: 14px; right: 16px; width: 20px; height: 20px; margin: 0; accent-color: var(--c); cursor: pointer; }
@@ -543,7 +543,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   <div class="pillars" id="pillars">
     <label class="pillar" style="--c: var(--core)"><input type="checkbox" id="p-core" data-p="core" checked><span class="k">Optimize the core</span><b>Core Digital</b><span class="n" id="n-core">–</span></label>
     <label class="pillar" style="--c: var(--enterprise)"><input type="checkbox" id="p-enterprise" data-p="enterprise" checked><span class="k">Connect the ecosystem</span><b>Enterprise Transformation</b><span class="n" id="n-enterprise">–</span></label>
-    <label class="pillar" style="--c: var(--innovation)"><input type="checkbox" id="p-innovation" data-p="innovation" checked><span class="k">Build for scale</span><b>Innovation &amp; Scale</b><span class="n" id="n-innovation">–</span></label>
   </div>
 
   <div class="tabrow">
@@ -644,7 +643,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
       <label class="field">Pillar<select id="f-pillar">
         <option value="core">Core Digital</option>
         <option value="enterprise">Enterprise Transformation</option>
-        <option value="innovation">Innovation &amp; Scale</option>
       </select></label>
     </div>
     <div class="grid2">
@@ -688,7 +686,6 @@ const LANES = [
   { id: "blm", name: "Bloomingdale's" },
   { id: "all", name: "Shared across brands" },
   { id: "cross", name: "Cross-functional" },
-  { id: "innovation", name: "Innovation & Scale" },
 ];
 const BRANDS = ["mnp", "gymshark", "coach", "blm"];
 // A brand tab also shows the shared lane, since those projects apply to every brand.
@@ -759,7 +756,7 @@ function render() {
   if (!shown && items.length) g.append(el("div", "empty", "Nothing matches these filters. Pick another brand, turn a pillar back on or untick “UX/UI Design” in Filters."));
   placeToday();
 
-  ["core","enterprise","innovation"].forEach((p) => {
+  ["core","enterprise"].forEach((p) => {
     const n = items.filter((i) => i.pillar === p).length;
     $("n-" + p).textContent = n + (n === 1 ? " project" : " projects");
   });
