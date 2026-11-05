@@ -57,36 +57,6 @@
   }
  },
  {
-  "id": "blm-bazaarvoice-ratings-reviews-app-plp",
-  "data": {
-   "designDone": true,
-   "designDoneOn": "2026-10-29",
-   "due": "",
-   "end": 3,
-   "flagship": true,
-   "lane": "blm",
-   "links": [
-    {
-     "label": "Jira BLMHD-3456",
-     "platform": "app",
-     "url": "https://bloomingdalesme.atlassian.net/browse/BLMHD-3456"
-    }
-   ],
-   "mine": true,
-   "notes": "PLP design done Oct 2026. Release planned Q1 2027.",
-   "order": 1,
-   "owner": "Awatef",
-   "pillar": "core",
-   "scope": "App",
-   "source": "Oct 2026 release notes",
-   "start": 1,
-   "systems": "",
-   "timing": "Q1 2027",
-   "title": "Bazaar Voice Ratings & Reviews (App)",
-   "workstream": ""
-  }
- },
- {
   "id": "blm-bbb-enrollment-re-launch",
   "data": {
    "end": 3,
@@ -451,16 +421,16 @@
    "flagship": false,
    "lane": "cross",
    "mine": false,
-   "notes": "",
+   "notes": "Runs from Q3 to the end of the year.",
    "order": 1,
    "owner": "Awatef",
    "pillar": "enterprise",
    "scope": "Cross-brand / strategic",
    "source": "2027 roadmap deck",
-   "start": 1,
-   "timing": "Full year 2027",
+   "start": 7,
+   "timing": "Q3–Q4 2027",
    "title": "Amber Loyalty",
-   "updatedAt": 1793624235879
+   "updatedAt": 1793872516257
   }
  },
  {
@@ -606,6 +576,34 @@
   }
  },
  {
+  "id": "cross-ksa-expansion",
+  "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "2027-09-30",
+   "end": null,
+   "flagship": false,
+   "hidden": false,
+   "lane": "cross",
+   "links": [],
+   "mine": false,
+   "notes": "ETA September 2027.",
+   "order": 13,
+   "owner": "Awatef",
+   "pillar": "enterprise",
+   "scope": "KSA",
+   "source": "Added on the roadmap",
+   "start": null,
+   "systems": "",
+   "timing": "ETA Sep 2027",
+   "title": "KSA Expansion",
+   "updatedAt": 1793872516257,
+   "workstream": ""
+  }
+ },
+ {
   "id": "cross-personalization-intelligent-cms-platform",
   "data": {
    "designDone": false,
@@ -663,7 +661,7 @@
    "designDone": false,
    "designDoneOn": "",
    "due": "",
-   "end": null,
+   "end": 5,
    "flagship": false,
    "hidden": false,
    "lane": "cross",
@@ -675,11 +673,11 @@
    "pillar": "enterprise",
    "scope": "All brands",
    "source": "2027 roadmap deck",
-   "start": null,
+   "start": 4,
    "systems": "",
-   "timing": "TBC",
+   "timing": "Apr–May 2027",
    "title": "SFMC Replacement",
-   "updatedAt": 1793624738873,
+   "updatedAt": 1793872516257,
    "workstream": ""
   }
  },
@@ -688,14 +686,14 @@
   "data": {
    "designDone": false,
    "designDoneOn": "",
-   "due": "",
+   "due": "2027-04-30",
    "end": null,
    "flagship": false,
    "hidden": false,
    "lane": "cross",
    "links": [],
    "mine": false,
-   "notes": "",
+   "notes": "ETA April 2027.",
    "order": 9,
    "owner": "Awatef",
    "pillar": "enterprise",
@@ -703,9 +701,9 @@
    "source": "2027 roadmap deck",
    "start": null,
    "systems": "",
-   "timing": "TBC",
-   "title": "SFSC Optimization",
-   "updatedAt": 1793624598568,
+   "timing": "ETA Apr 2027",
+   "title": "SFSC Data Optimizations",
+   "updatedAt": 1793872516257,
    "workstream": ""
   }
  },
@@ -818,96 +816,6 @@
   }
  },
  {
-  "id": "gymshark-e-gift-card-release-app",
-  "data": {
-   "designDone": true,
-   "designDoneOn": "2026-10-29",
-   "due": "",
-   "end": 3,
-   "flagship": false,
-   "lane": "gymshark",
-   "links": [
-    {
-     "label": "Add to Bag",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=23530-81121&t=owFpcD9FVvMeiHzL-11"
-    },
-    {
-     "label": "Shopping Bag",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=18971-82094&t=owFpcD9FVvMeiHzL-11"
-    },
-    {
-     "label": "PDP",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=23458-58363&t=owFpcD9FVvMeiHzL-11"
-    },
-    {
-     "label": "Checkout",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=3635-240493&t=owFpcD9FVvMeiHzL-11"
-    },
-    {
-     "label": "Checkout – Shipping Method",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=3691-75806&t=owFpcD9FVvMeiHzL-11"
-    },
-    {
-     "label": "Checkout – Shipping Method Summary",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=3691-75884&t=owFpcD9FVvMeiHzL-11"
-    },
-    {
-     "label": "My Orders › Order Details",
-     "platform": "app",
-     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=23589-138294&t=owFpcD9FVvMeiHzL-11"
-    }
-   ],
-   "mine": true,
-   "notes": "Designs and dev discovery done Oct 2026. Releases after the code freeze ends 7 Dec. Assigned by Emma (1 Oct 2026): GS gift card, app and web, Q1 2027.",
-   "order": 1,
-   "owner": "Awatef",
-   "pillar": "core",
-   "scope": "App",
-   "source": "Oct 2026 release notes",
-   "start": 1,
-   "systems": "",
-   "timing": "Q1 2027",
-   "title": "E-Gift Card (App)",
-   "workstream": ""
-  }
- },
- {
-  "id": "gymshark-e-gift-card-release-web",
-  "data": {
-   "designDone": true,
-   "designDoneOn": "2026-10-21",
-   "due": "",
-   "end": 3,
-   "flagship": false,
-   "lane": "gymshark",
-   "links": [
-    {
-     "label": "Jira GSW-2428 (Requirements)",
-     "platform": "web",
-     "url": "https://bloomingdalesme.atlassian.net/browse/GSW-2428"
-    }
-   ],
-   "mine": true,
-   "notes": "Web designs done 21 Oct 2026. Assigned by Emma (1 Oct 2026): GS gift card, app and web, Q1 2027.",
-   "order": 2,
-   "owner": "Awatef",
-   "pillar": "core",
-   "scope": "Web · GSW-2428",
-   "source": "Oct 2026 release notes",
-   "start": 1,
-   "systems": "",
-   "timing": "Q1 2027",
-   "title": "E-Gift Card (Web)",
-   "workstream": ""
-  }
- },
- {
   "id": "gymshark-onyx-queueing-system",
   "data": {
    "due": "2027-04-30",
@@ -1006,63 +914,6 @@
   }
  },
  {
-  "id": "innovation-ai-powered-digital-concierge",
-  "data": {
-   "end": 9,
-   "flagship": true,
-   "lane": "innovation",
-   "mine": false,
-   "notes": "",
-   "order": 3,
-   "owner": "Awatef",
-   "pillar": "innovation",
-   "scope": "Beauty / all brands",
-   "source": "2027 roadmap deck",
-   "start": 7,
-   "timing": "Q3 2027",
-   "title": "AI-Powered Digital Concierge"
-  }
- },
- {
-  "id": "innovation-ai-powered-search-cimulate",
-  "data": {
-   "end": 3,
-   "flagship": false,
-   "lane": "innovation",
-   "mine": false,
-   "notes": "",
-   "order": 1,
-   "owner": "Awatef",
-   "pillar": "innovation",
-   "scope": "Salesforce · all brands",
-   "source": "2027 roadmap deck",
-   "start": 1,
-   "timing": "Q1 2027",
-   "title": "AI-Powered Search (Cimulate)"
-  }
- },
- {
-  "id": "innovation-external-concessions-platform",
-  "data": {
-   "due": "2027-09-30",
-   "end": 9,
-   "flagship": false,
-   "lane": "innovation",
-   "mine": false,
-   "notes": "The Omni tracker lists external concession brands for BLM, due 30 Sep 2027. The deck's timing says Q4 2027.",
-   "order": 2,
-   "owner": "Abhilash",
-   "pillar": "innovation",
-   "scope": "Endless aisle & extended assortment",
-   "source": "2027 roadmap deck",
-   "start": 1,
-   "systems": "SFCC, SAP",
-   "timing": "Q4 2027",
-   "title": "External Concessions Platform",
-   "workstream": "Omni"
-  }
- },
- {
   "id": "innovation-quality-management-tool-cc",
   "data": {
    "designDone": false,
@@ -1071,11 +922,11 @@
    "end": null,
    "flagship": false,
    "hidden": false,
-   "lane": "innovation",
+   "lane": "cross",
    "links": [],
    "mine": false,
    "notes": "",
-   "order": 5,
+   "order": 12,
    "owner": "Awatef",
    "pillar": "enterprise",
    "scope": "Customer Care",
@@ -1084,33 +935,7 @@
    "systems": "",
    "timing": "TBC",
    "title": "Quality Management tool for CC",
-   "updatedAt": 1793624658647,
-   "workstream": ""
-  }
- },
- {
-  "id": "innovation-sfsc-agentforce-upgrade",
-  "data": {
-   "designDone": false,
-   "designDoneOn": "",
-   "due": "",
-   "end": null,
-   "flagship": false,
-   "hidden": false,
-   "lane": "innovation",
-   "links": [],
-   "mine": false,
-   "notes": "",
-   "order": 4,
-   "owner": "Awatef",
-   "pillar": "innovation",
-   "scope": "Salesforce Service Cloud",
-   "source": "Added on the roadmap",
-   "start": null,
-   "systems": "SFSC",
-   "timing": "TBC",
-   "title": "SFSC Agentforce Upgrade",
-   "updatedAt": 1793624658647,
+   "updatedAt": 1793872516257,
    "workstream": ""
   }
  },
