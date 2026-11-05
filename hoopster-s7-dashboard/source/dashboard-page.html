@@ -1248,7 +1248,7 @@ dash.calc('results', {
     const rn = (c) => c.id.replace('round-', '');
     const vis = cards.filter((c, i) => seen[i]);
     rangeEl.innerHTML = '';
-    if (vis.length) rangeEl.append('Rounds ', el('b', '', rn(vis[0]) + '\u2013' + rn(vis[vis.length - 1])), ' of ' + cards.length, el('span', 'cn-hint', ' \u00B7 drag or use the arrows'));
+    if (vis.length) rangeEl.append('Rounds ', el('b', '', rn(vis[0]) + '\u2013' + rn(vis[vis.length - 1])), ' of ' + cards.length);
     const nx = root.querySelector('.g1-round.is-next');
     nowB.hidden = !nx; if (nx) { const cr = nx.getBoundingClientRect(); nowB.disabled = Math.abs(cr.left + cr.width / 2 - (rr.left + rr.width / 2)) < 8; }
   };
