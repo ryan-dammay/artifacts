@@ -81,6 +81,7 @@
 .g1-round.open .g1-rbody{display:block}
 .g1-rgames{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:12px;margin-top:12px}
 .g1-rgames>.g1-game{margin-top:0}
+@media (min-width:1025px){.g1-round.open{grid-column:auto}.g1-rgames{grid-template-columns:1fr}}
 .g1-rsum{margin-top:8px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);cursor:pointer}
 .g1-round.open .g1-rsum{display:none}
 .g1-round.is-next .g1-time{color:#E8743B}
