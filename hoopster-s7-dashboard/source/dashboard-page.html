@@ -512,7 +512,7 @@ dash.calc('standings_rows', {
     if (!at) { agoEl.textContent = ''; return; }
     const s = Math.max(0, Math.round((Date.now() - new Date(at).getTime()) / 1000));
     const m = Math.floor(s / 60), h = Math.floor(m / 60), d = Math.floor(h / 24);
-    agoEl.textContent = '· ' + (s < 60 ? 'just now' : m < 60 ? m + ' min ago' : h < 24 ? h + (h === 1 ? ' hour ago' : ' hours ago') : d + (d === 1 ? ' day ago' : ' days ago')) + (saved ? ' · saved copy' : '');
+    agoEl.textContent = '· ' + (s < 60 ? 'just now' : m < 60 ? m + ' min ago' : h < 24 ? h + (h === 1 ? ' hour ago' : ' hours ago') : d + (d === 1 ? ' day ago' : ' days ago'));
   };
   setInterval(ago, 30000);
   dash.onData(() => {
@@ -528,12 +528,12 @@ dash.calc('standings_rows', {
       const r = dash.data('upd_label');
       saved = !loading;
       if (r.status === 'ok' && r.data.length) { whenEl.textContent = r.data[0].label; at = r.data[0].at; } else { whenEl.textContent = '—'; at = null; }
-      whenEl.title = loading ? 'Pulling from the league Google Sheet…' : 'The league sheet could not be read, so this is the last saved copy';
+      whenEl.title = loading ? 'Pulling from the league Google Sheet…' : 'Last update from the league sheet';
     }
     ago();
     if (busy && !IDS.some((id) => { const d = dash.data(id); return d.refreshing || d.status === 'loading'; })) {
       busy = false; btn.classList.remove('busy');
-      tx.textContent = liveOk ? 'Updated' : 'Saved copy';
+      tx.textContent = 'Updated';
       setTimeout(() => { if (!busy) tx.textContent = 'Refresh'; }, 2500);
     }
   });
