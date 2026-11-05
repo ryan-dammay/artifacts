@@ -1007,6 +1007,11 @@ $("pw-form").addEventListener("submit", async (e) => {
   const err = (t) => { $("pw-err").textContent = t; };
   if (mode === "unlock") {
     if (!p) { err("Enter the password."); return; }
+    if (window.rmUnlock) { // GitHub copy: the password unlocks its saved GitHub access instead
+      const r = await window.rmUnlock(p);
+      if (r !== true) { err(r || "That password isn't right. Try again."); $("pw-input").select(); return; }
+      setUnlocked(lock.hash); setStatus("Editing unlocked for this browser session."); closePw(true); return;
+    }
     const h = await sha(lock.salt + ":" + p);
     if (h !== lock.hash) { err("That password isn't right. Try again."); $("pw-input").select(); return; }
     setUnlocked(h); setStatus("Editing unlocked for this browser session."); closePw(true);
