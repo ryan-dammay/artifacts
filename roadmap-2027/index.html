@@ -418,9 +418,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .btn.dangerfill { background: var(--innovation); border-color: var(--innovation); color: var(--now-ink); }
 /* On load and when the brand tab or a filter changes, bars sweep in from their start month row by row, then the OMS diamonds pop in. */
 @media (prefers-reduced-motion: no-preference) {
-  #gantt.intro .bar:not(.tbc) { animation: barin 1s cubic-bezier(.25,.8,.25,1) backwards; animation-delay: calc(var(--i, 0) * 90ms + 250ms); }
-  #gantt.intro .bar.tbc { animation: fadein .6s ease-out backwards; animation-delay: calc(var(--i, 0) * 90ms + 250ms); }
-  #gantt.intro .due { animation: duein .4s ease-out backwards; animation-delay: calc(var(--i, 0) * 90ms + 1150ms); }
+  #gantt.intro .bar:not(.tbc) { animation: barin 1.3s cubic-bezier(.25,.8,.25,1) backwards; animation-delay: calc(var(--i, 0) * 140ms + 500ms); }
+  #gantt.intro .bar.tbc { animation: fadein .8s ease-out backwards; animation-delay: calc(var(--i, 0) * 140ms + 500ms); }
+  #gantt.intro .due { animation: duein .5s ease-out backwards; animation-delay: calc(var(--i, 0) * 140ms + 1700ms); }
   @keyframes barin { from { clip-path: inset(0 100% 0 0 round 7px); } to { clip-path: inset(0 0 0 0 round 7px); } }
   @keyframes fadein { from { opacity: 0; } }
   @keyframes duein { from { opacity: 0; transform: rotate(45deg) scale(.3); } }
@@ -820,7 +820,7 @@ function render() {
   if (introPending && shown) { // animate the bars on first load and on brand/filter changes (not on saves, refreshes or drags)
     introPending = false; g.classList.add("intro");
     clearTimeout(introTimer);
-    introTimer = setTimeout(() => g.classList.remove("intro"), 250 + Math.min(shown, 24) * 90 + 1700);
+    introTimer = setTimeout(() => g.classList.remove("intro"), 500 + Math.min(shown, 24) * 140 + 2300);
   } else { clearTimeout(introTimer); g.classList.remove("intro"); } // a save mid-animation shows bars in place, no replay
   placeToday();
   g.style.minHeight = "";
