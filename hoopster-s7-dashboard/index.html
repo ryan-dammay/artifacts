@@ -141,6 +141,9 @@ html,body{margin:0;background:#141413}
 .g1-rounds{display:flex;align-items:flex-start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--color-border-line) transparent}
 .g1-rounds>.g1-round{flex:0 0 18rem;scroll-snap-align:center}
 .g1-round.open{grid-column:auto}.g1-rgames{grid-template-columns:1fr}
+.g1-rounds{cursor:grab}
+.g1-rounds.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.g1-rounds.dragging *{cursor:grabbing!important}
 .g1-rounds::-webkit-scrollbar{height:8px}.g1-rounds::-webkit-scrollbar-thumb{background:var(--color-border-line);border-radius:4px}
 }
 .g1-rsum{margin-top:8px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);cursor:pointer}
@@ -1254,6 +1257,28 @@ dash.calc('results', {
   let lastW = 0;
   if (window.ResizeObserver) new ResizeObserver(() => { const w = root.clientWidth; if (w && w !== lastW) { lastW = w; centerNext(); } }).observe(root);
   wide.addEventListener && wide.addEventListener('change', centerNext);
+  // Desktop: drag the row sideways with the mouse; a drag never counts as a click on a card.
+  let drag = null, justDragged = false;
+  root.addEventListener('pointerdown', (e) => {
+    if (!wide.matches || e.pointerType !== 'mouse' || e.button !== 0) return;
+    drag = { x: e.clientX, left: root.scrollLeft, moved: false, id: e.pointerId };
+  });
+  root.addEventListener('pointermove', (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x;
+    if (!drag.moved && Math.abs(dx) < 5) return;
+    if (!drag.moved) { drag.moved = true; root.classList.add('dragging'); try { root.setPointerCapture(e.pointerId); } catch (err) {} }
+    root.scrollLeft = drag.left - dx;
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    if (drag.moved) { justDragged = true; setTimeout(() => { justDragged = false; }, 0); }
+    drag = null; root.classList.remove('dragging');
+  };
+  root.addEventListener('pointerup', endDrag);
+  root.addEventListener('pointercancel', endDrag);
+  root.addEventListener('click', (e) => { if (justDragged) { e.stopPropagation(); e.preventDefault(); justDragged = false; } }, true);
+  root.addEventListener('dragstart', (e) => { if (wide.matches) e.preventDefault(); });
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const safe = (u) => (/^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? String(u) : '');
   const place = (g, cls) => {
