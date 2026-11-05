@@ -9,6 +9,11 @@ innovation projects, published as a Claude artifact.
 - `source/roadmap-page.html` – the page as it runs inside the Claude artifact (uses its `db` and `user` capabilities).
 - `data/items.json` – saved copy of the projects (one entry per project: lane, pillar, months, phase, owner, links, notes).
 - `data/meta.json` – the "Last updated" note at the time of the snapshot.
+- `sync/snapshot.py` – used by the hourly scheduled sync: it turns a listing of the Claude artifact's projects into
+  `data/items.json` and `data/meta.json`, and reports whether anything changed.
+
+Edits made in the Claude artifact reach this copy through an hourly scheduled sync, which commits the data files to
+`main` only when something changed.
 
 What the page shows:
 
@@ -18,4 +23,4 @@ What the page shows:
 - Productivity Graph: each Project Owner's projects after UX/UI (Development and Completed).
 - UX/UI Graph: Ryan's UX/UI design progress, overall and by brand.
 
-Snapshot taken 5 Nov 2026. The edit password is not included in this copy.
+The edit password is never included in this copy.
