@@ -1,8 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoopster Nation S7</title>
+<meta name="description" content="Hoopster Nation Season 7 – game schedule, standings and player stats.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
-@font-face{font-family:'HN Oswald';font-weight:400;font-style:normal;font-display:swap;src:url('/_blob/bd39b3b7db08056b5642d93ac533aebe') format('woff2')}
-@font-face{font-family:'HN Oswald';font-weight:500;font-style:normal;font-display:swap;src:url('/_blob/5e3f48f29c9727c2200e10e2173efe7a') format('woff2')}
-@font-face{font-family:'HN Barlow';font-weight:400;font-style:normal;font-display:swap;src:url('/_blob/f3b62326d3016a9e659c4b7b90d5f83e') format('woff2')}
-@font-face{font-family:'HN Barlow';font-weight:500;font-style:normal;font-display:swap;src:url('/_blob/41060cf94e2380c4157199e7f421da40') format('woff2')}
+:root{--font-anthropic-sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:18px;--cds-font-size-title:30px;--cds-font-weight-medium:500;--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:12px;--cds-gap-lg:20px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:16px;--cds-radius:8px;--cds-dur-slow:.3s;--cds-shadow-popover:0 8px 24px rgba(0,0,0,.45);color-scheme:dark}
+html,body{margin:0;background:#141413}
+#dash-root{max-width:1280px;margin:0 auto}
+#t-tl,#tab-tl{display:none!important}
+.hn-pages-note{max-width:1280px;margin:0 auto;padding:10px clamp(16px,3vw,32px) 24px;color:#A8A59C;font:12px system-ui,sans-serif;background:#141413}
+.hn-pages-note a{color:#E8743B}
+</style>
+<script>
+// Stand-alone runtime for GitHub Pages: serves the dashboard's saved data files in place of the Claude dashboard runtime.
+(function () {
+  const FILES = { schedule: 'data/schedule.json', box: 'data/boxscores.json', roster: 'data/roster.json', awards: 'data/awards.json', standings_raw: 'data/standings.json', last_update: 'data/last_update.json' };
+  const EMPTY = ['sheet_schedule', 'sheet_stats', 'sheet_roster', 'sheet_potg', 'sheet_standings', 'photos', 'tl_fees'];
+  const store = {}, calcs = {}, cbs = []; let cache = {}; let params = {};
+  try { const h = new URLSearchParams(location.search); if (h.get('game')) params.game = h.get('game'); } catch (e) {}
+  const load = (id) => fetch(FILES[id] + '?v=' + Date.now(), { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then((rows) => { store[id] = { status: 'ok', data: rows }; }).catch((e) => { store[id] = { status: 'error', data: [], message: String(e) }; });
+  const rowsOf = (id) => {
+    if (store[id]) return store[id].status === 'ok' ? store[id].data : [];
+    if (EMPTY.includes(id)) return [];
+    const c = calcs[id]; if (!c) return [];
+    if (!(id in cache)) { try { cache[id] = c.fn(...c.inputs.map(rowsOf)); } catch (e) { console.error('calc ' + id, e); cache[id] = []; } }
+    return cache[id];
+  };
+  const run = () => { cache = {}; cbs.forEach((f) => { try { f(); } catch (e) { console.error(e); } }); };
+  window.dash = {
+    data(id) {
+      if (store[id]) { const s = store[id]; return { status: s.status, data: s.data, columns: s.data[0] ? Object.keys(s.data[0]) : [], refreshing: !!s.refreshing, message: s.message, meta: [] }; }
+      if (EMPTY.includes(id)) return { status: 'missing', data: [], columns: [], refreshing: false, meta: [] };
+      if (calcs[id]) { const pending = Object.keys(FILES).some((k) => !store[k]); if (pending) return { status: 'loading', data: [], columns: [], meta: [] }; const d = rowsOf(id); return { status: 'ok', data: d, columns: d[0] ? Object.keys(d[0]) : [], refreshing: false, meta: [] }; }
+      return { status: 'loading', data: [], columns: [], meta: [] };
+    },
+    calc(id, o) { calcs[id] = o; },
+    loader() {},
+    onData(fn) { cbs.push(fn); try { fn(); } catch (e) { console.error(e); } },
+    params() { return params; },
+    setParams(p) { Object.assign(params, p); run(); },
+    resetParams() { params = {}; run(); },
+    setLink(name) { try { history.replaceState(null, '', '#' + name); } catch (e) {} },
+    refresh(id) { if (!FILES[id]) return; if (store[id]) store[id].refreshing = true; run(); load(id).then(run); },
+    colors: ['#E8743B', '#5B8DEF', '#3FB68B', '#F2C14E', '#B67BE0', '#E05A6A', '#4CC3D9', '#A3A29A'],
+  };
+  window.addEventListener('resize', () => { clearTimeout(window.__hnR); window.__hnR = setTimeout(run, 150); });
+  document.addEventListener('DOMContentLoaded', () => Promise.all(Object.keys(FILES).map(load)).then(run));
+})();
+</script>
+</head>
+<body>
+<div id="dash-root">
+<style>
+@font-face{font-family:'HN Oswald';font-weight:400;font-style:normal;font-display:swap;src:url('fonts/oswald-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'HN Oswald';font-weight:500;font-style:normal;font-display:swap;src:url('fonts/oswald-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'HN Barlow';font-weight:400;font-style:normal;font-display:swap;src:url('fonts/barlow-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'HN Barlow';font-weight:500;font-style:normal;font-display:swap;src:url('fonts/barlow-latin-500-normal.woff2') format('woff2')}
 #dash-root{--dash-gutter:0}
 .g1{--hn-display:'HN Oswald',var(--font-anthropic-sans);--hn-text:'HN Barlow',var(--font-anthropic-sans);--color-bg:#141413;--color-panel:#1F1E1D;--color-fg:#F5F4EF;--color-fg-muted:#A8A59C;--color-border-line:#3A3935;--color-bad:#E5644E;--cds-surface-popover:#2A2927;--cds-border:#3A3935;--cds-text-secondary:#A8A59C;--hn-accent:#E8743B;color-scheme:dark;background:var(--color-bg);color:var(--color-fg);padding:clamp(16px,3vw,32px);min-height:100vh;box-sizing:border-box;font-family:var(--hn-text);display:flex;flex-direction:column;gap:var(--cds-gap-lg)}
 .g1 svg text{font-family:var(--hn-text)}
@@ -1586,3 +1643,8 @@ dash.calc('standings', {
   show(tabs.some((b) => b.dataset.tab === start) ? start : 'schedule', false);
 })();
 </script>
+
+</div>
+<p class="hn-pages-note">Saved copy of the Hoopster Nation S7 dashboard, updated from the league sheet. The TL Corner is only on the private dashboard.</p>
+</body>
+</html>
