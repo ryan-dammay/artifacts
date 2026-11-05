@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<script>
+/* GitHub Pages runtime: a read-only stand-in for the Claude artifact's db and user capabilities.
+   It serves the saved copies in data/ so the page renders the same roadmap; editing stays in Claude. */
+(function () {
+  const load = (p) => fetch(p, { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const itemsP = load("data/items.json").then((a) => a || []);
+  const metaP = load("data/meta.json");
+  const meta0 = { fromCache: false, hasPendingWrites: false };
+  const snap = (rows) => ({ docs: rows.map((r) => ({ id: r.id, exists: true, data: () => r.data, metadata: meta0 })), size: rows.length, empty: !rows.length, docChanges: () => [], metadata: meta0 });
+  const readOnly = () => Promise.reject({ code: "invalid_argument", message: "This GitHub copy is read-only." });
+  const docSnap = async (path) => {
+    if (path === "meta/info") { const m = await metaP; return { id: "info", exists: !!m, data: () => m || undefined, metadata: meta0 }; }
+    return { id: path.split("/").pop(), exists: false, data: () => undefined, metadata: meta0 };
+  };
+  const docRef = (path) => ({ id: path.split("/").pop(), path, get: () => docSnap(path), onSnapshot: (next) => { docSnap(path).then(next); return () => {}; }, set: readOnly, update: readOnly, delete: readOnly, acquire: async () => ({ acquired: false }), collection: (c) => coll(path + "/" + c) });
+  const coll = (path) => ({ path, doc: (id) => docRef(path + "/" + (id || "new")), add: readOnly, where() { return this; }, orderBy() { return this; }, limit() { return this; },
+    get: async () => snap(path === "items" ? await itemsP : []),
+    onSnapshot: (next) => { itemsP.then((a) => next(snap(path === "items" ? a : []))); return () => {}; } });
+  const db = { doc: docRef, collection: coll };
+  const user = { can: async () => false, canEdit: async () => false, isOwner: async () => false, id: async () => null };
+  window.claude = { use: async (name) => (name === "db" ? db : name === "user" ? user : null) };
+  document.addEventListener("DOMContentLoaded", () => {
+    const host = document.querySelector(".head-actions");
+    if (!host) return;
+    const note = document.createElement("p");
+    note.className = "updated";
+    note.textContent = "Read-only copy";
+    host.prepend(note);
+  });
+})();
+</script>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>2027 Roadmap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: the deck's Gantt, made live — lanes by brand, a 12-month track, bars coloured by pillar. */
+:root {
+  --bg: #121417;
+  --surface: #1a1d22;
+  --fg: #eef1f5;
+  --muted: #9aa5b5;
+  --line: #2c3139;
+  --q-band: rgba(255,255,255,.03);
+  --core: #7c9cf2;
+  --enterprise: #cf73cb;
+  --innovation: #f08a63;
+  --mine: #f2c14e;
+  --now: #ff6b5e;
+  --now-ink: #121417;
+  --omni: #4fd1c5;
+  --done: #6fd39b;
+  /* Project phases, in order: UX/UI -> Development -> Completed (validated on the dark surface) */
+  --ph-uxui: #c0882b;
+  --ph-dev: #8b7fd9;
+  --ph-done: #2f9a63;
+  --ph-dev-ink: #c4bcf5;
+  color-scheme: dark;
+  --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Inter", "Helvetica Neue", Arial, sans-serif; /* one family throughout; labels keep tabular figures */
+}
+/* Dark theme only, whatever the viewer's setting. */
+
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.45; font-feature-settings: "tnum" 1; }
+.wrap { width: 100%; box-sizing: border-box; margin: 0; padding-left: max(clamp(16px, 2.5vw, 40px), env(safe-area-inset-left, 0px)); padding-right: max(clamp(16px, 2.5vw, 40px), env(safe-area-inset-right, 0px)); padding-block: 32px 56px; display: flex; flex-direction: column; gap: 22px; }
+
+header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 5vw, 54px); line-height: 1; letter-spacing: -.025em; margin: 0; }
+.sub { margin: 10px 0 0; color: var(--muted); max-width: 64ch; }
+.head-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.updated { margin: 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.updated b { color: var(--fg); font-weight: 600; }
+.updated span { display: block; font-size: 12px; }
+.btn { font: 600 14px var(--font-body); border-radius: 999px; padding: 9px 16px; border: 1px solid var(--fg); background: var(--fg); color: var(--bg); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn.danger { background: transparent; color: var(--innovation); border-color: var(--innovation); }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pillar { position: relative; text-align: left; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 10px; padding: 14px 52px 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pillar.off { opacity: .45; }
+.pillar input { position: absolute; top: 14px; right: 16px; width: 20px; height: 20px; margin: 0; accent-color: var(--c); cursor: pointer; }
+.pillar:has(input:focus-visible) { outline: 2px solid var(--fg); outline-offset: 2px; }
+.pillar input:focus-visible { outline: none; }
+.pillar .k { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--c); font-weight: 500; }
+.pillar b { font-size: 17px; font-weight: 700; }
+.pillar span.n { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } }
+
+/* Brand tab bar: underline tabs, scrolls sideways on phones. */
+.tabrow { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: -6px; }
+.tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; }
+.fwrap { position: relative; flex: none; padding-bottom: 4px; }
+.fbtn { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; font: 600 14px var(--font-body); color: var(--fg); }
+.fbtn:hover, .fbtn[aria-expanded="true"] { border-color: var(--muted); }
+.fbtn:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.fbtn .chev { font-size: 11px; color: var(--muted); transition: transform .15s; }
+.fbtn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.fcount { font: 600 11px var(--font-mono); background: var(--mine); color: var(--now-ink); border-radius: 999px; min-width: 18px; height: 18px; display: inline-grid; place-items: center; padding: 0 5px; box-sizing: border-box; }
+.fpanel { position: absolute; right: 0; top: calc(100% + 6px); z-index: 15; width: min(280px, calc(100vw - 32px)); box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,.45); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 11px; font-size: 14px; color: var(--muted); }
+.fhead { margin: 4px 0 0; font: 500 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.fhead + .toggle, .fhead + .key { margin-top: -2px; }
+.fpanel .toggle { justify-content: flex-start; }
+.fpanel .fsel { color: var(--fg); font-size: 14px; }
+.fpanel .fsel select { font-size: 14px; padding: 7px 9px; }
+.tag.asg { border-color: var(--muted); color: var(--fg); display: none; }
+.row:hover .tag.asg, .row:focus-within .tag.asg { display: inline-block; }
+.track, .name button { -webkit-user-select: none; user-select: none; }
+.fpanel .fn { margin-left: auto; font: 500 12px var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.fpanel .fhead:nth-of-type(2) { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 2px; }
+.fpanel .key { display: grid; grid-template-columns: 22px 1fr; column-gap: 10px; align-items: center; }
+.fpanel .key i { justify-self: center; margin: 0; }
+.key i.due { position: static; border: 0; top: auto; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { all: unset; cursor: pointer; flex: none; padding: 10px 14px 12px; font: 600 15px var(--font-body); color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; display: inline-flex; align-items: baseline; gap: 7px; white-space: nowrap; }
+.tab span { font: 500 11.5px var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); }
+.tab:hover { color: var(--fg); }
+.tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); }
+.tab[aria-selected="true"] span { color: var(--fg); }
+.tab:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; border-radius: 6px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; font-size: 13px; color: var(--muted); }
+.toggle { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--fg); font-weight: 500; }
+.toggle input { width: 16px; height: 16px; accent-color: var(--fg); }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.key i { display: inline-block; width: 22px; height: 8px; border-radius: 4px; }
+.key i.tbc { background: transparent; border: 1.5px dashed var(--muted); }
+.key i.flag { width: 8px; height: 8px; border-radius: 50%; background: var(--fg); }
+.key i.star { width: auto; height: auto; background: none; color: var(--mine); font-style: normal; }
+.key i.now { width: 2px; height: 14px; border-radius: 0; background: var(--now); }
+.key i.due { width: 9px; height: 9px; border-radius: 1px; transform: rotate(45deg); background: var(--omni); }
+.due { position: absolute; top: 12px; width: 12px; height: 12px; margin-left: -6px; box-sizing: border-box; transform: rotate(45deg); background: var(--omni); border: 2px solid var(--surface); border-radius: 2px; z-index: 1; }
+.done-pill { align-self: flex-start; display: inline-flex; align-items: center; margin-top: 3px; font: 600 11px var(--font-body); color: var(--done); border: 1px solid color-mix(in srgb, var(--done) 55%, transparent); background: color-mix(in srgb, var(--done) 12%, transparent); border-radius: 999px; padding: 1px 8px; }
+.chip.c-done { border-color: var(--done); color: var(--done); font-weight: 600; }
+.done-pill.ph-dev { color: var(--ph-dev-ink); border-color: color-mix(in srgb, var(--ph-dev) 60%, transparent); background: color-mix(in srgb, var(--ph-dev) 14%, transparent); }
+.phases { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.phases li { min-width: 0; }
+.phases button { all: unset; box-sizing: border-box; width: 100%; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; }
+.phases button:disabled { cursor: default; }
+.phases button:not(:disabled):hover { border-color: var(--muted); }
+.phases button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.phases b { font-size: 14px; font-weight: 700; color: var(--muted); }
+.phases small { font-size: 12px; color: var(--muted); }
+.phases .past b, .phases .cur b { color: var(--fg); }
+.phases .past { border-color: color-mix(in srgb, var(--c) 55%, var(--line)); }
+.phases .cur { border-color: var(--c); box-shadow: inset 0 3px 0 var(--c); }
+.btn.donebtn { background: transparent; color: var(--done); border-color: var(--done); margin-right: auto; }
+.btn.donebtn.on { color: var(--muted); border-color: var(--line); }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.tag { font-family: var(--font-mono); font-size: 10.5px; line-height: 1.5; padding: 0 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); }
+.tag.omni { border-color: var(--omni); color: var(--omni); font-weight: 500; }
+.tag.hid { border-style: dashed; color: var(--fg); }
+.row.is-hidden .name > button, .row.is-hidden .track, .row.is-hidden .timing { opacity: .45; }
+.timing small { display: block; font-size: 11.5px; font-weight: 500; color: var(--omni); }
+
+.scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.gantt { min-width: 980px; position: relative; }
+.today { position: absolute; bottom: 0; width: 2px; margin-left: -1px; background: var(--now); z-index: 3; pointer-events: none; }
+.today::before { content: ""; position: absolute; top: -5px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--now); }
+.today b { position: absolute; top: 10px; left: 8px; background: var(--now); color: var(--now-ink); font: 600 11px var(--font-mono); letter-spacing: .02em; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+.today.end b { left: auto; right: 8px; }
+.row { display: grid; grid-template-columns: minmax(220px, 300px) 1fr 132px; align-items: center; border-bottom: 1px solid var(--line); }
+.row:last-child { border-bottom: 0; }
+.head { position: sticky; top: 0; background: var(--surface); z-index: 2; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.head > div { padding: 12px 14px; }
+.months { display: grid; grid-template-columns: repeat(12, 1fr); }
+.months span { text-align: center; padding: 4px 0; }
+.qs { display: grid; grid-template-columns: repeat(4, 1fr); font-weight: 500; color: var(--fg); }
+.qs span { text-align: center; }
+.lanehead { display: flex; align-items: baseline; gap: 10px; padding: 18px 14px 8px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.lanehead b { font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+.lanehead small { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+.name { padding: 9px 14px; min-width: 0; display: flex; flex-direction: column; gap: 1px; position: relative; }
+.grip { position: absolute; left: 0; top: 8px; width: 14px; text-align: center; font-size: 13px; line-height: 20px; color: var(--muted); cursor: grab; touch-action: none; opacity: 0; transition: opacity .15s; -webkit-user-select: none; user-select: none; }
+.row:hover .grip, .grip:focus-visible { opacity: 1; }
+.grip:hover { color: var(--fg); }
+.row.lifting { opacity: .45; }
+.row.lifting .grip { cursor: grabbing; opacity: 1; }
+.dropline { position: absolute; left: 0; right: 0; height: 2px; background: var(--fg); z-index: 4; pointer-events: none; border-radius: 1px; }
+.name button { all: unset; cursor: pointer; font-weight: 600; font-size: 14px; overflow-wrap: anywhere; display: inline-flex; gap: 6px; align-items: baseline; }
+.name button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 3px; }
+.name button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.name small { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.flag { width: 7px; height: 7px; border-radius: 50%; background: var(--fg); flex: none; transform: translateY(-2px); }
+.star { color: var(--mine); }
+.track { position: relative; height: 36px; display: grid; grid-template-columns: repeat(12, 1fr); }
+.track i { border-left: 1px solid var(--line); }
+.track i:nth-child(3n+1) { border-left-color: color-mix(in srgb, var(--muted) 45%, transparent); }
+.track i:nth-child(n+4):nth-child(-n+6), .track i:nth-child(n+10) { background: var(--q-band); }
+.bar { position: absolute; top: 11px; height: 14px; border-radius: 7px; background: var(--c); transition: filter .15s, box-shadow .15s; }
+.track { cursor: pointer; }
+.track:hover .bar:not(.tbc) { filter: brightness(1.18); }
+.track:hover .bar.tbc { border-color: var(--muted); }
+.bar.tbc { left: 8px; right: 8px; background: transparent; border: 1.5px dashed var(--line); top: 10px; }
+.row.mine .bar:not(.tbc) { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--mine); }
+.row.mine .bar.tbc { border-color: var(--mine); }
+.key i.mine-k { width: 22px; height: 8px; border-radius: 4px; background: var(--core); box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--mine); }
+.timing { padding: 9px 14px; text-align: right; font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+.timing.tbc { color: var(--muted); font-weight: 500; }
+.status { font-size: 13px; color: var(--muted); min-height: 1.4em; margin: 0; }
+.empty { padding: 32px; text-align: center; color: var(--muted); }
+
+.scrim { position: fixed; inset: 0; background: rgba(10,14,22,.5); display: flex; align-items: center; justify-content: center; z-index: 20; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.sheet { background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 14px; width: min(560px, 100%); max-height: 100%; overflow: auto; padding: 22px; display: flex; flex-direction: column; gap: 13px; box-sizing: border-box; }
+.sheet h2 { margin: 0; font-size: 22px; font-weight: 800; }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 500; color: var(--muted); min-width: 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.checks { display: flex; flex-wrap: wrap; gap: 18px; }
+input[type=text], input[type=date], input[type=password], select, textarea { font: 15px var(--font-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; width: 100%; box-sizing: border-box; }
+textarea { min-height: 80px; resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+.actions .r { display: flex; gap: 10px; }
+.confirm { font-size: 13px; color: var(--innovation); }
+.scrim.pw { z-index: 30; }
+.scrim.cf { z-index: 35; }
+.cfsheet { width: min(420px, 100%); }
+.btn.dangerfill { background: var(--innovation); border-color: var(--innovation); color: var(--now-ink); }
+.bar.drag { cursor: grab; touch-action: none; }
+.bar.dragging { cursor: grabbing; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+.bar .hdl { position: absolute; top: -4px; bottom: -4px; width: 12px; cursor: ew-resize; touch-action: none; }
+.bar .hdl.l { left: -5px; }
+.bar .hdl.r { right: -5px; }
+.bar .hdl::after { content: ""; position: absolute; top: 7px; bottom: 7px; left: 5px; width: 2px; border-radius: 1px; background: var(--bg); opacity: 0; transition: opacity .15s; }
+.track:hover .bar .hdl::after, .bar.dragging .hdl::after { opacity: .85; }
+.dragtip { position: absolute; top: -4px; transform: translate(-2px, -100%); background: var(--fg); color: var(--bg); font: 600 11px var(--font-body); padding: 3px 8px; border-radius: 4px; white-space: nowrap; pointer-events: none; z-index: 5; }
+.pwsheet { width: min(400px, 100%); }
+.pwrow { position: relative; display: block; }
+.pwrow input { padding-right: 68px; }
+.pwshow { all: unset; position: absolute; right: 6px; top: 50%; transform: translateY(-50%); cursor: pointer; font: 600 12px var(--font-body); color: var(--muted); padding: 5px 9px; border-radius: 6px; }
+.pwshow:hover { color: var(--fg); background: var(--surface); }
+.pwshow:focus-visible { outline: 2px solid var(--fg); outline-offset: 1px; }
+.pw-text { margin: 0; color: var(--muted); font-size: 14px; }
+.pw-err { margin: 0; min-height: 1.3em; font-size: 13px; color: var(--innovation); }
+@media (max-width: 520px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* Detail drawer: opens from the right on desktop, full sheet on phones. */
+.dscrim { position: fixed; inset: 0; background: rgba(10,14,22,.55); z-index: 20; display: flex; justify-content: flex-end; }
+.drawer { background: var(--surface); color: var(--fg); border-left: 1px solid var(--line); width: min(520px, 100%); height: 100%; box-sizing: border-box; overflow-y: auto; display: flex; flex-direction: column; padding: max(22px, env(safe-area-inset-top, 0px)) max(22px, env(safe-area-inset-right, 0px)) max(22px, env(safe-area-inset-bottom, 0px)) 22px; gap: 22px; }
+@media (prefers-reduced-motion: no-preference) { .drawer { animation: slidein .18s ease-out; } @keyframes slidein { from { transform: translateX(24px); opacity: .6; } } }
+.d-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.d-top .eyebrow { margin: 0 0 8px; }
+.d-top h2 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
+.x { all: unset; cursor: pointer; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 18px; color: var(--muted); flex: none; }
+.x:hover { color: var(--fg); border-color: var(--muted); }
+.x:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.chip { font: 500 12px var(--font-mono); padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.chip.c-mine { border-color: var(--mine); color: var(--mine); }
+.chip.c-omni { border-color: var(--omni); color: var(--omni); }
+.chip.c-pillar { border-color: var(--c); color: var(--c); }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; margin: 0; padding: 16px 0; border-block: 1px solid var(--line); }
+.facts div { min-width: 0; }
+.facts dt { font: 500 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.facts dd { margin: 0; font-weight: 600; font-size: 14px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.dsec { display: flex; flex-direction: column; gap: 10px; }
+.dsec h3 { margin: 0; display: flex; align-items: baseline; gap: 8px; font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.dsec h3 span { color: var(--fg); }
+.links { display: flex; flex-direction: column; gap: 8px; }
+.lk { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); min-width: 0; }
+.lk:hover { border-color: var(--muted); }
+.lk a { flex: 1; min-width: 0; color: var(--fg); text-decoration: none; display: flex; flex-direction: column; gap: 1px; }
+.lk a:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; border-radius: 4px; }
+.lk a b { font-weight: 600; font-size: 14px; overflow-wrap: anywhere; }
+.lk a small { font: 12px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.lk .glyph { width: 34px; height: 34px; border-radius: 8px; flex: none; display: grid; place-items: center; font: 700 12px var(--font-mono); color: var(--now-ink); }
+.lk.figma .glyph { background: var(--enterprise); }
+.lk.jira .glyph { background: var(--core); }
+.lk.other .glyph { background: var(--muted); }
+.lk .open { font: 500 12px var(--font-mono); color: var(--muted); flex: none; }
+.lk .rm { all: unset; cursor: pointer; color: var(--muted); font-size: 16px; padding: 2px 6px; border-radius: 4px; flex: none; }
+.lk .rm:hover { color: var(--innovation); }
+.lk .rm:focus-visible { outline: 2px solid var(--fg); }
+.none { margin: 0; font-size: 13px; color: var(--muted); padding: 11px 12px; border: 1px dashed var(--line); border-radius: 10px; }
+.addlink { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); }
+.addlink label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.addlink .r { display: flex; gap: 8px; }
+.addlink .r input { flex: 1; min-width: 0; }
+.addlink .hint { font-size: 12px; color: var(--muted); min-height: 1.3em; margin: 0; }
+.d-notes { margin: 0; white-space: pre-wrap; color: var(--fg); max-width: 60ch; }
+.d-foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; padding-top: 6px; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; gap: 4px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; }
+.seg button { all: unset; cursor: pointer; text-align: center; padding: 9px 12px; border-radius: 999px; font: 600 14px var(--font-body); color: var(--muted); display: flex; justify-content: center; align-items: baseline; gap: 8px; }
+.seg button span { font: 500 11px var(--font-mono); color: inherit; opacity: .8; font-variant-numeric: tabular-nums; }
+.seg button[aria-selected="true"] { background: var(--fg); color: var(--bg); }
+.seg button:not([aria-selected="true"]):hover { color: var(--fg); }
+.seg button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.d-owner { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+.d-owner b { color: var(--fg); font-weight: 600; }
+.d-owner b.none { color: var(--muted); font-weight: 500; }
+.addlink .hint:empty { display: none; }
+.prod { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px 12px; display: flex; flex-direction: column; gap: 12px; }
+.prod-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+.prod-head h2 { margin: 0; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+.prod-sub { margin: 0; font-size: 13px; color: var(--muted); flex: 1; min-width: 200px; }
+.prod-sub b { color: var(--fg); }
+.prow.lanerow .pname { padding-left: 14px; font-weight: 500; color: var(--muted); }
+.prow.lanerow .ptot { font-weight: 500; color: var(--muted); }
+.prod-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12.5px; color: var(--muted); }
+.prod-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; box-sizing: border-box; }
+.sw.uxui, .pseg.uxui { background: var(--ph-uxui); }
+.sw.dev, .pseg.dev { background: var(--ph-dev); }
+.sw.done, .pseg.done { background: var(--ph-done); }
+.prod-rows { display: flex; flex-direction: column; gap: 2px; }
+.prow { box-sizing: border-box; display: grid; grid-template-columns: 180px minmax(0, 1fr) 200px; align-items: center; gap: 14px; padding: 7px 8px; border-radius: 8px; }
+.pname { font-weight: 600; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ptrack { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.pbar { flex: 1; display: flex; gap: 2px; height: 14px; min-width: 0; }
+.pseg { flex: 0 0 auto; height: 100%; border-radius: 2px; box-sizing: border-box; }
+.pseg:first-child { border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
+.pseg:last-child { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+.ptot { font-size: 13px; font-weight: 700; min-width: 22px; font-variant-numeric: tabular-nums; }
+.pstat { font-size: 12.5px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.ptip { position: fixed; z-index: 40; pointer-events: none; background: var(--fg); color: var(--bg); font: 600 12px var(--font-body); padding: 4px 8px; border-radius: 4px; white-space: nowrap; }
+@media (max-width: 640px) { .prow { grid-template-columns: 90px minmax(0, 1fr); } .pstat { grid-column: 2; text-align: left; } }
+.lchips { display: flex; flex-wrap: wrap; gap: 8px; }
+.lchip { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); max-width: 100%; }
+.lchip a { color: var(--fg); text-decoration: none; font: 600 13px var(--font-body); padding: 6px 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lchip a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.lchip a:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 999px; }
+.lchip.figma { border-color: var(--enterprise); }
+.lchip.jira { border-color: var(--core); }
+.lchip.confluence { border-color: var(--omni); }
+.lchip .rm { all: unset; cursor: pointer; color: var(--muted); font-size: 15px; line-height: 1; padding: 4px 10px 4px 0; }
+.lchip .rm:hover { color: var(--innovation); }
+.lchip .rm:focus-visible { outline: 2px solid var(--fg); border-radius: 4px; }
+.lk .both { font: 500 10.5px var(--font-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; flex: none; }
+.name .lkcount { all: unset; cursor: pointer; display: block; width: fit-content; margin-top: 6px; font: 500 11.5px var(--font-body); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; }
+.name .lkcount:hover { color: var(--fg); border-color: var(--muted); }
+.name .lkcount:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+@media (max-width: 520px) { .facts { grid-template-columns: 1fr 1fr; } .drawer { border-left: 0; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>2027 Roadmap</h1>
+    </div>
+    <div class="head-actions">
+      <p class="updated" id="updated">Last updated: checking…</p>
+      <button class="btn ghost" id="pw-change" type="button" hidden>Change password</button>
+      <button class="btn ghost" id="refresh-btn" type="button">Refresh</button>
+      <button class="btn" id="add-btn" type="button" hidden>Add project</button>
+    </div>
+  </header>
+
+  <div class="pillars" id="pillars">
+    <label class="pillar" style="--c: var(--core)"><input type="checkbox" id="p-core" data-p="core" checked><span class="k">Optimize the core</span><b>Core Digital</b><span class="n" id="n-core">–</span></label>
+    <label class="pillar" style="--c: var(--enterprise)"><input type="checkbox" id="p-enterprise" data-p="enterprise" checked><span class="k">Connect the ecosystem</span><b>Enterprise Transformation</b><span class="n" id="n-enterprise">–</span></label>
+    <label class="pillar" style="--c: var(--innovation)"><input type="checkbox" id="p-innovation" data-p="innovation" checked><span class="k">Build for scale</span><b>Innovation &amp; Scale</b><span class="n" id="n-innovation">–</span></label>
+  </div>
+
+  <div class="tabrow">
+    <nav class="tabs" role="tablist" aria-label="Brand" id="tabs"></nav>
+    <div class="fwrap">
+      <button class="fbtn" type="button" id="f-btn" aria-expanded="false" aria-controls="f-panel">Filters <span class="fcount" id="f-count" hidden></span><span class="chev" aria-hidden="true">▾</span></button>
+      <div class="fpanel" id="f-panel" hidden>
+        <p class="fhead">Show</p>
+        <label class="toggle"><input type="checkbox" id="only-mine"> UX/UI Design <span class="fn" id="n-mine"></span></label>
+        <label class="toggle"><input type="checkbox" id="only-omni"> OMS <span class="fn" id="n-omni"></span></label>
+        <label class="toggle" id="hid-wrap" hidden><input type="checkbox" id="show-hidden"> Hidden projects <span class="fn" id="n-hidden"></span></label>
+        <label class="field fsel">Project Owner<select id="f-asg"></select></label>
+        <input type="checkbox" id="hide-tbc" hidden>
+        <p class="fhead">Key</p>
+        <span class="key"><i class="tbc"></i> Dates TBC</span>
+        <span class="key"><i class="mine-k"></i> Yours</span>
+        <span class="key"><i class="now"></i> Today</span>
+        <span class="key"><i class="due"></i> Omni target date</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll"><div class="gantt" id="gantt"></div></div>
+  <p class="status" id="status" role="status">Loading roadmap…</p>
+
+  <section class="prod" aria-labelledby="prod-title">
+    <div class="prod-head">
+      <h2 id="prod-title">Productivity Graph</h2>
+      <p class="prod-sub">Projects per Project Owner after UX/UI, for the brand and pillars selected. UX/UI is tracked in the graph below.</p>
+      <div class="prod-legend" aria-label="Legend"><span><i class="sw dev"></i>Development</span><span><i class="sw done"></i>Completed</span></div>
+    </div>
+    <div class="prod-rows" id="prod-rows" role="list"></div>
+  </section>
+
+  <section class="prod" aria-labelledby="ux-title">
+    <div class="prod-head">
+      <h2 id="ux-title">UX/UI Graph</h2>
+      <p class="prod-sub">UX/UI design by <b>Ryan</b> for the brand and pillars selected. A project's UX/UI is done once it moves to Development.</p>
+      <div class="prod-legend" aria-label="Legend"><span><i class="sw uxui"></i>In UX/UI</span><span><i class="sw dev"></i>UX/UI done</span></div>
+    </div>
+    <div class="prod-rows" id="ux-rows" role="list"></div>
+  </section>
+</div>
+
+
+<div class="dscrim" id="dscrim" hidden>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title">
+    <div>
+      <div class="d-top">
+        <div><p class="eyebrow" id="d-eyebrow"></p><h2 id="d-title"></h2><p class="d-owner" id="d-owner"></p></div>
+        <button class="x" type="button" id="d-close" aria-label="Close">×</button>
+      </div>
+      <div class="chips" id="d-chips"></div>
+    </div>
+    <ol class="phases" id="d-phases" aria-label="Project phase"></ol>
+    <dl class="facts" id="d-facts"></dl>
+    <div class="seg" role="tablist" aria-label="Platform" id="d-seg">
+      <button type="button" role="tab" id="pf-web" data-pf="web" aria-selected="true">Web <span id="pf-n-web"></span></button>
+      <button type="button" role="tab" id="pf-app" data-pf="app" aria-selected="false">App <span id="pf-n-app"></span></button>
+    </div>
+    <section class="dsec" id="d-links-sec" hidden><div class="lchips" id="d-links"></div></section>
+    <form class="addlink" id="d-add">
+      <label for="d-url" id="d-add-label">Add a link</label>
+      <div class="r"><input type="text" id="d-url" inputmode="url" placeholder="Figma, Jira, Confluence or any link" autocomplete="off"><button class="btn" type="submit" id="d-add-btn">Add</button></div>
+      <input type="text" id="d-label" maxlength="80" hidden>
+      <p class="hint" id="d-hint"></p>
+    </form>
+    <section class="dsec" id="d-notes-sec"><h3>Notes</h3><p class="d-notes" id="d-notes"></p></section>
+    <div class="d-foot"><button class="btn donebtn" type="button" id="d-designdone">Mark UX/UI Completed</button><button class="btn ghost" type="button" id="d-hide" hidden>Hide project</button><button class="btn danger" type="button" id="d-delete" hidden>Delete project</button><button class="btn ghost" type="button" id="d-done">Close</button><button class="btn" type="button" id="d-edit">Edit project</button></div>
+  </aside>
+</div>
+
+<div class="scrim cf" id="cf-scrim" hidden>
+  <div class="sheet cfsheet" role="alertdialog" aria-modal="true" aria-labelledby="cf-title" aria-describedby="cf-text">
+    <h2 id="cf-title">Delete this project?</h2>
+    <p class="pw-text" id="cf-text"></p>
+    <div class="actions"><span></span><div class="r"><button class="btn ghost" type="button" id="cf-cancel">Cancel</button><button class="btn dangerfill" type="button" id="cf-ok">Delete</button></div></div>
+  </div>
+</div>
+
+<div class="scrim pw" id="pw-scrim" hidden>
+  <form class="sheet pwsheet" id="pw-form" aria-labelledby="pw-title" data-mode="unlock">
+    <h2 id="pw-title">Enter the edit password</h2>
+    <p class="pw-text" id="pw-text">Editing is locked. Enter the password to add, edit or delete projects.</p>
+    <label class="field" id="pw-l1">Password<span class="pwrow"><input type="password" id="pw-input" autocomplete="current-password"><button type="button" class="pwshow" id="pw-show" aria-pressed="false" aria-label="Show password">Show</button></span></label>
+    <label class="field" id="pw-l2" hidden>Confirm password<span class="pwrow"><input type="password" id="pw-confirm" autocomplete="new-password"></span></label>
+    <p class="pw-err" id="pw-err" role="alert"></p>
+    <div class="actions"><span></span><div class="r"><button class="btn ghost" type="button" id="pw-cancel">Cancel</button><button class="btn" type="submit" id="pw-ok">Unlock</button></div></div>
+  </form>
+</div>
+
+<div class="scrim" id="scrim" hidden>
+  <form class="sheet" id="form" aria-labelledby="form-title">
+    <h2 id="form-title">Edit project</h2>
+    <label class="field">Project<input type="text" id="f-title" required maxlength="140"></label>
+    <div class="grid2">
+      <label class="field">Brand / group<select id="f-lane"></select></label>
+      <label class="field">Pillar<select id="f-pillar">
+        <option value="core">Core Digital</option>
+        <option value="enterprise">Enterprise Transformation</option>
+        <option value="innovation">Innovation &amp; Scale</option>
+      </select></label>
+    </div>
+    <div class="grid2">
+      <label class="field">Starts<select id="f-start"></select></label>
+      <label class="field">Ends<select id="f-end"></select></label>
+    </div>
+    <div class="grid2">
+      <label class="field">Timing label<input type="text" id="f-timing" maxlength="40" placeholder="e.g. Go-live Apr 2027"></label>
+      <label class="field">Scope<input type="text" id="f-scope" maxlength="80"></label>
+    </div>
+    <div class="checks">
+      <label class="toggle" hidden><input type="checkbox" id="f-mine"> I'm designing this</label>
+      <label class="toggle"><input type="checkbox" id="f-flagship"> Flagship</label>
+      <label class="toggle" hidden><input type="checkbox" id="f-designdone"> UX/UI Completed</label>
+    </div>
+    <div class="grid2">
+      <label class="field">Project Owner<select id="f-owner"></select></label>
+      <label class="field">Workstream<input type="text" id="f-workstream" maxlength="40" placeholder="e.g. Omni"></label>
+    </div>
+    <div class="grid2">
+      <label class="field">Systems<input type="text" id="f-systems" maxlength="80" placeholder="e.g. SFCC, OMS, WMS"></label>
+      <label class="field">Target date<input type="date" id="f-due"></label>
+    </div>
+    <div class="grid2">
+      <label class="field">Phase<select id="f-phase"><option value="uxui">UX/UI</option><option value="dev">Development</option><option value="done">Completed</option></select></label>
+      <span></span>
+    </div>
+    <label class="field">Notes<textarea id="f-notes" maxlength="800"></textarea></label>
+    <div class="actions">
+      <div><button class="btn danger" type="button" id="del-btn">Delete</button> <span class="confirm" id="del-msg" hidden>Tap Delete again to remove it.</span></div>
+      <div class="r"><button class="btn ghost" type="button" id="cancel-btn">Cancel</button><button class="btn" type="submit">Save</button></div>
+    </div>
+  </form>
+</div>
+
+<script>
+const LANES = [
+  { id: "mnp", name: "Mamas & Papas" },
+  { id: "gymshark", name: "Gymshark" },
+  { id: "coach", name: "Coach" },
+  { id: "blm", name: "Bloomingdale's" },
+  { id: "all", name: "Shared across brands" },
+  { id: "cross", name: "Cross-functional" },
+  { id: "innovation", name: "Innovation & Scale" },
+];
+const BRANDS = ["mnp", "gymshark", "coach", "blm"];
+// A brand tab also shows the shared lane, since those projects apply to every brand.
+const inTab = (laneId, tab) => !tab || laneId === tab || (laneId === "all" && BRANDS.includes(tab));
+const TABS = () => [{ id: "", name: "All Brands" }, ...LANES.filter((l) => BRANDS.includes(l.id))];
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const PILLAR_VAR = { core: "--core", enterprise: "--enterprise", innovation: "--innovation" };
+const DEFAULT_OWNER = "Awatef";
+const ASSIGNEES = ["Awatef", "Emma", "Bilal", "Aline", "Yagiz"];
+// A project moves through UX/UI, then Development, until it is Completed.
+const PHASES = ["uxui", "dev", "done"];
+const PHASE_NAME = { uxui: "UX/UI", dev: "Development", done: "Completed" };
+const PHASE_VAR = { uxui: "--ph-uxui", dev: "--ph-dev", done: "--ph-done" };
+const phaseOf = (it) => (it && it.done) ? "done" : (it && it.designDone) ? "dev" : "uxui";
+const rangeLabel = (s, e) => (s === e ? MONTHS[s - 1] : MONTHS[s - 1] + "–" + MONTHS[e - 1]) + " 2027";
+let suppressClick = false;
+let isAdmin = false; // Owner and Editors (share menu) can create and delete projects
+
+let items = [], db = null, canWrite = true, editing = null;
+const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false };
+// Hidden projects are left out for everyone; admins can bring them back into view from Filters.
+const visible = (it) => !it.hidden || (isAdmin && view.showHidden);
+const isOmni = (it) => (it.workstream || "").toLowerCase() === "omni";
+const usesOMS = (it) => (it.systems || "").split(",").some((s) => s.trim().toUpperCase() === "OMS");
+const Y0 = new Date(2027, 0, 1), Y1 = new Date(2028, 0, 1);
+const yearFrac = (d) => Math.min(1, Math.max(0, (d - Y0) / (Y1 - Y0)));
+const parseDue = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+const fmtDate = (d) => d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+try { Object.assign(view, JSON.parse(localStorage.getItem("rm27-view") || "{}")); } catch (e) {}
+view.hideTbc = false; // the Hide undated filter is retired; undated projects always show
+const save = () => { try { localStorage.setItem("rm27-view", JSON.stringify(view)); } catch (e) {} };
+
+const $ = (id) => document.getElementById(id);
+const el = (t, c, txt) => { const n = document.createElement(t); if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
+const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+const dated = (it) => Number.isInteger(it.start) && Number.isInteger(it.end);
+
+function render() {
+  const g = $("gantt"); g.replaceChildren();
+  const head = el("div", "row head");
+  head.append(el("div", null, "Project"));
+  const mid = el("div"); const qs = el("div", "qs"); ["Q1 27","Q2 27","Q3 27","Q4 27"].forEach((q) => qs.append(el("span", null, q)));
+  const ms = el("div", "months"); MONTHS.forEach((m) => ms.append(el("span", null, m[0])));
+  mid.append(qs, ms); head.append(mid, el("div", null, "Timing")); head.lastChild.style.textAlign = "right";
+  g.append(head);
+
+  let shown = 0;
+  if (view.lane && !TABS().some((t) => t.id === view.lane)) view.lane = "";
+  const owners = [...new Set([...ASSIGNEES, ...items.map((i) => (i.owner || "").trim()).filter(Boolean)])];
+  if (view.owner && !owners.includes(view.owner)) view.owner = "";
+  $("f-asg").replaceChildren(Object.assign(el("option", null, "Everyone"), { value: "" }), ...owners.map((n) => Object.assign(el("option", null, n), { value: n })));
+  const passes = (it) => visible(it) && view[it.pillar] && (!view.mine || it.mine) && (!view.omni || usesOMS(it)) && (!view.owner || (it.owner || "").trim() === view.owner) && (!view.hideTbc || dated(it));
+  renderTabs(passes);
+  const graphPass = (it) => visible(it) && view[it.pillar] && (!view.mine || it.mine) && (!view.omni || usesOMS(it)) && inTab(it.lane, view.lane);
+  renderUx(graphPass);
+  renderProd(graphPass);
+  LANES.forEach((lane) => {
+    if (!inTab(lane.id, view.lane)) return;
+    const rows = items.filter((it) => it.lane === lane.id && passes(it))
+      .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+    if (!rows.length) return;
+    const lh = el("div", "lanehead"); lh.append(el("b", null, lane.name), el("small", null, rows.length + (rows.length === 1 ? " project" : " projects")));
+    g.append(lh);
+    rows.forEach((it) => { g.append(row(it)); shown++; });
+  });
+  if (!shown && items.length) g.append(el("div", "empty", "Nothing matches these filters. Pick another brand, turn a pillar back on or untick “UX/UI Design” in Filters."));
+  placeToday();
+
+  ["core","enterprise","innovation"].forEach((p) => {
+    const n = items.filter((i) => i.pillar === p).length;
+    $("n-" + p).textContent = n + (n === 1 ? " project" : " projects");
+  });
+  $("n-mine").textContent = String(items.filter((i) => i.mine).length);
+  $("n-omni").textContent = String(items.filter(usesOMS).length);
+  $("only-omni").checked = view.omni;
+  document.querySelectorAll(".pillar input").forEach((c) => { c.checked = !!view[c.dataset.p]; c.closest(".pillar").classList.toggle("off", !c.checked); });
+  $("only-mine").checked = view.mine; $("hide-tbc").checked = view.hideTbc;
+  $("f-asg").value = view.owner || "";
+  $("n-hidden").textContent = String(items.filter((i) => i.hidden).length);
+  $("show-hidden").checked = !!view.showHidden;
+  const nOn = [view.mine, view.omni, view.owner, isAdmin && view.showHidden].filter(Boolean).length;
+  $("f-count").textContent = String(nOn); $("f-count").hidden = !nOn;
+}
+
+function renderTabs(passes) {
+  const bar = $("tabs"); const keepScroll = bar.scrollLeft; bar.replaceChildren();
+  // "All brands" stays first; brands follow, most projects on the left (ties keep the usual order).
+  const counted = TABS().map((t, i) => ({ t, i, n: items.filter((it) => inTab(it.lane, t.id) && passes(it)).length }));
+  const [first, ...rest] = counted;
+  rest.sort((a, b) => b.n - a.n || a.i - b.i);
+  [first, ...rest].forEach(({ t, n }) => {
+    const b = el("button", "tab"); b.type = "button"; b.setAttribute("role", "tab");
+    b.id = "tab-" + (t.id || "all"); b.dataset.id = t.id;
+    const sel = view.lane === t.id;
+    b.setAttribute("aria-selected", String(sel)); b.tabIndex = sel ? 0 : -1;
+    b.append(document.createTextNode(t.name), el("span", null, String(n)));
+    b.addEventListener("click", () => { view.lane = t.id; save(); render(); $("tab-" + (t.id || "all"))?.focus(); });
+    bar.append(b);
+  });
+  bar.scrollLeft = keepScroll;
+}
+$("tabs").addEventListener("keydown", (e) => {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  const ids = [...$("tabs").children].map((b) => b.dataset.id);
+  const i = ids.indexOf(view.lane), j = (i + (e.key === "ArrowRight" ? 1 : -1) + ids.length) % ids.length;
+  view.lane = ids[j]; save(); render();
+  const b = $("tab-" + (ids[j] || "all")); b?.focus(); b?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  e.preventDefault();
+});
+
+function row(it) {
+  const r = el("div", "row" + (it.mine ? " mine" : "") + (it.hidden ? " is-hidden" : ""));
+  r.dataset.id = it.id; r.dataset.lane = it.lane;
+  const name = el("div", "name");
+  const btn = el("button"); btn.type = "button";
+  btn.append(document.createTextNode(it.title));
+  bindOpen(btn, it.id);
+  name.append(btn);
+  if (isAdmin && canWrite && db) {
+    const grip = el("span", "grip", "⋮⋮"); grip.setAttribute("aria-hidden", "true");
+    name.append(grip); bindReorder(grip, r, it.id);
+  }
+  if (it.scope) name.append(el("small", null, it.scope));
+  const ph = phaseOf(it);
+  if (ph !== "uxui") name.append(el("span", "done-pill ph-" + ph, ph === "done" ? "Completed" : "In development"));
+  if (it.hidden || it.flagship || it.workstream || it.systems) {
+    const tags = el("div", "tags");
+    if (it.hidden) tags.append(el("span", "tag hid", "Hidden"));
+    if (it.flagship) tags.append(el("span", "tag", "Flagship"));
+    if (it.workstream) tags.append(el("span", "tag", it.workstream));
+    (it.systems || "").split(",").map((s) => s.trim()).filter(Boolean).forEach((s) => tags.append(el("span", "tag", s)));
+    name.append(tags);
+  }
+  const nl = (it.links || []).length;
+  if (nl) {
+    const lc = el("button", "lkcount", "↗ " + nl + (nl === 1 ? " link" : " links"));
+    lc.type = "button"; lc.setAttribute("aria-label", "Open " + nl + " links for " + it.title);
+    lc.addEventListener("click", () => openDetail(it.id));
+    name.append(lc);
+  }
+  const track = el("div", "track");
+  for (let i = 0; i < 12; i++) track.append(el("i"));
+  const bar = el("span", "bar");
+  if (dated(it)) {
+    bar.style.setProperty("--c", `var(${PILLAR_VAR[it.pillar] || "--core"})`);
+    bar.style.left = `calc(${(it.start - 1) / 12 * 100}% + 3px)`;
+    bar.style.width = `calc(${(it.end - it.start + 1) / 12 * 100}% - 6px)`;
+  } else bar.classList.add("tbc");
+  track.append(bar);
+  if (dated(it) && isAdmin && canWrite && db) {
+    bar.classList.add("drag");
+    bar.append(el("span", "hdl l"), el("span", "hdl r"));
+    bindDrag(bar, track, it.id);
+  }
+  bindOpen(track, it.id);
+  const due = parseDue(it.due);
+  if (due) {
+    const d = el("span", "due");
+    d.style.left = (yearFrac(due) * 100) + "%";
+    track.append(d);
+  }
+  const t = el("div", "timing" + (dated(it) || it.timing ? "" : " tbc"), it.timing || "TBC");
+  if (!it.timing || /tbc/i.test(it.timing)) t.classList.add("tbc");
+  if (due) t.append(el("small", null, (it.workstream || "Target") + " due " + due.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: due.getFullYear() === 2027 ? undefined : "numeric" })));
+  r.append(name, track, t);
+  return r;
+}
+
+// Admins drag a row's grip up or down to reorder projects within their brand or group; a pop-up asks before saving.
+function bindReorder(grip, rowEl, id) {
+  let active = false, sibs = [], line = null, target = -1, startIdx = -1;
+  const cleanup = () => { active = false; rowEl.classList.remove("lifting"); line?.remove(); line = null; };
+  const move = (e) => {
+    if (!active) return;
+    let idx = sibs.length;
+    for (let i = 0; i < sibs.length; i++) { const b = sibs[i].getBoundingClientRect(); if (e.clientY < b.top + b.height / 2) { idx = i; break; } }
+    target = idx;
+    const g = $("gantt").getBoundingClientRect();
+    const y = idx < sibs.length ? sibs[idx].getBoundingClientRect().top : sibs[sibs.length - 1].getBoundingClientRect().bottom;
+    line.style.top = (y - g.top - 1) + "px";
+  };
+  grip.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    sibs = [...$("gantt").querySelectorAll(".row[data-lane]")].filter((x) => x.dataset.lane === rowEl.dataset.lane);
+    startIdx = sibs.indexOf(rowEl); target = startIdx; active = true;
+    rowEl.classList.add("lifting");
+    line = el("div", "dropline"); $("gantt").append(line);
+    try { grip.setPointerCapture(e.pointerId); } catch (x) {}
+    move(e);
+  });
+  grip.addEventListener("pointermove", move);
+  grip.addEventListener("pointercancel", cleanup);
+  grip.addEventListener("click", (e) => e.stopPropagation());
+  grip.addEventListener("pointerup", async () => {
+    if (!active) return;
+    const t = target; cleanup();
+    const newIdx = t > startIdx ? t - 1 : t;
+    if (newIdx === startIdx || newIdx < 0) return;
+    const shown = sibs.map((s) => s.dataset.id);
+    shown.splice(startIdx, 1); shown.splice(newIdx, 0, id);
+    const before = shown[newIdx - 1], after = shown[newIdx + 1];
+    const it = items.find((x) => x.id === id); if (!it) return;
+    const title = (x) => items.find((i) => i.id === x)?.title || "";
+    const laneName = (LANES.find((l) => l.id === it.lane) || {}).name || "this group";
+    const where = before ? "below “" + title(before) + "”" : "to the top, above “" + title(after) + "”";
+    const ok = await confirmDialog({ title: "Save the new order?", text: "“" + it.title + "” will move " + where + " in " + laneName + ".", ok: "Save", danger: false });
+    if (!ok || !(await unlock())) return;
+    // Reorder the whole lane (including rows hidden by filters), then renumber 1..n.
+    const lane = items.filter((x) => x.lane === it.lane).sort((a, b) => (a.order ?? 99) - (b.order ?? 99) || a.title.localeCompare(b.title));
+    const ids = lane.map((x) => x.id).filter((x) => x !== id);
+    const at = before ? ids.indexOf(before) + 1 : Math.max(0, ids.indexOf(after));
+    ids.splice(at, 0, id);
+    const changes = ids.map((x, i) => ({ x, o: i + 1 })).filter(({ x, o }) => (items.find((i) => i.id === x)?.order) !== o);
+    try {
+      for (const { x, o } of changes) await db.collection("items").doc(x).update({ order: o, updatedAt: Date.now() });
+      touchMeta("Reordered " + laneName + ": moved " + it.title);
+      setStatus(it.title + " moved " + where + ".");
+    } catch (x) { setStatus("Couldn't save the new order. Try again."); }
+  });
+}
+
+// One bar row in a graph: segments are [cls, count, label]; widths share the graph's max.
+function barRow(host, who, segs, max, total, stat, extraCls) {
+  const row = el("div", "prow" + (extraCls ? " " + extraCls : "")); row.setAttribute("role", "listitem");
+  row.setAttribute("aria-label", who + ": " + segs.map(([, k, l]) => k + " " + l).join(", "));
+  const track = el("span", "ptrack"), bar = el("span", "pbar");
+  segs.forEach(([cls, k, label]) => { if (!k) return; const sp = el("span", "pseg " + cls); sp.style.width = `calc(${k / max * 100}% - 2px)`; sp.dataset.tip = who + " · " + label + ": " + k; bar.append(sp); });
+  track.append(bar, el("span", "ptot", String(total)));
+  row.append(el("span", "pname", who), track, el("span", "pstat", stat));
+  host.append(row);
+}
+
+// Productivity Graph: each Project Owner's projects once UX/UI is done (Development and Completed).
+function renderProd(basePass) {
+  const list = items.filter(basePass).filter((i) => phaseOf(i) !== "uxui");
+  const own = (i) => (i.owner || "").trim();
+  const names = [...new Set([...ASSIGNEES, ...list.map(own).filter(Boolean)])];
+  const rows = names.map((n) => ({ n, its: list.filter((i) => own(i) === n) }));
+  const un = list.filter((i) => !own(i)); if (un.length) rows.push({ n: "", its: un });
+  rows.forEach((r) => { r.dev = r.its.filter((i) => phaseOf(i) === "dev").length; r.done = r.its.filter((i) => phaseOf(i) === "done").length; });
+  rows.sort((a, b) => b.its.length - a.its.length || (a.n || "~").localeCompare(b.n || "~"));
+  const max = Math.max(1, ...rows.map((r) => r.its.length));
+  const host = $("prod-rows"); host.replaceChildren();
+  rows.forEach((r) => {
+    const total = r.its.length, pct = total ? Math.round(r.done / total * 100) : 0;
+    barRow(host, r.n || "Not assigned", [["dev", r.dev, "Development"], ["done", r.done, "Completed"]], max, total,
+      total ? r.done + " of " + total + " completed · " + pct + "%" : "Nothing past UX/UI yet");
+  });
+}
+
+// UX/UI Graph: Ryan's design work. A project's UX/UI is done once it moves to Development.
+const UX_DESIGNER = "Ryan";
+function renderUx(basePass) {
+  const list = items.filter(basePass);
+  const host = $("ux-rows"); host.replaceChildren();
+  const count = (its) => ({ prog: its.filter((i) => phaseOf(i) === "uxui").length, done: its.filter((i) => phaseOf(i) !== "uxui").length, total: its.length });
+  const all = count(list), max = Math.max(1, all.total);
+  const stat = (c) => c.total ? c.done + " of " + c.total + " done · " + Math.round(c.done / c.total * 100) + "%" : "No projects";
+  barRow(host, UX_DESIGNER, [["uxui", all.prog, "In UX/UI"], ["dev", all.done, "UX/UI done"]], max, all.total, stat(all));
+  LANES.forEach((l) => {
+    const its = list.filter((i) => i.lane === l.id); if (!its.length) return;
+    const c = count(its);
+    barRow(host, l.name, [["uxui", c.prog, "In UX/UI"], ["dev", c.done, "UX/UI done"]], max, c.total, stat(c), "lanerow");
+  });
+}
+
+const ptip = el("div", "ptip"); ptip.hidden = true; document.body.append(ptip);
+["prod-rows", "ux-rows"].forEach((hid) => {
+  $(hid).addEventListener("pointermove", (e) => {
+    const sp = e.target.closest(".pseg"); if (!sp) { ptip.hidden = true; return; }
+    ptip.textContent = sp.dataset.tip; ptip.hidden = false;
+    ptip.style.left = Math.max(8, Math.min(e.clientX + 12, innerWidth - ptip.offsetWidth - 8)) + "px";
+    ptip.style.top = Math.max(8, e.clientY - 34) + "px";
+  });
+  $(hid).addEventListener("pointerleave", () => { ptip.hidden = true; });
+});
+// Timeline hover: a single tooltip naming the Project Owner.
+$("gantt").addEventListener("pointermove", (e) => {
+  const r = e.target.closest(".row[data-id]");
+  if (!r || document.querySelector(".bar.dragging, .row.lifting")) { ptip.hidden = true; return; }
+  const it = items.find((x) => x.id === r.dataset.id); if (!it) { ptip.hidden = true; return; }
+  ptip.textContent = "Project Owner · " + ((it.owner || "").trim() || "Not assigned");
+  ptip.hidden = false;
+  ptip.style.left = Math.max(8, Math.min(e.clientX + 14, innerWidth - ptip.offsetWidth - 8)) + "px";
+  ptip.style.top = Math.max(8, e.clientY - 34) + "px";
+});
+$("gantt").addEventListener("pointerleave", () => { ptip.hidden = true; });
+$("gantt").addEventListener("pointerdown", () => { ptip.hidden = true; });
+
+// One click opens the project panel; a double-click opens the editor instead.
+function bindOpen(node, id) {
+  let t = null;
+  node.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (suppressClick) return;
+    if (e.detail > 1) return;
+    clearTimeout(t);
+    t = setTimeout(() => openDetail(id), e.detail === 0 ? 0 : 240);
+  });
+  node.addEventListener("dblclick", async (e) => {
+    e.stopPropagation(); clearTimeout(t);
+    if (suppressClick) return;
+    const it = items.find((x) => x.id === id); if (!it) return;
+    if (!canWrite || !db) { openDetail(id); return; }
+    if (!(await unlock())) return;
+    openEditor(items.find((x) => x.id === id) || it);
+  });
+}
+
+// Admins drag a dated bar to move it, or drag its ends to make it longer or shorter, in whole months; a pop-up asks before saving.
+function bindDrag(bar, track, id) {
+  let sx = 0, mw = 0, dragging = false, tip = null, it0 = null, mode = "move", ns = 0, ne = 0, oL = "", oW = "";
+  const place = (s, e) => { bar.style.left = `calc(${(s - 1) / 12 * 100}% + 3px)`; bar.style.width = `calc(${(e - s + 1) / 12 * 100}% - 6px)`; };
+  const reset = () => { bar.classList.remove("dragging"); if (oL) { bar.style.left = oL; bar.style.width = oW; } tip?.remove(); tip = null; };
+  const months = (n) => n + (n === 1 ? " month" : " months");
+  bar.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    it0 = items.find((x) => x.id === id); if (!it0 || !dated(it0)) { it0 = null; return; }
+    const cl = e.target.classList;
+    mode = cl && cl.contains("hdl") ? (cl.contains("l") ? "l" : "r") : "move";
+    sx = e.clientX; mw = track.getBoundingClientRect().width / 12; dragging = false;
+    ns = it0.start; ne = it0.end; oL = bar.style.left; oW = bar.style.width;
+    try { bar.setPointerCapture(e.pointerId); } catch (x) {}
+  });
+  bar.addEventListener("pointermove", (e) => {
+    if (!it0) return;
+    const dx = e.clientX - sx;
+    if (!dragging && Math.abs(dx) < 5) return;
+    dragging = true; bar.classList.add("dragging");
+    const d = Math.round(dx / mw), s0 = it0.start, e0 = it0.end;
+    if (mode === "move") { const m = Math.max(1 - s0, Math.min(12 - e0, d)); ns = s0 + m; ne = e0 + m; }
+    else if (mode === "l") { ns = Math.max(1, Math.min(e0, s0 + d)); ne = e0; }
+    else { ne = Math.min(12, Math.max(s0, e0 + d)); ns = s0; }
+    place(ns, ne);
+    if (!tip) { tip = el("span", "dragtip"); track.append(tip); }
+    tip.textContent = rangeLabel(ns, ne) + " · " + months(ne - ns + 1);
+    tip.style.left = ((ns - 1) / 12 * 100) + "%";
+  });
+  bar.addEventListener("pointerup", async (e) => {
+    if (!it0) return;
+    const it = it0; it0 = null;
+    try { bar.releasePointerCapture(e.pointerId); } catch (x) {}
+    if (!dragging) return;
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 300);
+    const s = ns, en = ne;
+    if (s === it.start && en === it.end) { reset(); return; }
+    const was = it.end - it.start + 1, now = en - s + 1, resized = was !== now;
+    const ok = await confirmDialog({
+      title: resized ? "Save the new duration?" : "Save the new dates?",
+      text: "“" + it.title + "” will change from " + rangeLabel(it.start, it.end) + " to " + rangeLabel(s, en)
+        + (resized ? " (" + months(now) + " instead of " + was + ")" : "") + ". Its timing label will change to match.",
+      ok: "Save", danger: false });
+    tip?.remove(); tip = null;
+    if (!ok || !(await unlock())) { reset(); return; }
+    const cur = items.find((x) => x.id === id) || it; const { id: _id, ...rest } = cur;
+    try {
+      await db.collection("items").doc(id).set({ ...rest, start: s, end: en, timing: rangeLabel(s, en), updatedAt: Date.now() });
+      touchMeta((resized ? "Changed " + it.title + " to " : "Moved " + it.title + " to ") + rangeLabel(s, en));
+      setStatus(it.title + " now runs " + rangeLabel(s, en) + ".");
+    } catch (x) { reset(); setStatus("Couldn't save the new dates. Try again."); }
+  });
+  bar.addEventListener("pointercancel", () => { it0 = null; dragging = false; reset(); });
+}
+
+function placeToday() {
+  const g = $("gantt");
+  g.querySelector(".today")?.remove();
+  const track = g.querySelector(".row:not(.head) .track");
+  const head = g.querySelector(".head");
+  if (!track || !head) return;
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const y0 = Y0, y1 = Y1;
+  const f = yearFrac(today);
+  const dateTxt = fmtDate(today);
+  let label = "Today · " + dateTxt;
+  if (today < y0) { const d = Math.round((y0 - today) / 864e5); label += " · 2027 starts in " + d + (d === 1 ? " day" : " days"); }
+  else if (today >= y1) label += " · 2027 complete";
+  const gr = g.getBoundingClientRect(), tr = track.getBoundingClientRect();
+  const line = el("div", "today" + (f > 0.75 ? " end" : ""));
+  line.style.left = (tr.left - gr.left + f * tr.width) + "px";
+  line.style.top = head.offsetHeight + "px";
+  line.append(el("b", null, label));
+  line.setAttribute("aria-hidden", "true");
+  g.append(line);
+}
+window.addEventListener("resize", placeToday);
+setInterval(placeToday, 36e5);
+
+function fillSelects() {
+  $("f-lane").replaceChildren(...LANES.map((l) => { const o = el("option", null, l.name); o.value = l.id; return o; }));
+
+  const opts = () => [Object.assign(el("option", null, "Not dated"), { value: "" }), ...MONTHS.map((m, i) => Object.assign(el("option", null, m + " 2027"), { value: String(i + 1) }))];
+  $("f-start").replaceChildren(...opts()); $("f-end").replaceChildren(...opts());
+}
+
+let delArmed = false;
+function openEditor(it) {
+  editing = it || null;
+  $("form-title").textContent = it ? "Edit project" : "Add project";
+  $("f-title").value = it?.title || "";
+  $("f-lane").value = it?.lane || "mnp";
+  $("f-pillar").value = it?.pillar || "core";
+  $("f-start").value = it?.start ? String(it.start) : "";
+  $("f-end").value = it?.end ? String(it.end) : "";
+  $("f-timing").value = it?.timing || "";
+  $("f-scope").value = it?.scope || "";
+  $("f-mine").checked = !!it?.mine; $("f-flagship").checked = !!it?.flagship; $("f-designdone").checked = !!it?.designDone;
+  $("f-phase").value = phaseOf(it);
+  $("f-notes").value = it?.notes || "";
+  $("f-workstream").value = it?.workstream || "";
+  // Every name is always listed: the team list, plus anyone already set as an owner (e.g. Abhilash).
+  const ownerNames = [...new Set([...ASSIGNEES, ...items.map((x) => (x.owner || "").trim()).filter(Boolean)])];
+  $("f-owner").replaceChildren(Object.assign(el("option", null, "Not assigned"), { value: "" }), ...ownerNames.map((n) => Object.assign(el("option", null, n), { value: n })));
+  $("f-owner").value = it ? ((it.owner || "").trim()) : DEFAULT_OWNER;
+  $("f-systems").value = it?.systems || "";
+  $("f-due").value = it?.due || "";
+  $("del-btn").hidden = !it || !isAdmin; $("del-msg").hidden = true; delArmed = false;
+  const ro = !canWrite || !db;
+  $("form").querySelectorAll("input,select,textarea,button[type=submit],#del-btn").forEach((n) => n.disabled = ro);
+  $("scrim").hidden = false; $("f-title").focus();
+}
+function closeEditor() { $("scrim").hidden = true; editing = null; if (detailId && current()) { renderDetail(); $("dscrim").hidden = false; } }
+
+$("form").addEventListener("submit", async (e) => {
+  e.preventDefault(); if (!db) return;
+  if (!(await unlock())) return;
+  let s = parseInt($("f-start").value, 10), en = parseInt($("f-end").value, 10);
+  if (Number.isInteger(s) && !Number.isInteger(en)) en = s;
+  if (Number.isInteger(en) && !Number.isInteger(s)) s = en;
+  if (Number.isInteger(s) && en < s) [s, en] = [en, s];
+  const data = {
+    title: $("f-title").value.trim(), lane: $("f-lane").value, pillar: $("f-pillar").value,
+    start: Number.isInteger(s) ? s : null, end: Number.isInteger(en) ? en : null,
+    timing: $("f-timing").value.trim(), scope: $("f-scope").value.trim(),
+    mine: $("f-mine").checked, flagship: $("f-flagship").checked,
+    designDone: $("f-phase").value !== "uxui", designDoneOn: $("f-phase").value !== "uxui" ? (editing?.designDoneOn || todayISO()) : "",
+    done: $("f-phase").value === "done", doneOn: $("f-phase").value === "done" ? (editing?.doneOn || todayISO()) : "", notes: $("f-notes").value.trim(),
+    workstream: $("f-workstream").value.trim(), owner: $("f-owner").value.trim(),
+    systems: $("f-systems").value.trim(), due: $("f-due").value || "",
+    hidden: !!editing?.hidden,
+    links: editing?.links || [], order: editing?.order ?? 90, source: editing?.source || "Added on the roadmap", updatedAt: Date.now(),
+  };
+  if (!data.title) return;
+  if (!editing && !isAdmin) { setStatus("Only admins can create projects."); return; }
+  try {
+    if (editing) await db.collection("items").doc(editing.id).set(data);
+    else await db.collection("items").add(data);
+    touchMeta((editing ? "Edited " : "Added ") + data.title);
+    setStatus("Saved."); closeEditor();
+  } catch (err) {
+    if (err?.code === "invalid_argument") { canWrite = false; setStatus("You can view this roadmap but not change it."); }
+    else setStatus("Couldn't save. Check your connection and try again.");
+  }
+});
+$("del-btn").addEventListener("click", async () => {
+  if (!editing || !db || !isAdmin) return;
+  if (!(await confirmDialog({ title: "Delete this project?", text: "“" + editing.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
+  if (!(await unlock())) return;
+  try { const t = editing.title; await db.collection("items").doc(editing.id).delete(); touchMeta("Deleted " + t); setStatus("Deleted."); detailId = null; closeEditor(); closeDetail(); }
+  catch (e) { setStatus("Couldn't delete that project. Try again."); }
+});
+$("cancel-btn").addEventListener("click", closeEditor);
+$("scrim").addEventListener("click", (e) => { if (e.target === $("scrim")) closeEditor(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("scrim").hidden) closeEditor(); });
+$("add-btn").addEventListener("click", async () => { if (!isAdmin) return; if (await unlock()) openEditor(null); });
+
+// ---- Edit lock: a password before any change (salted SHA-256 hash kept in meta/lock; only the owner can set it) ----
+let lock = null, unlockedHash = null, pwResolve = null, isOwner = false;
+try { unlockedHash = sessionStorage.getItem("rm27-unlocked"); } catch (e) {}
+const isUnlocked = () => !!(lock?.hash && unlockedHash === lock.hash);
+const hex = (buf) => [...new Uint8Array(buf)].map((x) => x.toString(16).padStart(2, "0")).join("");
+async function sha(s) { return hex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s))); }
+function showLockState() {
+  // The header lock button is hidden; the password prompt appears when someone tries to edit.
+  if (!db || !canWrite) { $("pw-change").hidden = true; return; }
+  $("pw-change").hidden = !(isOwner && isUnlocked());
+}
+function openPw(mode) {
+  const f = $("pw-form"); f.dataset.mode = mode;
+  const T = {
+    unlock: ["Enter the edit password", "Editing is locked. Enter the password to add, edit or delete projects.", "Unlock"],
+    set: ["Set an edit password", "Choose a password of at least 6 characters. Anyone who changes this roadmap will need it, including you.", "Save password"],
+    change: ["Change the edit password", "Choose a new password of at least 6 characters. Everyone else will need the new one.", "Save password"],
+    none: ["Editing is locked", "The owner hasn't set an edit password yet. Ask them to set one.", ""],
+  }[mode];
+  $("pw-title").textContent = T[0]; $("pw-text").textContent = T[1];
+  $("pw-ok").textContent = T[2]; $("pw-ok").hidden = mode === "none";
+  $("pw-l1").hidden = mode === "none"; $("pw-l2").hidden = !(mode === "set" || mode === "change");
+  $("pw-input").autocomplete = mode === "unlock" ? "current-password" : "new-password";
+  $("pw-cancel").textContent = mode === "none" ? "Close" : "Cancel";
+  $("pw-err").textContent = ""; $("pw-input").value = ""; $("pw-confirm").value = "";
+  setPwVisible(false);
+  $("pw-scrim").hidden = false;
+  (mode === "none" ? $("pw-cancel") : $("pw-input")).focus();
+}
+function setPwVisible(on) {
+  $("pw-input").type = on ? "text" : "password";
+  $("pw-confirm").type = on ? "text" : "password";
+  const b = $("pw-show"); b.textContent = on ? "Hide" : "Show";
+  b.setAttribute("aria-pressed", String(on)); b.setAttribute("aria-label", on ? "Hide password" : "Show password");
+}
+$("pw-show").addEventListener("click", (e) => {
+  e.preventDefault();
+  const inp = $("pw-input"), pos = inp.selectionStart;
+  setPwVisible(inp.type === "password");
+  inp.focus(); try { inp.setSelectionRange(pos, pos); } catch (x) {}
+});
+function closePw(ok) {
+  setPwVisible(false);
+  $("pw-scrim").hidden = true; $("pw-input").value = ""; $("pw-confirm").value = "";
+  const r = pwResolve; pwResolve = null; if (r) r(!!ok);
+}
+function setUnlocked(h) {
+  unlockedHash = h;
+  try { if (h) sessionStorage.setItem("rm27-unlocked", h); else sessionStorage.removeItem("rm27-unlocked"); } catch (e) {}
+  showLockState();
+}
+function unlock() {
+  if (isUnlocked()) return Promise.resolve(true);
+  if (pwResolve) pwResolve(false);
+  return new Promise((res) => { pwResolve = res; openPw(lock?.hash ? "unlock" : (isOwner ? "set" : "none")); });
+}
+$("pw-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const mode = $("pw-form").dataset.mode, p = $("pw-input").value;
+  const err = (t) => { $("pw-err").textContent = t; };
+  if (mode === "unlock") {
+    if (!p) { err("Enter the password."); return; }
+    const h = await sha(lock.salt + ":" + p);
+    if (h !== lock.hash) { err("That password isn't right. Try again."); $("pw-input").select(); return; }
+    setUnlocked(h); setStatus("Editing unlocked for this browser session."); closePw(true);
+  } else if (mode === "set" || mode === "change") {
+    if (p.length < 6) { err("Use at least 6 characters."); return; }
+    if (p !== $("pw-confirm").value) { err("The two passwords don't match."); return; }
+    const salt = hex(crypto.getRandomValues(new Uint8Array(16)));
+    const h = await sha(salt + ":" + p);
+    try {
+      await db.doc("meta/lock").set({ salt, hash: h, setAt: Date.now() });
+      lock = { salt, hash: h }; setUnlocked(h);
+      setStatus(mode === "change" ? "Edit password changed." : "Edit password set. Editing is unlocked for this browser session.");
+      closePw(true);
+    } catch (x) { err("Couldn't save the password. Only the owner can set it."); }
+  }
+});
+$("pw-cancel").addEventListener("click", () => closePw(false));
+$("pw-scrim").addEventListener("click", (e) => { if (e.target === $("pw-scrim")) closePw(false); });
+window.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("pw-scrim").hidden) { e.stopImmediatePropagation(); closePw(false); } }, true);
+$("pw-change").addEventListener("click", () => { if (pwResolve) pwResolve(false); pwResolve = null; openPw("change"); });
+
+// ---- Confirmation modal for destructive actions ----
+let cfResolve = null;
+function confirmDialog({ title, text, ok = "Delete", danger = true }) {
+  if (cfResolve) cfResolve(false);
+  $("cf-ok").className = "btn" + (danger ? " dangerfill" : "");
+  $("cf-title").textContent = title; $("cf-text").textContent = text; $("cf-ok").textContent = ok;
+  $("cf-scrim").hidden = false; $("cf-cancel").focus();
+  return new Promise((res) => { cfResolve = res; });
+}
+function closeCf(v) { $("cf-scrim").hidden = true; const r = cfResolve; cfResolve = null; if (r) r(v); }
+$("cf-ok").addEventListener("click", () => closeCf(true));
+$("cf-cancel").addEventListener("click", () => closeCf(false));
+$("cf-scrim").addEventListener("click", (e) => { if (e.target === $("cf-scrim")) closeCf(false); });
+window.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("cf-scrim").hidden) { e.stopImmediatePropagation(); closeCf(false); } }, true);
+document.querySelectorAll(".pillar input").forEach((c) => c.addEventListener("change", () => { view[c.dataset.p] = c.checked; save(); render(); }));
+$("only-mine").addEventListener("change", (e) => { view.mine = e.target.checked; save(); render(); });
+$("hide-tbc").addEventListener("change", (e) => { view.hideTbc = e.target.checked; save(); render(); });
+$("only-omni").addEventListener("change", (e) => { view.omni = e.target.checked; save(); render(); });
+$("show-hidden").addEventListener("change", (e) => { view.showHidden = e.target.checked; save(); render(); });
+$("f-asg").addEventListener("change", (e) => { view.owner = e.target.value; save(); render(); });
+
+// ---- Detail view: links to Figma files and Jira tickets ----
+const LANE_NAME = Object.fromEntries(LANES.map((l) => [l.id, l.name]));
+const PILLAR_NAME = { core: "Core Digital", enterprise: "Enterprise Transformation", innovation: "Innovation & Scale" };
+let detailId = null, detailPf = "web";
+const PF_NAME = { web: "Web", app: "App" };
+const linkKind = (url) => /figma\.com\//i.test(url) ? "figma"
+  : /confluence|atlassian\.net\/wiki\//i.test(url) ? "confluence"
+  : /atlassian\.net\/|\/browse\/[A-Z][A-Z0-9]+-\d+|jira/i.test(url) ? "jira" : "other";
+const jiraKey = (url) => (/\/browse\/([A-Z][A-Z0-9]+-\d+)/i.exec(url) || /selectedIssue=([A-Z][A-Z0-9]+-\d+)/i.exec(url) || [])[1]?.toUpperCase() || "";
+function figmaInfo(url) {
+  const m = /figma\.com\/(?:design|file|proto|board|slides)\/[^/]+\/([^/?#]+)/i.exec(url);
+  const file = m ? decodeURIComponent(m[1]).replace(/-/g, " ") : "Figma file";
+  const node = (/node-id=([0-9]+[-:][0-9]+)/i.exec(url) || [])[1];
+  return { file, node: node ? node.replace("-", ":") : "" };
+}
+function autoLabel(url) {
+  const k = linkKind(url);
+  if (k === "jira") return jiraKey(url) ? "Jira " + jiraKey(url) : "Jira ticket";
+  if (k === "figma") return figmaInfo(url).file;
+  if (k === "confluence") return "Confluence page";
+  try { return new URL(url).hostname.replace(/^www\./, ""); } catch (e) { return "Link"; }
+}
+function linkCard(lk, idx, it) {
+  const k = linkKind(lk.url);
+  const box = el("div", "lk " + k);
+  box.append(el("span", "glyph", k === "figma" ? "Fig" : k === "jira" ? "Jira" : "URL"));
+  const a = el("a"); a.href = lk.url; a.target = "_blank"; a.rel = "noopener";
+  a.append(el("b", null, lk.label || autoLabel(lk.url)));
+  let sub = "";
+  if (k === "figma") { const f = figmaInfo(lk.url); sub = f.file + (f.node ? " · frame " + f.node : ""); }
+  else if (k === "jira") sub = (jiraKey(lk.url) || "Ticket") + " · " + (() => { try { return new URL(lk.url).hostname; } catch (e) { return ""; } })();
+  else { try { sub = new URL(lk.url).hostname; } catch (e) { sub = lk.url; } }
+  a.append(el("small", null, sub));
+  if (!lk.platform) box.append(el("span", "both", "Web & App"));
+  box.append(a, el("span", "open", "Open ↗"));
+  if (canWrite && db) {
+    const rm = el("button", "rm", "×"); rm.type = "button"; rm.setAttribute("aria-label", "Remove " + (lk.label || "link"));
+    rm.addEventListener("click", async () => {
+      if (!(await confirmDialog({ title: "Remove this link?", text: "“" + (lk.label || autoLabel(lk.url)) + "” will be removed from " + it.title + " for everyone.", ok: "Remove link" }))) return;
+      saveLinks(it, (it.links || []).filter((_, i) => i !== idx), "Link removed.");
+    });
+    box.append(rm);
+  }
+  return box;
+}
+const shortLabel = (url) => { const k = linkKind(url); return k === "figma" ? "Figma" : k === "jira" ? "JIRA" + (jiraKey(url) ? " #" + jiraKey(url) : "") : k === "confluence" ? "Confluence" : "URL"; };
+function linkChip(lk, idx, it) {
+  const box = el("span", "lchip " + linkKind(lk.url));
+  const a = el("a", null, shortLabel(lk.url)); a.href = lk.url; a.target = "_blank"; a.rel = "noopener";
+  a.title = (lk.label ? lk.label + " · " : "") + lk.url;
+  box.append(a);
+  if (canWrite && db) {
+    const rm = el("button", "rm", "×"); rm.type = "button"; rm.setAttribute("aria-label", "Remove " + shortLabel(lk.url) + " link");
+    rm.addEventListener("click", async () => {
+      if (!(await confirmDialog({ title: "Remove this link?", text: "The " + shortLabel(lk.url) + " link" + (lk.label ? " (" + lk.label + ")" : "") + " will be removed from " + it.title + " for everyone.", ok: "Remove link" }))) return;
+      saveLinks(it, (it.links || []).filter((_, i) => i !== idx), "Link removed.");
+    });
+    box.append(rm);
+  }
+  return box;
+}
+function fillLinks(id, list, emptyText) {
+  const host = $(id); host.replaceChildren();
+  if (!list.length) { host.append(el("p", "none", emptyText)); return; }
+  list.forEach(({ lk, i }, _, __) => host.append(linkCard(lk, i, current())));
+}
+const current = () => items.find((x) => x.id === detailId);
+function renderDetail() {
+  const it = current();
+  if (!it) { closeDetail(); return; }
+  $("d-eyebrow").textContent = (LANE_NAME[it.lane] || "") + (it.scope ? " · " + it.scope : "");
+  $("d-title").textContent = it.title;
+  const chips = $("d-chips"); chips.replaceChildren();
+  const pc = el("span", "chip c-pillar", PILLAR_NAME[it.pillar] || "Core Digital"); pc.style.setProperty("--c", `var(${PILLAR_VAR[it.pillar] || "--core"})`); chips.append(pc);
+  if (it.mine) chips.append(el("span", "chip c-mine", "UX/UI"));
+  const cur = phaseOf(it), ci = PHASES.indexOf(cur);
+  const shortD = (s) => { const d = parseDue(s); return d ? " · " + d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : ""; };
+  $("d-phases").replaceChildren(...PHASES.map((p, i) => {
+    const li = el("li"), b = el("button"); b.type = "button";
+    b.className = i < ci ? "past" : i === ci ? "cur" : "";
+    b.style.setProperty("--c", `var(${PHASE_VAR[p]})`);
+    if (i === ci) b.setAttribute("aria-current", "step");
+    const sub = p === "uxui" ? (i < ci ? "Done" + shortD(it.designDoneOn) : "In progress")
+      : p === "dev" ? (i < ci ? "Done" + shortD(it.doneOn) : i === ci ? "In progress" : "Next")
+      : (i === ci ? "Done" + shortD(it.doneOn) : "Not yet");
+    b.append(el("b", null, PHASE_NAME[p]), el("small", null, sub));
+    b.disabled = !canWrite || !db || i === ci;
+    b.addEventListener("click", () => setPhase(it.id, p));
+    li.append(b); return li;
+  }));
+  if (it.hidden) chips.append(el("span", "chip", "Hidden"));
+  if (it.flagship) chips.append(el("span", "chip", "Flagship"));
+  if (isOmni(it)) chips.append(el("span", "chip c-omni", "Omni"));
+  const facts = $("d-facts"); facts.replaceChildren();
+  const fact = (k, v) => { if (!v) return; const d = el("div"); d.append(el("dt", null, k), el("dd", null, v)); facts.append(d); };
+  fact("Timing", it.timing || "TBC");
+  fact("On the timeline", dated(it) ? (it.start === it.end ? MONTHS[it.start - 1] : MONTHS[it.start - 1] + " – " + MONTHS[it.end - 1]) + " 2027" : "Not dated");
+  const due = parseDue(it.due); if (due) fact((it.workstream || "Target") + " target", fmtDate(due));
+  $("d-owner").replaceChildren(document.createTextNode("Project Owner "), el("b", it.owner ? null : "none", it.owner || "Not assigned"));
+  fact("Systems", it.systems); fact("Source", it.source);
+  const every = (it.links || []).map((lk, i) => ({ lk, i }));
+  const inPf = (pf) => every.filter((x) => !x.lk.platform || x.lk.platform === pf);
+  ["web", "app"].forEach((pf) => {
+    const n = every.filter((x) => x.lk.platform === pf).length;
+    $("pf-n-" + pf).textContent = n ? String(n) : "";
+    $("pf-" + pf).setAttribute("aria-selected", String(pf === detailPf));
+    $("pf-" + pf).tabIndex = pf === detailPf ? 0 : -1;
+  });
+  const all = inPf(detailPf);
+  const order = { figma: 0, jira: 1, confluence: 2, other: 3 };
+  const sorted = all.slice().sort((a, b) => order[linkKind(a.lk.url)] - order[linkKind(b.lk.url)]);
+  $("d-links").replaceChildren(...sorted.map(({ lk, i }) => linkChip(lk, i, it)));
+  $("d-links-sec").hidden = !sorted.length;
+  $("d-add-label").textContent = "Add a link";
+  $("d-notes").textContent = it.notes || ""; $("d-notes-sec").hidden = !it.notes;
+  const ro = !canWrite || !db;
+  $("d-add").hidden = ro; $("d-edit").hidden = ro; $("d-designdone").hidden = true; $("d-delete").hidden = ro || !isAdmin;
+  $("d-hide").hidden = ro || !isAdmin; $("d-hide").textContent = it.hidden ? "Unhide project" : "Hide project";
+  $("d-designdone").textContent = it.designDone ? "Undo UX/UI Completed" : "Mark UX/UI Completed";
+  $("d-designdone").classList.toggle("on", !!it.designDone);
+}
+function openDetail(id) {
+  const it0 = items.find((x) => x.id === id);
+  if (it0) {
+    const ls = it0.links || [], sc = (it0.scope || "") + " " + it0.title;
+    const nApp = ls.filter((l) => l.platform === "app").length, nWeb = ls.filter((l) => l.platform === "web").length;
+    detailPf = /\bapp\b/i.test(sc) && !/\bweb\b/i.test(sc) ? "app" : /\bweb\b/i.test(sc) ? "web" : (nApp > nWeb ? "app" : "web");
+  }
+  detailId = id; renderDetail(); if (!current()) return;
+  $("dscrim").hidden = false; $("d-hint").textContent = "";
+  try { if (location.hash !== "#" + id) location.hash = id; } catch (e) {}
+  $("d-close").focus();
+}
+function closeDetail() {
+  if ($("dscrim").hidden && !detailId) return;
+  $("dscrim").hidden = true; detailId = null;
+  try { if (location.hash) location.hash = ""; } catch (e) {}
+}
+async function saveLinks(it, links, msg) {
+  if (!db || !it) return false;
+  if (!(await unlock())) return false;
+  const { id, ...rest } = it;
+  try { await db.collection("items").doc(id).set({ ...rest, links, updatedAt: Date.now() }); touchMeta(msg); setStatus(msg); return true; }
+  catch (err) { $("d-hint").textContent = err?.code === "invalid_argument" ? "You can view this roadmap but not change it." : "Couldn't save the link. Check your connection and try again."; return false; }
+}
+$("d-add").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const it = current(); let url = $("d-url").value.trim();
+  if (!url) { $("d-hint").textContent = "Paste a link first."; return; }
+  if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+  try { new URL(url); } catch (err) { $("d-hint").textContent = "That doesn't look like a link. Copy it from Figma's Share button or the Jira address bar."; return; }
+  if ((it.links || []).some((l) => l.url === url)) { $("d-hint").textContent = "That link is already here."; return; }
+  const label = $("d-label").value.trim() || autoLabel(url);
+  if (await saveLinks(it, [...(it.links || []), { label, url, platform: detailPf }], PF_NAME[detailPf] + " link added to " + it.title + ".")) {
+    $("d-url").value = ""; $("d-label").value = ""; $("d-hint").textContent = "Added " + label + ".";
+  }
+});
+$("d-url").addEventListener("input", () => { const v = $("d-url").value.trim(); $("d-hint").textContent = v ? "Will show as: " + shortLabel(/^https?:/i.test(v) ? v : "https://" + v) : ""; });
+document.querySelectorAll("#d-seg button").forEach((b) => b.addEventListener("click", () => { detailPf = b.dataset.pf; renderDetail(); }));
+$("d-seg").addEventListener("keydown", (e) => { if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return; detailPf = detailPf === "web" ? "app" : "web"; renderDetail(); $("pf-" + detailPf).focus(); e.preventDefault(); });
+async function setPhase(id, p) {
+  const it = items.find((x) => x.id === id); if (!it || !db) return;
+  const from = phaseOf(it); if (from === p) return;
+  if (PHASES.indexOf(p) < PHASES.indexOf(from) && !(await confirmDialog({ title: "Move back to " + PHASE_NAME[p] + "?", text: "“" + it.title + "” will go back to " + PHASE_NAME[p] + " and lose the completion date" + (p === "uxui" && from === "done" ? "s" : "") + " after that step.", ok: "Move back" }))) return;
+  if (!(await unlock())) return;
+  const { id: _id, ...rest } = it;
+  const designDone = p !== "uxui", done = p === "done";
+  try {
+    await db.collection("items").doc(id).set({ ...rest, designDone, designDoneOn: designDone ? (it.designDoneOn || todayISO()) : "", done, doneOn: done ? (it.doneOn || todayISO()) : "", updatedAt: Date.now() });
+    touchMeta(it.title + ": " + PHASE_NAME[p]);
+    setStatus(it.title + (p === "done" ? " is Completed." : " is now in " + PHASE_NAME[p] + "."));
+  } catch (e) { setStatus("Couldn't update that project. Try again."); }
+}
+$("d-designdone").addEventListener("click", async () => {
+  const it = current(); if (!it || !db) return;
+  if (!(await unlock())) return;
+  const on = !it.designDone; const { id, ...rest } = it;
+  if (!on && !(await confirmDialog({ title: "Undo UX/UI Completed?", text: "“" + it.title + "” will go back to in progress and lose its completion date.", ok: "Undo" }))) return;
+  try { await db.collection("items").doc(id).set({ ...rest, designDone: on, designDoneOn: on ? todayISO() : "", updatedAt: Date.now() }); touchMeta((on ? "Marked UX/UI Completed: " : "Back in progress: ") + it.title); setStatus(on ? it.title + " marked UX/UI Completed." : it.title + " is back in progress."); }
+  catch (err) { setStatus("Couldn't update that project. Try again."); }
+});
+$("d-hide").addEventListener("click", async () => {
+  const it = current(); if (!it || !db || !isAdmin) return;
+  if (!(await unlock())) return;
+  const on = !it.hidden; const { id, ...rest } = it;
+  try {
+    await db.collection("items").doc(id).set({ ...rest, hidden: on, updatedAt: Date.now() });
+    touchMeta((on ? "Hid " : "Unhid ") + it.title);
+    setStatus(on ? it.title + " is hidden. Turn on Filters › Hidden projects to see it again." : it.title + " is visible again.");
+    if (on && !view.showHidden) closeDetail();
+  } catch (e) { setStatus("Couldn't update that project. Try again."); }
+});
+$("d-delete").addEventListener("click", async () => {
+  const it = current(); if (!it || !db || !isAdmin) return;
+  if (!(await confirmDialog({ title: "Delete this project?", text: "“" + it.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
+  if (!(await unlock())) return;
+  try { await db.collection("items").doc(it.id).delete(); touchMeta("Deleted " + it.title); setStatus("Deleted " + it.title + "."); closeDetail(); }
+  catch (e) { setStatus("Couldn't delete that project. Try again."); }
+});
+$("d-close").addEventListener("click", closeDetail);
+$("d-done").addEventListener("click", closeDetail);
+$("d-edit").addEventListener("click", async () => { if (!(await unlock())) return; const it = current(); $("dscrim").hidden = true; openEditor(it); });
+$("dscrim").addEventListener("click", (e) => { if (e.target === $("dscrim")) closeDetail(); });
+window.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("dscrim").hidden && $("scrim").hidden) closeDetail(); }, true);
+window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (h && items.some((x) => x.id === h)) { if (detailId !== h) openDetail(h); } else if (!h && detailId) closeDetail(); });
+
+function setFilters(open) { $("f-panel").hidden = !open; $("f-btn").setAttribute("aria-expanded", String(open)); }
+$("f-btn").addEventListener("click", () => setFilters($("f-panel").hidden));
+document.addEventListener("click", (e) => { if (!$("f-panel").hidden && !e.target.closest(".fwrap")) setFilters(false); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("f-panel").hidden) { setFilters(false); $("f-btn").focus(); } });
+function setStatus(t) { $("status").textContent = t; }
+
+let meta = null;
+const fmtStamp = (ms) => new Date(ms).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+function showUpdated() {
+  const fromItems = items.reduce((m, i) => Math.max(m, typeof i.updatedAt === "number" ? i.updatedAt : 0), 0);
+  const fromMeta = typeof meta?.lastUpdated === "number" ? meta.lastUpdated : 0;
+  const ts = Math.max(fromItems, fromMeta);
+  const box = $("updated"); box.replaceChildren();
+  if (!ts) { box.textContent = "Last updated: not recorded yet"; return; }
+  box.append(document.createTextNode("Last updated "), el("b", null, fmtStamp(ts)));
+  if (fromMeta >= fromItems && meta?.summary) box.append(el("span", null, meta.summary));
+}
+async function touchMeta(summary) {
+  if (!db) return;
+  try { await db.doc("meta/info").set({ lastUpdated: Date.now(), summary: summary || "" }); } catch (e) {}
+}
+$("refresh-btn").addEventListener("click", async () => {
+  if (!db) return;
+  const b = $("refresh-btn"); b.disabled = true; b.textContent = "Refreshing…";
+  try {
+    const [snap, m] = await Promise.all([db.collection("items").get(), db.doc("meta/info").get()]);
+    items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    meta = m.exists ? m.data() : null;
+    render(); if (detailId) renderDetail(); showUpdated();
+    setStatus("Refreshed at " + new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }) + " · " + items.length + " projects");
+  } catch (e) { setStatus("Couldn't refresh. Check your connection and try again."); }
+  b.disabled = false; b.textContent = "Refresh";
+});
+fillSelects(); render();
+
+(async () => {
+  db = await claude.use("db");
+  if (!db) { setStatus("The roadmap data isn't available in this view. Open it from claude.ai while signed in."); $("add-btn").disabled = true; $("refresh-btn").disabled = true; $("updated").textContent = "Last updated: unavailable"; return; }
+  const user = await claude.use("user");
+  const w = user ? await user.can("data.write") : null;
+  if (w === false) { canWrite = false; $("add-btn").hidden = true; }
+  try { isAdmin = user ? !!(await user.canEdit()) : false; } catch (e) { isAdmin = false; }
+  $("add-btn").hidden = !(isAdmin && canWrite);
+  $("hid-wrap").hidden = !isAdmin;
+  if (!isAdmin) view.showHidden = false;
+  try { isOwner = user ? !!(await user.isOwner()) : false; } catch (e) { isOwner = false; }
+  showLockState();
+  db.doc("meta/lock").onSnapshot((s) => { lock = s.exists ? s.data() : null; showLockState(); }, () => {});
+  db.collection("items").onSnapshot((snap) => {
+    items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    render(); showUpdated();
+    if (detailId) renderDetail();
+    else { const h = (location.hash || "").slice(1); if (h && items.some((x) => x.id === h)) openDetail(h); }
+    const undated = items.filter((i) => !dated(i)).length;
+    setStatus(items.length ? `${items.length} projects · ${undated} without dates yet` : "No projects yet. Use Add project to put the first one on the timeline.");
+  }, () => setStatus("Lost the connection to the roadmap. Reload the page to reconnect."));
+  db.doc("meta/info").onSnapshot((s) => { meta = s.exists ? s.data() : null; showUpdated(); }, () => {});
+})();
+</script>
+
+</body></html>
+</body>
+</html>
