@@ -2,10 +2,16 @@
  {
   "id": "all-payment-gateway-integration",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "2027-06-30",
    "end": 7,
    "flagship": false,
+   "hidden": true,
    "lane": "all",
+   "links": [],
    "mine": false,
    "notes": "Matched to “Payment gateway replacement” in the Omni tracker (due 30 Jun 2027).",
    "order": 1,
@@ -17,6 +23,7 @@
    "systems": "SFCC, OMS",
    "timing": "Q2 2027",
    "title": "Payment Gateway integration",
+   "updatedAt": 1793877740249,
    "workstream": "Omni"
   }
  },
@@ -48,42 +55,15 @@
    "lane": "blm",
    "mine": false,
    "notes": "",
-   "order": 11,
+   "order": 8,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 7,
    "timing": "Q3 2027",
-   "title": "AI Tagging"
-  }
- },
- {
-  "id": "blm-bbb-enrollment-re-launch",
-  "data": {
-   "designDone": false,
-   "designDoneOn": "",
-   "done": false,
-   "doneOn": "",
-   "due": "",
-   "end": 3,
-   "flagship": false,
-   "hidden": false,
-   "lane": "blm",
-   "links": [],
-   "mine": false,
-   "notes": "Listed on the Q1 2027 slide; not on the Gantt.",
-   "order": 3,
-   "owner": "Awatef",
-   "pillar": "core",
-   "scope": "",
-   "source": "Q1 2027 slide",
-   "start": 2,
-   "systems": "",
-   "timing": "Q1 2027",
-   "title": "BBB Enrollment",
-   "updatedAt": 1793873361316,
-   "workstream": ""
+   "title": "AI Tagging",
+   "updatedAt": 1793880630996
   }
  },
  {
@@ -101,7 +81,7 @@
    "links": [],
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026): Beauty concierge with Talal, Q2 2027. The deck says Q1, so confirm which is right.",
-   "order": 6,
+   "order": 7,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -109,8 +89,8 @@
    "start": 2,
    "systems": "",
    "timing": "Q1 2027",
-   "title": "Beauty Concierge",
-   "updatedAt": 1793873448612,
+   "title": "Beauty concierge",
+   "updatedAt": 1793880630670,
    "workstream": ""
   }
  },
@@ -122,14 +102,15 @@
    "lane": "blm",
    "mine": false,
    "notes": "",
-   "order": 4,
+   "order": 6,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 1,
    "timing": "Q1/Q2 2027",
-   "title": "Beauty Relaunch"
+   "title": "Bloomingdale’s Beauty Relaunch",
+   "updatedAt": 1793880630304
   }
  },
  {
@@ -141,7 +122,7 @@
    "lane": "blm",
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026): Q2 2027. The deck says Q3, so confirm which is right.",
-   "order": 8,
+   "order": 14,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -149,27 +130,34 @@
    "start": 6,
    "timing": "Q3 2027",
    "title": "Beauty Subscriptions",
-   "updatedAt": 1793873497177
+   "updatedAt": 1793874015211
   }
  },
  {
   "id": "blm-bloomingdale-s-ksa-launch",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "2027-09-30",
    "end": 9,
    "flagship": false,
+   "hidden": false,
    "lane": "blm",
+   "links": [],
    "mine": false,
    "notes": "Dependent on OMS timelines.",
-   "order": 9,
+   "order": 1,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "App & web",
    "source": "2027 roadmap deck",
-   "start": 6,
+   "start": 5,
    "systems": "SFCC, OMS, WMS",
    "timing": "Go-live Sep 2027",
-   "title": "Bloomingdale's KSA Launch",
+   "title": "Bloomingdale’s KSA Launch",
+   "updatedAt": 1793878540000,
    "workstream": "Omni"
   }
  },
@@ -185,7 +173,7 @@
    "links": [],
    "mine": false,
    "notes": "The Q1 slide lists a Customer Care return form in Q1.",
-   "order": 13,
+   "order": 9,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "BLM / All brands",
@@ -193,8 +181,36 @@
    "start": 7,
    "systems": "",
    "timing": "Q3–Q4 2027",
-   "title": "Customer Care Projects/Support",
-   "updatedAt": 1793342716119,
+   "title": "Customer care support",
+   "updatedAt": 1793880631332,
+   "workstream": ""
+  }
+ },
+ {
+  "id": "blm-external-concessions-platform",
+  "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
+   "end": 12,
+   "flagship": false,
+   "hidden": false,
+   "lane": "blm",
+   "links": [],
+   "mine": false,
+   "notes": "",
+   "order": 2,
+   "owner": "Awatef",
+   "pillar": "core",
+   "scope": "",
+   "source": "Added on the roadmap",
+   "start": 1,
+   "systems": "",
+   "timing": "Full year 2027",
+   "title": "External Concessions Platform",
+   "updatedAt": 1793880628947,
    "workstream": ""
   }
  },
@@ -207,7 +223,7 @@
    "lane": "blm",
    "mine": false,
    "notes": "The Omni tracker targets 30 Jun 2027; the deck shows Q1.",
-   "order": 2,
+   "order": 3,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "",
@@ -215,7 +231,8 @@
    "start": 1,
    "systems": "SFCC, SAP",
    "timing": "Q1 2027",
-   "title": "GWP / Sample selection",
+   "title": "GWP/Sample selection",
+   "updatedAt": 1793880629291,
    "workstream": "Omni"
   }
  },
@@ -234,7 +251,7 @@
    "links": [],
    "mine": false,
    "notes": "",
-   "order": 5,
+   "order": 4,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -242,45 +259,37 @@
    "start": 2,
    "systems": "",
    "timing": "Feb–Apr 2027",
-   "title": "Holition Beauty AR",
-   "updatedAt": 1793873405687,
+   "title": "Holition Beauty",
+   "updatedAt": 1793880629626,
    "workstream": ""
-  }
- },
- {
-  "id": "blm-reem-mall-flow-c-c-in-store",
-  "data": {
-   "end": 9,
-   "flagship": false,
-   "lane": "blm",
-   "mine": false,
-   "notes": "Depends on the Beauty team.",
-   "order": 10,
-   "owner": "Awatef",
-   "pillar": "core",
-   "scope": "C&C & iPads",
-   "source": "2027 roadmap deck",
-   "start": 7,
-   "timing": "Q3 2027",
-   "title": "Reem Mall flow (C&C + in-store)"
   }
  },
  {
   "id": "blm-sale-preview-similar-to-onyx",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 10,
    "flagship": false,
+   "hidden": true,
    "lane": "blm",
+   "links": [],
    "mine": false,
    "notes": "",
-   "order": 14,
+   "order": 11,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 8,
+   "systems": "",
    "timing": "Q4 2027",
-   "title": "Sale preview (similar to Onyx)"
+   "title": "Sale Preview (Similar to Onyx)",
+   "updatedAt": 1793878828827,
+   "workstream": ""
   }
  },
  {
@@ -291,14 +300,15 @@
    "lane": "blm",
    "mine": false,
    "notes": "",
-   "order": 12,
+   "order": 5,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 7,
    "timing": "Q3 2027",
-   "title": "Size guide improvement"
+   "title": "Size guide improvements",
+   "updatedAt": 1793880629960
   }
  },
  {
@@ -316,7 +326,7 @@
    "links": [],
    "mine": false,
    "notes": "",
-   "order": 7,
+   "order": 10,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -325,7 +335,7 @@
    "systems": "",
    "timing": "Q1/Q2 2027",
    "title": "Wishlist / Multiple Collections",
-   "updatedAt": 1793873480219,
+   "updatedAt": 1793878540000,
    "workstream": ""
   }
  },
@@ -337,14 +347,15 @@
    "lane": "coach",
    "mine": false,
    "notes": "Phase 1 was in the Q4 2026 backlog (P1).",
-   "order": 1,
+   "order": 2,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 1,
    "timing": "Q1 2027",
-   "title": "AI Shopping Assistant – Phase 2"
+   "title": "AI Shopping Assistant Phase 2",
+   "updatedAt": 1793877930000
   }
  },
  {
@@ -356,7 +367,7 @@
    "lane": "coach",
    "mine": false,
    "notes": "The deck shows a Q3–Q4 bar with timing TBC. The Omni tracker targets 30 Sep 2027.",
-   "order": 6,
+   "order": 3,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "",
@@ -365,25 +376,36 @@
    "systems": "SFCC, SAP",
    "timing": "TBC",
    "title": "Coach App",
+   "updatedAt": 1793877930000,
    "workstream": "Omni"
   }
  },
  {
   "id": "coach-coach-cro-brand-requirements",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 12,
    "flagship": false,
+   "hidden": false,
    "lane": "coach",
+   "links": [],
    "mine": false,
    "notes": "The Q1 slide also lists PLP CRO/brand changes in Q1.",
-   "order": 4,
+   "order": 6,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 4,
+   "systems": "",
    "timing": "Q2–Q4 2027",
-   "title": "Coach CRO / brand requirements"
+   "title": "Coach CRO / Brand Requirements",
+   "updatedAt": 1793878092755,
+   "workstream": ""
   }
  },
  {
@@ -395,7 +417,7 @@
    "lane": "coach",
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026). Not in the 2027 roadmap deck.",
-   "order": 3,
+   "order": 7,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -403,7 +425,7 @@
    "start": 1,
    "timing": "Q1 2027",
    "title": "Notify me",
-   "updatedAt": 1793873177612
+   "updatedAt": 1793877930000
   }
  },
  {
@@ -414,32 +436,43 @@
    "lane": "coach",
    "mine": false,
    "notes": "",
-   "order": 2,
+   "order": 5,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 1,
    "timing": "Q1 2027",
-   "title": "PDP 7"
+   "title": "PDP 7",
+   "updatedAt": 1793877930000
   }
  },
  {
   "id": "coach-plp-improvements-2027",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 4,
    "flagship": false,
+   "hidden": false,
    "lane": "coach",
+   "links": [],
    "mine": false,
    "notes": "",
-   "order": 3,
+   "order": 4,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 2,
+   "systems": "",
    "timing": "Q2 2027",
-   "title": "PLP improvements (2027)"
+   "title": "PLP Improvements (2027)",
+   "updatedAt": 1793877998751,
+   "workstream": ""
   }
  },
  {
@@ -450,15 +483,15 @@
    "lane": "coach",
    "mine": false,
    "notes": "",
-   "order": 5,
+   "order": 1,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 4,
    "timing": "Apr–May 2027",
-   "title": "Waterfall model in Fulfilment",
-   "updatedAt": 1793873220896
+   "title": "Waterfall Model in Fulfilment",
+   "updatedAt": 1793877930000
   }
  },
  {
@@ -547,9 +580,16 @@
  {
   "id": "cross-cx-strategy",
   "data": {
-   "end": null,
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
+   "end": 8,
    "flagship": false,
+   "hidden": false,
    "lane": "cross",
+   "links": [],
    "mine": false,
    "notes": "In the portfolio; no timeline yet.",
    "order": 10,
@@ -557,9 +597,12 @@
    "pillar": "enterprise",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": null,
-   "timing": "TBC",
-   "title": "CX Strategy"
+   "start": 1,
+   "systems": "",
+   "timing": "Q3 2027",
+   "title": "CX Strategy",
+   "updatedAt": 1793879110349,
+   "workstream": ""
   }
  },
  {
@@ -611,7 +654,7 @@
    "links": [],
    "mine": true,
    "notes": "Flagged by Emma as IMMEDIATE on 1 Oct 2026, so it is a 2026 task rather than a 2027 one. Bloomingdale's. Deadline to confirm.",
-   "order": 0,
+   "order": 12,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -620,7 +663,7 @@
    "systems": "",
    "timing": "Immediate",
    "title": "Gift guide",
-   "updatedAt": 1793873306959,
+   "updatedAt": 1793873974538,
    "workstream": ""
   }
  },
@@ -632,7 +675,7 @@
    "done": false,
    "doneOn": "",
    "due": "2027-09-30",
-   "end": null,
+   "end": 9,
    "flagship": false,
    "hidden": false,
    "lane": "cross",
@@ -644,11 +687,11 @@
    "pillar": "enterprise",
    "scope": "KSA",
    "source": "Added on the roadmap",
-   "start": null,
+   "start": 5,
    "systems": "",
    "timing": "ETA Sep 2027",
    "title": "KSA Expansion",
-   "updatedAt": 1793872516257,
+   "updatedAt": 1793873851638,
    "workstream": ""
   }
  },
@@ -679,36 +722,12 @@
   }
  },
  {
-  "id": "cross-psp-replacement",
-  "data": {
-   "designDone": false,
-   "designDoneOn": "",
-   "due": "",
-   "end": 3,
-   "flagship": false,
-   "hidden": false,
-   "lane": "cross",
-   "links": [],
-   "mine": false,
-   "notes": "Listed on the Q1 2027 slide.",
-   "order": 11,
-   "owner": "Awatef",
-   "pillar": "enterprise",
-   "scope": "All brands",
-   "source": "Q1 2027 slide",
-   "start": 1,
-   "systems": "",
-   "timing": "Q1 2027",
-   "title": "PSP Replacement",
-   "updatedAt": 1793624560281,
-   "workstream": ""
-  }
- },
- {
   "id": "cross-sfmc-replacement",
   "data": {
    "designDone": false,
    "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "",
    "end": 5,
    "flagship": false,
@@ -722,11 +741,11 @@
    "pillar": "enterprise",
    "scope": "All brands",
    "source": "2027 roadmap deck",
-   "start": 4,
+   "start": 1,
    "systems": "",
    "timing": "Apr–May 2027",
    "title": "SFMC Replacement",
-   "updatedAt": 1793872516257,
+   "updatedAt": 1793873614616,
    "workstream": ""
   }
  },
@@ -735,8 +754,10 @@
   "data": {
    "designDone": false,
    "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "2027-04-30",
-   "end": null,
+   "end": 4,
    "flagship": false,
    "hidden": false,
    "lane": "cross",
@@ -748,11 +769,11 @@
    "pillar": "enterprise",
    "scope": "All brands",
    "source": "2027 roadmap deck",
-   "start": null,
+   "start": 1,
    "systems": "",
    "timing": "ETA Apr 2027",
    "title": "SFSC Data Optimizations",
-   "updatedAt": 1793872516257,
+   "updatedAt": 1793873664651,
    "workstream": ""
   }
  },
@@ -769,7 +790,7 @@
    "links": [],
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026) with no date. Bloomingdale's. Timing to confirm.",
-   "order": 0,
+   "order": 13,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -778,7 +799,35 @@
    "systems": "",
    "timing": "TBC",
    "title": "What's on in store",
-   "updatedAt": 1793873311990,
+   "updatedAt": 1793873974966,
+   "workstream": ""
+  }
+ },
+ {
+  "id": "gymshark-ai-powered-search-cimulate",
+  "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
+   "end": 3,
+   "flagship": false,
+   "hidden": false,
+   "lane": "gymshark",
+   "links": [],
+   "mine": false,
+   "notes": "",
+   "order": 2,
+   "owner": "Awatef",
+   "pillar": "core",
+   "scope": "",
+   "source": "Added on the roadmap",
+   "start": 2,
+   "systems": "",
+   "timing": "Feb–Mar 2027",
+   "title": "AI-Powered Search (Cimulate)",
+   "updatedAt": 1793880637533,
    "workstream": ""
   }
  },
@@ -787,17 +836,19 @@
   "data": {
    "end": 9,
    "flagship": false,
+   "hidden": true,
    "lane": "gymshark",
    "mine": false,
    "notes": "",
-   "order": 10,
+   "order": 9,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 7,
    "timing": "Q3 2027",
-   "title": "Blog feature"
+   "title": "Blog feature",
+   "updatedAt": 1793880640114
   }
  },
  {
@@ -805,14 +856,17 @@
   "data": {
    "designDone": false,
    "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "2027-06-30",
    "end": 6,
    "flagship": false,
+   "hidden": false,
    "lane": "gymshark",
    "links": [],
    "mine": false,
    "notes": "",
-   "order": 6,
+   "order": 5,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "UAE and Kuwait",
@@ -820,7 +874,8 @@
    "start": 4,
    "systems": "SFCC, OMS, SIM",
    "timing": "Q2 2027",
-   "title": "Click and Collect",
+   "title": "Click & Collect",
+   "updatedAt": 1793880638755,
    "workstream": "Omni"
   }
  },
@@ -832,11 +887,12 @@
    "due": "2027-04-30",
    "end": 4,
    "flagship": false,
+   "hidden": true,
    "lane": "gymshark",
    "links": [],
    "mine": true,
    "notes": "The Omni tracker lists delivery slot windows for all brands, due 30 Apr 2027. The deck has it under Gymshark in Q1. Assigned by Emma (1 Oct 2026): already live on BLM, needed for the other brands, Q1 2027.",
-   "order": 5,
+   "order": 7,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "All brands (Omni tracker)",
@@ -845,7 +901,7 @@
    "systems": "SFCC, OMS, WMS",
    "timing": "Apr 2027",
    "title": "Delivery Slots",
-   "updatedAt": 1793873135228,
+   "updatedAt": 1793880639435,
    "workstream": "Omni"
   }
  },
@@ -857,14 +913,15 @@
    "lane": "gymshark",
    "mine": false,
    "notes": "",
-   "order": 8,
+   "order": 4,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "Frontend",
    "source": "2027 roadmap deck",
    "start": 6,
    "timing": "Q2/Q3 2027",
-   "title": "Digital experience refresh"
+   "title": "Frontend Experience Refresh",
+   "updatedAt": 1793880638412
   }
  },
  {
@@ -877,7 +934,7 @@
    "links": [],
    "mine": false,
    "notes": "The Omni tracker targets 30 Apr 2027; the deck shows Q1.",
-   "order": 3,
+   "order": 1,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "",
@@ -886,7 +943,7 @@
    "systems": "SFCC, OMS",
    "timing": "Feb–Apr 2027",
    "title": "ONYX Queueing System",
-   "updatedAt": 1793873145615,
+   "updatedAt": 1793873915171,
    "workstream": "Omni"
   }
  },
@@ -895,17 +952,19 @@
   "data": {
    "end": 12,
    "flagship": false,
+   "hidden": true,
    "lane": "gymshark",
    "mine": false,
    "notes": "",
-   "order": 11,
+   "order": 10,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 10,
    "timing": "Q4 2027",
-   "title": "Personal Shopping OTO"
+   "title": "Personal Shopping OTO",
+   "updatedAt": 1793880640443
   }
  },
  {
@@ -913,10 +972,11 @@
   "data": {
    "end": 6,
    "flagship": false,
+   "hidden": true,
    "lane": "gymshark",
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026): PLP interrupters for GS & MNP, Q2 2027.",
-   "order": 7,
+   "order": 8,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -924,20 +984,25 @@
    "start": 6,
    "timing": "Jun 2027",
    "title": "PLP interrupters",
-   "updatedAt": 1793873159566
+   "updatedAt": 1793880639773
   }
  },
  {
   "id": "gymshark-return-to-store-ksa",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "2027-06-30",
    "end": 6,
    "flagship": false,
+   "hidden": false,
    "lane": "gymshark",
    "links": [],
    "mine": false,
    "notes": "The Omni tracker targets 30 Jun 2027; the deck shows Q1.",
-   "order": 4,
+   "order": 6,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "KSA",
@@ -946,7 +1011,7 @@
    "systems": "SFCC, OMS, WMS",
    "timing": "Jun 2027",
    "title": "Return to Store (KSA)",
-   "updatedAt": 1793873140410,
+   "updatedAt": 1793880639084,
    "workstream": "Omni"
   }
  },
@@ -958,14 +1023,15 @@
    "lane": "gymshark",
    "mine": false,
    "notes": "",
-   "order": 9,
+   "order": 3,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 7,
    "timing": "Q3 2027",
-   "title": "Size recommender"
+   "title": "Size Recommender",
+   "updatedAt": 1793880638071
   }
  },
  {
@@ -973,8 +1039,10 @@
   "data": {
    "designDone": false,
    "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
    "due": "",
-   "end": null,
+   "end": 9,
    "flagship": false,
    "hidden": false,
    "lane": "cross",
@@ -986,11 +1054,11 @@
    "pillar": "enterprise",
    "scope": "Customer Care",
    "source": "Added on the roadmap",
-   "start": null,
+   "start": 5,
    "systems": "",
-   "timing": "TBC",
+   "timing": "Q3 2027",
    "title": "Quality Management tool for CC",
-   "updatedAt": 1793872516257,
+   "updatedAt": 1793879123236,
    "workstream": ""
   }
  },
@@ -1009,7 +1077,8 @@
    "source": "2027 roadmap deck",
    "start": 1,
    "timing": "Q1 2027",
-   "title": "BazaarVoice"
+   "title": "BazaarVoice",
+   "updatedAt": 1793874550176
   }
  },
  {
@@ -1021,7 +1090,7 @@
    "lane": "mnp",
    "mine": false,
    "notes": "The Omni tracker targets 30 Apr 2027; the deck shows Q1.",
-   "order": 3,
+   "order": 4,
    "owner": "Abhilash",
    "pillar": "core",
    "scope": "",
@@ -1030,7 +1099,7 @@
    "systems": "SFCC, OMS",
    "timing": "Mar–Apr 2027",
    "title": "Furniture Assembly & Refresh",
-   "updatedAt": 1793873065624,
+   "updatedAt": 1793877840000,
    "workstream": "Omni"
   }
  },
@@ -1059,9 +1128,12 @@
    "designDoneOn": "",
    "done": false,
    "doneOn": "",
+   "due": "",
    "end": 12,
    "flagship": true,
+   "hidden": false,
    "lane": "mnp",
+   "links": [],
    "mine": true,
    "notes": "",
    "order": 1,
@@ -1069,10 +1141,12 @@
    "pillar": "core",
    "scope": "Web and App",
    "source": "2027 roadmap deck",
-   "start": 3,
+   "start": 2,
+   "systems": "",
    "timing": "Q4 2027",
    "title": "Headless Web & App Launch",
-   "updatedAt": 1793672511605
+   "updatedAt": 1793874563731,
+   "workstream": ""
   }
  },
  {
@@ -1118,14 +1192,15 @@
    "lane": "mnp",
    "mine": false,
    "notes": "Follows the Parenting app (Q4 2026 backlog, P1).",
-   "order": 7,
+   "order": 6,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 10,
    "timing": "Q4 2027",
-   "title": "Parenting guide & AI Assistant Phase 2"
+   "title": "Parenting guide & AI Assistant Phase 2",
+   "updatedAt": 1793873901200
   }
  },
  {
@@ -1133,10 +1208,11 @@
   "data": {
    "end": 5,
    "flagship": false,
+   "hidden": true,
    "lane": "mnp",
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026): PLP interrupters for GS & MNP, Q2 2027.",
-   "order": 6,
+   "order": 7,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
@@ -1144,7 +1220,7 @@
    "start": 5,
    "timing": "May 2027",
    "title": "PLP Interrupter",
-   "updatedAt": 1793873091641
+   "updatedAt": 1793877712757
   }
  },
  {
@@ -1178,15 +1254,15 @@
    "lane": "mnp",
    "mine": false,
    "notes": "Listed on the Q1 2027 slide; not on the Gantt.",
-   "order": 4,
+   "order": 3,
    "owner": "Awatef",
    "pillar": "core",
    "scope": "",
    "source": "Q1 2027 slide",
    "start": 1,
    "timing": "Jan–Feb 2027",
-   "title": "Recommendation enhancements",
-   "updatedAt": 1793873071077
+   "title": "Recommendations enhancement",
+   "updatedAt": 1793877840000
   }
  }
 ]
