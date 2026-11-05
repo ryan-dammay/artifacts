@@ -482,7 +482,9 @@ const PHASE_VAR = { uxui: "--ph-uxui", dev: "--ph-dev", done: "--ph-done" };
 const phaseOf = (it) => (it && it.done) ? "done" : (it && it.designDone) ? "dev" : "uxui";
 const rangeLabel = (s, e) => (s === e ? MONTHS[s - 1] : MONTHS[s - 1] + "–" + MONTHS[e - 1]) + " 2027";
 let suppressClick = false;
-let isAdmin = false; // Owner and Editors (share menu) can create and delete projects
+// Admin tools (add, delete, hide, drag, reorder) are for the Owner and Editors, and for anyone who can edit the
+// roadmap's data and has entered the edit password in this browser session.
+let shareAdmin = false, isAdmin = false;
 
 let items = [], db = null, canWrite = true, editing = null;
 const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false };
@@ -932,7 +934,7 @@ $("del-btn").addEventListener("click", async () => {
 $("cancel-btn").addEventListener("click", closeEditor);
 $("scrim").addEventListener("click", (e) => { if (e.target === $("scrim")) closeEditor(); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("scrim").hidden) closeEditor(); });
-$("add-btn").addEventListener("click", async () => { if (!isAdmin) return; if (await unlock()) openEditor(null); });
+$("add-btn").addEventListener("click", async () => { if (!(await unlock())) return; updateRole(); if (isAdmin) openEditor(null); });
 
 // ---- Edit lock: a password before any change (salted SHA-256 hash kept in meta/lock; only the owner can set it) ----
 let lock = null, unlockedHash = null, pwResolve = null, isOwner = false;
@@ -984,6 +986,15 @@ function setUnlocked(h) {
   unlockedHash = h;
   try { if (h) sessionStorage.setItem("rm27-unlocked", h); else sessionStorage.removeItem("rm27-unlocked"); } catch (e) {}
   showLockState();
+  updateRole();
+}
+function updateRole() {
+  const was = isAdmin;
+  isAdmin = shareAdmin || (canWrite && !!db && isUnlocked());
+  $("add-btn").hidden = !(canWrite && db);
+  $("hid-wrap").hidden = !isAdmin;
+  if (!isAdmin) view.showHidden = false;
+  if (was !== isAdmin) { render(); if (detailId) renderDetail(); }
 }
 function unlock() {
   if (isUnlocked()) return Promise.resolve(true);
@@ -1285,13 +1296,11 @@ fillSelects(); render();
   const user = await claude.use("user");
   const w = user ? await user.can("data.write") : null;
   if (w === false) { canWrite = false; $("add-btn").hidden = true; }
-  try { isAdmin = user ? !!(await user.canEdit()) : false; } catch (e) { isAdmin = false; }
-  $("add-btn").hidden = !(isAdmin && canWrite);
-  $("hid-wrap").hidden = !isAdmin;
-  if (!isAdmin) view.showHidden = false;
+  try { shareAdmin = user ? !!(await user.canEdit()) : false; } catch (e) { shareAdmin = false; }
+  updateRole();
   try { isOwner = user ? !!(await user.isOwner()) : false; } catch (e) { isOwner = false; }
   showLockState();
-  db.doc("meta/lock").onSnapshot((s) => { lock = s.exists ? s.data() : null; showLockState(); }, () => {});
+  db.doc("meta/lock").onSnapshot((s) => { lock = s.exists ? s.data() : null; showLockState(); updateRole(); }, () => {});
   db.collection("items").onSnapshot((snap) => {
     items = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     render(); showUpdated();
