@@ -25,6 +25,7 @@
   "data": {
    "end": 7,
    "flagship": false,
+   "hidden": true,
    "lane": "all",
    "mine": false,
    "notes": "",
@@ -35,7 +36,8 @@
    "source": "2027 roadmap deck",
    "start": 3,
    "timing": "Q2 2027",
-   "title": "Personalized discovery & recommendations"
+   "title": "Personalized discovery & recommendations",
+   "updatedAt": 1793873537326
   }
  },
  {
@@ -59,9 +61,16 @@
  {
   "id": "blm-bbb-enrollment-re-launch",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 3,
    "flagship": false,
+   "hidden": false,
    "lane": "blm",
+   "links": [],
    "mine": false,
    "notes": "Listed on the Q1 2027 slide; not on the Gantt.",
    "order": 3,
@@ -69,17 +78,27 @@
    "pillar": "core",
    "scope": "",
    "source": "Q1 2027 slide",
-   "start": 1,
+   "start": 2,
+   "systems": "",
    "timing": "Q1 2027",
-   "title": "BBB enrollment & re-launch"
+   "title": "BBB Enrollment",
+   "updatedAt": 1793873361316,
+   "workstream": ""
   }
  },
  {
   "id": "blm-beauty-concierge-shopping-assistant",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 5,
    "flagship": true,
+   "hidden": false,
    "lane": "blm",
+   "links": [],
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026): Beauty concierge with Talal, Q2 2027. The deck says Q1, so confirm which is right.",
    "order": 6,
@@ -88,8 +107,11 @@
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 2,
+   "systems": "",
    "timing": "Q1 2027",
-   "title": "Beauty Concierge / shopping assistant"
+   "title": "Beauty Concierge",
+   "updatedAt": 1793873448612,
+   "workstream": ""
   }
  },
  {
@@ -115,6 +137,7 @@
   "data": {
    "end": 8,
    "flagship": false,
+   "hidden": true,
    "lane": "blm",
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026): Q2 2027. The deck says Q3, so confirm which is right.",
@@ -125,7 +148,8 @@
    "source": "2027 roadmap deck",
    "start": 6,
    "timing": "Q3 2027",
-   "title": "Beauty Subscriptions"
+   "title": "Beauty Subscriptions",
+   "updatedAt": 1793873497177
   }
  },
  {
@@ -198,9 +222,16 @@
  {
   "id": "blm-holition-beauty-virtual-try-on",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 4,
    "flagship": true,
+   "hidden": false,
    "lane": "blm",
+   "links": [],
    "mine": false,
    "notes": "",
    "order": 5,
@@ -208,9 +239,12 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 1,
-   "timing": "Go-live Apr 2027",
-   "title": "Holition Beauty Virtual Try-On"
+   "start": 2,
+   "systems": "",
+   "timing": "Feb–Apr 2027",
+   "title": "Holition Beauty AR",
+   "updatedAt": 1793873405687,
+   "workstream": ""
   }
  },
  {
@@ -270,9 +304,16 @@
  {
   "id": "blm-wishlist-multiple-collections",
   "data": {
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "due": "",
    "end": 6,
    "flagship": false,
+   "hidden": false,
    "lane": "blm",
+   "links": [],
    "mine": false,
    "notes": "",
    "order": 7,
@@ -280,9 +321,12 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 3,
+   "start": 4,
+   "systems": "",
    "timing": "Q1/Q2 2027",
-   "title": "Wishlist / multiple collections"
+   "title": "Wishlist / Multiple Collections",
+   "updatedAt": 1793873480219,
+   "workstream": ""
   }
  },
  {
@@ -347,6 +391,7 @@
   "data": {
    "end": 3,
    "flagship": false,
+   "hidden": true,
    "lane": "coach",
    "mine": true,
    "notes": "Assigned by Emma (1 Oct 2026). Not in the 2027 roadmap deck.",
@@ -357,7 +402,8 @@
    "source": "Emma, 1 Oct 2026",
    "start": 1,
    "timing": "Q1 2027",
-   "title": "Notify me"
+   "title": "Notify me",
+   "updatedAt": 1793873177612
   }
  },
  {
@@ -399,7 +445,7 @@
  {
   "id": "coach-waterfall-model-in-fulfilment",
   "data": {
-   "end": 6,
+   "end": 5,
    "flagship": false,
    "lane": "coach",
    "mine": false,
@@ -410,8 +456,9 @@
    "scope": "",
    "source": "2027 roadmap deck",
    "start": 4,
-   "timing": "Q2 2027",
-   "title": "Waterfall model in Fulfilment"
+   "timing": "Apr–May 2027",
+   "title": "Waterfall model in Fulfilment",
+   "updatedAt": 1793873220896
   }
  },
  {
@@ -559,6 +606,7 @@
    "due": "",
    "end": 1,
    "flagship": false,
+   "hidden": true,
    "lane": "blm",
    "links": [],
    "mine": true,
@@ -572,6 +620,7 @@
    "systems": "",
    "timing": "Immediate",
    "title": "Gift guide",
+   "updatedAt": 1793873306959,
    "workstream": ""
   }
  },
@@ -715,6 +764,7 @@
    "due": "",
    "end": 1,
    "flagship": false,
+   "hidden": true,
    "lane": "blm",
    "links": [],
    "mine": true,
@@ -728,6 +778,7 @@
    "systems": "",
    "timing": "TBC",
    "title": "What's on in store",
+   "updatedAt": 1793873311990,
    "workstream": ""
   }
  },
@@ -779,7 +830,7 @@
    "designDone": false,
    "designDoneOn": "",
    "due": "2027-04-30",
-   "end": 3,
+   "end": 4,
    "flagship": false,
    "lane": "gymshark",
    "links": [],
@@ -790,10 +841,11 @@
    "pillar": "core",
    "scope": "All brands (Omni tracker)",
    "source": "2027 roadmap deck",
-   "start": 1,
+   "start": 4,
    "systems": "SFCC, OMS, WMS",
-   "timing": "Q1 2027",
+   "timing": "Apr 2027",
    "title": "Delivery Slots",
+   "updatedAt": 1793873135228,
    "workstream": "Omni"
   }
  },
@@ -819,7 +871,7 @@
   "id": "gymshark-onyx-queueing-system",
   "data": {
    "due": "2027-04-30",
-   "end": 3,
+   "end": 4,
    "flagship": true,
    "lane": "gymshark",
    "links": [],
@@ -830,10 +882,11 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 1,
+   "start": 2,
    "systems": "SFCC, OMS",
-   "timing": "Q1 2027",
+   "timing": "Feb–Apr 2027",
    "title": "ONYX Queueing System",
+   "updatedAt": 1793873145615,
    "workstream": "Omni"
   }
  },
@@ -868,16 +921,17 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 4,
-   "timing": "Q2 2027",
-   "title": "PLP interrupters"
+   "start": 6,
+   "timing": "Jun 2027",
+   "title": "PLP interrupters",
+   "updatedAt": 1793873159566
   }
  },
  {
   "id": "gymshark-return-to-store-ksa",
   "data": {
    "due": "2027-06-30",
-   "end": 3,
+   "end": 6,
    "flagship": false,
    "lane": "gymshark",
    "links": [],
@@ -888,10 +942,11 @@
    "pillar": "core",
    "scope": "KSA",
    "source": "2027 roadmap deck",
-   "start": 1,
+   "start": 6,
    "systems": "SFCC, OMS, WMS",
-   "timing": "Q1 2027",
+   "timing": "Jun 2027",
    "title": "Return to Store (KSA)",
+   "updatedAt": 1793873140410,
    "workstream": "Omni"
   }
  },
@@ -961,7 +1016,7 @@
   "id": "mnp-furniture-assembly-refresh",
   "data": {
    "due": "2027-04-30",
-   "end": 3,
+   "end": 4,
    "flagship": false,
    "lane": "mnp",
    "mine": false,
@@ -971,10 +1026,11 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 1,
+   "start": 3,
    "systems": "SFCC, OMS",
-   "timing": "Q1 2027",
+   "timing": "Mar–Apr 2027",
    "title": "Furniture Assembly & Refresh",
+   "updatedAt": 1793873065624,
    "workstream": "Omni"
   }
  },
@@ -1027,6 +1083,7 @@
    "due": "2026-12-30",
    "end": 1,
    "flagship": false,
+   "hidden": true,
    "lane": "mnp",
    "links": [
     {
@@ -1049,6 +1106,7 @@
    "systems": "SFCC, OMS, WMS",
    "timing": "30 Dec 2026",
    "title": "Kiosk Payment",
+   "updatedAt": 1793873010588,
    "workstream": "Omni"
   }
  },
@@ -1073,7 +1131,7 @@
  {
   "id": "mnp-plp-interrupter",
   "data": {
-   "end": 6,
+   "end": 5,
    "flagship": false,
    "lane": "mnp",
    "mine": true,
@@ -1083,9 +1141,10 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 4,
-   "timing": "Q2 2027",
-   "title": "PLP Interrupter"
+   "start": 5,
+   "timing": "May 2027",
+   "title": "PLP Interrupter",
+   "updatedAt": 1793873091641
   }
  },
  {
@@ -1094,6 +1153,7 @@
    "due": "2027-04-30",
    "end": null,
    "flagship": false,
+   "hidden": true,
    "lane": "mnp",
    "mine": false,
    "notes": "From the Omni tracker; not in the 2027 deck. Only a target date is known.",
@@ -1106,13 +1166,14 @@
    "systems": "SFCC, OMS, WMS",
    "timing": "30 Apr 2027",
    "title": "Qatar in-market fulfilment",
+   "updatedAt": 1793873103666,
    "workstream": "Omni"
   }
  },
  {
   "id": "mnp-recommendation-enhancements",
   "data": {
-   "end": 3,
+   "end": 2,
    "flagship": false,
    "lane": "mnp",
    "mine": false,
@@ -1123,8 +1184,9 @@
    "scope": "",
    "source": "Q1 2027 slide",
    "start": 1,
-   "timing": "Q1 2027",
-   "title": "Recommendation enhancements"
+   "timing": "Jan–Feb 2027",
+   "title": "Recommendation enhancements",
+   "updatedAt": 1793873071077
   }
  }
 ]
