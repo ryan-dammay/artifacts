@@ -10,15 +10,14 @@
 :root{--font-anthropic-sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:18px;--cds-font-size-title:30px;--cds-font-weight-medium:500;--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:12px;--cds-gap-lg:20px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:16px;--cds-radius:8px;--cds-dur-slow:.3s;--cds-shadow-popover:0 8px 24px rgba(0,0,0,.45);color-scheme:dark}
 html,body{margin:0;background:#141413}
 #dash-root{max-width:1280px;margin:0 auto}
-#t-tl,#tab-tl{display:none!important}
 .hn-pages-note{max-width:1280px;margin:0 auto;padding:10px clamp(16px,3vw,32px) 24px;color:#A8A59C;font:12px system-ui,sans-serif;background:#141413}
 .hn-pages-note a{color:#E8743B}
 </style>
 <script>
 // Stand-alone runtime for GitHub Pages: serves the dashboard's saved data files in place of the Claude dashboard runtime.
 (function () {
-  const FILES = { schedule: 'data/schedule.json', box: 'data/boxscores.json', roster: 'data/roster.json', awards: 'data/awards.json', standings_raw: 'data/standings.json', last_update: 'data/last_update.json' };
-  const EMPTY = ['sheet_schedule', 'sheet_stats', 'sheet_roster', 'sheet_potg', 'sheet_standings', 'photos', 'tl_fees'];
+  const FILES = { schedule: 'data/schedule.json', box: 'data/boxscores.json', roster: 'data/roster.json', awards: 'data/awards.json', standings_raw: 'data/standings.json', last_update: 'data/last_update.json', photos: 'data/photos.json', tl_fees: 'data/tl_fees.enc.json' };
+  const EMPTY = ['sheet_schedule', 'sheet_stats', 'sheet_roster', 'sheet_potg', 'sheet_standings'];
   const store = {}, calcs = {}, cbs = []; let cache = {}; let params = {};
   try { const h = new URLSearchParams(location.search); if (h.get('game')) params.game = h.get('game'); } catch (e) {}
   const load = (id) => fetch(FILES[id] + '?v=' + Date.now(), { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -1645,6 +1644,6 @@ dash.calc('standings', {
 </script>
 
 </div>
-<p class="hn-pages-note">Saved copy of the Hoopster Nation S7 dashboard, updated from the league sheet. The TL Corner is only on the private dashboard.</p>
+<p class="hn-pages-note">Saved copy of the Hoopster Nation S7 dashboard, updated from the league sheet.</p>
 </body>
 </html>

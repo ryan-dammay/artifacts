@@ -4,8 +4,8 @@ Source for the Hoopster Nation S7 dashboard (Game Schedule, Standings, Player st
 published as a Claude Dashboard artifact.
 
 - `index.html` – stand-alone copy for GitHub Pages (https://ryan-dammay.github.io/artifacts/): the same page with a small
-  built-in runtime that reads the saved files in `data/`. It has the schedule, standings and player stats; the TL Corner
-  stays on the private Claude dashboard.
+  built-in runtime that reads the saved files in `data/`. It has the schedule, standings, player stats, player photos and the
+  password-protected TL Corner (`data/tl_fees.enc.json`, opened in the browser with the TL password).
 - `source/dashboard-page.html` – the page as it runs inside the Claude Dashboard artifact (uses its `dash` data API).
 - `fonts/` – Oswald and Barlow (SIL Open Font License).
 - `data/` – saved copies of the public data (schedule, box scores, rosters, Players of the Game, standings).
@@ -14,4 +14,3 @@ published as a Claude Dashboard artifact.
   - `tl_sync.py` builds the TL Corner fee data and seals it with a public key (no password inside).
 
 Live data comes from the league Google Sheet ("Hoopster Nation Season 7 – Teams (Live)").
-Not in this repo: player photos and the TL Corner fee data.
