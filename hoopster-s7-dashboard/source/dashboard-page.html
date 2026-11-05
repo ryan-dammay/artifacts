@@ -85,11 +85,33 @@
 .g1-rounds{display:flex;align-items:flex-start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--color-border-line) transparent}
 .g1-rounds>.g1-round{flex:0 0 18rem;scroll-snap-align:center}
 .g1-round.open{grid-column:auto}.g1-rgames{grid-template-columns:1fr}
+.g1-cnav{display:flex;align-items:center;gap:16px;margin:0 0 12px}
+.g1-cnav .cn-range{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);white-space:nowrap}
+.g1-cnav .cn-hint{opacity:.75}
+.g1-cnav .cn-range b{color:var(--color-fg);font-weight:500}
+.g1-cnav .cn-dots{display:flex;gap:6px;flex:1;justify-content:center}
+.g1-cnav .cn-dot{width:8px;height:8px;padding:0;border-radius:999px;border:0;background:var(--color-border-line);cursor:pointer;transition:width .2s,background .2s}
+.g1-cnav .cn-dot.in{background:var(--color-fg-muted)}
+.g1-cnav .cn-dot.next{background:#E8743B}
+.g1-cnav .cn-dot.in.next{width:20px}
+.g1-cnav .cn-btns{display:flex;gap:8px;align-items:center}
+.g1-cnav button.cn-arrow,.g1-cnav button.cn-now{font:inherit;border:1px solid var(--color-border-line);background:transparent;color:var(--color-fg);cursor:pointer;border-radius:999px}
+.g1-cnav button.cn-arrow{width:36px;height:36px;font-size:22px;line-height:1;display:inline-flex;align-items:center;justify-content:center;padding:0 0 3px}
+.g1-cnav button.cn-now{font-size:var(--cds-font-size-caption);padding:6px 12px;color:#E8743B;border-color:color-mix(in srgb,#E8743B 50%,transparent)}
+.g1-cnav button:hover:not(:disabled){border-color:var(--color-fg-muted);background:color-mix(in srgb,var(--color-fg) 6%,transparent)}
+.g1-cnav button:focus-visible{outline:2px solid #E8743B;outline-offset:2px}
+.g1-cnav button:disabled{opacity:.35;cursor:default}
+.g1-rwrap{position:relative}
+.g1-rwrap::before,.g1-rwrap::after{content:'';position:absolute;top:0;bottom:10px;width:56px;pointer-events:none;z-index:1;opacity:0;transition:opacity .2s}
+.g1-rwrap::before{left:0;background:linear-gradient(to right,var(--color-panel),transparent)}
+.g1-rwrap::after{right:0;background:linear-gradient(to left,var(--color-panel),transparent)}
+.g1-rwrap.can-l::before,.g1-rwrap.can-r::after{opacity:1}
 .g1-rounds{cursor:grab}
 .g1-rounds.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
 .g1-rounds.dragging *{cursor:grabbing!important}
 .g1-rounds::-webkit-scrollbar{height:8px}.g1-rounds::-webkit-scrollbar-thumb{background:var(--color-border-line);border-radius:4px}
 }
+@media (max-width:1024px){.g1-cnav{display:none}}
 .g1-rsum{margin-top:8px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);cursor:pointer}
 .g1-round.open .g1-rsum{display:none}
 .g1-round.is-next .g1-time{color:#E8743B}
@@ -327,7 +349,16 @@ td.g1-clickname:hover,.g1-mvp .g1-clickname:hover{color:#E8743B}
     <h2>Schedule and results</h2>
     <p class="g1-note">Every Sunday, five games from 9 AM, with venue (tap it for the map), from the league's Schedule sheet. Scores are each team's points from its stat sheet (Round 1 = Game 1 stats); winners in bold, with each game's Player of the Game and his stat line underneath. The next game day is highlighted in orange.</p>
     <div class="g1-teams" id="sched-picker" role="group" aria-label="Schedule team"></div>
-    <div class="g1-rounds dash-skeleton" id="rounds"></div>
+    <div class="g1-cnav" id="sched-nav" aria-label="Scroll through rounds">
+      <span class="cn-range" id="sched-range" aria-live="polite"></span>
+      <span class="cn-dots" id="sched-dots"></span>
+      <span class="cn-btns">
+        <button type="button" class="cn-now" id="sched-now">Upcoming</button>
+        <button type="button" class="cn-arrow" id="sched-prev" aria-label="Earlier rounds">&#8249;</button>
+        <button type="button" class="cn-arrow" id="sched-next" aria-label="Later rounds">&#8250;</button>
+      </span>
+    </div>
+    <div class="g1-rwrap" id="rounds-wrap"><div class="g1-rounds dash-skeleton" id="rounds"></div></div>
   </section>
 
   </div>
@@ -1197,7 +1228,40 @@ dash.calc('results', {
     if (!c) return;
     const rr = root.getBoundingClientRect(), cr = c.getBoundingClientRect();
     root.scrollLeft += cr.left + cr.width / 2 - (rr.left + rr.width / 2);
+    syncNav();
   });
+  const wrap = document.getElementById('rounds-wrap');
+  const dotsEl = document.getElementById('sched-dots'), rangeEl = document.getElementById('sched-range');
+  const prevB = document.getElementById('sched-prev'), nextB = document.getElementById('sched-next'), nowB = document.getElementById('sched-now');
+  const goTo = (c) => { const rr = root.getBoundingClientRect(), cr = c.getBoundingClientRect(); root.scrollBy({ left: cr.left + cr.width / 2 - (rr.left + rr.width / 2), behavior: 'smooth' }); };
+  const step = () => { const c = root.querySelector('.g1-round'); return c ? c.getBoundingClientRect().width + 16 : 300; };
+  const syncNav = () => {
+    const max = root.scrollWidth - root.clientWidth;
+    const l = root.scrollLeft > 2, r = root.scrollLeft < max - 2;
+    wrap.classList.toggle('can-l', l); wrap.classList.toggle('can-r', r);
+    prevB.disabled = !l; nextB.disabled = !r;
+    const rr = root.getBoundingClientRect();
+    const cards = [...root.querySelectorAll('.g1-round')];
+    const seen = cards.map((c) => { const cr = c.getBoundingClientRect(); return cr.right > rr.left + 24 && cr.left < rr.right - 24; });
+    [...dotsEl.children].forEach((d, i) => d.classList.toggle('in', !!seen[i]));
+    const rn = (c) => c.id.replace('round-', '');
+    const vis = cards.filter((c, i) => seen[i]);
+    rangeEl.innerHTML = '';
+    if (vis.length) rangeEl.append('Rounds ', el('b', '', rn(vis[0]) + '\u2013' + rn(vis[vis.length - 1])), ' of ' + cards.length, el('span', 'cn-hint', ' \u00B7 drag or use the arrows'));
+    const nx = root.querySelector('.g1-round.is-next');
+    nowB.hidden = !nx; if (nx) { const cr = nx.getBoundingClientRect(); nowB.disabled = Math.abs(cr.left + cr.width / 2 - (rr.left + rr.width / 2)) < 8; }
+  };
+  root.addEventListener('scroll', () => requestAnimationFrame(syncNav), { passive: true });
+  let aim = null, aimT = 0;
+  const nudge = (dir) => {
+    const max = root.scrollWidth - root.clientWidth;
+    aim = Math.max(0, Math.min(max, (aim == null ? root.scrollLeft : aim) + dir * step()));
+    root.scrollTo({ left: aim, behavior: 'smooth' });
+    clearTimeout(aimT); aimT = setTimeout(() => { aim = null; }, 600);
+  };
+  prevB.addEventListener('click', () => nudge(-1));
+  nextB.addEventListener('click', () => nudge(1));
+  nowB.addEventListener('click', () => { const nx = root.querySelector('.g1-round.is-next'); if (nx) goTo(nx); });
   let lastW = 0;
   if (window.ResizeObserver) new ResizeObserver(() => { const w = root.clientWidth; if (w && w !== lastW) { lastW = w; centerNext(); } }).observe(root);
   wide.addEventListener && wide.addEventListener('change', centerNext);
@@ -1358,6 +1422,12 @@ dash.calc('results', {
       cards.push(card);
     });
     root.replaceChildren(...cards);
+    dotsEl.replaceChildren(...cards.map((c) => {
+      const b = el('button', 'cn-dot' + (c.classList.contains('is-next') ? ' next' : ''));
+      b.type = 'button'; b.setAttribute('aria-label', 'Go to ' + c.querySelector('.rn').textContent);
+      b.addEventListener('click', () => goTo(c));
+      return b;
+    }));
     centerNext();
   }
   dash.onData(draw);
