@@ -1382,7 +1382,11 @@ dash.calc('results', {
     }));
     const next = rows.find((r) => r.status === 'Upcoming');
     const order = [...new Set(rows.map((r) => r.round))];
-    if (!openRounds) openRounds = new Set([next ? next.round : order[order.length - 1]]);
+    if (!openRounds) {
+      // Phone and tablet open only the upcoming round; desktop also opens every round that has been played.
+      openRounds = new Set([next ? next.round : order[order.length - 1]]);
+      if (wide.matches) order.forEach((rd) => { if (rows.filter((r) => r.round === rd).every((r) => r.status === 'Final')) openRounds.add(rd); });
+    }
     const cards = [];
     order.forEach((rd) => {
       const games = rows.filter((r) => r.round === rd && (team === 'All' || r.home === team || r.away === team));
