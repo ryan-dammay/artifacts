@@ -69,6 +69,20 @@
 .g1-rh{display:flex;justify-content:space-between;align-items:baseline;gap:var(--cds-gap-sm);margin-bottom:var(--cds-gap-xs)}
 .g1-rh .rn{font-family:var(--hn-display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:var(--cds-font-size-body)}
 .g1-rh .tag{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.g1-rounds{align-items:start}
+.g1-round.open{grid-column:1/-1}
+.g1-rh{cursor:pointer;user-select:none;align-items:center;margin-bottom:0}
+.g1-rh:focus-visible{outline:2px solid #E8743B;outline-offset:4px;border-radius:4px}
+.g1-rh .rr{display:inline-flex;align-items:center;gap:10px}
+.g1-rh .chev{width:8px;height:8px;border-right:2px solid var(--color-fg-muted);border-bottom:2px solid var(--color-fg-muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+.g1-round.open .g1-rh .chev{transform:rotate(225deg) translate(-2px,-2px)}
+.g1-round .g1-venue{margin:4px 0 0}
+.g1-rbody{display:none}
+.g1-round.open .g1-rbody{display:block}
+.g1-rgames{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:12px;margin-top:12px}
+.g1-rgames>.g1-game{margin-top:0}
+.g1-rsum{margin-top:8px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);cursor:pointer}
+.g1-round.open .g1-rsum{display:none}
 .g1-round.is-next .g1-time{color:#E8743B}
 .g1-rh .tag.next{background:#E8743B;color:#2B1206;font-weight:500;padding:1px 8px;border-radius:999px}
 .g1-sched{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:var(--cds-font-size-body)}
@@ -1165,6 +1179,7 @@ dash.calc('results', {
   const root = document.getElementById('rounds');
   const picker = document.getElementById('sched-picker');
   let team = 'All';
+  let openRounds = null;
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const safe = (u) => (/^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? String(u) : '');
   const place = (g, cls) => {
@@ -1203,20 +1218,35 @@ dash.calc('results', {
     }));
     const next = rows.find((r) => r.status === 'Upcoming');
     const order = [...new Set(rows.map((r) => r.round))];
+    if (!openRounds) openRounds = new Set([next ? next.round : order[order.length - 1]]);
     const cards = [];
     order.forEach((rd) => {
       const games = rows.filter((r) => r.round === rd && (team === 'All' || r.home === team || r.away === team));
       if (!games.length) return;
       const first = games[0];
       const isNext = next && next.round === rd;
-      const card = el('div', 'g1-round' + (isNext ? ' is-next' : ''));
+      const isOpen = openRounds.has(rd);
+      const card = el('div', 'g1-round' + (isNext ? ' is-next' : '') + (isOpen ? ' open' : ''));
       card.id = 'round-' + rd;
       const head = el('div', 'g1-rh');
+      head.setAttribute('role', 'button'); head.tabIndex = 0; head.setAttribute('aria-expanded', String(isOpen));
+      head.setAttribute('aria-controls', 'round-' + rd + '-games');
       const rn = el('span', 'rn');
       rn.append('Round ', mark(el('span', '', first.round), first, 'round'), ' · ', mark(el('span', '', first.date), first, 'date'));
       const allDone = games.every((g) => g.status === 'Final');
-      head.append(rn, el('span', 'tag' + (isNext ? ' next' : ''), isNext ? 'Upcoming' : allDone ? 'Final' : ''));
+      const right = el('span', 'rr');
+      right.append(el('span', 'tag' + (isNext ? ' next' : ''), isNext ? 'Upcoming' : allDone ? 'Final' : ''), el('span', 'chev'));
+      head.append(rn, right);
       card.append(head);
+      const body = el('div', 'g1-rbody'); body.id = 'round-' + rd + '-games';
+      const list = el('div', 'g1-rgames');
+      const toggle = () => {
+        const nowOpen = !card.classList.contains('open');
+        card.classList.toggle('open', nowOpen); head.setAttribute('aria-expanded', String(nowOpen));
+        if (nowOpen) openRounds.add(rd); else openRounds.delete(rd);
+      };
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
       const venues = [...new Set(games.map((g) => g.venue + '|' + g.map))].map((k) => k.split('|')[0]);
       const shared = venues.length === 1;
       if (shared) {
@@ -1270,13 +1300,17 @@ dash.calc('results', {
           row.classList.add('g1-clickgame'); row.title = 'Open match details';
           row.addEventListener('click', () => window.g1MatchModal && window.g1MatchModal(g));
         }
-        card.append(row);
+        list.append(row);
       });
+      body.append(list);
+      const sum = el('div', 'g1-rsum', 'Show ' + games.length + (allDone ? ' results' : ' games'));
+      sum.addEventListener('click', toggle);
+      card.append(sum, body);
       if (isNext && window.g1VerseFor) {
         const [vt, vr] = window.g1VerseFor('');
         const cv = el('div', 'g1-card-verse');
         cv.append(el('div', 'vt', 'Verse of the day'), el('span', '', '\u201C' + vt + '\u201D'), ' ', el('span', 'ref', vr));
-        card.append(cv);
+        body.append(cv);
       }
       cards.push(card);
     });
