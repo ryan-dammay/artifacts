@@ -711,6 +711,11 @@ const view = { core: true, enterprise: true, innovation: true, mine: false, omni
 // Saving a change never moves things around: brand tabs and graph rows are ranked by count only when the page loads
 // or the filters change, not each time a project is saved.
 const ranks = {};
+// Rows sort by their saved order, then by title, so the database's delivery order never shuffles them.
+// While a reorder is being saved, the new order is shown straight away and held until every write is done.
+let orderOverride = null;
+const ord = (it) => (orderOverride && orderOverride.has(it.id) ? orderOverride.get(it.id) : (it.order ?? 99));
+const byOrder = (a, b) => ord(a) - ord(b) || (a.title || "").localeCompare(b.title || "");
 function stableRank(name, keys, score, ignore) {
   const vk = JSON.stringify({ ...view, [ignore || "_"]: 0 }), r = ranks[name];
   if (!r || r.vk !== vk || r.empty) ranks[name] = { vk, empty: !items.length, list: keys.slice().sort((a, b) => score(b) - score(a) || keys.indexOf(a) - keys.indexOf(b)) };
@@ -737,7 +742,10 @@ const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + St
 const dated = (it) => Number.isInteger(it.start) && Number.isInteger(it.end);
 
 function render() {
-  const g = $("gantt"); g.replaceChildren();
+  const g = $("gantt"), sc = g.parentElement;
+  const keepX = scrollX, keepY = scrollY, keepL = sc.scrollLeft;
+  g.style.minHeight = g.offsetHeight + "px"; // hold the height while rows are rebuilt, so the page can't shrink and jump
+  g.replaceChildren();
   const head = el("div", "row head");
   head.append(el("div", null, "Project"));
   const mid = el("div"); const qs = el("div", "qs"); ["Q1 27","Q2 27","Q3 27","Q4 27"].forEach((q) => qs.append(el("span", null, q)));
@@ -758,7 +766,7 @@ function render() {
   LANES.forEach((lane) => {
     if (!inTab(lane.id, view.lane)) return;
     const rows = items.filter((it) => it.lane === lane.id && passes(it))
-      .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+      .sort(byOrder);
     if (!rows.length) return;
     const lh = el("div", "lanehead"); lh.append(el("b", null, lane.name), el("small", null, rows.length + (rows.length === 1 ? " project" : " projects")));
     g.append(lh);
@@ -766,6 +774,9 @@ function render() {
   });
   if (!shown && items.length) g.append(el("div", "empty", "Nothing matches these filters. Pick another brand, turn a pillar back on or untick “UX/UI Design” in Filters."));
   placeToday();
+  g.style.minHeight = "";
+  sc.scrollLeft = keepL;
+  if (scrollX !== keepX || scrollY !== keepY) scrollTo(keepX, keepY);
 
   ["core","enterprise"].forEach((p) => {
     const n = items.filter((i) => i.pillar === p).length;
@@ -909,16 +920,18 @@ function bindReorder(grip, rowEl, id) {
     const ok = await confirmDialog({ title: "Save the new order?", text: "“" + it.title + "” will move " + where + " in " + laneName + ".", ok: "Save", danger: false });
     if (!ok || !(await unlock())) return;
     // Reorder the whole lane (including rows hidden by filters), then renumber 1..n.
-    const lane = items.filter((x) => x.lane === it.lane).sort((a, b) => (a.order ?? 99) - (b.order ?? 99) || a.title.localeCompare(b.title));
+    const lane = items.filter((x) => x.lane === it.lane).sort(byOrder);
     const ids = lane.map((x) => x.id).filter((x) => x !== id);
     const at = before ? ids.indexOf(before) + 1 : Math.max(0, ids.indexOf(after));
     ids.splice(at, 0, id);
     const changes = ids.map((x, i) => ({ x, o: i + 1 })).filter(({ x, o }) => (items.find((i) => i.id === x)?.order) !== o);
+    orderOverride = new Map(ids.map((x, i) => [x, i + 1])); render();
     try {
       for (const { x, o } of changes) await db.collection("items").doc(x).update({ order: o, updatedAt: Date.now() });
       touchMeta("Reordered " + laneName + ": moved " + it.title);
       setStatus(it.title + " moved " + where + ".");
     } catch (x) { setStatus("Couldn't save the new order. Try again."); }
+    orderOverride = null; render();
   });
 }
 
