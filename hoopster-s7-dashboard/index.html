@@ -986,7 +986,7 @@ dash.calc('shares', {
     document.getElementById('tk-verb').textContent = season ? 'leads the season with' : 'led all scorers with';
     document.getElementById('tk-verb2').textContent = season ? 'has the most points so far at' : 'put up the top team total at';
     document.getElementById('lbl-teams').textContent = season ? 'Teams' : 'Teams reported';
-    document.getElementById('top-title').textContent = season ? 'Top 10 scorers, season' : 'Top 10 scorers';
+    document.getElementById('top-title').textContent = (season ? 'Season' : sel) + ' top 10 scorers';
     document.querySelectorAll('.tk, .tile').forEach((el) => {
       const src = el.dataset.source;
       const d = dash.data(src);
