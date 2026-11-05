@@ -125,6 +125,7 @@ html,body{margin:0;background:#141413}
 .g1-rh{display:flex;justify-content:space-between;align-items:baseline;gap:var(--cds-gap-sm);margin-bottom:var(--cds-gap-xs)}
 .g1-rh .rn{font-family:var(--hn-display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:var(--cds-font-size-body)}
 .g1-rh .tag{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.g1-round:not(.open) .g1-rh .tag.final{color:#E8743B;font-weight:500}
 .g1-rounds{align-items:start}
 .g1-round.open{grid-column:1/-1}
 .g1-rh{cursor:pointer;user-select:none;align-items:center;margin-bottom:0}
@@ -1398,7 +1399,7 @@ dash.calc('results', {
       rn.append('Round ', mark(el('span', '', first.round), first, 'round'), ' · ', mark(el('span', '', first.date), first, 'date'));
       const allDone = games.every((g) => g.status === 'Final');
       const right = el('span', 'rr');
-      right.append(el('span', 'tag' + (isNext ? ' next' : ''), isNext ? 'Upcoming' : allDone ? 'Final' : ''), el('span', 'chev'));
+      right.append(el('span', 'tag' + (isNext ? ' next' : allDone ? ' final' : ''), isNext ? 'Upcoming' : allDone ? 'Final' : ''), el('span', 'chev'));
       head.append(rn, right);
       card.append(head);
       const body = el('div', 'g1-rbody'); body.id = 'round-' + rd + '-games';
