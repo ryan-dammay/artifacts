@@ -416,11 +416,11 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .scrim.cf { z-index: 35; }
 .cfsheet { width: min(420px, 100%); }
 .btn.dangerfill { background: var(--innovation); border-color: var(--innovation); color: var(--now-ink); }
-/* On first load, bars sweep in from their start month row by row, then the OMS diamonds pop in. */
+/* On load and when the brand tab or a filter changes, bars sweep in from their start month row by row, then the OMS diamonds pop in. */
 @media (prefers-reduced-motion: no-preference) {
-  #gantt.intro .bar:not(.tbc) { animation: barin .7s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: calc(var(--i, 0) * 35ms + 80ms); }
-  #gantt.intro .bar.tbc { animation: fadein .5s ease-out backwards; animation-delay: calc(var(--i, 0) * 35ms + 80ms); }
-  #gantt.intro .due { animation: duein .3s ease-out backwards; animation-delay: calc(var(--i, 0) * 35ms + 700ms); }
+  #gantt.intro .bar:not(.tbc) { animation: barin 1s cubic-bezier(.25,.8,.25,1) backwards; animation-delay: calc(var(--i, 0) * 90ms + 250ms); }
+  #gantt.intro .bar.tbc { animation: fadein .6s ease-out backwards; animation-delay: calc(var(--i, 0) * 90ms + 250ms); }
+  #gantt.intro .due { animation: duein .4s ease-out backwards; animation-delay: calc(var(--i, 0) * 90ms + 1150ms); }
   @keyframes barin { from { clip-path: inset(0 100% 0 0 round 7px); } to { clip-path: inset(0 0 0 0 round 7px); } }
   @keyframes fadein { from { opacity: 0; } }
   @keyframes duein { from { opacity: 0; transform: rotate(45deg) scale(.3); } }
@@ -742,7 +742,8 @@ let suppressClick = false;
 let shareAdmin = false, isAdmin = false;
 
 let items = [], db = null, canWrite = true, editing = null;
-let introPending = true;
+let introPending = true, introTimer = 0;
+const animateNext = () => { introPending = true; };
 const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false };
 // Saving a change never moves things around: brand tabs and graph rows are ranked by count only when the page loads
 // or the filters change, not each time a project is saved.
@@ -816,10 +817,11 @@ function render() {
     rows.forEach((it) => { const rw = row(it); rw.style.setProperty("--i", Math.min(shown, 24)); g.append(rw); shown++; });
   });
   if (!shown && items.length) g.append(el("div", "empty", "Nothing matches these filters. Pick another brand, turn a pillar back on or untick “UX/UI Design” in Filters."));
-  if (introPending && shown) { // animate the bars once, when the projects first load (not on later saves or filter changes)
+  if (introPending && shown) { // animate the bars on first load and on brand/filter changes (not on saves, refreshes or drags)
     introPending = false; g.classList.add("intro");
-    setTimeout(() => g.classList.remove("intro"), 2600);
-  }
+    clearTimeout(introTimer);
+    introTimer = setTimeout(() => g.classList.remove("intro"), 250 + Math.min(shown, 24) * 90 + 1700);
+  } else { clearTimeout(introTimer); g.classList.remove("intro"); } // a save mid-animation shows bars in place, no replay
   placeToday();
   g.style.minHeight = "";
   sc.scrollLeft = keepL;
@@ -854,7 +856,7 @@ function renderTabs(passes) {
     const sel = view.lane === t.id;
     b.setAttribute("aria-selected", String(sel)); b.tabIndex = sel ? 0 : -1;
     b.append(document.createTextNode(t.name), el("span", null, String(n)));
-    b.addEventListener("click", () => { view.lane = t.id; save(); render(); $("tab-" + (t.id || "all"))?.focus(); });
+    b.addEventListener("click", () => { view.lane = t.id; save(); animateNext(); render(); $("tab-" + (t.id || "all"))?.focus(); });
     bar.append(b);
   });
   bar.scrollLeft = keepScroll;
@@ -863,7 +865,7 @@ $("tabs").addEventListener("keydown", (e) => {
   if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
   const ids = [...$("tabs").children].map((b) => b.dataset.id);
   const i = ids.indexOf(view.lane), j = (i + (e.key === "ArrowRight" ? 1 : -1) + ids.length) % ids.length;
-  view.lane = ids[j]; save(); render();
+  view.lane = ids[j]; save(); animateNext(); render();
   const b = $("tab-" + (ids[j] || "all")); b?.focus(); b?.scrollIntoView({ block: "nearest", inline: "nearest" });
   e.preventDefault();
 });
@@ -1346,12 +1348,12 @@ $("cf-ok").addEventListener("click", () => closeCf(true));
 $("cf-cancel").addEventListener("click", () => closeCf(false));
 $("cf-scrim").addEventListener("click", (e) => { if (e.target === $("cf-scrim")) closeCf(false); });
 window.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("cf-scrim").hidden) { e.stopImmediatePropagation(); closeCf(false); } }, true);
-document.querySelectorAll(".pillar input").forEach((c) => c.addEventListener("change", () => { view[c.dataset.p] = c.checked; save(); render(); }));
-$("only-mine").addEventListener("change", (e) => { view.mine = e.target.checked; save(); render(); });
-$("hide-tbc").addEventListener("change", (e) => { view.hideTbc = e.target.checked; save(); render(); });
-$("only-omni").addEventListener("change", (e) => { view.omni = e.target.checked; save(); render(); });
-$("show-hidden").addEventListener("change", (e) => { view.showHidden = e.target.checked; save(); render(); });
-$("f-asg").addEventListener("change", (e) => { view.owner = e.target.value; save(); render(); });
+document.querySelectorAll(".pillar input").forEach((c) => c.addEventListener("change", () => { view[c.dataset.p] = c.checked; save(); animateNext(); render(); }));
+$("only-mine").addEventListener("change", (e) => { view.mine = e.target.checked; save(); animateNext(); render(); });
+$("hide-tbc").addEventListener("change", (e) => { view.hideTbc = e.target.checked; save(); animateNext(); render(); });
+$("only-omni").addEventListener("change", (e) => { view.omni = e.target.checked; save(); animateNext(); render(); });
+$("show-hidden").addEventListener("change", (e) => { view.showHidden = e.target.checked; save(); animateNext(); render(); });
+$("f-asg").addEventListener("change", (e) => { view.owner = e.target.value; save(); animateNext(); render(); });
 
 // ---- Detail view: links to Figma files and Jira tickets ----
 const LANE_NAME = Object.fromEntries(LANES.map((l) => [l.id, l.name]));
