@@ -495,6 +495,18 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .d-owner b { color: var(--fg); font-weight: 600; }
 .d-owner b.none { color: var(--muted); font-weight: 500; }
 .addlink .hint:empty { display: none; }
+/* Graphs are hidden until the viewer turns them on; the choice is remembered in this browser. */
+.gbar { display: flex; }
+.gtoggle { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 10px; border: 1px solid var(--line); border-radius: 999px; font: 600 14px var(--font-body); color: var(--fg); }
+.gtoggle:hover { border-color: var(--muted); }
+.gtoggle:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.gtoggle small { font: 500 12px var(--font-body); color: var(--muted); }
+.gtrack { position: relative; width: 34px; height: 20px; border-radius: 999px; background: var(--line); transition: background .15s; flex: none; }
+.gknob { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--muted); transition: transform .15s, background .15s; }
+.gtoggle[aria-checked="true"] .gtrack { background: var(--fg); }
+.gtoggle[aria-checked="true"] .gknob { transform: translateX(14px); background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { .gtrack, .gknob { transition: none; } }
+.graphs { display: flex; flex-direction: column; gap: 22px; }
 .prod { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px 12px; display: flex; flex-direction: column; gap: 12px; }
 .prod-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
 .prod-head h2 { margin: 0; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
@@ -579,6 +591,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   <div class="scroll"><div class="gantt" id="gantt"></div></div>
   <p class="status" id="status" role="status">Loading roadmap…</p>
 
+  <div class="gbar"><button class="gtoggle" id="g-toggle" type="button" role="switch" aria-checked="false" aria-controls="graphs"><span class="gtrack" aria-hidden="true"><span class="gknob"></span></span>Show graphs <small>Productivity · UX/UI</small></button></div>
+  <div class="graphs" id="graphs" hidden>
   <section class="prod" aria-labelledby="prod-title">
     <div class="prod-head">
       <h2 id="prod-title">Productivity Graph</h2>
@@ -596,6 +610,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
     </div>
     <div class="prod-rows" id="ux-rows" role="list"></div>
   </section>
+  </div>
 </div>
 
 
@@ -746,6 +761,13 @@ const fmtDate = (d) => d.toLocaleDateString("en-GB", { day: "numeric", month: "s
 try { Object.assign(view, JSON.parse(localStorage.getItem("rm27-view") || "{}")); } catch (e) {}
 view.hideTbc = false; // the Hide undated filter is retired; undated projects always show
 const save = () => { try { localStorage.setItem("rm27-view", JSON.stringify(view)); } catch (e) {} };
+function showGraphs(on, remember) {
+  document.getElementById("graphs").hidden = !on; document.getElementById("g-toggle").setAttribute("aria-checked", String(on));
+  if (remember) { try { localStorage.setItem("rm27-graphs", on ? "1" : "0"); } catch (e) {} }
+}
+let graphsOn = false; try { graphsOn = localStorage.getItem("rm27-graphs") === "1"; } catch (e) {}
+showGraphs(graphsOn, false);
+document.getElementById("g-toggle").addEventListener("click", () => showGraphs(document.getElementById("graphs").hidden, true));
 
 const $ = (id) => document.getElementById(id);
 const el = (t, c, txt) => { const n = document.createElement(t); if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
