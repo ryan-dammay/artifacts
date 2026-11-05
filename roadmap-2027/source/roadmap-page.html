@@ -485,6 +485,17 @@ let shareAdmin = false, isAdmin = false;
 
 let items = [], db = null, canWrite = true, editing = null;
 const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false };
+// Saving a change never moves things around: brand tabs and graph rows are ranked by count only when the page loads
+// or the filters change, not each time a project is saved.
+const ranks = {};
+function stableRank(name, keys, score, ignore) {
+  const vk = JSON.stringify({ ...view, [ignore || "_"]: 0 }), r = ranks[name];
+  if (!r || r.vk !== vk || r.empty) ranks[name] = { vk, empty: !items.length, list: keys.slice().sort((a, b) => score(b) - score(a) || keys.indexOf(a) - keys.indexOf(b)) };
+  const list = ranks[name].list.filter((k) => keys.includes(k));
+  keys.forEach((k) => { if (!list.includes(k)) list.push(k); });
+  ranks[name].list = list;
+  return list;
+}
 // Hidden projects are left out for everyone; admins can bring them back into view from Filters.
 const visible = (it) => !it.hidden || (isAdmin && view.showHidden);
 const isOmni = (it) => (it.workstream || "").toLowerCase() === "omni";
@@ -554,8 +565,9 @@ function renderTabs(passes) {
   // "All brands" stays first; brands follow, most projects on the left (ties keep the usual order).
   const counted = TABS().map((t, i) => ({ t, i, n: items.filter((it) => inTab(it.lane, t.id) && passes(it)).length }));
   const [first, ...rest] = counted;
-  rest.sort((a, b) => b.n - a.n || a.i - b.i);
-  [first, ...rest].forEach(({ t, n }) => {
+  const byId = new Map(rest.map((c) => [c.t.id, c]));
+  const ranked = stableRank("tabs", rest.map((c) => c.t.id), (id) => byId.get(id).n, "lane").map((id) => byId.get(id));
+  [first, ...ranked].forEach(({ t, n }) => {
     const b = el("button", "tab"); b.type = "button"; b.setAttribute("role", "tab");
     b.id = "tab-" + (t.id || "all"); b.dataset.id = t.id;
     const sel = view.lane === t.id;
@@ -706,7 +718,10 @@ function renderProd(basePass) {
   const rows = names.map((n) => ({ n, its: list.filter((i) => own(i) === n) }));
   const un = list.filter((i) => !own(i)); if (un.length) rows.push({ n: "", its: un });
   rows.forEach((r) => { r.dev = r.its.filter((i) => phaseOf(i) === "dev").length; r.done = r.its.filter((i) => phaseOf(i) === "done").length; });
-  rows.sort((a, b) => b.its.length - a.its.length || (a.n || "~").localeCompare(b.n || "~"));
+  rows.sort((a, b) => (a.n || "~").localeCompare(b.n || "~"));
+  const byName = new Map(rows.map((r) => [r.n, r]));
+  const order = stableRank("prod", rows.map((r) => r.n), (n) => byName.get(n).its.length);
+  rows.splice(0, rows.length, ...order.map((n) => byName.get(n)));
   const max = Math.max(1, ...rows.map((r) => r.its.length));
   const host = $("prod-rows"); host.replaceChildren();
   rows.forEach((r) => {
@@ -1186,8 +1201,17 @@ function openDetail(id) {
 }
 function closeDetail() {
   if ($("dscrim").hidden && !detailId) return;
-  $("dscrim").hidden = true; detailId = null;
-  try { if (location.hash) location.hash = ""; } catch (e) {}
+  $("dscrim").hidden = true;
+  const back = detailId && document.querySelector('.row[data-id="' + CSS.escape(detailId) + '"] .name button');
+  detailId = null;
+  // Clear the project from the address without jumping to the top of the page.
+  const y = scrollY, x = scrollX;
+  if (location.hash) {
+    try { history.replaceState(history.state, "", location.pathname + location.search); }
+    catch (e) { try { location.hash = ""; } catch (e2) {} }
+  }
+  scrollTo(x, y);
+  back?.focus({ preventScroll: true });
 }
 async function saveLinks(it, links, msg) {
   if (!db || !it) return false;
