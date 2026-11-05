@@ -137,7 +137,12 @@ html,body{margin:0;background:#141413}
 .g1-round.open .g1-rbody{display:block}
 .g1-rgames{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:12px;margin-top:12px}
 .g1-rgames>.g1-game{margin-top:0}
-@media (min-width:1025px){.g1-round.open{grid-column:auto}.g1-rgames{grid-template-columns:1fr}}
+@media (min-width:1025px){
+.g1-rounds{display:flex;align-items:flex-start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--color-border-line) transparent}
+.g1-rounds>.g1-round{flex:0 0 18rem;scroll-snap-align:center}
+.g1-round.open{grid-column:auto}.g1-rgames{grid-template-columns:1fr}
+.g1-rounds::-webkit-scrollbar{height:8px}.g1-rounds::-webkit-scrollbar-thumb{background:var(--color-border-line);border-radius:4px}
+}
 .g1-rsum{margin-top:8px;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);cursor:pointer}
 .g1-round.open .g1-rsum{display:none}
 .g1-round.is-next .g1-time{color:#E8743B}
@@ -1237,6 +1242,18 @@ dash.calc('results', {
   const picker = document.getElementById('sched-picker');
   let team = 'All';
   let openRounds = null;
+  // Desktop: the rounds sit in one row that scrolls sideways, with the upcoming round centred.
+  const wide = window.matchMedia('(min-width: 1025px)');
+  const centerNext = () => requestAnimationFrame(() => {
+    if (!wide.matches || !root.clientWidth) return;
+    const c = root.querySelector('.g1-round.is-next') || root.querySelector('.g1-round.open') || root.lastElementChild;
+    if (!c) return;
+    const rr = root.getBoundingClientRect(), cr = c.getBoundingClientRect();
+    root.scrollLeft += cr.left + cr.width / 2 - (rr.left + rr.width / 2);
+  });
+  let lastW = 0;
+  if (window.ResizeObserver) new ResizeObserver(() => { const w = root.clientWidth; if (w && w !== lastW) { lastW = w; centerNext(); } }).observe(root);
+  wide.addEventListener && wide.addEventListener('change', centerNext);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const safe = (u) => (/^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? String(u) : '');
   const place = (g, cls) => {
@@ -1372,6 +1389,7 @@ dash.calc('results', {
       cards.push(card);
     });
     root.replaceChildren(...cards);
+    centerNext();
   }
   dash.onData(draw);
 })();
