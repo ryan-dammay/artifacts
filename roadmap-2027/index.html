@@ -1192,8 +1192,12 @@ const hex = (buf) => [...new Uint8Array(buf)].map((x) => x.toString(16).padStart
 async function sha(s) { return hex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s))); }
 function showLockState() {
   // The header lock button is hidden; the password prompt appears when someone tries to edit.
-  if (!db || !canWrite) { $("pw-change").hidden = true; return; }
-  $("pw-change").hidden = !(isOwner && isUnlocked());
+  // The Change password button stays hidden too; the owner can still open it with #change-password.
+  $("pw-change").hidden = true;
+  if (db && canWrite && isOwner && lock?.hash && location.hash === "#change-password") {
+    try { history.replaceState(history.state, "", location.pathname + location.search); } catch (e) {}
+    if (pwResolve) pwResolve(false); pwResolve = null; openPw("change");
+  }
 }
 function openPw(mode) {
   const f = $("pw-form"); f.dataset.mode = mode;
