@@ -416,6 +416,15 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .scrim.cf { z-index: 35; }
 .cfsheet { width: min(420px, 100%); }
 .btn.dangerfill { background: var(--innovation); border-color: var(--innovation); color: var(--now-ink); }
+/* On first load, bars sweep in from their start month row by row, then the OMS diamonds pop in. */
+@media (prefers-reduced-motion: no-preference) {
+  #gantt.intro .bar:not(.tbc) { animation: barin .7s cubic-bezier(.2,.7,.2,1) backwards; animation-delay: calc(var(--i, 0) * 35ms + 80ms); }
+  #gantt.intro .bar.tbc { animation: fadein .5s ease-out backwards; animation-delay: calc(var(--i, 0) * 35ms + 80ms); }
+  #gantt.intro .due { animation: duein .3s ease-out backwards; animation-delay: calc(var(--i, 0) * 35ms + 700ms); }
+  @keyframes barin { from { clip-path: inset(0 100% 0 0 round 7px); } to { clip-path: inset(0 0 0 0 round 7px); } }
+  @keyframes fadein { from { opacity: 0; } }
+  @keyframes duein { from { opacity: 0; transform: rotate(45deg) scale(.3); } }
+}
 .bar.drag { cursor: grab; touch-action: none; }
 .bar.dragging { cursor: grabbing; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,.5); }
 .bar .hdl { position: absolute; top: -4px; bottom: -4px; width: 12px; cursor: ew-resize; touch-action: none; }
@@ -733,6 +742,7 @@ let suppressClick = false;
 let shareAdmin = false, isAdmin = false;
 
 let items = [], db = null, canWrite = true, editing = null;
+let introPending = true;
 const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false };
 // Saving a change never moves things around: brand tabs and graph rows are ranked by count only when the page loads
 // or the filters change, not each time a project is saved.
@@ -803,9 +813,13 @@ function render() {
     if (!rows.length) return;
     const lh = el("div", "lanehead"); lh.append(el("b", null, lane.name), el("small", null, rows.length + (rows.length === 1 ? " project" : " projects")));
     g.append(lh);
-    rows.forEach((it) => { g.append(row(it)); shown++; });
+    rows.forEach((it) => { const rw = row(it); rw.style.setProperty("--i", Math.min(shown, 24)); g.append(rw); shown++; });
   });
   if (!shown && items.length) g.append(el("div", "empty", "Nothing matches these filters. Pick another brand, turn a pillar back on or untick “UX/UI Design” in Filters."));
+  if (introPending && shown) { // animate the bars once, when the projects first load (not on later saves or filter changes)
+    introPending = false; g.classList.add("intro");
+    setTimeout(() => g.classList.remove("intro"), 2600);
+  }
   placeToday();
   g.style.minHeight = "";
   sc.scrollLeft = keepL;
