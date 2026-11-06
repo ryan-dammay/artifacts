@@ -74,7 +74,7 @@
    "done": false,
    "doneOn": "",
    "due": "",
-   "end": 5,
+   "end": 9,
    "flagship": true,
    "hidden": false,
    "lane": "blm",
@@ -86,11 +86,11 @@
    "pillar": "core",
    "scope": "",
    "source": "2027 roadmap deck",
-   "start": 2,
+   "start": 6,
    "systems": "",
-   "timing": "Q1 2027",
+   "timing": "Jun–Sep 2027",
    "title": "Beauty concierge",
-   "updatedAt": 1793880630670,
+   "updatedAt": 1793960466562,
    "workstream": ""
   }
  },
