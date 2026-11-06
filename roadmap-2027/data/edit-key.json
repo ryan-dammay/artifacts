@@ -1,0 +1,9 @@
+{
+ "v": 1,
+ "kdf": "PBKDF2-SHA256",
+ "iter": 600000,
+ "salt": "3cMlSrpx+7YpufCRRYggIg==",
+ "iv": "ROPzyAIIZ2i17FxB",
+ "ct": "dnBw+jibG3Pfyw5MXj79ZxIxKz/858FUoj0vdSL+nb02WqmEtp+liHmhcpg2y5EnlcC4CvfUnMXDp6vFNDQ0uajxPAm0kWmBJkHu39r0EI6LYwa2LDSCuyBW00W6KH/ocK7q68h/IqoBJFkSMw==",
+ "setAt": "2026-11-06T10:04:10.776Z"
+}
