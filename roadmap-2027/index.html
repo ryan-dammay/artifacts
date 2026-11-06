@@ -695,17 +695,15 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
     </div>
     <div class="grid2">
       <label class="field">Project Owner<select id="f-owner"></select></label>
-      <label class="field">Workstream<input type="text" id="f-workstream" maxlength="40" placeholder="e.g. Omni"></label>
-    </div>
-    <div class="grid2">
-      <label class="field">Systems<input type="text" id="f-systems" maxlength="80" placeholder="e.g. SFCC, OMS, WMS"></label>
-      <label class="field">Target date<input type="date" id="f-due"></label>
-    </div>
-    <div class="grid2">
       <label class="field">Phase<select id="f-phase"><option value="uxui">UX/UI</option><option value="dev">Development</option><option value="done">Completed</option></select></label>
-      <span></span>
     </div>
-    <label class="field">Notes<textarea id="f-notes" maxlength="800"></textarea></label>
+    <!-- Not shown in the form; kept so a project's saved workstream, systems, target date and notes carry through a save -->
+    <div hidden>
+      <input type="text" id="f-workstream" maxlength="40">
+      <input type="text" id="f-systems" maxlength="80">
+      <input type="date" id="f-due">
+      <textarea id="f-notes" maxlength="800"></textarea>
+    </div>
     <div class="actions">
       <div><button class="btn danger" type="button" id="del-btn">Delete</button> <span class="confirm" id="del-msg" hidden>Tap Delete again to remove it.</span></div>
       <div class="r"><button class="btn ghost" type="button" id="cancel-btn">Cancel</button><button class="btn" type="submit">Save</button></div>
