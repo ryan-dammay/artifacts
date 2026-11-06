@@ -182,9 +182,6 @@
   // ---------- page notes and owner setup ----------
   document.addEventListener("DOMContentLoaded", () => {
     ready.then(() => {
-      const host = document.querySelector(".head-actions");
-      if (host) { const note = document.createElement("p"); note.className = "updated";
-        note.textContent = editKey ? "GitHub copy · edits sync with Claude every hour" : "Read-only copy · synced from Claude every hour"; host.prepend(note); }
       if (location.hash === "#setup-editing") openSetup();
     });
   });
@@ -1671,7 +1668,6 @@ function showUpdated() {
   const box = $("updated"); box.replaceChildren();
   if (!ts) { box.textContent = "Last updated: not recorded yet"; return; }
   box.append(document.createTextNode("Last updated "), el("b", null, fmtStamp(ts)));
-  if (fromMeta >= fromItems && meta?.summary) box.append(el("span", null, meta.summary));
 }
 async function touchMeta(summary) {
   if (!db) return;

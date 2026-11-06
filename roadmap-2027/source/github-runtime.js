@@ -173,9 +173,6 @@
   // ---------- page notes and owner setup ----------
   document.addEventListener("DOMContentLoaded", () => {
     ready.then(() => {
-      const host = document.querySelector(".head-actions");
-      if (host) { const note = document.createElement("p"); note.className = "updated";
-        note.textContent = editKey ? "GitHub copy · edits sync with Claude every hour" : "Read-only copy · synced from Claude every hour"; host.prepend(note); }
       if (location.hash === "#setup-editing") openSetup();
     });
   });
