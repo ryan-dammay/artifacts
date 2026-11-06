@@ -1,7 +1,7 @@
 {
- "claudeMeta": 1793880640834,
- "itemsHash": "83ff62693b527032daa0e80aef4f8c9765a9bbc41de2449e830bb818544d9269",
- "syncedAt": 1793892148217,
+ "claudeMeta": 1793960523382,
+ "itemsHash": "9ae194e8d522404eff578123695e7d040d588ab1c5e2cb47a35b0ef7d1d5aa59",
+ "syncedAt": 1793960523382,
  "items": {
   "all-payment-gateway-integration": "0111f735d594f3152f24659537dcc1067e0d65454e890533bdd5808cc5fb5e96",
   "all-personalized-discovery-recommendations": "ffba277643bfa4ce9d764a3b19a20949b56ed1ecb3aefc3d0ad1efc672e0bd90",
@@ -51,7 +51,7 @@
   "mnp-bazaarvoice": "d16b98ede5acf9ba5e9a16502aeba62b2cd6f0f5ef4112f52caa008e2e278a53",
   "mnp-furniture-assembly-refresh": "c5d07e5c7f150a02a0175f6e8cac4e87f2432a687b796814d9a6cafe76afed54",
   "mnp-gift-registry": "378d52b061e9a454ca6d5d529643403c16f724a1fd857b09cd61189512a28890",
-  "mnp-headless-web-app-launch": "8fc9e8d73ea16160a060ad7754637815e460614ca540f4a77b92e25a38361ead",
+  "mnp-headless-web-app-launch": "71e30546f6b5e0ec121696a21d57b965b5047ff4750f216970acfb08d7759893",
   "mnp-kiosk-payment-release": "0cb2f4f29be4031b82429bc16d16cb28ea4d471d64bc6e588f75409c543152d3",
   "mnp-parenting-guide-ai-assistant-phase-2": "ca8b5eb347eef62ca4f172cbc9d9160a4d0f4a0f033771164f4891daf42664e4",
   "mnp-plp-interrupter": "a4464d265f3bb4972763c60c30211a418f2203cc5b6ee81727b26d43e537c104",
