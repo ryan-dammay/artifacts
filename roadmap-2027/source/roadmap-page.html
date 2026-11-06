@@ -52,6 +52,16 @@ h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 
 .fab:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.5), 0 3px 8px rgba(0,0,0,.32); }
 .fab:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
 .fab[hidden] { display: none; }
+/* A small, quiet confirmation after a change is saved */
+.toast { position: fixed; z-index: 40; left: max(24px, env(safe-area-inset-left, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px)); transform: translateY(8px); opacity: 0; pointer-events: none;
+  display: inline-flex; align-items: center; gap: 8px; max-width: min(420px, calc(100vw - 32px)); box-sizing: border-box; padding: 8px 14px 8px 10px; border-radius: 999px;
+  background: rgba(26,29,34,.96); border: 1px solid rgba(111,211,155,.35); color: var(--fg); font-size: 13.5px; line-height: 1.3; box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  transition: opacity .2s ease, transform .2s ease; }
+.toast.on { opacity: 1; transform: none; }
+.toast svg { flex: none; color: var(--done); }
+.toast span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 600px) { .toast { left: max(16px, env(safe-area-inset-left, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); max-width: calc(100vw - 32px - 190px); } }
+@media (prefers-reduced-motion: reduce) { .toast { transition: opacity .2s ease; transform: none; } }
 body:has(.fab:not([hidden])) .wrap { padding-bottom: 112px; } /* keep the last rows clear of the button */
 @media (max-width: 480px) { .fab { right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); } }
 @media (prefers-reduced-motion: reduce) { .fab { transition: none; } .fab:hover { transform: none; } }
@@ -393,6 +403,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 
   <div class="scroll"><div class="gantt" id="gantt"></div></div>
   <p class="status" id="status" role="status">Loading roadmap…</p>
+  <div class="toast" id="toast" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5" stroke-width="1.8"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg><span id="toast-t"></span></div>
 
   <div class="gbar"><button class="gtoggle" id="g-toggle" type="button" role="switch" aria-checked="false" aria-controls="graphs"><span class="gtrack" aria-hidden="true"><span class="gknob"></span></span>Show graphs <small>Productivity · UX/UI</small></button></div>
   <div class="graphs" id="graphs" hidden>
@@ -770,7 +781,7 @@ function bindReorder(grip, rowEl, id) {
     try {
       for (const { x, o } of changes) await db.collection("items").doc(x).update({ order: o, updatedAt: Date.now() });
       touchMeta("Reordered " + laneName + ": moved " + it.title);
-      setStatus(it.title + " moved " + where + ".");
+      done(it.title + " moved " + where + ".", "Order saved");
     } catch (x) { failed(x, "save the new order"); }
     orderOverride = null; render();
   });
@@ -916,7 +927,7 @@ function bindDrag(bar, track, id) {
     try {
       await db.collection("items").doc(id).set({ ...rest, start: s, end: en, timing: rangeLabel(s, en), updatedAt: Date.now() });
       touchMeta((resized ? "Changed " + it.title + " to " : "Moved " + it.title + " to ") + rangeLabel(s, en));
-      setStatus(it.title + " now runs " + rangeLabel(s, en) + ".");
+      done(it.title + " now runs " + rangeLabel(s, en) + ".", "Dates saved");
     } catch (x) { reset(); failed(x, "save the new dates"); }
   });
   bar.addEventListener("pointercancel", () => { it0 = null; dragging = false; reset(); });
@@ -1025,7 +1036,7 @@ $("form").addEventListener("submit", async (e) => {
     if (editing) await db.collection("items").doc(editing.id).set(data);
     else await db.collection("items").add(data);
     touchMeta((editing ? "Edited " : "Added ") + data.title);
-    setStatus("Saved."); closeEditor();
+    done(editing ? "Saved changes to " + data.title + "." : "Added " + data.title + ".", editing ? "Changes saved" : "Project added"); closeEditor();
   } catch (err) {
     if (err?.code === "invalid_argument") closeEditor();
     failed(err, "save this project");
@@ -1035,7 +1046,7 @@ $("del-btn").addEventListener("click", async () => {
   if (!editing || !db || !isAdmin) return;
   if (!(await confirmDialog({ title: "Delete this project?", text: "“" + editing.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
   if (!(await unlock("delete this project"))) return;
-  try { const t = editing.title; await db.collection("items").doc(editing.id).delete(); touchMeta("Deleted " + t); setStatus("Deleted."); detailId = null; closeEditor(); closeDetail(); }
+  try { const t = editing.title; await db.collection("items").doc(editing.id).delete(); touchMeta("Deleted " + t); done("Deleted " + t + ".", "Project deleted"); detailId = null; closeEditor(); closeDetail(); }
   catch (e) { failed(e, "delete that project"); }
 });
 $("cancel-btn").addEventListener("click", closeEditor);
@@ -1148,7 +1159,7 @@ $("pw-form").addEventListener("submit", async (e) => {
     try {
       await db.doc("meta/lock").set({ salt, hash: h, setAt: Date.now() });
       lock = { salt, hash: h }; setUnlocked(h);
-      setStatus(mode === "change" ? "Edit password changed." : "Edit password set. Editing is unlocked for this browser session.");
+      done(mode === "change" ? "Admin password changed." : "Admin password set. You are logged in as admin.", mode === "change" ? "Password changed" : "Password set");
       closePw(true);
     } catch (x) { err("Couldn't save the password. Only the owner can set it."); }
   }
@@ -1345,7 +1356,7 @@ async function saveLinks(it, links, msg) {
   if (!db || !it) return false;
   if (!(await unlock())) return false;
   const { id, ...rest } = it;
-  try { await db.collection("items").doc(id).set({ ...rest, links, updatedAt: Date.now() }); touchMeta(msg); setStatus(msg); return true; }
+  try { await db.collection("items").doc(id).set({ ...rest, links, updatedAt: Date.now() }); touchMeta(msg); done(msg, /removed/i.test(msg) ? "Link removed" : "Link added"); return true; }
   catch (err) { $("d-hint").textContent = ""; failed(err, "save the link"); return false; }
 }
 $("d-add").addEventListener("submit", async (e) => {
@@ -1373,7 +1384,7 @@ async function setPhase(id, p) {
   try {
     await db.collection("items").doc(id).set({ ...rest, designDone, designDoneOn: designDone ? (it.designDoneOn || todayISO()) : "", done, doneOn: done ? (it.doneOn || todayISO()) : "", updatedAt: Date.now() });
     touchMeta(it.title + ": " + PHASE_NAME[p]);
-    setStatus(it.title + (p === "done" ? " is Completed." : " is now in " + PHASE_NAME[p] + "."));
+    done(it.title + (p === "done" ? " is Completed." : " is now in " + PHASE_NAME[p] + "."), "Phase updated");
   } catch (e) { failed(e, "update that project"); }
 }
 $("d-designdone").addEventListener("click", async () => {
@@ -1381,7 +1392,7 @@ $("d-designdone").addEventListener("click", async () => {
   if (!(await unlock())) return;
   const on = !it.designDone; const { id, ...rest } = it;
   if (!on && !(await confirmDialog({ title: "Undo UX/UI Completed?", text: "“" + it.title + "” will go back to in progress and lose its completion date.", ok: "Undo" }))) return;
-  try { await db.collection("items").doc(id).set({ ...rest, designDone: on, designDoneOn: on ? todayISO() : "", updatedAt: Date.now() }); touchMeta((on ? "Marked UX/UI Completed: " : "Back in progress: ") + it.title); setStatus(on ? it.title + " marked UX/UI Completed." : it.title + " is back in progress."); }
+  try { await db.collection("items").doc(id).set({ ...rest, designDone: on, designDoneOn: on ? todayISO() : "", updatedAt: Date.now() }); touchMeta((on ? "Marked UX/UI Completed: " : "Back in progress: ") + it.title); done(on ? it.title + " marked UX/UI Completed." : it.title + " is back in progress.", "Phase updated"); }
   catch (err) { failed(err, "update that project"); }
 });
 // Hide shows an eye with a line through it; once hidden, an open eye brings the project back.
@@ -1405,7 +1416,7 @@ $("d-hide").addEventListener("click", async () => {
   try {
     await db.collection("items").doc(id).set({ ...rest, hidden: on, updatedAt: Date.now() });
     touchMeta((on ? "Hid " : "Unhid ") + it.title);
-    setStatus(on ? it.title + " is hidden. Turn on Filters › Hidden projects to see it again." : it.title + " is visible again.");
+    done(on ? it.title + " is hidden. Turn on Filters › Hidden projects to see it again." : it.title + " is visible again.", on ? "Project hidden" : "Project visible again");
     if (on && !view.showHidden) closeDetail();
   } catch (e) { failed(e, "update that project"); }
 });
@@ -1413,7 +1424,7 @@ $("d-delete").addEventListener("click", async () => {
   const it = current(); if (!it || !db || !isAdmin) return;
   if (!(await confirmDialog({ title: "Delete this project?", text: "“" + it.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
   if (!(await unlock("delete this project"))) return;
-  try { await db.collection("items").doc(it.id).delete(); touchMeta("Deleted " + it.title); setStatus("Deleted " + it.title + "."); closeDetail(); }
+  try { await db.collection("items").doc(it.id).delete(); touchMeta("Deleted " + it.title); done("Deleted " + it.title + ".", "Project deleted"); closeDetail(); }
   catch (e) { failed(e, "delete that project"); }
 });
 $("d-close").addEventListener("click", closeDetail);
@@ -1433,6 +1444,14 @@ $("f-btn").addEventListener("click", () => setFilters($("f-panel").hidden));
 document.addEventListener("click", (e) => { if (!$("f-panel").hidden && !e.target.closest(".fwrap")) setFilters(false); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("f-panel").hidden) { setFilters(false); $("f-btn").focus(); } });
 function setStatus(t) { $("status").textContent = t; }
+// done(): a change was saved. The status line says it in full (and to screen readers); a quiet green toast confirms it.
+let toastTimer = 0;
+function done(statusText, toastText) {
+  setStatus(statusText);
+  const t = $("toast"); $("toast-t").textContent = toastText || statusText;
+  t.classList.remove("on"); void t.offsetWidth; t.classList.add("on");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("on"), 2600);
+}
 
 let meta = null;
 const fmtStamp = (ms) => new Date(ms).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
