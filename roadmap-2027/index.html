@@ -1275,7 +1275,7 @@ $("logout-btn").addEventListener("click", () => {
   setUnlocked(null); if (!$("scrim").hidden) closeEditor();
   setStatus("Logged out. The roadmap is view-only until an admin logs in."); $("login-btn").focus();
 });
-$("add-btn").addEventListener("click", async () => { if (!(await unlock("add a project"))) return; updateRole(); if (isAdmin) openEditor(null); });
+$("add-btn").addEventListener("click", async () => { const was = isAdmin; if (!(await unlock("add a project"))) return; updateRole(); if (!isAdmin) return; if (!was) setStatus("Logged in as admin."); openEditor(null); });
 
 // ---- Edit lock: a password before any change (salted SHA-256 hash kept in meta/lock; only the owner can set it) ----
 let lock = null, unlockedHash = null, pwResolve = null, isOwner = false;
@@ -1337,7 +1337,8 @@ function setUnlocked(h) {
 function updateRole() {
   const was = isAdmin;
   isAdmin = canWrite && !!db && isUnlocked();
-  $("add-btn").hidden = !isAdmin;
+  $("add-btn").hidden = !(canWrite && db); // everyone who could edit sees it; logged-out viewers are asked to log in as admin first
+  $("add-btn").title = isAdmin ? "" : "Log in as admin to add a project";
   $("login-btn").hidden = isAdmin || !canWrite || !db;
   $("logout-btn").hidden = !isAdmin;
   $("hid-wrap").hidden = !isAdmin;
