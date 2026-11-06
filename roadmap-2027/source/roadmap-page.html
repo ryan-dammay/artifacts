@@ -845,7 +845,7 @@ function bindOpen(node, id) {
     if (suppressClick) return;
     const it = items.find((x) => x.id === id); if (!it) return;
     if (!canWrite || !db) { openDetail(id); return; }
-    if (!(await unlock())) return;
+    if (!(await unlock("edit this project"))) return;
     openEditor(items.find((x) => x.id === id) || it);
   });
 }
@@ -1017,14 +1017,14 @@ $("form").addEventListener("submit", async (e) => {
 $("del-btn").addEventListener("click", async () => {
   if (!editing || !db || !isAdmin) return;
   if (!(await confirmDialog({ title: "Delete this project?", text: "“" + editing.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
-  if (!(await unlock())) return;
+  if (!(await unlock("delete this project"))) return;
   try { const t = editing.title; await db.collection("items").doc(editing.id).delete(); touchMeta("Deleted " + t); setStatus("Deleted."); detailId = null; closeEditor(); closeDetail(); }
   catch (e) { failed(e, "delete that project"); }
 });
 $("cancel-btn").addEventListener("click", closeEditor);
 $("scrim").addEventListener("click", (e) => { if (e.target === $("scrim")) closeEditor(); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("scrim").hidden) closeEditor(); });
-$("add-btn").addEventListener("click", async () => { if (!(await unlock())) return; updateRole(); if (isAdmin) openEditor(null); });
+$("add-btn").addEventListener("click", async () => { if (!(await unlock("add a project"))) return; updateRole(); if (isAdmin) openEditor(null); });
 
 // ---- Edit lock: a password before any change (salted SHA-256 hash kept in meta/lock; only the owner can set it) ----
 let lock = null, unlockedHash = null, pwResolve = null, isOwner = false;
@@ -1090,10 +1090,14 @@ function updateRole() {
   if (!isAdmin) view.showHidden = false;
   if (was !== isAdmin) { render(); if (detailId) renderDetail(); }
 }
-function unlock() {
-  if (isUnlocked()) return Promise.resolve(true);
+// unlock() asks once per browser session; unlock(reason) asks every time (editing, creating, hiding and deleting a project).
+function unlock(reason) {
+  if (!reason && isUnlocked()) return Promise.resolve(true);
   if (pwResolve) pwResolve(false);
-  return new Promise((res) => { pwResolve = res; openPw(lock?.hash ? "unlock" : (isOwner ? "set" : "none")); });
+  return new Promise((res) => {
+    pwResolve = res; const mode = lock?.hash ? "unlock" : (isOwner ? "set" : "none"); openPw(mode);
+    if (reason && mode === "unlock") { $("pw-title").textContent = "Enter the edit password"; $("pw-text").textContent = "Enter the password to " + reason + "."; }
+  });
 }
 $("pw-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -1104,11 +1108,11 @@ $("pw-form").addEventListener("submit", async (e) => {
     if (window.rmUnlock) { // GitHub copy: the password unlocks its saved GitHub access instead
       const r = await window.rmUnlock(p);
       if (r !== true) { err(r || "That password isn't right. Try again."); $("pw-input").select(); return; }
-      setUnlocked(lock.hash); setStatus("Editing unlocked for this browser session."); closePw(true); return;
+      setUnlocked(lock.hash); setStatus("Password accepted."); closePw(true); return;
     }
     const h = await sha(lock.salt + ":" + p);
     if (h !== lock.hash) { err("That password isn't right. Try again."); $("pw-input").select(); return; }
-    setUnlocked(h); setStatus("Editing unlocked for this browser session."); closePw(true);
+    setUnlocked(h); setStatus("Password accepted."); closePw(true);
   } else if (mode === "set" || mode === "change") {
     if (p.length < 6) { err("Use at least 6 characters."); return; }
     if (p !== $("pw-confirm").value) { err("The two passwords don't match."); return; }
@@ -1367,7 +1371,7 @@ $("d-hide").addEventListener("click", async () => {
   if (!(await confirmDialog(on
     ? { title: "Hide this project?", text: "“" + it.title + "” will be hidden from the timeline, counts and graphs for everyone. You can bring it back from Filters › Hidden projects.", ok: "Hide project", danger: false }
     : { title: "Unhide this project?", text: "“" + it.title + "” will show on the timeline, counts and graphs again for everyone.", ok: "Unhide project", danger: false }))) return;
-  if (!(await unlock())) return;
+  if (!(await unlock(on ? "hide this project" : "unhide this project"))) return;
   const { id, ...rest } = it;
   try {
     await db.collection("items").doc(id).set({ ...rest, hidden: on, updatedAt: Date.now() });
@@ -1379,13 +1383,13 @@ $("d-hide").addEventListener("click", async () => {
 $("d-delete").addEventListener("click", async () => {
   const it = current(); if (!it || !db || !isAdmin) return;
   if (!(await confirmDialog({ title: "Delete this project?", text: "“" + it.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
-  if (!(await unlock())) return;
+  if (!(await unlock("delete this project"))) return;
   try { await db.collection("items").doc(it.id).delete(); touchMeta("Deleted " + it.title); setStatus("Deleted " + it.title + "."); closeDetail(); }
   catch (e) { failed(e, "delete that project"); }
 });
 $("d-close").addEventListener("click", closeDetail);
 $("d-done").addEventListener("click", closeDetail);
-$("d-edit").addEventListener("click", async () => { if (!(await unlock())) return; const it = current(); $("dscrim").hidden = true; openEditor(it); });
+$("d-edit").addEventListener("click", async () => { if (!(await unlock("edit this project"))) return; const it = current(); $("dscrim").hidden = true; openEditor(it); });
 $("dscrim").addEventListener("click", (e) => { if (e.target === $("dscrim")) closeDetail(); });
 window.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("dscrim").hidden && $("scrim").hidden) closeDetail(); }, true);
 window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (h && items.some((x) => x.id === h)) { if (detailId !== h) openDetail(h); } else if (!h && detailId) closeDetail(); });
