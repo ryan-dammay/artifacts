@@ -1083,7 +1083,7 @@
  {
   "id": "mnp-bazaarvoice",
   "data": {
-   "title": "Bazaar Voice",
+   "title": "BazaarVoice",
    "lane": "mnp",
    "pillar": "core",
    "start": 1,
@@ -1105,7 +1105,7 @@
    "links": [],
    "order": 2,
    "source": "2027 roadmap deck",
-   "updatedAt": 1793962577151
+   "updatedAt": 1793962585683
   }
  },
  {
