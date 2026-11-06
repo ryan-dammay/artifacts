@@ -12,8 +12,13 @@
                set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} },
                del: (k) => { try { sessionStorage.removeItem(k); } catch (e) {} } };
 
-  let token = ss.get("rm27-gh-token");
-  if (!token) ss.del("rm27-unlocked"); // the page's unlock flag only counts while this tab holds the token
+  // The admin log-in keeps the GitHub access in this browser until the admin logs out.
+  const ls = { get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+               set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} },
+               del: (k) => { try { localStorage.removeItem(k); } catch (e) {} } };
+  let token = ls.get("rm27-gh-token") || ss.get("rm27-gh-token");
+  ss.del("rm27-gh-token"); ss.del("rm27-unlocked");
+  if (token) ls.set("rm27-gh-token", token); else ls.del("rm27-admin"); // the page's log-in only counts while this browser holds the access
 
   // ---------- helpers ----------
   const enc = new TextEncoder(), dec = new TextDecoder();
@@ -111,6 +116,7 @@
   window.addEventListener("beforeunload", (e) => { if (pending.length || saving) { e.preventDefault(); e.returnValue = ""; } });
 
   // ---------- unlocking with the edit password ----------
+  window.rmLogout = () => { token = null; ls.del("rm27-gh-token"); ls.del("rm27-admin"); };
   window.rmUnlock = async (pw) => {
     await ready;
     if (!editKey) return "Editing on GitHub isn't set up yet.";
@@ -122,7 +128,7 @@
     token = t;
     const r = await gh("").catch(() => null); // lists the repo root: checks the token still works
     if (!r || !r.ok) { token = null; return "The password is right, but GitHub refused the saved access (" + (r ? r.status : "offline") + "). The owner needs to set it up again."; }
-    ss.set("rm27-gh-token", t);
+    ls.set("rm27-gh-token", t);
     await loadRows(); emitItems();
     return true;
   };
@@ -204,7 +210,7 @@
         const old = await gh(KEY_PATH + "?ref=" + BRANCH); const sha = old.ok ? (await old.json()).sha : undefined;
         const r = await gh(KEY_PATH, { method: "PUT", body: JSON.stringify({ message: "Roadmap: set up editing on GitHub", content: toB64(JSON.stringify(body, null, 1)), branch: BRANCH, ...(sha ? { sha } : {}) }) });
         if (!r.ok) throw new Error("GitHub refused to save it (" + r.status + "). The token needs Contents: Read and write on " + REPO);
-        editKey = body; ss.set("rm27-gh-token", t); ss.set("rm27-unlocked", "github");
+        editKey = body; ls.set("rm27-gh-token", t); ls.set("rm27-admin", "github");
         wrap.remove(); history.replaceState(null, "", location.pathname); location.reload();
       } catch (x) { token = prev; err(x.message || String(x)); }
     };
