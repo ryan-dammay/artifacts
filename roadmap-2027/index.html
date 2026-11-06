@@ -384,9 +384,10 @@ body:has(.fab:not([hidden])) .wrap { padding-bottom: 112px; } /* keep the last r
 .months span { text-align: center; padding: 4px 0; }
 .qs { display: grid; grid-template-columns: repeat(4, 1fr); font-weight: 500; color: var(--fg); }
 .qs span { text-align: center; }
-.lanehead { display: flex; align-items: baseline; gap: 10px; padding: 18px 14px 8px; border-bottom: 1px solid var(--line); background: var(--surface); }
-.lanehead b { font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
-.lanehead small { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+/* Brand/group headings read as section bands, clearly above the project names */
+.lanehead { display: flex; align-items: center; gap: 12px; padding: 16px 16px 14px 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #22262e; box-shadow: inset 4px 0 0 var(--lc, var(--core)); }
+.lanehead b { font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -.015em; line-height: 1.2; }
+.lanehead small { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg); background: rgba(255,255,255,.07); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; }
 .name { padding: 9px 14px; min-width: 0; display: flex; flex-direction: column; gap: 1px; position: relative; }
 .grip { position: absolute; left: 0; top: 8px; width: 14px; text-align: center; font-size: 13px; line-height: 20px; color: var(--muted); cursor: grab; touch-action: none; opacity: 0; transition: opacity .15s; -webkit-user-select: none; user-select: none; }
 .row:hover .grip, .grip:focus-visible { opacity: 1; }
@@ -829,7 +830,7 @@ function render() {
     const rows = items.filter((it) => it.lane === lane.id && passes(it))
       .sort(byOrder);
     if (!rows.length) return;
-    const lh = el("div", "lanehead"); lh.append(el("b", null, lane.name), el("small", null, rows.length + (rows.length === 1 ? " project" : " projects")));
+    const lh = el("div", "lanehead"); lh.style.setProperty("--lc", lane.id === "cross" ? "var(--enterprise)" : "var(--core)"); lh.append(el("b", null, lane.name), el("small", null, rows.length + (rows.length === 1 ? " project" : " projects")));
     g.append(lh);
     rows.forEach((it) => { const rw = row(it); rw.style.setProperty("--i", Math.min(shown, 24)); g.append(rw); shown++; });
   });
