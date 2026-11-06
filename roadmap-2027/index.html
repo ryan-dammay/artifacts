@@ -977,7 +977,7 @@ function bindReorder(grip, rowEl, id) {
       for (const { x, o } of changes) await db.collection("items").doc(x).update({ order: o, updatedAt: Date.now() });
       touchMeta("Reordered " + laneName + ": moved " + it.title);
       setStatus(it.title + " moved " + where + ".");
-    } catch (x) { setStatus("Couldn't save the new order. Try again."); }
+    } catch (x) { failed(x, "save the new order"); }
     orderOverride = null; render();
   });
 }
@@ -1123,7 +1123,7 @@ function bindDrag(bar, track, id) {
       await db.collection("items").doc(id).set({ ...rest, start: s, end: en, timing: rangeLabel(s, en), updatedAt: Date.now() });
       touchMeta((resized ? "Changed " + it.title + " to " : "Moved " + it.title + " to ") + rangeLabel(s, en));
       setStatus(it.title + " now runs " + rangeLabel(s, en) + ".");
-    } catch (x) { reset(); setStatus("Couldn't save the new dates. Try again."); }
+    } catch (x) { reset(); failed(x, "save the new dates"); }
   });
   bar.addEventListener("pointercancel", () => { it0 = null; dragging = false; reset(); });
 }
@@ -1233,8 +1233,8 @@ $("form").addEventListener("submit", async (e) => {
     touchMeta((editing ? "Edited " : "Added ") + data.title);
     setStatus("Saved."); closeEditor();
   } catch (err) {
-    if (err?.code === "invalid_argument") { canWrite = false; setStatus("You can view this roadmap but not change it."); }
-    else setStatus("Couldn't save. Check your connection and try again.");
+    if (err?.code === "invalid_argument") closeEditor();
+    failed(err, "save this project");
   }
 });
 $("del-btn").addEventListener("click", async () => {
@@ -1242,7 +1242,7 @@ $("del-btn").addEventListener("click", async () => {
   if (!(await confirmDialog({ title: "Delete this project?", text: "“" + editing.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
   if (!(await unlock())) return;
   try { const t = editing.title; await db.collection("items").doc(editing.id).delete(); touchMeta("Deleted " + t); setStatus("Deleted."); detailId = null; closeEditor(); closeDetail(); }
-  catch (e) { setStatus("Couldn't delete that project. Try again."); }
+  catch (e) { failed(e, "delete that project"); }
 });
 $("cancel-btn").addEventListener("click", closeEditor);
 $("scrim").addEventListener("click", (e) => { if (e.target === $("scrim")) closeEditor(); });
@@ -1352,12 +1352,25 @@ $("pw-change").addEventListener("click", () => { if (pwResolve) pwResolve(false)
 
 // ---- Confirmation modal for destructive actions ----
 let cfResolve = null;
-function confirmDialog({ title, text, ok = "Delete", danger = true }) {
+function confirmDialog({ title, text, ok = "Delete", danger = true, alone = false }) {
   if (cfResolve) cfResolve(false);
+  $("cf-cancel").hidden = alone;
   $("cf-ok").className = "btn" + (danger ? " dangerfill" : "");
   $("cf-title").textContent = title; $("cf-text").textContent = text; $("cf-ok").textContent = ok;
-  $("cf-scrim").hidden = false; $("cf-cancel").focus();
+  $("cf-scrim").hidden = false; (alone ? $("cf-ok") : $("cf-cancel")).focus();
   return new Promise((res) => { cfResolve = res; });
+}
+// A save that fails says so in a pop-up, since the status line is hidden behind an open form or panel.
+const RO_TEXT = "Your claude.ai account can view this roadmap but isn't allowed to save changes to it. Ask the roadmap owner to give you edit access.";
+function notice(title, text) { return confirmDialog({ title, text, ok: "OK", danger: false, alone: true }); }
+function failed(err, what) {
+  if (err?.code === "invalid_argument") {
+    canWrite = false; updateRole(); $("add-btn").hidden = true; if (detailId) renderDetail();
+    setStatus("View only. " + RO_TEXT);
+    return notice("Your change wasn't saved", RO_TEXT);
+  }
+  setStatus("Couldn't " + what + ". Check your connection and try again.");
+  return notice("Couldn't " + what, "Your change wasn't saved. Check your connection and try again.");
 }
 function closeCf(v) { $("cf-scrim").hidden = true; const r = cfResolve; cfResolve = null; if (r) r(v); }
 $("cf-ok").addEventListener("click", () => closeCf(true));
@@ -1523,7 +1536,7 @@ async function saveLinks(it, links, msg) {
   if (!(await unlock())) return false;
   const { id, ...rest } = it;
   try { await db.collection("items").doc(id).set({ ...rest, links, updatedAt: Date.now() }); touchMeta(msg); setStatus(msg); return true; }
-  catch (err) { $("d-hint").textContent = err?.code === "invalid_argument" ? "You can view this roadmap but not change it." : "Couldn't save the link. Check your connection and try again."; return false; }
+  catch (err) { $("d-hint").textContent = ""; failed(err, "save the link"); return false; }
 }
 $("d-add").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -1551,7 +1564,7 @@ async function setPhase(id, p) {
     await db.collection("items").doc(id).set({ ...rest, designDone, designDoneOn: designDone ? (it.designDoneOn || todayISO()) : "", done, doneOn: done ? (it.doneOn || todayISO()) : "", updatedAt: Date.now() });
     touchMeta(it.title + ": " + PHASE_NAME[p]);
     setStatus(it.title + (p === "done" ? " is Completed." : " is now in " + PHASE_NAME[p] + "."));
-  } catch (e) { setStatus("Couldn't update that project. Try again."); }
+  } catch (e) { failed(e, "update that project"); }
 }
 $("d-designdone").addEventListener("click", async () => {
   const it = current(); if (!it || !db) return;
@@ -1559,7 +1572,7 @@ $("d-designdone").addEventListener("click", async () => {
   const on = !it.designDone; const { id, ...rest } = it;
   if (!on && !(await confirmDialog({ title: "Undo UX/UI Completed?", text: "“" + it.title + "” will go back to in progress and lose its completion date.", ok: "Undo" }))) return;
   try { await db.collection("items").doc(id).set({ ...rest, designDone: on, designDoneOn: on ? todayISO() : "", updatedAt: Date.now() }); touchMeta((on ? "Marked UX/UI Completed: " : "Back in progress: ") + it.title); setStatus(on ? it.title + " marked UX/UI Completed." : it.title + " is back in progress."); }
-  catch (err) { setStatus("Couldn't update that project. Try again."); }
+  catch (err) { failed(err, "update that project"); }
 });
 // Hide shows an eye with a line through it; once hidden, an open eye brings the project back.
 function setHideIcon(b, isHidden) {
@@ -1584,14 +1597,14 @@ $("d-hide").addEventListener("click", async () => {
     touchMeta((on ? "Hid " : "Unhid ") + it.title);
     setStatus(on ? it.title + " is hidden. Turn on Filters › Hidden projects to see it again." : it.title + " is visible again.");
     if (on && !view.showHidden) closeDetail();
-  } catch (e) { setStatus("Couldn't update that project. Try again."); }
+  } catch (e) { failed(e, "update that project"); }
 });
 $("d-delete").addEventListener("click", async () => {
   const it = current(); if (!it || !db || !isAdmin) return;
   if (!(await confirmDialog({ title: "Delete this project?", text: "“" + it.title + "” will be removed from the roadmap for everyone, together with its links and notes. This can't be undone.", ok: "Delete project" }))) return;
   if (!(await unlock())) return;
   try { await db.collection("items").doc(it.id).delete(); touchMeta("Deleted " + it.title); setStatus("Deleted " + it.title + "."); closeDetail(); }
-  catch (e) { setStatus("Couldn't delete that project. Try again."); }
+  catch (e) { failed(e, "delete that project"); }
 });
 $("d-close").addEventListener("click", closeDetail);
 $("d-done").addEventListener("click", closeDetail);
@@ -1652,7 +1665,8 @@ fillSelects(); render();
     if (detailId) renderDetail();
     else { const h = (location.hash || "").slice(1); if (h && items.some((x) => x.id === h)) openDetail(h); }
     const undated = items.filter((i) => !dated(i)).length;
-    setStatus(items.length ? `${items.length} projects · ${undated} without dates yet` : "No projects yet. Use Add project to put the first one on the timeline.");
+    if (!canWrite) setStatus("View only. " + RO_TEXT);
+    else setStatus(items.length ? `${items.length} projects · ${undated} without dates yet` : "No projects yet. Use Add project to put the first one on the timeline.");
   }, () => setStatus("Lost the connection to the roadmap. Reload the page to reconnect."));
   db.doc("meta/info").onSnapshot((s) => { meta = s.exists ? s.data() : null; showUpdated(); }, () => {});
 })();
