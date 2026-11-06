@@ -995,7 +995,7 @@
    "done": false,
    "doneOn": "",
    "due": "2027-06-30",
-   "end": 6,
+   "end": 1,
    "flagship": false,
    "hidden": false,
    "lane": "gymshark",
@@ -1007,11 +1007,11 @@
    "pillar": "core",
    "scope": "KSA",
    "source": "2027 roadmap deck",
-   "start": 6,
+   "start": 1,
    "systems": "SFCC, OMS, WMS",
-   "timing": "Jun 2027",
+   "timing": "Jan 2027",
    "title": "Return to Store (KSA)",
-   "updatedAt": 1793880639084,
+   "updatedAt": 1793960493613,
    "workstream": "Omni"
   }
  },
