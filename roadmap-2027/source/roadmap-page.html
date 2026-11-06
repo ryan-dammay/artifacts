@@ -986,6 +986,24 @@ $("form").addEventListener("submit", async (e) => {
   };
   if (!data.title) return;
   if (!editing && !isAdmin) { setStatus("Only admins can create projects."); return; }
+  if (editing) {
+    const phaseOfData = data.done ? "done" : data.designDone ? "dev" : "uxui";
+    const laneN = (id) => (LANES.find((l) => l.id === id) || {}).name || id;
+    const range = (a, b) => Number.isInteger(a) ? rangeLabel(a, b) : "Not dated";
+    const changes = [];
+    if (data.title !== editing.title) changes.push("name");
+    if (data.lane !== editing.lane) changes.push("brand to " + laneN(data.lane));
+    if (data.pillar !== editing.pillar) changes.push("pillar to " + (data.pillar === "core" ? "Core Digital" : "Enterprise Transformation"));
+    if (data.start !== (editing.start ?? null) || data.end !== (editing.end ?? null)) changes.push("timeline to " + range(data.start, data.end));
+    if (data.timing !== (editing.timing || "")) changes.push("timing label");
+    if (data.scope !== (editing.scope || "")) changes.push("scope");
+    if (data.flagship !== !!editing.flagship) changes.push(data.flagship ? "marked Flagship" : "Flagship removed");
+    if (data.owner !== (editing.owner || "")) changes.push("owner to " + (data.owner || "nobody"));
+    if (phaseOfData !== phaseOf(editing)) changes.push("phase to " + PHASE_NAME[phaseOfData]);
+    if (!changes.length) { setStatus("No changes to save."); closeEditor(); return; }
+    const list = changes.join(", ");
+    if (!(await confirmDialog({ title: "Save changes?", text: "“" + editing.title + "” will be updated for everyone: " + list.charAt(0).toUpperCase() + list.slice(1) + ".", ok: "Save", danger: false }))) return;
+  } else if (!(await confirmDialog({ title: "Add this project?", text: "“" + data.title + "” will be added to " + ((LANES.find((l) => l.id === data.lane) || {}).name || "the roadmap") + " for everyone.", ok: "Add project", danger: false }))) return;
   try {
     if (editing) await db.collection("items").doc(editing.id).set(data);
     else await db.collection("items").add(data);
@@ -1332,8 +1350,12 @@ function setHideIcon(b, isHidden) {
 }
 $("d-hide").addEventListener("click", async () => {
   const it = current(); if (!it || !db || !isAdmin) return;
+  const on = !it.hidden;
+  if (!(await confirmDialog(on
+    ? { title: "Hide this project?", text: "“" + it.title + "” will be hidden from the timeline, counts and graphs for everyone. You can bring it back from Filters › Hidden projects.", ok: "Hide project", danger: false }
+    : { title: "Unhide this project?", text: "“" + it.title + "” will show on the timeline, counts and graphs again for everyone.", ok: "Unhide project", danger: false }))) return;
   if (!(await unlock())) return;
-  const on = !it.hidden; const { id, ...rest } = it;
+  const { id, ...rest } = it;
   try {
     await db.collection("items").doc(id).set({ ...rest, hidden: on, updatedAt: Date.now() });
     touchMeta((on ? "Hid " : "Unhid ") + it.title);
