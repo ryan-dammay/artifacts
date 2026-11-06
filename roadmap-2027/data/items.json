@@ -1249,20 +1249,29 @@
  {
   "id": "mnp-recommendation-enhancements",
   "data": {
-   "end": 2,
-   "flagship": false,
+   "title": "Recommendations Enhancement",
    "lane": "mnp",
-   "mine": false,
-   "notes": "Listed on the Q1 2027 slide; not on the Gantt.",
-   "order": 3,
-   "owner": "Awatef",
    "pillar": "core",
-   "scope": "",
-   "source": "Q1 2027 slide",
    "start": 1,
+   "end": 2,
    "timing": "Jan–Feb 2027",
-   "title": "Recommendations enhancement",
-   "updatedAt": 1793877840000
+   "scope": "",
+   "mine": false,
+   "flagship": false,
+   "designDone": false,
+   "designDoneOn": "",
+   "done": false,
+   "doneOn": "",
+   "notes": "Listed on the Q1 2027 slide; not on the Gantt.",
+   "workstream": "",
+   "owner": "Awatef",
+   "systems": "",
+   "due": "",
+   "hidden": false,
+   "links": [],
+   "order": 3,
+   "source": "Q1 2027 slide",
+   "updatedAt": 1793961893348
   }
  }
 ]
