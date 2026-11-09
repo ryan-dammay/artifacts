@@ -88,6 +88,24 @@ body:has(.fab:not([hidden])) .wrap { padding-bottom: 112px; } /* keep the last r
 .pillar b { font-size: 17px; font-weight: 700; }
 .pillar span.n { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
 @media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } }
+/* Themes under each pillar: what supports it, and how much */
+.pcol { display: flex; flex-direction: column; min-width: 0; }
+.pcol .pillar { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0; }
+.thm { flex: 1; background: var(--surface); border: 1px solid var(--line); border-top: 1px dashed var(--line); border-radius: 0 0 10px 10px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.thm .th { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 0 6px 4px; }
+.thm button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 72px 26px; align-items: center; gap: 10px; padding: 6px; border-radius: 6px; font-size: 13.5px; }
+.thm button:hover { background: rgba(255,255,255,.05); }
+.thm button:focus-visible { outline: 2px solid var(--fg); outline-offset: 1px; }
+.thm button .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.thm button .br { height: 6px; border-radius: 3px; background: rgba(255,255,255,.07); overflow: hidden; }
+.thm button .br i { display: block; height: 100%; border-radius: 3px; background: var(--c); }
+.thm button .ct { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.thm button[aria-pressed="true"] { background: rgba(255,255,255,.09); font-weight: 600; }
+.thm button[aria-pressed="true"] .ct { color: var(--fg); }
+.thm.dim button[aria-pressed="false"] { opacity: .5; }
+.thm .none { color: var(--muted); font-size: 13px; padding: 4px 6px; }
+.thm .unset .nm { color: var(--muted); font-style: italic; }
+.tag.thm-t { color: var(--fg); border-color: rgba(255,255,255,.18); }
 
 /* Brand tab bar: underline tabs, scrolls sideways on phones. */
 .tabrow { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); margin-bottom: -6px; }
@@ -258,6 +276,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .chip { font: 500 12px var(--font-mono); padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
 .chip.c-mine { border-color: var(--mine); color: var(--mine); }
+.chip.c-theme { border-color: rgba(255,255,255,.28); color: var(--fg); }
 .chip.c-omni { border-color: var(--omni); color: var(--omni); }
 .chip.c-pillar { border-color: var(--c); color: var(--c); }
 .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; margin: 0; padding: 16px 0; border-block: 1px solid var(--line); }
@@ -378,8 +397,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
   </header>
 
   <div class="pillars" id="pillars">
-    <label class="pillar" style="--c: var(--core)"><input type="checkbox" id="p-core" data-p="core" checked><span class="k">Optimize the core</span><b>Core Digital</b><span class="n" id="n-core">–</span></label>
-    <label class="pillar" style="--c: var(--enterprise)"><input type="checkbox" id="p-enterprise" data-p="enterprise" checked><span class="k">Connect the ecosystem</span><b>Enterprise Transformation</b><span class="n" id="n-enterprise">–</span></label>
+    <div class="pcol" style="--c: var(--core)"><label class="pillar" style="--c: var(--core)"><input type="checkbox" id="p-core" data-p="core" checked><span class="k">Optimize the core</span><b>Core Digital</b><span class="n" id="n-core">–</span></label><div class="thm" id="thm-core" role="group" aria-label="Themes supporting Core Digital"></div></div>
+    <div class="pcol" style="--c: var(--enterprise)"><label class="pillar" style="--c: var(--enterprise)"><input type="checkbox" id="p-enterprise" data-p="enterprise" checked><span class="k">Connect the ecosystem</span><b>Enterprise Transformation</b><span class="n" id="n-enterprise">–</span></label><div class="thm" id="thm-enterprise" role="group" aria-label="Themes supporting Enterprise Transformation"></div></div>
   </div>
 
   <div class="tabrow">
@@ -392,6 +411,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
         <label class="toggle"><input type="checkbox" id="only-omni"> OMS <span class="fn" id="n-omni"></span></label>
         <label class="toggle" id="hid-wrap" hidden><input type="checkbox" id="show-hidden"> Hidden projects <span class="fn" id="n-hidden"></span></label>
         <label class="field fsel">Project Owner<select id="f-asg"></select></label>
+        <label class="field fsel">Theme<select id="f-theme"></select></label>
         <input type="checkbox" id="hide-tbc" hidden>
         <p class="fhead">Key</p>
         <span class="key"><i class="tbc"></i> Dates TBC</span>
@@ -486,6 +506,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .btn:focus-vi
         <option value="enterprise">Enterprise Transformation</option>
       </select></label>
     </div>
+    <label class="field">Theme<select id="f-themesel"></select></label>
     <div class="grid2">
       <label class="field">Starts<select id="f-start"></select></label>
       <label class="field">Ends<select id="f-end"></select></label>
@@ -548,7 +569,18 @@ let shareAdmin = false, isAdmin = false;
 let items = [], db = null, canWrite = true, editing = null;
 let introPending = true, introTimer = 0;
 const animateNext = () => { introPending = true; };
-const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false };
+const view = { core: true, enterprise: true, innovation: true, mine: false, omni: false, hideTbc: false, lane: "", owner: "", showHidden: false, theme: "" };
+// Strategic themes: each project supports one, and the pillar cards show how the themes add up.
+const THEMES = [
+  { id: "customer", name: "Customer Centricity" },
+  { id: "omni", name: "Omni Channel Excellence" },
+  { id: "dsof", name: "Department Store of the Future" },
+  { id: "beauty", name: "Beauty Dominance" },
+  { id: "brand", name: "Brand Authority" },
+  { id: "region", name: "Regional Expansion" },
+];
+const THEME_NAME = Object.fromEntries(THEMES.map((t) => [t.id, t.name]));
+const themeOf = (it) => (THEME_NAME[it.theme] ? it.theme : "");
 // Saving a change never moves things around: brand tabs and graph rows are ranked by count only when the page loads
 // or the filters change, not each time a project is saved.
 const ranks = {};
@@ -606,9 +638,13 @@ function render() {
   const owners = [...new Set([...ASSIGNEES, ...items.map((i) => (i.owner || "").trim()).filter(Boolean)])];
   if (view.owner && !owners.includes(view.owner)) view.owner = "";
   $("f-asg").replaceChildren(Object.assign(el("option", null, "Everyone"), { value: "" }), ...owners.map((n) => Object.assign(el("option", null, n), { value: n })));
-  const passes = (it) => visible(it) && view[it.pillar] && (!view.mine || it.mine) && (!view.omni || usesOMS(it)) && (!view.owner || (it.owner || "").trim() === view.owner) && (!view.hideTbc || dated(it));
+  if (view.theme && view.theme !== "none" && !THEME_NAME[view.theme]) view.theme = "";
+  const themePass = (it) => !view.theme || (view.theme === "none" ? !themeOf(it) : themeOf(it) === view.theme);
+  const basePass = (it) => visible(it) && (!view.mine || it.mine) && (!view.omni || usesOMS(it)) && (!view.owner || (it.owner || "").trim() === view.owner) && (!view.hideTbc || dated(it));
+  const passes = (it) => basePass(it) && view[it.pillar] && themePass(it);
   renderTabs(passes);
-  const graphPass = (it) => visible(it) && view[it.pillar] && (!view.mine || it.mine) && (!view.omni || usesOMS(it)) && inTab(it.lane, view.lane);
+  const graphPass = (it) => visible(it) && view[it.pillar] && (!view.mine || it.mine) && (!view.omni || usesOMS(it)) && themePass(it) && inTab(it.lane, view.lane);
+  renderThemes((it) => basePass(it) && inTab(it.lane, view.lane));
   renderUx(graphPass);
   renderProd(graphPass);
   LANES.forEach((lane) => {
@@ -632,7 +668,7 @@ function render() {
   if (scrollX !== keepX || scrollY !== keepY) scrollTo(keepX, keepY);
 
   ["core","enterprise"].forEach((p) => {
-    const n = items.filter((i) => i.pillar === p).length;
+    const n = items.filter((i) => i.pillar === p && visible(i)).length;
     $("n-" + p).textContent = n + (n === 1 ? " project" : " projects");
   });
   $("n-mine").textContent = String(items.filter((i) => i.mine).length);
@@ -643,8 +679,32 @@ function render() {
   $("f-asg").value = view.owner || "";
   $("n-hidden").textContent = String(items.filter((i) => i.hidden).length);
   $("show-hidden").checked = !!view.showHidden;
-  const nOn = [view.mine, view.omni, view.owner, isAdmin && view.showHidden].filter(Boolean).length;
+  $("f-theme").value = view.theme || "";
+  const nOn = [view.mine, view.omni, view.owner, view.theme, isAdmin && view.showHidden].filter(Boolean).length;
   $("f-count").textContent = String(nOn); $("f-count").hidden = !nOn;
+}
+
+function renderThemes(pass) {
+  ["core", "enterprise"].forEach((p) => {
+    const box = $("thm-" + p); box.replaceChildren(el("p", "th", "Themes"));
+    const pool = items.filter((it) => it.pillar === p && pass(it));
+    const rows = THEMES.map((t) => ({ id: t.id, name: t.name, n: pool.filter((it) => themeOf(it) === t.id).length })).filter((r) => r.n);
+    const unset = pool.filter((it) => !themeOf(it)).length;
+    if (unset) rows.push({ id: "none", name: "No theme yet", n: unset, unset: true });
+    rows.sort((a, b) => (a.unset - b.unset) || b.n - a.n || THEMES.findIndex((t) => t.id === a.id) - THEMES.findIndex((t) => t.id === b.id));
+    if (!rows.length) { box.append(el("p", "none", "No projects match the current filters.")); return; }
+    const max = Math.max(...rows.map((r) => r.n));
+    rows.forEach((r) => {
+      const b = el("button", r.unset ? "unset" : null); b.type = "button"; b.dataset.id = r.id;
+      const on = view.theme === r.id; b.setAttribute("aria-pressed", String(on));
+      b.setAttribute("aria-label", r.name + ": " + r.n + (r.n === 1 ? " project" : " projects") + (on ? ". Showing only this theme; press to show all" : ". Press to show only this theme"));
+      const br = el("span", "br"); const fill = el("i"); fill.style.width = (r.n / max * 100) + "%"; br.append(fill);
+      b.append(el("span", "nm", r.name), br, el("span", "ct", String(r.n)));
+      b.addEventListener("click", () => { view.theme = on ? "" : r.id; save(); animateNext(); render(); $("thm-" + p).querySelector('[data-id="' + r.id + '"]')?.focus(); });
+      box.append(b);
+    });
+    box.classList.toggle("dim", !!view.theme);
+  });
 }
 
 function renderTabs(passes) {
@@ -689,9 +749,10 @@ function row(it) {
   if (it.scope) name.append(el("small", null, it.scope));
   const ph = phaseOf(it);
   if (ph !== "uxui") name.append(el("span", "done-pill ph-" + ph, ph === "done" ? "Completed" : "In development"));
-  if (it.hidden || it.flagship || it.workstream || it.systems) {
+  if (it.hidden || it.flagship || it.workstream || it.systems || themeOf(it)) {
     const tags = el("div", "tags");
     if (it.hidden) tags.append(el("span", "tag hid", "Hidden"));
+    if (themeOf(it)) tags.append(el("span", "tag thm-t", THEME_NAME[themeOf(it)]));
     if (it.flagship) tags.append(el("span", "tag", "Flagship"));
     if (it.workstream) tags.append(el("span", "tag", it.workstream));
     (it.systems || "").split(",").map((s) => s.trim()).filter(Boolean).forEach((s) => tags.append(el("span", "tag", s)));
@@ -973,6 +1034,8 @@ function openEditor(it) {
   $("f-title").value = it?.title || "";
   $("f-lane").value = it?.lane || "mnp";
   $("f-pillar").value = it?.pillar || "core";
+  $("f-themesel").replaceChildren(Object.assign(el("option", null, "No theme yet"), { value: "" }), ...THEMES.map((t) => Object.assign(el("option", null, t.name), { value: t.id })));
+  $("f-themesel").value = it ? themeOf(it) : (THEME_NAME[view.theme] ? view.theme : "");
   $("f-start").value = it?.start ? String(it.start) : "";
   $("f-end").value = it?.end ? String(it.end) : "";
   $("f-timing").value = it?.timing || "";
@@ -1002,7 +1065,7 @@ $("form").addEventListener("submit", async (e) => {
   if (Number.isInteger(en) && !Number.isInteger(s)) s = en;
   if (Number.isInteger(s) && en < s) [s, en] = [en, s];
   const data = {
-    title: $("f-title").value.trim(), lane: $("f-lane").value, pillar: $("f-pillar").value,
+    title: $("f-title").value.trim(), lane: $("f-lane").value, pillar: $("f-pillar").value, theme: $("f-themesel").value,
     start: Number.isInteger(s) ? s : null, end: Number.isInteger(en) ? en : null,
     timing: $("f-timing").value.trim(), scope: $("f-scope").value.trim(),
     mine: $("f-mine").checked, flagship: $("f-flagship").checked,
@@ -1022,6 +1085,7 @@ $("form").addEventListener("submit", async (e) => {
     const changes = [];
     if (data.title !== editing.title) changes.push("name");
     if (data.lane !== editing.lane) changes.push("brand to " + laneN(data.lane));
+    if (data.theme !== themeOf(editing)) changes.push("theme to " + (THEME_NAME[data.theme] || "no theme"));
     if (data.pillar !== editing.pillar) changes.push("pillar to " + (data.pillar === "core" ? "Core Digital" : "Enterprise Transformation"));
     if (data.start !== (editing.start ?? null) || data.end !== (editing.end ?? null)) changes.push("timeline to " + range(data.start, data.end));
     if (data.timing !== (editing.timing || "")) changes.push("timing label");
@@ -1203,6 +1267,8 @@ $("hide-tbc").addEventListener("change", (e) => { view.hideTbc = e.target.checke
 $("only-omni").addEventListener("change", (e) => { view.omni = e.target.checked; save(); animateNext(); render(); });
 $("show-hidden").addEventListener("change", (e) => { view.showHidden = e.target.checked; save(); animateNext(); render(); });
 $("f-asg").addEventListener("change", (e) => { view.owner = e.target.value; save(); animateNext(); render(); });
+$("f-theme").replaceChildren(Object.assign(el("option", null, "All themes"), { value: "" }), ...THEMES.map((t) => Object.assign(el("option", null, t.name), { value: t.id })), Object.assign(el("option", null, "No theme yet"), { value: "none" }));
+$("f-theme").addEventListener("change", (e) => { view.theme = e.target.value; save(); animateNext(); render(); });
 
 // ---- Detail view: links to Figma files and Jira tickets ----
 const LANE_NAME = Object.fromEntries(LANES.map((l) => [l.id, l.name]));
@@ -1278,6 +1344,7 @@ function renderDetail() {
   $("d-title").textContent = it.title;
   const chips = $("d-chips"); chips.replaceChildren();
   const pc = el("span", "chip c-pillar", PILLAR_NAME[it.pillar] || "Core Digital"); pc.style.setProperty("--c", `var(${PILLAR_VAR[it.pillar] || "--core"})`); chips.append(pc);
+  if (themeOf(it)) chips.append(el("span", "chip c-theme", THEME_NAME[themeOf(it)]));
   if (it.mine) chips.append(el("span", "chip c-mine", "UX/UI"));
   const cur = phaseOf(it), ci = PHASES.indexOf(cur);
   const shortD = (s) => { const d = parseDue(s); return d ? " · " + d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : ""; };

@@ -24,7 +24,8 @@
    "timing": "Q2 2027",
    "title": "Payment Gateway integration",
    "updatedAt": 1793877740249,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -44,7 +45,8 @@
    "start": 3,
    "timing": "Q2 2027",
    "title": "Personalized discovery & recommendations",
-   "updatedAt": 1793873537326
+   "updatedAt": 1793873537326,
+   "theme": "customer"
   }
  },
  {
@@ -63,7 +65,8 @@
    "start": 7,
    "timing": "Q3 2027",
    "title": "AI Tagging",
-   "updatedAt": 1793880630996
+   "updatedAt": 1793880630996,
+   "theme": "dsof"
   }
  },
  {
@@ -91,7 +94,8 @@
    "timing": "Jul–Sep 2027",
    "title": "Beauty Concierge",
    "updatedAt": 1793961944096,
-   "workstream": ""
+   "workstream": "",
+   "theme": "beauty"
   }
  },
  {
@@ -110,7 +114,8 @@
    "start": 1,
    "timing": "Q1/Q2 2027",
    "title": "Bloomingdale’s Beauty Relaunch",
-   "updatedAt": 1793880630304
+   "updatedAt": 1793880630304,
+   "theme": "beauty"
   }
  },
  {
@@ -130,7 +135,8 @@
    "start": 6,
    "timing": "Q3 2027",
    "title": "Beauty Subscriptions",
-   "updatedAt": 1793874015211
+   "updatedAt": 1793874015211,
+   "theme": "beauty"
   }
  },
  {
@@ -158,7 +164,8 @@
    "timing": "Go-live Sep 2027",
    "title": "Bloomingdale’s KSA Launch",
    "updatedAt": 1793878540000,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "region"
   }
  },
  {
@@ -186,7 +193,8 @@
    "timing": "Q3–Q4 2027",
    "title": "Customer Care Support",
    "updatedAt": 1793961960646,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -214,7 +222,8 @@
    "timing": "Full year 2027",
    "title": "External Concessions Platform",
    "updatedAt": 1793880628947,
-   "workstream": ""
+   "workstream": "",
+   "theme": "dsof"
   }
  },
  {
@@ -242,7 +251,8 @@
    "timing": "Q1 2027",
    "title": "GWP/Sample Selection",
    "updatedAt": 1793961982767,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "beauty"
   }
  },
  {
@@ -270,7 +280,8 @@
    "timing": "Feb–Apr 2027",
    "title": "Holition Beauty",
    "updatedAt": 1793880629626,
-   "workstream": ""
+   "workstream": "",
+   "theme": "beauty"
   }
  },
  {
@@ -298,7 +309,8 @@
    "timing": "Q4 2027",
    "title": "Sale Preview (Similar to Onyx)",
    "updatedAt": 1793878828827,
-   "workstream": ""
+   "workstream": "",
+   "theme": "dsof"
   }
  },
  {
@@ -326,7 +338,8 @@
    "timing": "Q3 2027",
    "title": "Size Guide Improvements",
    "updatedAt": 1793962000655,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -354,7 +367,8 @@
    "timing": "Q1/Q2 2027",
    "title": "Wishlist / Multiple Collections",
    "updatedAt": 1793878540000,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -373,7 +387,8 @@
    "start": 1,
    "timing": "Q1 2027",
    "title": "AI Shopping Assistant Phase 2",
-   "updatedAt": 1793877930000
+   "updatedAt": 1793877930000,
+   "theme": "customer"
   }
  },
  {
@@ -395,7 +410,8 @@
    "timing": "TBC",
    "title": "Coach App",
    "updatedAt": 1793877930000,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "brand"
   }
  },
  {
@@ -423,7 +439,8 @@
    "timing": "Q2–Q4 2027",
    "title": "Coach CRO / Brand Requirements",
    "updatedAt": 1793878092755,
-   "workstream": ""
+   "workstream": "",
+   "theme": "brand"
   }
  },
  {
@@ -443,7 +460,8 @@
    "start": 1,
    "timing": "Q1 2027",
    "title": "Notify me",
-   "updatedAt": 1793877930000
+   "updatedAt": 1793877930000,
+   "theme": "customer"
   }
  },
  {
@@ -462,7 +480,8 @@
    "start": 1,
    "timing": "Q1 2027",
    "title": "PDP 7",
-   "updatedAt": 1793877930000
+   "updatedAt": 1793877930000,
+   "theme": "brand"
   }
  },
  {
@@ -490,7 +509,8 @@
    "timing": "Q2 2027",
    "title": "PLP Improvements (2027)",
    "updatedAt": 1793877998751,
-   "workstream": ""
+   "workstream": "",
+   "theme": "brand"
   }
  },
  {
@@ -509,7 +529,8 @@
    "start": 4,
    "timing": "Apr–May 2027",
    "title": "Waterfall Model in Fulfilment",
-   "updatedAt": 1793877930000
+   "updatedAt": 1793877930000,
+   "theme": "omni"
   }
  },
  {
@@ -528,7 +549,8 @@
    "start": 7,
    "timing": "Q3–Q4 2027",
    "title": "Amber Loyalty",
-   "updatedAt": 1793872516257
+   "updatedAt": 1793872516257,
+   "theme": "customer"
   }
  },
  {
@@ -547,7 +569,8 @@
    "start": 1,
    "timing": "Jan–Apr 2027",
    "title": "Clienteling Phase 1",
-   "updatedAt": 1793624236326
+   "updatedAt": 1793624236326,
+   "theme": "customer"
   }
  },
  {
@@ -566,7 +589,8 @@
    "start": 5,
    "timing": "May–Dec 2027",
    "title": "Clienteling Phase 2",
-   "updatedAt": 1793624236659
+   "updatedAt": 1793624236659,
+   "theme": "customer"
   }
  },
  {
@@ -592,7 +616,8 @@
    "timing": "Q3–Q4 2027",
    "title": "Customer Care Projects/Support",
    "updatedAt": 1793624567697,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -620,7 +645,8 @@
    "timing": "Q3 2027",
    "title": "CX Strategy",
    "updatedAt": 1793879110349,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -638,7 +664,8 @@
    "source": "2027 roadmap deck",
    "start": 1,
    "timing": "Full year 2027",
-   "title": "Data Governance & Compliance"
+   "title": "Data Governance & Compliance",
+   "theme": "customer"
   }
  },
  {
@@ -656,7 +683,8 @@
    "source": "2027 roadmap deck",
    "start": 1,
    "timing": "Jan–Dec 2027",
-   "title": "ERP Transformation"
+   "title": "ERP Transformation",
+   "theme": "omni"
   }
  },
  {
@@ -682,7 +710,8 @@
    "timing": "Immediate",
    "title": "Gift guide",
    "updatedAt": 1793873974538,
-   "workstream": ""
+   "workstream": "",
+   "theme": "dsof"
   }
  },
  {
@@ -710,7 +739,8 @@
    "timing": "ETA Sep 2027",
    "title": "KSA Expansion",
    "updatedAt": 1793873851638,
-   "workstream": ""
+   "workstream": "",
+   "theme": "region"
   }
  },
  {
@@ -736,7 +766,8 @@
    "timing": "Full year 2027",
    "title": "Personalization & Intelligent CMS Platform",
    "updatedAt": 1793624716190,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -764,7 +795,8 @@
    "timing": "Apr–May 2027",
    "title": "SFMC Replacement",
    "updatedAt": 1793873614616,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -792,7 +824,8 @@
    "timing": "ETA Apr 2027",
    "title": "SFSC Data Optimizations",
    "updatedAt": 1793873664651,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -818,7 +851,8 @@
    "timing": "TBC",
    "title": "What's on in store",
    "updatedAt": 1793873974966,
-   "workstream": ""
+   "workstream": "",
+   "theme": "dsof"
   }
  },
  {
@@ -846,7 +880,8 @@
    "timing": "Feb–Mar 2027",
    "title": "AI-Powered Search (Cimulate)",
    "updatedAt": 1793880637533,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -866,7 +901,8 @@
    "start": 7,
    "timing": "Q3 2027",
    "title": "Blog feature",
-   "updatedAt": 1793880640114
+   "updatedAt": 1793880640114,
+   "theme": "brand"
   }
  },
  {
@@ -894,7 +930,8 @@
    "timing": "Q2 2027",
    "title": "Click & Collect",
    "updatedAt": 1793880638755,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -920,7 +957,8 @@
    "timing": "Apr 2027",
    "title": "Delivery Slots",
    "updatedAt": 1793880639435,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -939,7 +977,8 @@
    "start": 6,
    "timing": "Q2/Q3 2027",
    "title": "Frontend Experience Refresh",
-   "updatedAt": 1793880638412
+   "updatedAt": 1793880638412,
+   "theme": "brand"
   }
  },
  {
@@ -962,7 +1001,8 @@
    "timing": "Feb–Apr 2027",
    "title": "ONYX Queueing System",
    "updatedAt": 1793873915171,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -982,7 +1022,8 @@
    "start": 10,
    "timing": "Q4 2027",
    "title": "Personal Shopping OTO",
-   "updatedAt": 1793880640443
+   "updatedAt": 1793880640443,
+   "theme": "customer"
   }
  },
  {
@@ -1002,7 +1043,8 @@
    "start": 6,
    "timing": "Jun 2027",
    "title": "PLP interrupters",
-   "updatedAt": 1793880639773
+   "updatedAt": 1793880639773,
+   "theme": "brand"
   }
  },
  {
@@ -1030,7 +1072,8 @@
    "timing": "Jan–Mar 2027",
    "title": "Return to Store (KSA)",
    "updatedAt": 1793960497029,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -1049,7 +1092,8 @@
    "start": 7,
    "timing": "Q3 2027",
    "title": "Size Recommender",
-   "updatedAt": 1793880638071
+   "updatedAt": 1793880638071,
+   "theme": "customer"
   }
  },
  {
@@ -1077,7 +1121,8 @@
    "timing": "Q3 2027",
    "title": "Quality Management tool for CC",
    "updatedAt": 1793879123236,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -1105,7 +1150,8 @@
    "timing": "Q1 2027",
    "title": "BazaarVoice",
    "updatedAt": 1793962585683,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -1127,7 +1173,8 @@
    "timing": "Mar–Apr 2027",
    "title": "Furniture Assembly & Refresh",
    "updatedAt": 1793877840000,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -1155,7 +1202,8 @@
    "timing": "Q2 2027",
    "title": "Gift Registry",
    "updatedAt": 1793961912466,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  },
  {
@@ -1183,7 +1231,8 @@
    "timing": "Feb–Dec 2027",
    "title": "Headless Web & App Launch",
    "updatedAt": 1793962562480,
-   "workstream": ""
+   "workstream": "",
+   "theme": "brand"
   }
  },
  {
@@ -1218,7 +1267,8 @@
    "timing": "30 Dec 2026",
    "title": "Kiosk Payment",
    "updatedAt": 1793873010588,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "omni"
   }
  },
  {
@@ -1237,7 +1287,8 @@
    "start": 10,
    "timing": "Q4 2027",
    "title": "Parenting guide & AI Assistant Phase 2",
-   "updatedAt": 1793873901200
+   "updatedAt": 1793873901200,
+   "theme": "brand"
   }
  },
  {
@@ -1257,7 +1308,8 @@
    "start": 5,
    "timing": "May 2027",
    "title": "PLP Interrupter",
-   "updatedAt": 1793877712757
+   "updatedAt": 1793877712757,
+   "theme": "brand"
   }
  },
  {
@@ -1280,7 +1332,8 @@
    "timing": "30 Apr 2027",
    "title": "Qatar in-market fulfilment",
    "updatedAt": 1793873103666,
-   "workstream": "Omni"
+   "workstream": "Omni",
+   "theme": "region"
   }
  },
  {
@@ -1308,7 +1361,8 @@
    "timing": "Jan–Feb 2027",
    "title": "Recommendations Enhancement",
    "updatedAt": 1793961893348,
-   "workstream": ""
+   "workstream": "",
+   "theme": "customer"
   }
  }
 ]
