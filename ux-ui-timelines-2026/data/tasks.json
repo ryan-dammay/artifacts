@@ -1,0 +1,682 @@
+[
+ {
+  "id": "4uz169r1z40icsftagch",
+  "data": {
+   "area": "Coach",
+   "assignee": "Ryan",
+   "createdAt": 1793612717332,
+   "date": "2026-11-03",
+   "end": "2026-11-03",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Link 1",
+     "url": "https://bloomingdalesme.atlassian.net/browse/COACH-2050"
+    }
+   ],
+   "notes": "The CRM team needs an explicit consent checkbox on all forms that collect user information. If the user selects consent, the communication preferences must be updated in the Master Communication Preferences table. The form source must also be stored using the form id. This applies across all brands and across website and mobile app flows where consent is requested.",
+   "ready": false,
+   "start": "2026-11-02",
+   "status": "in-progress",
+   "title": "Coach - Explict Consent"
+  }
+ },
+ {
+  "id": "4weqr02a9p1ofhgb62gn",
+  "data": {
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "createdAt": 1793607803346,
+   "date": "2026-11-12",
+   "end": "2026-11-12",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Link 1",
+     "url": "https://www.figma.com/design/mds6ld1q4O2BWttRp80lkD/BLM-Emails--Working-File-?node-id=20528-52423&t=iEH0Z1sjl0j1VfoI-1"
+    },
+    {
+     "label": "Link 2",
+     "url": "https://docs.bazaarvoice.com/articles/ratings-reviews/edit-in-mail-templates/"
+    },
+    {
+     "label": "Link 3",
+     "url": "https://docs.bazaarvoice.com/articles/ratings-reviews/email_templates/a/h2__1440037056"
+    }
+   ],
+   "notes": "Rating & Result",
+   "ready": false,
+   "start": "2026-11-09",
+   "status": "in-progress",
+   "title": "Bazaarvoice Integration - Email"
+  }
+ },
+ {
+  "id": "awxteytbvf5nda23ah15",
+  "data": {
+   "area": "Bloomingdale's",
+   "assignee": "Anjali",
+   "completedOn": "2026-11-05",
+   "createdAt": 1793857907953,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-04",
+   "end": "2026-11-04",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/v4BRJYXLrvdxyl0Cplztzr/BLM-App-Headless?node-id=84450-41752"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/UxH9Ggkjh1EUJIEVgU5fFm/BLMHW---Sprint-4--PDP--Mini--Wishlist-?node-id=1285-48259"
+    }
+   ],
+   "notes": "Complete the designs and flow for products with zero reviews",
+   "ready": false,
+   "start": "2026-11-04",
+   "status": "done",
+   "title": "Bazaar Voice - Empty State"
+  }
+ },
+ {
+  "id": "blm-app-bazaarvoice-plp",
+  "data": {
+   "area": "Bloomingdale's App",
+   "assignee": "Ryan",
+   "createdAt": 1792731800000,
+   "date": "2026-10-23",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Jira BLMHD-3459",
+     "url": "https://bloomingdalesme.atlassian.net/browse/BLMHD-3459"
+    }
+   ],
+   "notes": "Q4 2026. Ratings and reviews (BazaarVoice) on the product listing page. Bazaar Voice reviews for Bloomingdale's are planned to release next quarter (Q1 2027) per the October 2026 release notes.",
+   "status": "done",
+   "title": "BLM App BazaarVoice integration: PLP done"
+  }
+ },
+ {
+  "id": "bloomingdales-advent-calendar-live",
+  "data": {
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "createdAt": 1792642000006,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October pre-Cyber release.",
+   "status": "done",
+   "title": "Bloomingdale's Advent Calendar app experience live"
+  }
+ },
+ {
+  "id": "bloomingdales-tamara-prescoring-live",
+  "data": {
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "createdAt": 1792642000007,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October pre-Cyber release.",
+   "status": "done",
+   "title": "Bloomingdale's Tamara pre-scoring live"
+  }
+ },
+ {
+  "id": "coach-contextual-search-live",
+  "data": {
+   "area": "Coach",
+   "assignee": "Ryan",
+   "createdAt": 1792642000002,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October pre-Cyber release.",
+   "status": "done",
+   "title": "Coach contextual search live"
+  }
+ },
+ {
+  "id": "coach-pdp-enhancements-live",
+  "data": {
+   "area": "Coach",
+   "assignee": "Ryan",
+   "createdAt": 1792642000001,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October pre-Cyber release: Pair It With, Meet the Family, A Closer Look and a compressed delivery section.",
+   "status": "done",
+   "title": "Coach PDP enhancements live"
+  }
+ },
+ {
+  "id": "coach-shopping-assistant",
+  "data": {
+   "area": "Coach",
+   "assignee": "Ryan",
+   "createdAt": 1792642000009,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Scheduled to go live later in October per the October 2026 release notes. Mark done once it ships.",
+   "status": "in-progress",
+   "title": "Coach Shopping Assistant (launching later this month)"
+  }
+ },
+ {
+  "id": "deema-tally-designs-all-brands",
+  "data": {
+   "area": "All brands",
+   "assignee": "Ryan",
+   "createdAt": 1792566100000,
+   "date": "2026-09-30",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q3 2026. Taly and Deema designs completed across all brands in September. Launched in Kuwait across all brands in the October 2026 pre-Cyber release.",
+   "status": "done",
+   "title": "Taly and Deema designs done (all brands)"
+  }
+ },
+ {
+  "id": "dtjbj5t6aik98oclpqai",
+  "data": {
+   "area": "Mamas & Papas",
+   "assignee": "Anjali",
+   "completedOn": "2026-11-05",
+   "createdAt": 1794287924239,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-09",
+   "end": "2026-11-09",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/TYJ8R9muD8ANefWLUf4cbg/M-P-App-Designs?node-id=20275-159717"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/vUQnf8SRJjtvzkvET3dDCC/MNP-Web--CRO--Working-File?node-id=42322-86407"
+    }
+   ],
+   "notes": "Add alert message for language switching, adapted updates from BLM",
+   "ready": false,
+   "start": "2026-11-09",
+   "status": "done",
+   "title": "MNP Bazaar Voice Updates"
+  }
+ },
+ {
+  "id": "egift-card-app-design",
+  "data": {
+   "area": "Gymshark App",
+   "assignee": "Ryan",
+   "createdAt": 1792401500000,
+   "date": "2026-10-19",
+   "links": [
+    {
+     "label": "Add to Bag",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=23530-81121&t=owFpcD9FVvMeiHzL-11"
+    },
+    {
+     "label": "Shopping Bag",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=18971-82094&t=owFpcD9FVvMeiHzL-11"
+    },
+    {
+     "label": "PDP",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=23458-58363&t=owFpcD9FVvMeiHzL-11"
+    },
+    {
+     "label": "Checkout",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=3635-240493&t=owFpcD9FVvMeiHzL-11"
+    },
+    {
+     "label": "Checkout – Shipping Method",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=3691-75806&t=owFpcD9FVvMeiHzL-11"
+    },
+    {
+     "label": "Checkout – Shipping Method Summary",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=3691-75884&t=owFpcD9FVvMeiHzL-11"
+    },
+    {
+     "label": "My Orders › Order Details",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=23589-138294&t=owFpcD9FVvMeiHzL-11"
+    }
+   ],
+   "notes": "Q4 2026. E-gift card flow designed across Add to Bag, Shopping Bag, PDP, Checkout and Order Details. Gymshark eGift release is planned for next quarter (Q1 2027) per the October 2026 release notes; code freeze runs until 7 Dec.",
+   "title": "E-gift card designs done (App)"
+  }
+ },
+ {
+  "id": "egift-card-web-design",
+  "data": {
+   "area": "Gymshark Web",
+   "assignee": "Ryan",
+   "createdAt": 1792555500000,
+   "date": "2026-10-21",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Jira GSW-2428 (Requirements)",
+     "url": "https://bloomingdalesme.atlassian.net/browse/GSW-2428"
+    }
+   ],
+   "notes": "Q4 2026. Web version of the e-gift card flow; requirements in Jira GSW-2428. Gymshark eGift release is planned for next quarter (Q1 2027) per the October 2026 release notes; code freeze runs until 7 Dec.",
+   "startedOn": "2026-10-21",
+   "status": "done",
+   "title": "E-gift card designs done (Web)"
+  }
+ },
+ {
+  "id": "ff09p6s410sj5jbsmci7",
+  "data": {
+   "area": "Mamas & Papas",
+   "assignee": "Anjali",
+   "completedOn": "2026-11-04",
+   "createdAt": 1793618567433,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-03",
+   "dateHistory": [
+    {
+     "at": 1793618591100,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-10-30",
+      "start": "2026-10-26"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-03",
+      "start": "2026-10-26"
+     }
+    },
+    {
+     "at": 1793618601762,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-11-03",
+      "start": "2026-10-26"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-10-30",
+      "start": "2026-10-26"
+     }
+    },
+    {
+     "at": 1793618634179,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-10-30",
+      "start": "2026-10-26"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-03",
+      "start": "2026-10-26"
+     }
+    }
+   ],
+   "end": "2026-11-03",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Jira #MNPSF-3624",
+     "url": "https://bloomingdalesme.atlassian.net/browse/MNPSF-3624"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/XGaL7xnAgYd059i5KdZ8y1/Kiosk-Payment?node-id=1-102&t=9yIv9PxGIHQPJxbx-1"
+    }
+   ],
+   "notes": "Creating the Tablet designs for MNP Kiosk which users can access from the store to shop and receive a QR code, which they can scan to pay from their phone.",
+   "ready": true,
+   "start": "2026-10-26",
+   "status": "done",
+   "title": "MNP Kiosk"
+  }
+ },
+ {
+  "id": "gymshark-gwp-enhancement-live",
+  "data": {
+   "area": "Gymshark",
+   "assignee": "Ryan",
+   "createdAt": 1792642000005,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Gift-with-purchase enhancement shipped in the October pre-Cyber release.",
+   "status": "done",
+   "title": "Gymshark GWP enhancement live"
+  }
+ },
+ {
+  "id": "gymshark-plp-interrupter",
+  "data": {
+   "area": "Gymshark Web",
+   "assignee": "Ryan",
+   "createdAt": 1794480000000,
+   "date": "2026-11-19",
+   "end": "2026-11-19",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/8yqZ5ERb14RfslwouSCxjS/GS-Web?node-id=40262-62855&t=aaXKOyhf2ZXqny5s-11"
+    }
+   ],
+   "notes": "PLP interrupter designs for Gymshark Web (GS-Web Figma file).",
+   "ready": false,
+   "start": "2026-11-12",
+   "status": "in-progress",
+   "title": "Gymshark PLP Interrupter"
+  }
+ },
+ {
+  "id": "gymshark-tabby-tamara-prescoring-live",
+  "data": {
+   "area": "Gymshark",
+   "assignee": "Ryan",
+   "createdAt": 1792642000003,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October pre-Cyber release.",
+   "status": "done",
+   "title": "Gymshark Tabby and Tamara pre-scoring live"
+  }
+ },
+ {
+  "id": "gymshark-timed-banner-live",
+  "data": {
+   "area": "Gymshark",
+   "assignee": "Ryan",
+   "createdAt": 1792642000004,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October pre-Cyber release.",
+   "status": "done",
+   "title": "Gymshark timed banner live"
+  }
+ },
+ {
+  "id": "jira-mnpsf-3624",
+  "data": {
+   "area": "MnP Kiosk",
+   "assignee": "Ryan",
+   "createdAt": 1792577200000,
+   "date": "2026-10-21",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma: Kiosk Payment",
+     "url": "https://www.figma.com/design/XGaL7xnAgYd059i5KdZ8y1/Kiosk-Payment?node-id=1-102&t=Ye6dGbgC5p8Tx2Cj-1"
+    },
+    {
+     "label": "Jira MNPSF-3624",
+     "url": "https://bloomingdalesme.atlassian.net/browse/MNPSF-3624"
+    }
+   ],
+   "notes": "Q4 2026. Kiosk payment designs for MnP completed (Jira MNPSF-3624).",
+   "status": "done",
+   "title": "MnP Kiosk payment designs done"
+  }
+ },
+ {
+  "id": "mnp-ios-explicit-consent",
+  "data": {
+   "area": "Mamas & Papas iOS",
+   "assignee": "Anjali",
+   "createdAt": 1793603400000,
+   "date": "2026-11-02",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Jira MI-2293",
+     "url": "https://bloomingdalesme.atlassian.net/browse/MI-2293"
+    }
+   ],
+   "notes": "Q4 2026. Explicit consent design for the Mamas & Papas iOS app.",
+   "status": "done",
+   "title": "MnP iOS: Explicit Consent"
+  }
+ },
+ {
+  "id": "mnp-parenting-hub",
+  "data": {
+   "area": "Mamas & Papas",
+   "assignee": "Ryan",
+   "createdAt": 1792642000008,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Scheduled to go live later in October per the October 2026 release notes. Mark done once it ships.",
+   "status": "in-progress",
+   "title": "Mamas & Papas Parenting Hub (launching later this month)"
+  }
+ },
+ {
+  "id": "mnp-plp-interrupter",
+  "data": {
+   "area": "Mamas & Papas Web",
+   "assignee": "Ryan",
+   "createdAt": 1794480060000,
+   "date": "2026-11-19",
+   "end": "2026-11-19",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/vUQnf8SRJjtvzkvET3dDCC/MNP-Web--CRO--Working-File?node-id=30605-91298&t=EiYQ2ZRdeO2cZvAO-11"
+    }
+   ],
+   "notes": "PLP interrupter designs for Mamas & Papas Web (MNP Web CRO working file).",
+   "ready": false,
+   "start": "2026-11-12",
+   "status": "in-progress",
+   "title": "MnP PLP Interrupter"
+  }
+ },
+ {
+  "id": "mnp-web-explicit-consent",
+  "data": {
+   "area": "Mamas & Papas Web",
+   "assignee": "Anjali",
+   "createdAt": 1793598000000,
+   "date": "2026-11-02",
+   "end": "2026-11-02",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Jira MNPSF-3623",
+     "url": "https://bloomingdalesme.atlassian.net/browse/MNPSF-3623"
+    }
+   ],
+   "notes": "Q4 2026. Explicit consent design for the Mamas & Papas website.",
+   "ready": false,
+   "start": "2026-11-02",
+   "status": "done",
+   "title": "MnP Web: Explicit Consent"
+  }
+ },
+ {
+  "id": "omyp702mrslfiozo511b",
+  "data": {
+   "area": "Gymshark Web",
+   "assignee": "Anjali",
+   "createdAt": 1793610150565,
+   "date": "2026-11-03",
+   "end": "2026-11-03",
+   "highlight": false,
+   "links": [],
+   "notes": "As a customer, when I submit a form, I want to choose consent for communication preferences so that my marketing preferences are saved and updated correctly.  As a guest or current user, when I use a form with consent, I want my communication preferences to be updated based on the checkbox so that the system stores my latest consent status.",
+   "ready": false,
+   "start": "2026-11-03",
+   "status": "in-progress",
+   "title": "GS Web - Explicit Consent"
+  }
+ },
+ {
+  "id": "qvb6vhowk0nqvtfiumrv",
+  "data": {
+   "area": "Gymshark",
+   "assignee": "Anjali",
+   "createdAt": 1793618295831,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-04",
+   "dateHistory": [
+    {
+     "at": 1793618315763,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-11-04",
+      "start": "2026-10-26"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-04",
+      "start": "2026-10-29"
+     }
+    }
+   ],
+   "end": "2026-11-04",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/7aYQkKonsv9jVlsflVgdlv/Gymshark-Component-Audit?node-id=0-1&t=fqEQbx6caqTfqR47-1"
+    }
+   ],
+   "notes": "Documenting key changes in our current design system vs GS UK",
+   "ready": true,
+   "start": "2026-10-29",
+   "status": "in-progress",
+   "title": "Gymshark Component Audit"
+  }
+ },
+ {
+  "id": "t5ekcruuxhozymqj1kvs",
+  "data": {
+   "area": "Gymshark App",
+   "assignee": "Anjali",
+   "completedOn": "2026-11-02",
+   "createdAt": 1793609657110,
+   "date": "2026-11-03",
+   "end": "2026-11-03",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Link 1",
+     "url": "https://bloomingdalesme.atlassian.net/browse/GSA-1484"
+    }
+   ],
+   "notes": "Consent from users",
+   "ready": false,
+   "start": "2026-11-03",
+   "status": "done",
+   "title": "GS App - Explicit Consent"
+  }
+ },
+ {
+  "id": "taly-deema-launch-kuwait",
+  "data": {
+   "area": "All brands",
+   "assignee": "Ryan",
+   "createdAt": 1792641700000,
+   "date": "2026-10-22",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Release notes (Oct 2026)",
+     "url": "https://outlook.office365.com/owa/?ItemID=AAMkAGJiMjNhOGNkLTQzZmUtNGQ5Ni04ZGIzLThjZWM0Y2Q3YWJlOQBGAAAAAADV7NtpH9LFQYAFO97ItDKfBwCvB%2fhIdjADQq42MwRUAQ3AAAAAAAEMAACvB%2fhIdjADQq42MwRUAQ3AAAVpaj0nAAA%3d&exvsurl=1&viewmodel=ReadMessageItem"
+    }
+   ],
+   "notes": "Q4 2026. Shipped in the October 2026 pre-Cyber release across Bloomingdale's, Gymshark, Mamas & Papas and Coach, from the designs completed in September.",
+   "status": "done",
+   "title": "Taly and Deema live in Kuwait (all brands)"
+  }
+ },
+ {
+  "id": "zhxj9pgftj2abvb9y95w",
+  "data": {
+   "area": "Bloomingdale's",
+   "assignee": "Anjali",
+   "completedOn": "2026-11-05",
+   "createdAt": 1794375663911,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-11",
+   "end": "2026-11-11",
+   "highlight": false,
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/UxH9Ggkjh1EUJIEVgU5fFm/BLMHW---Sprint-4--PDP--Mini--Wishlist-?node-id=1066-23712"
+    }
+   ],
+   "notes": "Updates in order details page, add alert message on web",
+   "ready": false,
+   "start": "2026-11-10",
+   "status": "done",
+   "title": "BLM Bazaar Voice updates"
+  }
+ }
+]
