@@ -404,7 +404,7 @@ td.g1-clickname:hover,.g1-mvp .g1-clickname:hover{color:#E8743B}
 
   <section class="g1-card" id="schedule">
     <h2>Schedule and results</h2>
-    <p class="g1-note">Every Sunday, five games from 9 AM, with venue (tap it for the map), from the league's Schedule sheet. Scores are each team's points from its stat sheet (Round 1 = Game 1 stats); winners in bold, with each game's Player of the Game and his stat line underneath. The next game day is highlighted in orange.</p>
+    <p class="g1-note">Every Sunday, five games from 9 AM, with venue (tap it for the map), from the league's Schedule sheet. Scores are the official final scores; winners in bold, with each game's Player of the Game and his stat line underneath. The next game day is highlighted in orange.</p>
     <div class="g1-teams" id="sched-picker" role="group" aria-label="Schedule team"></div>
     <div class="g1-cnav" id="sched-nav" aria-label="Scroll through rounds">
       <span class="cn-range" id="sched-range" aria-live="polite"></span>
@@ -1241,7 +1241,7 @@ dash.calc('shares', {
 dash.calc('results', {
   inputs: ['sched_rows', 'team_totals', 'awards_rows', 'lines', 'roster_rows'],
   title: 'Schedule and results',
-  description: 'Every scheduled game with its final score: each team’s points from its stat sheet (Round N = Game N), or the score in the Schedule tab until the stat sheet is in; the winner; and the Player of the Game with his stat line (from the stat sheet, else from the poster).',
+  description: 'Every scheduled game with its final score: the official score in the Schedule tab, or each team’s stat-sheet points (Round N = Game N) until that score is entered; the winner; and the Player of the Game with his stat line (from the stat sheet, else from the poster).',
   fn: (sched_rows, team_totals, awards_rows, lines, roster_rows) => {
     const schedule = sched_rows, awards = awards_rows;
     const num = (v) => (v === '' || v == null || Number.isNaN(Number(v)) ? null : Number(v));
@@ -1259,7 +1259,9 @@ dash.calc('results', {
       const g = 'Game ' + s.round;
       const bh = pts[g + '|' + s.home], ba = pts[g + '|' + s.away];
       const fromSheets = bh != null && ba != null;
-      const h = fromSheets ? bh : num(s.home_score), a = fromSheets ? ba : num(s.away_score);
+      // The official final score in the Schedule tab wins; stat-sheet totals fill in only until it is entered.
+      const sh = num(s.home_score), sa = num(s.away_score), official = sh != null && sa != null;
+      const h = official ? sh : fromSheets ? bh : null, a = official ? sa : fromSheets ? ba : null;
       const done = h != null && a != null;
       const p = aw[s.round + '|' + s.game];
       const posted = p && num(p.pts) != null ? {jersey: jn[p.player] || '', pts: num(p.pts), reb: num(p.reb) ?? 0, ast: num(p.ast) ?? 0, stl: num(p.stl) ?? 0, blk: num(p.blk) ?? 0} : null;
