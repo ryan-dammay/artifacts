@@ -174,7 +174,18 @@
     wrap.addEventListener("click", (e) => { if (e.target === wrap) close(); });
     wrap.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.stopPropagation(); close(); } });
     wrap.querySelector("[data-cancel]").onclick = close;
+    wrap.querySelectorAll('input[type="password"]').forEach(addReveal);
     return { wrap, form: wrap.querySelector("form"), close, err: (t, ok) => { const m = wrap.querySelector(".msg"); m.textContent = t; m.className = "msg" + (ok ? "" : " err"); } };
+  }
+  // Show/Hide button inside a password field
+  function addReveal(input) {
+    const box = document.createElement("span"); box.className = "pw-box";
+    input.replaceWith(box); box.append(input);
+    const b = document.createElement("button"); b.type = "button"; b.className = "pw-eye";
+    const sync = () => { const shown = input.type === "text"; b.textContent = shown ? "Hide" : "Show"; b.setAttribute("aria-pressed", shown); b.setAttribute("aria-label", (shown ? "Hide" : "Show") + " password"); };
+    b.onclick = () => { input.type = input.type === "password" ? "text" : "password"; sync(); input.focus(); };
+    b.addEventListener("mousedown", (e) => e.preventDefault()); // keep the cursor in the field
+    sync(); box.append(b);
   }
   function openLogin() {
     const names = PEOPLE.filter((p) => editKey && editKey.people[p]);
@@ -234,7 +245,10 @@
   }
   document.addEventListener("DOMContentLoaded", () => {
     const st = document.createElement("style");
-    st.textContent = ".gh-acct{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:13px}.gh-modal select{appearance:auto}";
+    st.textContent = ".gh-acct{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:13px}.gh-modal select{appearance:auto}" +
+      ".pw-box{position:relative;display:block}.pw-box input{padding-right:64px}" +
+      ".pw-eye{position:absolute;right:4px;top:50%;transform:translateY(-50%);appearance:none;border:0;background:var(--sunk);color:var(--fg);font:600 12px var(--font-body);text-transform:none;letter-spacing:0;padding:5px 9px;border-radius:6px;cursor:pointer}" +
+      ".pw-eye:hover{background:var(--line)}.pw-eye:focus-visible{outline:2px solid var(--accent);outline-offset:1px}";
     document.head.append(st);
     ready.then(() => {
       const slot = document.querySelector(".hdr-acts");
