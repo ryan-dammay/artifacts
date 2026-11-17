@@ -661,8 +661,8 @@
   "data": {
    "title": "Virtual Waiting Room",
    "start": "2026-11-01",
-   "end": "2027-01-30",
-   "date": "2027-01-30",
+   "end": "2026-11-18",
+   "date": "2026-11-18",
    "status": "in-progress",
    "ready": false,
    "highlight": false,
@@ -677,7 +677,23 @@
    ],
    "createdAt": 1794900503998,
    "createdBy": "gh-talal",
-   "updatedAt": 1794900503998
+   "updatedAt": 1794903929655,
+   "dateHistory": [
+    {
+     "at": 1794903929654,
+     "by": "gh-talal",
+     "from": {
+      "start": "2026-11-01",
+      "end": "2027-01-30"
+     },
+     "to": {
+      "start": "2026-11-01",
+      "end": "2026-11-18"
+     },
+     "reason": "",
+     "late": false
+    }
+   ]
   }
  },
  {
