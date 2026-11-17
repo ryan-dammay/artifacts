@@ -664,7 +664,7 @@
    "end": "2026-11-18",
    "date": "2026-11-18",
    "status": "in-progress",
-   "ready": false,
+   "ready": true,
    "highlight": false,
    "area": "Gymshark",
    "assignee": "Talal",
@@ -677,7 +677,7 @@
    ],
    "createdAt": 1794900503998,
    "createdBy": "gh-talal",
-   "updatedAt": 1794904199745,
+   "updatedAt": 1794904779354,
    "dateHistory": [
     {
      "at": 1794903929654,
