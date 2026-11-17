@@ -609,6 +609,30 @@
   }
  },
  {
+  "id": "gh-mwkdf0la-075ou",
+  "data": {
+   "title": "Virtual Waiting Room",
+   "start": "2026-11-01",
+   "end": "2027-01-30",
+   "date": "2027-01-30",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Gymshark",
+   "assignee": "Talal",
+   "notes": "Introduce a controlled digital queue during peak traffic, similar to ticketing sites, so customers get a smooth journey and the site stays up.",
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/board/6KeLAKKjx88pWlpgDFdchO/Virtual-Waiting-Room?node-id=0-11&t=JCl6NoJSdjjiGaJp-1"
+    }
+   ],
+   "createdAt": 1794900503998,
+   "createdBy": "gh-talal",
+   "updatedAt": 1794900503998
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
