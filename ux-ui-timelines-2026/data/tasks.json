@@ -559,6 +559,24 @@
   }
  },
  {
+  "id": "gh-mwkc1gz9-iia37",
+  "data": {
+   "title": "Web & App - Order Details QR Code",
+   "start": "2026-11-23",
+   "end": "2026-11-27",
+   "date": "2026-11-27",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "notes": "",
+   "links": [],
+   "createdAt": 1794898192437,
+   "updatedAt": 1794898192437
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
