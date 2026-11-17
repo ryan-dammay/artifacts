@@ -691,12 +691,18 @@
    "date": "2026-11-03",
    "end": "2026-11-03",
    "highlight": false,
-   "links": [],
+   "links": [
+    {
+     "label": "Jira #GSW-2427",
+     "url": "https://bloomingdalesme.atlassian.net/browse/GSW-2427"
+    }
+   ],
    "notes": "As a customer, when I submit a form, I want to choose consent for communication preferences so that my marketing preferences are saved and updated correctly.  As a guest or current user, when I use a form with consent, I want my communication preferences to be updated based on the checkbox so that the system stores my latest consent status.",
    "ready": false,
    "start": "2026-11-03",
    "status": "in-progress",
-   "title": "GS Web - Explicit Consent"
+   "title": "GS Web - Explicit Consent",
+   "updatedAt": 1794897225363
   }
  },
  {
