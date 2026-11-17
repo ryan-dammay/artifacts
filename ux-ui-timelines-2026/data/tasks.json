@@ -582,9 +582,9 @@
   "id": "gh-mwkc1gz9-iia37",
   "data": {
    "title": "Web & App - Order Details QR Code",
-   "start": "2026-11-23",
-   "end": "2026-11-27",
-   "date": "2026-11-27",
+   "start": "2026-11-30",
+   "end": "2026-12-04",
+   "date": "2026-12-04",
    "status": "in-progress",
    "ready": false,
    "highlight": false,
@@ -593,7 +593,23 @@
    "notes": "",
    "links": [],
    "createdAt": 1794898192437,
-   "updatedAt": 1794898192437
+   "updatedAt": 1794900738612,
+   "dateHistory": [
+    {
+     "at": 1794900738604,
+     "by": null,
+     "from": {
+      "start": "2026-11-23",
+      "end": "2026-11-27"
+     },
+     "to": {
+      "start": "2026-11-30",
+      "end": "2026-12-04"
+     },
+     "reason": "",
+     "late": false
+    }
+   ]
   }
  },
  {
