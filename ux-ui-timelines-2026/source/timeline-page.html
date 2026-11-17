@@ -233,6 +233,16 @@ textarea { resize: vertical; min-height: 40px; }
 body.is-dragging, body.is-dragging * { user-select: none; cursor: grabbing !important; }
 .wk-card.dragging { opacity: .35; }
 .ev.dragging { z-index: 6; box-shadow: 0 8px 20px rgb(0 0 0 / .22); border-color: var(--accent); }
+/* Resize handles on both ends of a bar: drag an end to change that date, drag the middle to move the whole task */
+.rz { position: absolute; top: 0; bottom: 0; width: 12px; cursor: ew-resize; z-index: 2; touch-action: none; }
+.rz-l { left: -1px; } .rz-r { right: -1px; }
+.rz::after { content: ""; position: absolute; top: 50%; width: 3px; height: 14px; margin-top: -7px; border-radius: 2px; background: var(--accent); opacity: 0; transition: opacity .12s; }
+.rz-l::after { left: 3px; } .rz-r::after { right: 3px; }
+.wk-card:hover .rz::after, .ev:hover .rz::after, .resizing .rz::after { opacity: .7; }
+.rz:hover::after { opacity: 1; }
+@media (pointer: coarse) { .rz { width: 18px; } .rz::after { opacity: .45; } }
+.wk-card.resizing, .ev.resizing { opacity: 1; border-color: var(--accent); box-shadow: 0 6px 16px rgb(0 0 0 / .18); z-index: 6; }
+body.is-resizing, body.is-resizing * { user-select: none; cursor: ew-resize !important; }
 .drag-ghost { position: fixed; z-index: 70; pointer-events: none; margin: 0; box-shadow: 0 12px 28px rgb(0 0 0 / .25); transform: rotate(-2deg); border-color: var(--accent); }
 .wk-c.drop { background: var(--accent-soft); outline: 2px dashed var(--accent); outline-offset: -3px; }
 .drag-tip { position: fixed; z-index: 71; pointer-events: none; background: var(--accent); color: var(--surface); font: 600 11px var(--font-mono); padding: 2px 8px; border-radius: 99px; white-space: nowrap; }
@@ -969,7 +979,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
         return { t, left, width, top: 8 + r * (PH + RG) };
       });
       const h = Math.max(48, 16 + rows.length * (PH + RG) - RG);
-      lanes += `<div class="cal-row cal-lane">${laneLabel(brand, g, LW)}<div class="cal-track${writable && db ? " addable" : ""}" data-lane="${esc(brand)}" style="width:${TW}px;height:${h}px" title="${writable && db ? `Click an empty spot to add a ${esc(brand)} task` : ""}">${grid}${evs.map(({ t, left, width, top }) => `<button type="button" class="ev ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="left:${left.toFixed(1)}px;top:${top}px;width:${width.toFixed(1)}px" title="${esc(t.title)} · ${esc(estText(t))} · double-click to open"><i class="dot ${stateOf(t)}"></i><span>${t.highlight ? "★ " : ""}${esc(t.title)}</span>${whoDot(t)}</button>`).join("")}</div></div>`;
+      lanes += `<div class="cal-row cal-lane">${laneLabel(brand, g, LW)}<div class="cal-track${writable && db ? " addable" : ""}" data-lane="${esc(brand)}" style="width:${TW}px;height:${h}px" title="${writable && db ? `Click an empty spot to add a ${esc(brand)} task` : ""}">${grid}${evs.map(({ t, left, width, top }) => `<button type="button" class="ev ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="left:${left.toFixed(1)}px;top:${top}px;width:${width.toFixed(1)}px" title="${esc(t.title)} · ${esc(estText(t))} · double-click to open"><i class="dot ${stateOf(t)}"></i><span>${t.highlight ? "★ " : ""}${esc(t.title)}</span>${whoDot(t)}${canEditTask(t) ? `<span class="rz rz-l" data-rz="l" aria-hidden="true"></span><span class="rz rz-r" data-rz="r" aria-hidden="true"></span>` : ""}</button>`).join("")}</div></div>`;
     });
     $("timeline").dataset.unit = String(DAY);
     $("timeline").innerHTML = `<div class="cal-row cal-head"><div class="cal-label" style="width:${LW}px">Brand</div><div class="cal-track" style="width:${TW}px;height:66px">${head}</div></div>${lanes}`;
@@ -1015,7 +1025,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     const wh = weeks.map((w, i) => `<div class="wk-h${i === cur ? " cur" : ""}"><b>W${pad(i + 1)}${i === cur ? " · this week" : ""}</b><span>${w.s.getDate()} ${MONTHS[w.s.getMonth()]} – ${w.e.getDate()} ${MONTHS[w.e.getMonth()]}</span></div>`).join("");
 
     const groups = groupByBrand(items);
-    const card = (t, a, b, r) => `<button type="button" class="wk-card ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="grid-column:${a + 1} / ${b + 2};grid-row:${r + 1}" title="${esc(t.title)} · ${esc(estText(t))} · double-click to open"><span class="wk-d"><i class="dot ${stateOf(t)}"></i>${esc(fmtDay(startOf(t)))}${startOf(t) !== endOf(t) ? ` – ${esc(fmtDay(endOf(t)))}` : ""}${t.highlight ? ` <span class="star-s">★</span>` : ""}${whoDot(t)}</span><span class="wk-t">${esc(t.title)}</span></button>`;
+    const card = (t, a, b, r) => `<button type="button" class="wk-card ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="grid-column:${a + 1} / ${b + 2};grid-row:${r + 1}" title="${esc(t.title)} · ${esc(estText(t))} · double-click to open"><span class="wk-d"><i class="dot ${stateOf(t)}"></i>${esc(fmtDay(startOf(t)))}${startOf(t) !== endOf(t) ? ` – ${esc(fmtDay(endOf(t)))}` : ""}${t.highlight ? ` <span class="star-s">★</span>` : ""}${whoDot(t)}</span><span class="wk-t">${esc(t.title)}</span>${canEditTask(t) ? `<span class="rz rz-l" data-rz="l" aria-hidden="true"></span><span class="rz rz-r" data-rz="r" aria-hidden="true"></span>` : ""}</button>`;
     let lanes = "";
     laneOrder(groups).forEach((brand) => {
       const g = groups.get(brand) || [], rows = [];
@@ -1059,8 +1069,8 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     $("timeline").classList.toggle("can-drag", canDrag);
     $("tl-hint").hidden = !(writable && db);
     $("tl-hint").textContent = tlView === "week"
-      ? "Bars run from each task's estimated start to end. Hover a brand's row and use + Add to log a task in that week. Drag a bar sideways to shift its dates. Double-click a bar (long-press on a phone or tablet) to open it."
-      : "Bars run from each task's estimated start to end. Click an empty spot in a brand's row to add a task there. Drag a bar sideways to shift its dates. Double-click a bar (long-press on a phone or tablet) to open it.";
+      ? "Bars run from each task's estimated start to end. Hover a brand's row and use + Add to log a task in that week. Drag a bar to move it, or drag either end to change its start or end date. Double-click a bar (long-press on a phone or tablet) to open it."
+      : "Bars run from each task's estimated start to end. Click an empty spot in a brand's row to add a task there. Drag a bar to move it, or drag either end to change its start or end date. Double-click a bar (long-press on a phone or tablet) to open it.";
   }
 
   // Toasts
@@ -1122,6 +1132,31 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
       showToast(saveErr(e));
     }
   }
+  // Resize (or any change to start/end): same confirm, history and Undo as moving
+  async function setTaskDates(id, ns, ne, isUndo, restoreHist) {
+    const t = allTasks.find((x) => x.id === id); if (!t || !db || !canEditTask(t)) return;
+    if (ns === startOf(t) && ne === endOf(t)) { renderAll(); return; }
+    const ps = startOf(t), pe = endOf(t), oldHist = histOf(t);
+    let newHist;
+    if (isUndo) newHist = restoreHist || oldHist;
+    else {
+      const r = await confirmDateChange(t, ns, ne);
+      if (!r.ok) { renderAll(); showToast("Dates kept as they were."); return; }
+      newHist = [...oldHist, histEntry(t, ns, ne, r)];
+    }
+    const patch = { start: ns, end: ne, date: ne, dateHistory: newHist };
+    const prev = { start: t.start, end: t.end, date: t.date, dateHistory: t.dateHistory };
+    Object.assign(t, patch); selEv = id; renderAll();
+    try {
+      await db.doc("tasks/" + id).update(patch);
+      const len = dayDiff(ns, ne) + 1;
+      if (!isUndo) showToast(`Task Saved · ${fmtDay(ns)} – ${fmtDay(ne)} (${len} day${len === 1 ? "" : "s"})`, () => setTaskDates(id, ps, pe, true, oldHist));
+      else showToast(`Task Saved · back to ${fmtDay(ns)} – ${fmtDay(ne)}`);
+    } catch (e) {
+      Object.assign(t, prev); renderAll();
+      showToast(saveErr(e));
+    }
+  }
   function tipAt(ev, text) {
     if (!drag.tip) { drag.tip = document.createElement("div"); drag.tip.className = "drag-tip"; document.body.appendChild(drag.tip); }
     drag.tip.textContent = text;
@@ -1135,26 +1170,49 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     if (!drag) return;
     drag.el.classList.remove("dragging"); drag.el.style.transform = "";
     if (drag.tip) drag.tip.remove();
-    document.body.classList.remove("is-dragging");
+    drag.el.classList.remove("resizing"); document.body.classList.remove("is-dragging", "is-resizing");
   }
   $("timeline").addEventListener("pointerdown", (ev) => {
     if (!writable || !db || ev.button !== 0) return;
     const el = ev.target.closest(".wk-card, .ev"); if (!el) return;
     const t = allTasks.find((x) => x.id === el.dataset.ev); if (!t || !canEditTask(t)) return;
-    const week = el.classList.contains("wk-card");
-    drag = { el, id: t.id, start: startOf(t), end: endOf(t), x0: ev.clientX, y0: ev.clientY, pid: ev.pointerId, on: false,
+    const week = el.classList.contains("wk-card"), rz = ev.target.closest("[data-rz]");
+    const gc = (el.style.gridColumn || "").split("/").map((x) => parseInt(x, 10));
+    drag = { el, id: t.id, start: startOf(t), end: endOf(t), x0: ev.clientX, y0: ev.clientY, pid: ev.pointerId, on: false, week,
+             mode: rz ? rz.dataset.rz : "move", left0: parseFloat(el.style.left) || 0, width0: el.offsetWidth, a0: gc[0] || 1, b0: gc[1] || 2,
              unit: Number($("timeline").dataset.unit) || (week ? 176 : 3.6), step: week ? 7 : 1, sl0: $("tl-wrap").scrollLeft, days: 0 };
+    if (rz) ev.preventDefault();
   });
   window.addEventListener("pointermove", (ev) => {
     if (!drag || ev.pointerId !== drag.pid) return;
     if (!drag.on) {
       if (Math.hypot(ev.clientX - drag.x0, ev.clientY - drag.y0) < 6) return;
-      drag.on = true; document.body.classList.add("is-dragging"); drag.el.classList.add("dragging");
+      drag.on = true;
+      if (drag.mode === "move") { document.body.classList.add("is-dragging"); drag.el.classList.add("dragging"); }
+      else { document.body.classList.add("is-resizing"); drag.el.classList.add("resizing"); }
     }
     ev.preventDefault();
     edgeScroll(ev.clientX);
     const dx = ev.clientX - drag.x0 + ($("tl-wrap").scrollLeft - drag.sl0);
     let days = Math.round(dx / drag.unit) * drag.step;
+    if (drag.mode !== "move") {
+      // Resize: move one end only, keeping start ≤ end and inside the year
+      const span = dayDiff(drag.start, drag.end);
+      if (drag.mode === "l") days = Math.max(dayDiff(drag.start, yr + "-01-01"), Math.min(days, drag.week ? Math.floor(span / 7) * 7 : span));
+      else days = Math.min(dayDiff(drag.end, yr + "-12-31"), Math.max(days, drag.week ? -Math.floor(span / 7) * 7 : -span));
+      drag.days = days;
+      const ns = drag.mode === "l" ? addDays(drag.start, days) : drag.start, ne = drag.mode === "r" ? addDays(drag.end, days) : drag.end;
+      if (drag.week) {
+        const n = days / 7;
+        drag.el.style.gridColumn = drag.mode === "l" ? `${drag.a0 + n} / ${drag.b0}` : `${drag.a0} / ${drag.b0 + n}`;
+      } else {
+        const px = days * drag.unit;
+        if (drag.mode === "l") { drag.el.style.left = (drag.left0 + px).toFixed(1) + "px"; drag.el.style.width = Math.max(24, drag.width0 - px).toFixed(1) + "px"; }
+        else drag.el.style.width = Math.max(24, drag.width0 + px).toFixed(1) + "px";
+      }
+      tipAt(ev, `${fmtDay(ns)} – ${fmtDay(ne)} · ${dayDiff(ns, ne) + 1} days`);
+      return;
+    }
     days = Math.max(dayDiff(drag.start, yr + "-01-01"), Math.min(days, dayDiff(drag.end, yr + "-12-31")));
     drag.days = days;
     drag.el.style.transform = `translateX(${((days / drag.step) * drag.unit).toFixed(1)}px)`;
@@ -1167,7 +1225,9 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     if (!d.on) { drag = null; return; }
     endDrag(); drag = null;
     justDragged = true; setTimeout(() => { justDragged = false; }, 0);
-    if (d.days) moveTask(d.id, d.days); else renderTimeline();
+    if (!d.days) renderTimeline();
+    else if (d.mode === "move") moveTask(d.id, d.days);
+    else setTaskDates(d.id, d.mode === "l" ? addDays(d.start, d.days) : d.start, d.mode === "r" ? addDays(d.end, d.days) : d.end);
   });
   window.addEventListener("pointercancel", (ev) => { if (!drag || ev.pointerId !== drag.pid) return; const was = drag.on; endDrag(); drag = null; if (was) renderTimeline(); });
   // Add / edit form
