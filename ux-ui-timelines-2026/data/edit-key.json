@@ -1,0 +1,23 @@
+{
+ "v": 2,
+ "kdf": "PBKDF2-SHA256",
+ "iter": 600000,
+ "people": {
+  "Ryan": {
+   "salt": "wX8mkYbPASwVg+IWcRkaiA==",
+   "iv": "47hv35lIO0pnjRvW",
+   "ct": "K8G61H/Ud09gEWjN3TPd0i/Ing/MM3Kw57X51z4+ofqgI7zULH3O2NAhRSVhQF3qr3g4tXw3TOn8ax1b3gxDGr9uoOQ784M757dFJmS9u/P6E1D+UYyYBH7rX6NZWQCvyoXC8uZ7+X9iqgMB+A=="
+  },
+  "Anjali": {
+   "salt": "YD+IagHrbeRZo52HEhfQag==",
+   "iv": "m3vn+a/2J+rOkEei",
+   "ct": "F9Nc8iMjriTFjWqq5vA2J6Z7nn3HxVcBkzRmB8o4J3YAX5ebNc83epKxk/3Fnd6rH1cyG5okpkSSS6ehtJOR1judzjBSXiKsbiAW1WgPjcQyTQ+3h1sC8BVpyXmCcBJ14z+wKR34Jbv5lcArAA=="
+  },
+  "Talal": {
+   "salt": "z4+Qm8ebgGh+RRIoHf9jtA==",
+   "iv": "OfGF78ncibOuegxY",
+   "ct": "uaJJQDa1vEnjV4uOSn5FIk8U6IDsGmu44XhSELBd/sNErGOiCLlQG9b4wFkvGIzCMLvTzAmVlMwlhsszXZwgYs2i87nxyHTeVZyVFAn97VlKRk9b74Wh1vxAn3yfwzcn+B6GB0im+qqyfefW6w=="
+  }
+ },
+ "setAt": "2026-11-17T05:13:01.656Z"
+}
