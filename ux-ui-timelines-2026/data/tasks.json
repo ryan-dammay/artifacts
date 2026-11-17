@@ -15,10 +15,12 @@
     }
    ],
    "notes": "The CRM team needs an explicit consent checkbox on all forms that collect user information. If the user selects consent, the communication preferences must be updated in the Master Communication Preferences table. The form source must also be stored using the form id. This applies across all brands and across website and mobile app flows where consent is requested.",
-   "ready": false,
+   "ready": true,
    "start": "2026-11-02",
-   "status": "in-progress",
-   "title": "Coach - Explict Consent"
+   "status": "done",
+   "title": "Coach - Explict Consent",
+   "completedOn": "2026-11-17",
+   "updatedAt": 1794893647271
   }
  },
  {
