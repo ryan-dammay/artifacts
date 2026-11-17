@@ -602,10 +602,12 @@
     }
    ],
    "notes": "PLP interrupter designs for Mamas & Papas Web (MNP Web CRO working file).",
-   "ready": false,
+   "ready": true,
    "start": "2026-11-12",
-   "status": "in-progress",
-   "title": "MnP PLP Interrupter"
+   "status": "done",
+   "title": "MnP PLP Interrupter",
+   "completedOn": "2026-11-17",
+   "updatedAt": 1794893671465
   }
  },
  {
