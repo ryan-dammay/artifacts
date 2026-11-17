@@ -74,13 +74,18 @@
     {
      "label": "Figma",
      "url": "https://www.figma.com/design/UxH9Ggkjh1EUJIEVgU5fFm/BLMHW---Sprint-4--PDP--Mini--Wishlist-?node-id=1285-48259"
+    },
+    {
+     "label": "Jira #BLMHW-1287",
+     "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-1287"
     }
    ],
    "notes": "Complete the designs and flow for products with zero reviews",
    "ready": false,
    "start": "2026-11-04",
    "status": "done",
-   "title": "Bazaar Voice - Empty State"
+   "title": "Bazaar Voice - Empty State",
+   "updatedAt": 1794897331571
   }
  },
  {
