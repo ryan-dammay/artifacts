@@ -261,13 +261,18 @@
     {
      "label": "Figma",
      "url": "https://www.figma.com/design/vUQnf8SRJjtvzkvET3dDCC/MNP-Web--CRO--Working-File?node-id=42322-86407"
+    },
+    {
+     "label": "Jira #MI-2245",
+     "url": "https://bloomingdalesme.atlassian.net/browse/MI-2245"
     }
    ],
    "notes": "Add alert message for language switching, adapted updates from BLM",
    "ready": false,
    "start": "2026-11-09",
    "status": "done",
-   "title": "MNP Bazaar Voice Updates"
+   "title": "MNP Bazaar Voice Updates",
+   "updatedAt": 1794897404687
   }
  },
  {
