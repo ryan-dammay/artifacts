@@ -923,9 +923,15 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
   // Editing rights: Ryan (admin/owner) edits everything; everyone else edits only the tasks they added themselves
   let myId = null, myName = "", userNs = null;
   const nameCache = {};
-  const canEditTask = (t) => writable && !!db && (role === "admin" || (!!myId && t.createdBy === myId));
-  // Delete: tasks follow the same rule as editing (your own, or admin); KPI readings stay admin-only
-  const canDelPath = (path) => { const [col, id] = String(path || "").split("/"); if (col === "tasks") { const t = allTasks.find((x) => x.id === id); return !!t && canEditTask(t); } return writable && !!db && role === "admin"; };
+  // Which teammate is viewing (editors only): from their account name, or Anjali's known account id
+  const ANJALI_ID = "u_XhpqJMkeIsGAbDcqsWXk3A";
+  const myPerson = () => (role !== "editor" ? null : /talal/i.test(myName) ? "Talal" : /anjali/i.test(myName) || myId === ANJALI_ID ? "Anjali" : null);
+  const isMine = (t) => !!myId && t.createdBy === myId;
+  // Edit: admin, whoever added the task, or the teammate it is assigned to (e.g. a task Ryan created for Anjali)
+  const canEditTask = (t) => writable && !!db && (role === "admin" || isMine(t) || (!!myPerson() && whoOf(t) === myPerson()));
+  // Delete: admin or whoever added the task (an assignee can edit a task Ryan created, not delete it); KPI readings stay admin-only
+  const canDelPath = (path) => { const [col, id] = String(path || "").split("/"); if (col === "tasks") { const t = allTasks.find((x) => x.id === id); return !!t && writable && !!db && (role === "admin" || isMine(t)); } return writable && !!db && role === "admin"; };
+  const editorsText = (t) => { const a = addedBy(t), w = whoOf(t), names = [...new Set([a === "you" ? null : a, w, "Ryan"].filter((x) => x && x !== "a teammate"))]; return names.length > 1 ? names.slice(0, -1).join(", ") + " or " + names[names.length - 1] : names[0]; };
   const addedBy = (t) => (!t.createdBy ? "Ryan" : t.createdBy === myId ? "you" : nameCache[t.createdBy] || "a teammate");
   async function loadNames() {
     if (!userNs || !userNs.profiles) return;
@@ -949,7 +955,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     applyWho(); renderAll();
   });
   function applyRole() {
-    const label = role === "admin" ? "Ryan · Admin" : role === "editor" ? "Editor · add, edit and delete your own tasks" : "View only";
+    const label = role === "admin" ? "Ryan · Admin" : role === "editor" ? "Editor · add tasks, edit yours and those assigned to you" : "View only";
     let el = $("role-badge");
     if (!el) { el = document.createElement("span"); el.id = "role-badge"; el.className = "role"; $("when").appendChild(el); }
     el.textContent = label;
@@ -995,7 +1001,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     const pill = statePill(t);
     const links = linksHtml(t);
     const acts = canEditTask(t)
-      ? `<div class="acts">${flagsHtml(t)}<button class="star" data-star="${esc(t.id)}" aria-pressed="${t.highlight ? "true" : "false"}" aria-label="Highlight for review" title="Highlight for review" type="button">${t.highlight ? "★" : "☆"}</button><button class="del" data-edit="${esc(t.id)}" type="button">Edit</button><button class="del" data-del="tasks/${esc(t.id)}" type="button">Delete</button></div>`
+      ? `<div class="acts">${flagsHtml(t)}<button class="star" data-star="${esc(t.id)}" aria-pressed="${t.highlight ? "true" : "false"}" aria-label="Highlight for review" title="Highlight for review" type="button">${t.highlight ? "★" : "☆"}</button><button class="del" data-edit="${esc(t.id)}" type="button">Edit</button>${canDelPath("tasks/" + t.id) ? `<button class="del" data-del="tasks/${esc(t.id)}" type="button">Delete</button>` : ""}</div>`
       : (t.highlight ? `<span class="star" aria-label="Highlighted">★</span>` : "<span></span>");
     return `<div class="row"><div class="d">${esc(fmtDay(t.date))}</div><div><div class="t">${esc(t.title)}${pill}${whoChip(t)}${t.area ?`<span class="chip">${esc(t.area)}</span>` : ""}</div><div class="est">${esc(estText(t))}${reschedHtml(t)}</div>${t.notes ? `<div class="notes">${esc(t.notes)}</div>` : ""}${links}</div>${acts}</div>`;
   }
@@ -1241,7 +1247,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     if (sel) {
       const q = quarter(Number(endOf(sel).slice(5, 7)) - 1);
       const links = linksHtml(sel);
-      $("tl-detail").innerHTML = `<div class="tld-top">${statePill(sel)}<span>${esc(estText(sel))} · ${wkLabel(startOf(sel))}${wkLabel(startOf(sel)) !== wkLabel(endOf(sel)) ? `–${wkLabel(endOf(sel))}` : ""} · Q${q}</span>${whoChip(sel)}${sel.area ? `<span class="chip">${esc(sel.area)}</span>` : ""}${sel.highlight ? `<span class="star-s">★ Highlight</span>` : ""}<span>Added by ${esc(addedBy(sel))}</span></div><h3>${esc(sel.title)}</h3>${sel.notes ? `<p class="notes">${esc(sel.notes)}</p>` : ""}${links}${histHtml(sel)}${canEditTask(sel) ? `<div class="tld-acts">${flagsHtml(sel)}<button class="btn ghost" type="button" data-edit="${esc(sel.id)}">Edit task</button></div>` : writable && db ? `<p class="tld-lock">🔒 Added by ${esc(addedBy(sel))}. Only ${addedBy(sel) === "Ryan" ? "Ryan" : esc(addedBy(sel)) + " or Ryan"} can edit this task.</p>` : ""}`;
+      $("tl-detail").innerHTML = `<div class="tld-top">${statePill(sel)}<span>${esc(estText(sel))} · ${wkLabel(startOf(sel))}${wkLabel(startOf(sel)) !== wkLabel(endOf(sel)) ? `–${wkLabel(endOf(sel))}` : ""} · Q${q}</span>${whoChip(sel)}${sel.area ? `<span class="chip">${esc(sel.area)}</span>` : ""}${sel.highlight ? `<span class="star-s">★ Highlight</span>` : ""}<span>Added by ${esc(addedBy(sel))}</span></div><h3>${esc(sel.title)}</h3>${sel.notes ? `<p class="notes">${esc(sel.notes)}</p>` : ""}${links}${histHtml(sel)}${canEditTask(sel) ? `<div class="tld-acts">${flagsHtml(sel)}<button class="btn ghost" type="button" data-edit="${esc(sel.id)}">Edit task</button></div>` : writable && db ? `<p class="tld-lock">🔒 Added by ${esc(addedBy(sel))}. Only ${esc(editorsText(sel))} can edit this task.</p>` : ""}`;
     } else {
       $("tl-detail").innerHTML = `<p class="note">Select an item on the calendar to see its details here.</p>`;
     }
@@ -1342,7 +1348,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
   document.addEventListener("change", async (ev) => {
     const c = ev.target.closest && ev.target.closest("input[data-flag]"); if (!c || !db) return;
     const t = allTasks.find((x) => x.id === c.dataset.id); if (!t) return;
-    if (!canEditTask(t)) { c.checked = !c.checked; showToast("Only the person who added this task, or Ryan, can change it."); return; }
+    if (!canEditTask(t)) { c.checked = !c.checked; showToast(`Only ${editorsText(t)} can change this task.`); return; }
     if (c.dataset.flag === "done" && !c.checked && !isWip(t)) {
       const ok = await askConfirm({ title: "Reopen this task?", what: t.title, text: "It moves back to In progress, leaves the Done counts and loses its completion date. You can mark it completed again later.", ok: "Reopen task" });
       if (!ok) { c.checked = true; return; }
@@ -1473,7 +1479,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
   });
   function openEditTask(id, trigger) {
     const t = allTasks.find((x) => x.id === id); if (!t || !writable || !db) return;
-    if (!canEditTask(t)) { showToast(`Only ${addedBy(t) === "Ryan" ? "Ryan" : addedBy(t) + " or Ryan"} can edit this task.`); return; }
+    if (!canEditTask(t)) { showToast(`Only ${editorsText(t)} can edit this task.`); return; }
     qaEdit = id; qaLast = trigger || null;
     $("qa-h").textContent = "Edit task";
     $("qa-sub").textContent = `${t.area || "No brand"} · ${estText(t) || "No dates"}`;

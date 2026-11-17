@@ -27,8 +27,9 @@ It runs in two places that stay in step:
 ## Editing on GitHub
 
 Ryan, Anjali and Talal each have their own edit password. **Log in to edit** at the top right, pick your name and enter
-your password. The rights match the Claude artifact: Ryan (admin) can change everything; Anjali and Talal can add tasks
-and edit or delete the tasks they added. Each save is a commit to `data/tasks.json` on `main`; GitHub Pages shows it
+your password. The rights match the Claude artifact: Ryan (admin) can change everything; Anjali and Talal can add tasks,
+edit the tasks they added or that are assigned to them (including ones Ryan created for them), and delete the tasks
+they added. Each save is a commit to `data/tasks.json` on `main`; GitHub Pages shows it
 about a minute later. Like in Claude, these rights are enforced by the page, so they rely on trust within the team.
 
 One-time setup (Ryan): create a GitHub fine-grained personal access token for this repository only, with
