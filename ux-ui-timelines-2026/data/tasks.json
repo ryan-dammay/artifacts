@@ -600,6 +600,7 @@
   "data": {
    "area": "Gymshark Web",
    "assignee": "Anjali",
+   "completedOn": "2026-11-17",
    "createdAt": 1794480000000,
    "date": "2026-11-19",
    "end": "2026-11-19",
@@ -615,8 +616,7 @@
    "start": "2026-11-12",
    "status": "done",
    "title": "Gymshark PLP Interrupter",
-   "updatedAt": 1794897465223,
-   "completedOn": "2026-11-17"
+   "updatedAt": 1794897465223
   }
  },
  {
@@ -706,6 +706,23 @@
    "assignee": "Ryan",
    "createdAt": 1792642000008,
    "date": "2026-10-29",
+   "dateHistory": [
+    {
+     "at": 1794897291690,
+     "by": null,
+     "from": {
+      "end": "2026-10-22",
+      "start": "2026-10-22"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-10-29",
+      "start": "2026-10-22"
+     }
+    }
+   ],
+   "end": "2026-10-29",
    "highlight": false,
    "links": [
     {
@@ -714,26 +731,9 @@
     }
    ],
    "notes": "Q4 2026. Scheduled to go live later in October per the October 2026 release notes. Mark done once it ships.",
+   "start": "2026-10-22",
    "status": "in-progress",
    "title": "Mamas & Papas Parenting Hub (launching later this month)",
-   "start": "2026-10-22",
-   "end": "2026-10-29",
-   "dateHistory": [
-    {
-     "at": 1794897291690,
-     "by": null,
-     "from": {
-      "start": "2026-10-22",
-      "end": "2026-10-22"
-     },
-     "to": {
-      "start": "2026-10-22",
-      "end": "2026-10-29"
-     },
-     "reason": "",
-     "late": true
-    }
-   ],
    "updatedAt": 1794897291696
   }
  },
@@ -788,6 +788,7 @@
   "data": {
    "area": "Gymshark Web",
    "assignee": "Anjali",
+   "completedOn": "2026-11-17",
    "createdAt": 1793610150565,
    "date": "2026-11-03",
    "end": "2026-11-03",
@@ -803,8 +804,7 @@
    "start": "2026-11-03",
    "status": "done",
    "title": "GS Web - Explicit Consent",
-   "updatedAt": 1794897415187,
-   "completedOn": "2026-11-17"
+   "updatedAt": 1794897415187
   }
  },
  {
