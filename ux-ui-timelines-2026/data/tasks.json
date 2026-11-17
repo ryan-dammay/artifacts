@@ -193,11 +193,11 @@
     }
    ],
    "notes": "Q4 2026. Scheduled to go live later in October per the October 2026 release notes. Mark done once it ships.",
-   "status": "in-progress",
+   "status": "done",
    "title": "Coach Shopping Assistant (launching later this month)",
    "start": "2026-10-22",
    "end": "2026-11-22",
-   "ready": false,
+   "ready": true,
    "dateHistory": [
     {
      "at": 1794893694928,
@@ -214,7 +214,8 @@
      "late": true
     }
    ],
-   "updatedAt": 1794893694928
+   "updatedAt": 1794893700494,
+   "completedOn": "2026-11-17"
   }
  },
  {
