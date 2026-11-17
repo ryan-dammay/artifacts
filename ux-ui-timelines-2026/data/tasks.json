@@ -4,6 +4,7 @@
   "data": {
    "area": "Coach",
    "assignee": "Ryan",
+   "completedOn": "2026-11-17",
    "createdAt": 1793612717332,
    "date": "2026-11-03",
    "end": "2026-11-03",
@@ -19,7 +20,6 @@
    "start": "2026-11-02",
    "status": "done",
    "title": "Coach - Explict Consent",
-   "completedOn": "2026-11-17",
    "updatedAt": 1794893647271
   }
  },
@@ -28,6 +28,7 @@
   "data": {
    "area": "Bloomingdale's",
    "assignee": "Ryan",
+   "completedOn": "2026-11-17",
    "createdAt": 1793607803346,
    "date": "2026-11-12",
    "end": "2026-11-12",
@@ -51,7 +52,6 @@
    "start": "2026-11-09",
    "status": "done",
    "title": "Bazaarvoice Integration - Email",
-   "completedOn": "2026-11-17",
    "updatedAt": 1794893641125
   }
  },
@@ -188,8 +188,26 @@
   "data": {
    "area": "Coach",
    "assignee": "Ryan",
+   "completedOn": "2026-11-17",
    "createdAt": 1792642000009,
    "date": "2026-11-22",
+   "dateHistory": [
+    {
+     "at": 1794893694928,
+     "by": null,
+     "from": {
+      "end": "2026-10-22",
+      "start": "2026-10-22"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-22",
+      "start": "2026-10-22"
+     }
+    }
+   ],
+   "end": "2026-11-22",
    "highlight": false,
    "links": [
     {
@@ -198,29 +216,11 @@
     }
    ],
    "notes": "Q4 2026. Scheduled to go live later in October per the October 2026 release notes. Mark done once it ships.",
+   "ready": true,
+   "start": "2026-10-22",
    "status": "done",
    "title": "Coach Shopping Assistant (launching later this month)",
-   "start": "2026-10-22",
-   "end": "2026-11-22",
-   "ready": true,
-   "dateHistory": [
-    {
-     "at": 1794893694928,
-     "by": null,
-     "from": {
-      "start": "2026-10-22",
-      "end": "2026-10-22"
-     },
-     "to": {
-      "start": "2026-10-22",
-      "end": "2026-11-22"
-     },
-     "reason": "",
-     "late": true
-    }
-   ],
-   "updatedAt": 1794893700494,
-   "completedOn": "2026-11-17"
+   "updatedAt": 1794893700494
   }
  },
  {
@@ -411,16 +411,29 @@
  {
   "id": "gh-mwk94nu6-91jl4",
   "data": {
-   "title": "GS Pixel Perfection App",
-   "start": "2026-11-16",
-   "end": "2026-11-20",
-   "date": "2026-11-20",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Gymshark App",
    "assignee": "Anjali",
-   "notes": "Pick up previously blocked pixel perfection tickets for gymshark app and share the feedback on the tickets",
+   "createdAt": 1794893302446,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-20",
+   "dateHistory": [
+    {
+     "at": 1794893383712,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-11-23",
+      "start": "2026-11-16"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-20",
+      "start": "2026-11-16"
+     }
+    }
+   ],
+   "end": "2026-11-20",
+   "highlight": false,
    "links": [
     {
      "label": "URL",
@@ -431,60 +444,37 @@
      "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=25429-35988"
     }
    ],
-   "createdAt": 1794893302446,
-   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
-   "updatedAt": 1794893392179,
-   "dateHistory": [
-    {
-     "at": 1794893383712,
-     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
-     "from": {
-      "start": "2026-11-16",
-      "end": "2026-11-23"
-     },
-     "to": {
-      "start": "2026-11-16",
-      "end": "2026-11-20"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "Pick up previously blocked pixel perfection tickets for gymshark app and share the feedback on the tickets",
+   "ready": false,
+   "start": "2026-11-16",
+   "status": "in-progress",
+   "title": "GS Pixel Perfection App",
+   "updatedAt": 1794893392179
   }
  },
  {
   "id": "gh-mwk9604t-7fpwk",
   "data": {
-   "title": "GS Pixel Perfection Web",
-   "start": "2026-11-23",
-   "end": "2026-11-27",
-   "date": "2026-11-27",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Gymshark Web",
    "assignee": "Anjali",
-   "notes": "Pick up previously blocked pixel perfection tickets for gymshark web and share the feedback on the tickets",
+   "createdAt": 1794893365037,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-27",
+   "end": "2026-11-27",
+   "highlight": false,
    "links": [
     {
      "label": "URL",
      "url": "https://bloomingdalesme.atlassian.net/issues/?jql=project+%3D+GSW+AND+%28summary+%7E+%22Pixel+Perfection%22+OR+description+%7E+%22Pixel+Perfection%22%29+ORDER+BY+created+DESC"
     }
    ],
-   "createdAt": 1794893365037,
-   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "notes": "Pick up previously blocked pixel perfection tickets for gymshark web and share the feedback on the tickets",
+   "ready": false,
+   "start": "2026-11-23",
+   "status": "in-progress",
+   "title": "GS Pixel Perfection Web",
    "updatedAt": 1794893365037
   }
- },
- {
-  "id": "gh-mwk9cp4q-ori2b",
-  "deleted": true,
-  "deletedAt": 1794897276776
- },
- {
-  "id": "gh-mwk9d7mw-n7zlh",
-  "deleted": true,
-  "deletedAt": 1794897064656
  },
  {
   "id": "gymshark-gwp-enhancement-live",
@@ -652,6 +642,7 @@
   "data": {
    "area": "Mamas & Papas Web",
    "assignee": "Ryan",
+   "completedOn": "2026-11-17",
    "createdAt": 1794480060000,
    "date": "2026-11-19",
    "end": "2026-11-19",
@@ -667,7 +658,6 @@
    "start": "2026-11-12",
    "status": "done",
    "title": "MnP PLP Interrupter",
-   "completedOn": "2026-11-17",
    "updatedAt": 1794893671465
   }
  },
