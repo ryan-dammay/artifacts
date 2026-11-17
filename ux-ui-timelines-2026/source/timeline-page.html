@@ -18,6 +18,7 @@
   --warn: #a8540c;
   --warn-soft: #fbead8;
   --danger: #b4232f;
+  --now: #e5262b;
   --font-display: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -34,7 +35,7 @@
   :root:not([data-theme="light"]) {
     --bg: #0f131c; --surface: #171c28; --sunk: #1e2433; --line: #2b3346;
     --fg: #e8ecf6; --muted: #98a2b8; --accent: #8ea2ff; --accent-soft: #232c4d;
-    --good: #5fd09a; --good-soft: #17352a; --warn: #f0a960; --warn-soft: #3b2a17; --danger: #ff7a84;
+    --good: #5fd09a; --good-soft: #17352a; --warn: #f0a960; --warn-soft: #3b2a17; --danger: #ff7a84; --now: #ff5a5f;
     --ryan: #5eead4; --ryan-soft: #123430; --anjali: #d4b0ff; --anjali-soft: #2f2145; --talal: #f9a8d4; --talal-soft: #3b1a2c;
     --c-ryan: #0f9f8f; --c-anjali: #9370ee; --c-talal: #e0528c;
     color-scheme: dark;
@@ -43,7 +44,7 @@
 :root[data-theme="dark"] {
   --bg: #0f131c; --surface: #171c28; --sunk: #1e2433; --line: #2b3346;
   --fg: #e8ecf6; --muted: #98a2b8; --accent: #8ea2ff; --accent-soft: #232c4d;
-  --good: #5fd09a; --good-soft: #17352a; --warn: #f0a960; --warn-soft: #3b2a17; --danger: #ff7a84;
+  --good: #5fd09a; --good-soft: #17352a; --warn: #f0a960; --warn-soft: #3b2a17; --danger: #ff7a84; --now: #ff5a5f;
   --ryan: #5eead4; --ryan-soft: #123430; --anjali: #d4b0ff; --anjali-soft: #2f2145; --talal: #f9a8d4; --talal-soft: #3b1a2c;
     --c-ryan: #0f9f8f; --c-anjali: #9370ee; --c-talal: #e0528c;
   color-scheme: dark;
@@ -189,11 +190,11 @@ textarea { resize: vertical; min-height: 40px; }
 .cal-q.cur { color: var(--accent); }
 .cal-m { position: absolute; top: 26px; height: 24px; display: flex; align-items: center; padding-left: 8px; font: 500 11px var(--font-mono); letter-spacing: 0.04em; color: var(--muted); border-left: 1px solid var(--line); border-top: 1px solid var(--line); text-transform: uppercase; }
 .cal-m.cur { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
-.cal-flag { position: absolute; top: 50px; transform: translateX(-50%); background: var(--accent); color: var(--surface); font: 600 10px var(--font-mono); padding: 1px 7px; border-radius: 99px; white-space: nowrap; z-index: 2; }
+.cal-flag { position: absolute; top: 50px; transform: translateX(-50%); background: var(--now); color: var(--surface); font: 600 10px var(--font-mono); padding: 1px 7px; border-radius: 99px; white-space: nowrap; z-index: 2; }
 .cal-grid { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
 .cal-grid.q { background: color-mix(in srgb, var(--muted) 45%, transparent); }
 .cal-curm { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--accent-soft) 50%, transparent); }
-.cal-today { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--accent); z-index: 1; }
+.cal-today { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--now); z-index: 3; pointer-events: none; }
 .cal-empty { position: absolute; left: 16px; top: 18px; font-size: 13px; color: var(--muted); }
 .ev { position: absolute; z-index: 2; height: 28px; display: flex; align-items: center; gap: 6px; padding: 0 10px 0 6px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--fg); font: 500 12.5px var(--font-body); cursor: pointer; text-align: left; }
 .ev span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -292,6 +293,12 @@ label.flag.big { font-size: 14px; gap: 8px; }
 .wk-lane { position: relative; display: grid; grid-auto-rows: min-content; row-gap: 6px; padding-block: 6px; min-height: 52px; flex: none; align-content: start; }
 .wk-bg { position: absolute; inset: 0; background-image: linear-gradient(to right, var(--line) 1px, transparent 1px); pointer-events: none; }
 .wk-cur { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--accent-soft) 50%, transparent); pointer-events: none; }
+.wk-now { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--now); z-index: 3; pointer-events: none; }
+.wk-stack { position: relative; }
+.wk-stack .wk-now { top: 26px; }
+.wk-h.cur b, .wk-h.cur span { position: relative; z-index: 4; width: fit-content; background: var(--accent-soft); padding-right: 3px; border-radius: 3px; } /* text sits above the today line */
+.wk-stack .wk-now::before { content: ""; position: absolute; top: -4px; left: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--now); }
+.wk-stack .wk-now span { position: absolute; top: -23px; left: 1px; transform: translateX(-50%); font: 600 10px var(--font-mono); color: var(--surface); background: var(--now); padding: 1px 6px; border-radius: 99px; white-space: nowrap; }
 .wk-lane .wk-card { margin: 0 5px; position: relative; z-index: 1; }
 .wk-lane .wk-add { margin: 0 5px; position: relative; z-index: 1; opacity: 0; }
 .wk-lane:hover .wk-add { opacity: .4; }
@@ -980,6 +987,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     const weekIdx = (str) => { const [y, m, d] = str.split("-").map(Number); return Math.floor(Math.round((new Date(y, m - 1, d) - w1) / 86400000) / 7); };
     const wi = (str) => Math.max(0, Math.min(N - 1, weekIdx(str)));
     const ti = weekIdx(todayStr), cur = ti >= 0 && ti < N ? ti : -1;
+    const nowX = cur >= 0 ? cur * CW + (((today.getDay() + 6) % 7) + 0.5) / 7 * CW : null; // today's spot inside its week column
     const items = tasks.filter(inYearSpan).filter(tlVisible).sort(byStart);
     if (!selEv || !items.some((t) => t.id === selEv)) selEv = items.length ? [...items].sort(byNewest)[0].id : null;
 
@@ -1002,11 +1010,11 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
       }).join("");
       const R = rows.length;
       const adds = writable && db ? weeks.map((_, i) => `<button type="button" class="wk-add" style="grid-column:${i + 1};grid-row:${R + 1}" data-add-wk="${i}" data-lane="${esc(brand)}" aria-label="Add a ${esc(brand)} task in W${pad(i + 1)}">+ Add</button>`).join("") : "";
-      const bg = `<i class="wk-bg" style="background-size:${CW}px 100%"></i>${cur >= 0 ? `<i class="wk-cur" style="left:${cur * CW}px;width:${CW}px"></i>` : ""}`;
+      const bg = `<i class="wk-bg" style="background-size:${CW}px 100%"></i>${cur >= 0 ? `<i class="wk-cur" style="left:${cur * CW}px;width:${CW}px"></i>` : ""}${nowX !== null ? `<i class="wk-now" style="left:${nowX.toFixed(1)}px"></i>` : ""}`;
       lanes += `<div class="cal-row cal-lane">${laneLabel(brand, g, LW)}<div class="wk-lane" data-lane="${esc(brand)}" style="${cols};width:${N * CW}px">${bg}${placed}${adds}</div></div>`;
     });
     $("timeline").dataset.unit = String(CW);
-    $("timeline").innerHTML = `<div class="cal-row cal-head"><div class="cal-label" style="width:${LW}px">Week</div><div class="wk-stack"><div class="wk-grid" style="${cols}">${mo}</div><div class="wk-grid" style="${cols}">${wh}</div></div></div>${lanes}`;
+    $("timeline").innerHTML = `<div class="cal-row cal-head"><div class="cal-label" style="width:${LW}px">Week</div><div class="wk-stack"><div class="wk-grid" style="${cols}">${mo}</div><div class="wk-grid" style="${cols}">${wh}</div>${nowX !== null ? `<i class="wk-now" style="left:${nowX.toFixed(1)}px" title="Today ${today.getDate()} ${MONTHS[today.getMonth()]}"><span>Today ${today.getDate()} ${MONTHS[today.getMonth()]}</span></i>` : ""}</div></div>${lanes}`;
     renderDetail(items);
     if (!tlScrolled && cur >= 0) {
       const wr = $("tl-wrap"); wr.scrollLeft = Math.max(0, LW + cur * CW - wr.clientWidth * 0.6); tlScrolled = true;
