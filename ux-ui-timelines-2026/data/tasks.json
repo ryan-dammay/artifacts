@@ -665,6 +665,30 @@
   }
  },
  {
+  "id": "gh-mwkduatd-zylt4",
+  "data": {
+   "title": "Amber Flow Research",
+   "start": "2026-11-09",
+   "end": "2026-12-21",
+   "date": "2026-12-21",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "All brands",
+   "assignee": "Talal",
+   "notes": "See why Amber points are not being burnt on Bloomingdale's",
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/deck/0XQfk3ooZt0lNWMbnSInZL/Amber-study--BLM-vs-Ounass--Slides-?node-id=0-1&p=f&viewport=399%2C244%2C0.15&t=gxeh4WyWyB5KMwtU-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+    }
+   ],
+   "createdAt": 1794901217088,
+   "createdBy": "gh-talal",
+   "updatedAt": 1794901217089
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
