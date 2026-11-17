@@ -718,7 +718,7 @@
    "end": "2026-11-18",
    "date": "2026-11-18",
    "status": "in-progress",
-   "ready": false,
+   "ready": true,
    "highlight": false,
    "area": "All brands",
    "assignee": "Talal",
@@ -731,7 +731,7 @@
    ],
    "createdAt": 1794901217088,
    "createdBy": "gh-talal",
-   "updatedAt": 1794903939653,
+   "updatedAt": 1794904773619,
    "dateHistory": [
     {
      "at": 1794903939653,
