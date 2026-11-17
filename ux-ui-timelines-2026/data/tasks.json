@@ -507,7 +507,7 @@
    "end": "2026-11-20",
    "date": "2026-11-20",
    "status": "in-progress",
-   "ready": false,
+   "ready": true,
    "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
@@ -516,10 +516,14 @@
     {
      "label": "Jira #BLMHD-3534",
      "url": "https://bloomingdalesme.atlassian.net/browse/BLMHD-3534"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/nWalchzkdiDGSZpVuezVDq/BLP-APP-Dior?node-id=299-634&t=wi9EmYYYLcbDW7b6-11"
     }
    ],
    "createdAt": 1794897800700,
-   "updatedAt": 1794897800700
+   "updatedAt": 1794900123654
   }
  },
  {
