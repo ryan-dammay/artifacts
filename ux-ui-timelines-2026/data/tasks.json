@@ -502,16 +502,12 @@
  {
   "id": "gh-mwkbt2po-zpn37",
   "data": {
-   "title": "APP - Dior Category Component",
-   "start": "2026-11-17",
-   "end": "2026-11-20",
-   "date": "2026-11-20",
-   "status": "in-progress",
-   "ready": true,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "",
+   "createdAt": 1794897800700,
+   "date": "2026-11-20",
+   "end": "2026-11-20",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #BLMHD-3534",
@@ -522,7 +518,11 @@
      "url": "https://www.figma.com/design/nWalchzkdiDGSZpVuezVDq/BLP-APP-Dior?node-id=299-634&t=wi9EmYYYLcbDW7b6-11"
     }
    ],
-   "createdAt": 1794897800700,
+   "notes": "",
+   "ready": true,
+   "start": "2026-11-17",
+   "status": "in-progress",
+   "title": "APP - Dior Category Component",
    "updatedAt": 1794900123654
   }
  },
@@ -547,84 +547,97 @@
  {
   "id": "gh-mwkbw2f3-0jsu1",
   "data": {
-   "title": "Web & App - Click & Collect",
-   "start": "2026-11-30",
-   "end": "2026-12-04",
-   "date": "2026-12-04",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "",
-   "links": [],
    "createdAt": 1794897940287,
-   "updatedAt": 1794900736788,
+   "date": "2026-12-04",
    "dateHistory": [
     {
      "at": 1794900736779,
      "by": null,
      "from": {
-      "start": "2026-11-23",
-      "end": "2026-11-27"
+      "end": "2026-11-27",
+      "start": "2026-11-23"
      },
-     "to": {
-      "start": "2026-11-30",
-      "end": "2026-12-04"
-     },
+     "late": false,
      "reason": "",
-     "late": false
+     "to": {
+      "end": "2026-12-04",
+      "start": "2026-11-30"
+     }
     }
-   ]
+   ],
+   "end": "2026-12-04",
+   "highlight": false,
+   "links": [],
+   "notes": "",
+   "ready": false,
+   "start": "2026-11-30",
+   "status": "in-progress",
+   "title": "Web & App - Click & Collect",
+   "updatedAt": 1794900736788
   }
  },
  {
   "id": "gh-mwkc1gz9-iia37",
   "data": {
-   "title": "Web & App - Order Details QR Code",
-   "start": "2026-11-30",
-   "end": "2026-12-04",
-   "date": "2026-12-04",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "",
-   "links": [],
    "createdAt": 1794898192437,
-   "updatedAt": 1794900738612,
+   "date": "2026-12-04",
    "dateHistory": [
     {
      "at": 1794900738604,
      "by": null,
      "from": {
-      "start": "2026-11-23",
-      "end": "2026-11-27"
+      "end": "2026-11-27",
+      "start": "2026-11-23"
      },
-     "to": {
-      "start": "2026-11-30",
-      "end": "2026-12-04"
-     },
+     "late": false,
      "reason": "",
-     "late": false
+     "to": {
+      "end": "2026-12-04",
+      "start": "2026-11-30"
+     }
     }
-   ]
+   ],
+   "end": "2026-12-04",
+   "highlight": false,
+   "links": [],
+   "notes": "",
+   "ready": false,
+   "start": "2026-11-30",
+   "status": "in-progress",
+   "title": "Web & App - Order Details QR Code",
+   "updatedAt": 1794900738612
   }
  },
  {
   "id": "gh-mwkdb7sa-32w9a",
   "data": {
-   "title": "Shopping Assistant",
-   "start": "2026-10-01",
-   "end": "2026-11-17",
-   "date": "2026-11-17",
-   "status": "in-progress",
-   "ready": true,
-   "highlight": false,
    "area": "Coach",
    "assignee": "Talal",
-   "notes": "To act as a virtual shopping assistant for our COACH customers",
+   "createdAt": 1794900326698,
+   "createdBy": "gh-talal",
+   "date": "2026-11-17",
+   "dateHistory": [
+    {
+     "at": 1794903916345,
+     "by": "gh-talal",
+     "from": {
+      "end": "2027-02-01",
+      "start": "2026-10-01"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-17",
+      "start": "2026-10-01"
+     }
+    }
+   ],
+   "end": "2026-11-17",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #COACH-1928",
@@ -635,119 +648,106 @@
      "url": "https://staging.coach.ae/"
     }
    ],
-   "createdAt": 1794900326698,
-   "createdBy": "gh-talal",
-   "updatedAt": 1794904788610,
-   "dateHistory": [
-    {
-     "at": 1794903916345,
-     "by": "gh-talal",
-     "from": {
-      "start": "2026-10-01",
-      "end": "2027-02-01"
-     },
-     "to": {
-      "start": "2026-10-01",
-      "end": "2026-11-17"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "To act as a virtual shopping assistant for our COACH customers",
+   "ready": true,
+   "start": "2026-10-01",
+   "status": "in-progress",
+   "title": "Shopping Assistant",
+   "updatedAt": 1794904788610
   }
  },
  {
   "id": "gh-mwkdf0la-075ou",
   "data": {
-   "title": "Virtual Waiting Room",
-   "start": "2026-11-09",
-   "end": "2026-11-18",
-   "date": "2026-11-18",
-   "status": "in-progress",
-   "ready": true,
-   "highlight": false,
    "area": "Gymshark",
    "assignee": "Talal",
-   "notes": "Introduce a controlled digital queue during peak traffic, similar to ticketing sites, so customers get a smooth journey and the site stays up.",
+   "createdAt": 1794900503998,
+   "createdBy": "gh-talal",
+   "date": "2026-11-18",
+   "dateHistory": [
+    {
+     "at": 1794903929654,
+     "by": "gh-talal",
+     "from": {
+      "end": "2027-01-30",
+      "start": "2026-11-01"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-18",
+      "start": "2026-11-01"
+     }
+    },
+    {
+     "at": 1794904199745,
+     "by": "gh-talal",
+     "from": {
+      "end": "2026-11-18",
+      "start": "2026-11-01"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-18",
+      "start": "2026-11-09"
+     }
+    }
+   ],
+   "end": "2026-11-18",
+   "highlight": false,
    "links": [
     {
      "label": "Figma",
      "url": "https://www.figma.com/board/6KeLAKKjx88pWlpgDFdchO/Virtual-Waiting-Room?node-id=0-11&t=JCl6NoJSdjjiGaJp-1"
     }
    ],
-   "createdAt": 1794900503998,
-   "createdBy": "gh-talal",
-   "updatedAt": 1794904779354,
-   "dateHistory": [
-    {
-     "at": 1794903929654,
-     "by": "gh-talal",
-     "from": {
-      "start": "2026-11-01",
-      "end": "2027-01-30"
-     },
-     "to": {
-      "start": "2026-11-01",
-      "end": "2026-11-18"
-     },
-     "reason": "",
-     "late": false
-    },
-    {
-     "at": 1794904199745,
-     "by": "gh-talal",
-     "from": {
-      "start": "2026-11-01",
-      "end": "2026-11-18"
-     },
-     "to": {
-      "start": "2026-11-09",
-      "end": "2026-11-18"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "Introduce a controlled digital queue during peak traffic, similar to ticketing sites, so customers get a smooth journey and the site stays up.",
+   "ready": true,
+   "start": "2026-11-09",
+   "status": "in-progress",
+   "title": "Virtual Waiting Room",
+   "updatedAt": 1794904779354
   }
  },
  {
   "id": "gh-mwkduatd-zylt4",
   "data": {
-   "title": "Amber Flow Research",
-   "start": "2026-11-09",
-   "end": "2026-11-18",
-   "date": "2026-11-18",
-   "status": "in-progress",
-   "ready": true,
-   "highlight": false,
    "area": "All brands",
    "assignee": "Talal",
-   "notes": "See why Amber points are not being burnt on Bloomingdale's",
+   "createdAt": 1794901217088,
+   "createdBy": "gh-talal",
+   "date": "2026-11-18",
+   "dateHistory": [
+    {
+     "at": 1794903939653,
+     "by": "gh-talal",
+     "from": {
+      "end": "2026-12-21",
+      "start": "2026-11-09"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-18",
+      "start": "2026-11-09"
+     }
+    }
+   ],
+   "end": "2026-11-18",
+   "highlight": false,
    "links": [
     {
      "label": "Figma",
      "url": "https://www.figma.com/deck/0XQfk3ooZt0lNWMbnSInZL/Amber-study--BLM-vs-Ounass--Slides-?node-id=0-1&p=f&viewport=399%2C244%2C0.15&t=gxeh4WyWyB5KMwtU-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
     }
    ],
-   "createdAt": 1794901217088,
-   "createdBy": "gh-talal",
-   "updatedAt": 1794904773619,
-   "dateHistory": [
-    {
-     "at": 1794903939653,
-     "by": "gh-talal",
-     "from": {
-      "start": "2026-11-09",
-      "end": "2026-12-21"
-     },
-     "to": {
-      "start": "2026-11-09",
-      "end": "2026-11-18"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "See why Amber points are not being burnt on Bloomingdale's",
+   "ready": true,
+   "start": "2026-11-09",
+   "status": "in-progress",
+   "title": "Amber Flow Research",
+   "updatedAt": 1794904773619
   }
  },
  {
