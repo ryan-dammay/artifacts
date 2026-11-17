@@ -492,22 +492,8 @@
  },
  {
   "id": "gh-mwk9d7mw-n7zlh",
-  "data": {
-   "title": "test task",
-   "start": "2026-11-17",
-   "end": "2026-11-21",
-   "date": "2026-11-21",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
-   "area": "",
-   "assignee": "Talal",
-   "notes": "",
-   "links": [],
-   "createdAt": 1794893701352,
-   "createdBy": "gh-talal",
-   "updatedAt": 1794893701352
-  }
+  "deleted": true,
+  "deletedAt": 1794897064656
  },
  {
   "id": "gymshark-gwp-enhancement-live",
