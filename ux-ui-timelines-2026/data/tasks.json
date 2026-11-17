@@ -581,6 +581,34 @@
   }
  },
  {
+  "id": "gh-mwkdb7sa-32w9a",
+  "data": {
+   "title": "Shopping Assistant",
+   "start": "2026-10-01",
+   "end": "2027-02-01",
+   "date": "2027-02-01",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Coach",
+   "assignee": "Talal",
+   "notes": "To act as a virtual shopping assistant for our COACH customers",
+   "links": [
+    {
+     "label": "Jira #COACH-1928",
+     "url": "https://bloomingdalesme.atlassian.net/browse/COACH-1928?xpis=eyJicmlkZ2UiOiJzZWFyY2hQYWdlIiwiaWQiOiIxNzk0OTAwMjYxNDM3Iiwic291cmNlIjoiamlyYSJ9"
+    },
+    {
+     "label": "URL",
+     "url": "https://staging.coach.ae/"
+    }
+   ],
+   "createdAt": 1794900326698,
+   "createdBy": "gh-talal",
+   "updatedAt": 1794900326698
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
