@@ -468,27 +468,8 @@
  },
  {
   "id": "gh-mwk9cp4q-ori2b",
-  "data": {
-   "title": "test task",
-   "start": "2026-11-17",
-   "end": "2026-11-21",
-   "date": "2026-11-21",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
-   "area": "Bloomingdale's",
-   "assignee": "Ryan",
-   "notes": "ABC",
-   "links": [
-    {
-     "label": "URL",
-     "url": "https://figma link"
-    }
-   ],
-   "createdAt": 1794893677370,
-   "createdBy": "gh-talal",
-   "updatedAt": 1794893677370
-  }
+  "deleted": true,
+  "deletedAt": 1794897276776
  },
  {
   "id": "gh-mwk9d7mw-n7zlh",
