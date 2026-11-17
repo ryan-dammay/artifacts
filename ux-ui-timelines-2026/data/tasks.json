@@ -374,6 +374,34 @@
   }
  },
  {
+  "id": "gh-mwk94nu6-91jl4",
+  "data": {
+   "title": "GS Pixel Perfection App",
+   "start": "2026-11-16",
+   "end": "2026-11-23",
+   "date": "2026-11-23",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Gymshark",
+   "assignee": "Anjali",
+   "notes": "Pick up previously blocked pixel perfection tickets for gymshark app and share the feedback on the tickets",
+   "links": [
+    {
+     "label": "URL",
+     "url": "https://bloomingdalesme.atlassian.net/issues/?jql=project+%3D+GSA+AND+%28summary+%7E+%22Pixel+Perfection%22+OR+description+%7E+%22Pixel+Perfection%22%29+ORDER+BY+created+DESC"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=25429-35988"
+    }
+   ],
+   "createdAt": 1794893302446,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "updatedAt": 1794893302446
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
