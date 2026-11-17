@@ -276,6 +276,12 @@ details.grp[open] > summary { margin-bottom: 8px; }
 .who-i.t { background: var(--talal-soft); color: var(--talal); }
 .cal.can-drag .wk-card.ro, .cal.can-drag .ev.ro { cursor: pointer; }
 .tld-lock { font-size: 13px; color: var(--muted); margin: 4px 0 0; }
+.tv #tv-body { display: flex; flex-direction: column; gap: 10px; }
+.tv h2 { overflow-wrap: anywhere; }
+.tv .notes { margin: 0; color: var(--fg); white-space: pre-wrap; }
+.wk-card, .ev, .row[data-row] { -webkit-touch-callout: none; }
+@media (pointer: coarse) { .wk-card, .ev, .row[data-row] { -webkit-user-select: none; user-select: none; } }
+.lp-hold { transform: scale(.98); transition: transform .3s ease-out; }
 .wk-d .who-i { margin-left: auto; }
 .when .role { background: var(--fg); color: var(--bg); font-family: var(--font-body); font-weight: 600; }
 #p-kpis.solo { display: block; }
@@ -539,6 +545,12 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
       </div>
     </div>
   </div>
+  <div class="modal-back" id="tv" hidden>
+    <div class="modal wide tv" role="dialog" aria-modal="true" aria-labelledby="tv-h">
+      <div id="tv-body"></div>
+      <div class="modal-acts"><button class="btn ghost" id="tv-close" type="button">Close</button></div>
+    </div>
+  </div>
   <div class="modal-back" id="ask" hidden>
     <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="ask-h" aria-describedby="ask-d">
       <h2 id="ask-h">Are you sure?</h2>
@@ -680,7 +692,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     applyWho(); renderAll();
   });
   function applyRole() {
-    const label = role === "admin" ? "Ryan · Admin" : role === "editor" ? "Editor · add tasks, edit yours and those assigned to you" : "View only";
+    const label = role === "admin" ? "Ryan · Admin" : role === "editor" ? "Editor · your & assigned tasks" : "View only";
     let el = $("role-badge");
     if (!el) { el = document.createElement("span"); el.id = "role-badge"; el.className = "role"; $("when").appendChild(el); }
     el.textContent = label;
@@ -728,7 +740,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     const acts = canEditTask(t)
       ? `<div class="acts">${flagsHtml(t)}<button class="star" data-star="${esc(t.id)}" aria-pressed="${t.highlight ? "true" : "false"}" aria-label="Highlight for review" title="Highlight for review" type="button">${t.highlight ? "★" : "☆"}</button><button class="del" data-edit="${esc(t.id)}" type="button">Edit</button>${canDelPath("tasks/" + t.id) ? `<button class="del" data-del="tasks/${esc(t.id)}" type="button">Delete</button>` : ""}</div>`
       : (t.highlight ? `<span class="star" aria-label="Highlighted">★</span>` : "<span></span>");
-    return `<div class="row"><div class="d">${esc(fmtDay(t.date))}</div><div><div class="t">${esc(t.title)}${pill}${whoChip(t)}${t.area ?`<span class="chip">${esc(t.area)}</span>` : ""}</div><div class="est">${esc(estText(t))}${reschedHtml(t)}</div>${t.notes ? `<div class="notes">${esc(t.notes)}</div>` : ""}${links}</div>${acts}</div>`;
+    return `<div class="row" data-row="${esc(t.id)}"><div class="d">${esc(fmtDay(t.date))}</div><div><div class="t">${esc(t.title)}${pill}${whoChip(t)}${t.area ?`<span class="chip">${esc(t.area)}</span>` : ""}</div><div class="est">${esc(estText(t))}${reschedHtml(t)}</div>${t.notes ? `<div class="notes">${esc(t.notes)}</div>` : ""}${links}</div>${acts}</div>`;
   }
   const byNewest = (a, b) => (b.date || "").localeCompare(a.date || "") || (b.createdAt || 0) - (a.createdAt || 0);
   function renderTasks() {
@@ -957,7 +969,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
         return { t, left, width, top: 8 + r * (PH + RG) };
       });
       const h = Math.max(48, 16 + rows.length * (PH + RG) - RG);
-      lanes += `<div class="cal-row cal-lane">${laneLabel(brand, g, LW)}<div class="cal-track${writable && db ? " addable" : ""}" data-lane="${esc(brand)}" style="width:${TW}px;height:${h}px" title="${writable && db ? `Click an empty spot to add a ${esc(brand)} task` : ""}">${grid}${evs.map(({ t, left, width, top }) => `<button type="button" class="ev ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="left:${left.toFixed(1)}px;top:${top}px;width:${width.toFixed(1)}px" title="${esc(t.title)} · ${esc(estText(t))} · double-click to edit"><i class="dot ${stateOf(t)}"></i><span>${t.highlight ? "★ " : ""}${esc(t.title)}</span>${whoDot(t)}</button>`).join("")}</div></div>`;
+      lanes += `<div class="cal-row cal-lane">${laneLabel(brand, g, LW)}<div class="cal-track${writable && db ? " addable" : ""}" data-lane="${esc(brand)}" style="width:${TW}px;height:${h}px" title="${writable && db ? `Click an empty spot to add a ${esc(brand)} task` : ""}">${grid}${evs.map(({ t, left, width, top }) => `<button type="button" class="ev ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="left:${left.toFixed(1)}px;top:${top}px;width:${width.toFixed(1)}px" title="${esc(t.title)} · ${esc(estText(t))} · double-click to open"><i class="dot ${stateOf(t)}"></i><span>${t.highlight ? "★ " : ""}${esc(t.title)}</span>${whoDot(t)}</button>`).join("")}</div></div>`;
     });
     $("timeline").dataset.unit = String(DAY);
     $("timeline").innerHTML = `<div class="cal-row cal-head"><div class="cal-label" style="width:${LW}px">Brand</div><div class="cal-track" style="width:${TW}px;height:66px">${head}</div></div>${lanes}`;
@@ -1003,7 +1015,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     const wh = weeks.map((w, i) => `<div class="wk-h${i === cur ? " cur" : ""}"><b>W${pad(i + 1)}${i === cur ? " · this week" : ""}</b><span>${w.s.getDate()} ${MONTHS[w.s.getMonth()]} – ${w.e.getDate()} ${MONTHS[w.e.getMonth()]}</span></div>`).join("");
 
     const groups = groupByBrand(items);
-    const card = (t, a, b, r) => `<button type="button" class="wk-card ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="grid-column:${a + 1} / ${b + 2};grid-row:${r + 1}" title="${esc(t.title)} · ${esc(estText(t))} · double-click to edit"><span class="wk-d"><i class="dot ${stateOf(t)}"></i>${esc(fmtDay(startOf(t)))}${startOf(t) !== endOf(t) ? ` – ${esc(fmtDay(endOf(t)))}` : ""}${t.highlight ? ` <span class="star-s">★</span>` : ""}${whoDot(t)}</span><span class="wk-t">${esc(t.title)}</span></button>`;
+    const card = (t, a, b, r) => `<button type="button" class="wk-card ${stateOf(t)}${isOverdue(t) ? " late" : ""}${canEditTask(t) ? "" : " ro"}${t.id === selEv ? " sel" : ""}" data-ev="${esc(t.id)}" aria-pressed="${t.id === selEv}" style="grid-column:${a + 1} / ${b + 2};grid-row:${r + 1}" title="${esc(t.title)} · ${esc(estText(t))} · double-click to open"><span class="wk-d"><i class="dot ${stateOf(t)}"></i>${esc(fmtDay(startOf(t)))}${startOf(t) !== endOf(t) ? ` – ${esc(fmtDay(endOf(t)))}` : ""}${t.highlight ? ` <span class="star-s">★</span>` : ""}${whoDot(t)}</span><span class="wk-t">${esc(t.title)}</span></button>`;
     let lanes = "";
     laneOrder(groups).forEach((brand) => {
       const g = groups.get(brand) || [], rows = [];
@@ -1047,8 +1059,8 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     $("timeline").classList.toggle("can-drag", canDrag);
     $("tl-hint").hidden = !(writable && db);
     $("tl-hint").textContent = tlView === "week"
-      ? "Bars run from each task's estimated start to end. Hover a brand's row and use + Add to log a task in that week. Drag a bar sideways to shift its dates. Double-click a bar to edit it."
-      : "Bars run from each task's estimated start to end. Click an empty spot in a brand's row to add a task there. Drag a bar sideways to shift its dates. Double-click a bar to edit it.";
+      ? "Bars run from each task's estimated start to end. Hover a brand's row and use + Add to log a task in that week. Drag a bar sideways to shift its dates. Double-click a bar (long-press on a phone or tablet) to open it."
+      : "Bars run from each task's estimated start to end. Click an empty spot in a brand's row to add a task there. Drag a bar sideways to shift its dates. Double-click a bar (long-press on a phone or tablet) to open it.";
   }
 
   // Toasts
@@ -1364,7 +1376,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
   document.addEventListener("click", (ev) => {
     const e = ev.target.closest("[data-ev]"); if (!e || justDragged) return;
     const id = e.dataset.ev, now = Date.now();
-    if (lastTap.id === id && now - lastTap.t < 450) { lastTap = { id: null, t: 0 }; openEditTask(id, e); return; }
+    if (lastTap.id === id && now - lastTap.t < 450) { lastTap = { id: null, t: 0 }; openTaskSheet(id, e); return; }
     lastTap = { id, t: now };
     selEv = id;
     // Select in place (no re-render) so the same card receives the second click
@@ -1372,6 +1384,58 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     renderDetail(tasks.filter(inYearSpan));
   });
   let lastTap = { id: null, t: 0 };
+  // ---- Task sheet: double-click (desktop) or long-press (touch) on a task opens it ----
+  // Tasks you can edit open in the edit form; others open read-only.
+  let tvLast = null;
+  function openTaskSheet(id, trigger) {
+    const t = allTasks.find((x) => x.id === id); if (!t) return;
+    if (canEditTask(t)) { openEditTask(id, trigger); return; }
+    tvLast = trigger || null;
+    const q = endOf(t) ? quarter(Number(endOf(t).slice(5, 7)) - 1) : "";
+    const span = startOf(t) ? `${wkLabel(startOf(t))}${wkLabel(startOf(t)) !== wkLabel(endOf(t)) ? `–${wkLabel(endOf(t))}` : ""}${q ? ` · Q${q}` : ""}` : "";
+    const lock = writable && db ? `<p class="tld-lock">🔒 Added by ${esc(addedBy(t))}. Only ${esc(editorsText(t))} can edit this task.</p>` : "";
+    $("tv-body").innerHTML = `<div class="tld-top">${statePill(t)}<span>${esc(estText(t))}${span ? " · " + span : ""}</span>${whoChip(t)}${t.area ? `<span class="chip">${esc(t.area)}</span>` : ""}${t.highlight ? `<span class="star-s">★ Highlight</span>` : ""}${lock ? "" : `<span>Added by ${esc(addedBy(t))}</span>`}</div>
+      <h2 id="tv-h">${esc(t.title)}</h2>${t.notes ? `<p class="notes">${esc(t.notes)}</p>` : ""}${linksHtml(t)}${histHtml(t)}${lock}`;
+    $("tv").hidden = false; $("tv-close").focus();
+  }
+  function closeTaskSheet() { $("tv").hidden = true; const f = tvLast; tvLast = null; if (f && f.isConnected) f.focus(); }
+  $("tv-close").addEventListener("click", closeTaskSheet);
+  $("tv").addEventListener("click", (ev) => { if (ev.target === $("tv")) closeTaskSheet(); });
+  document.addEventListener("keydown", (ev) => { if (!$("tv").hidden && ev.key === "Escape") { ev.preventDefault(); closeTaskSheet(); } });
+  // Work log: double-click a row (not on its buttons, links or checkboxes)
+  $("task-list").addEventListener("dblclick", (ev) => {
+    const r = ev.target.closest("[data-row]"); if (!r || ev.target.closest("button, a, input, label, summary")) return;
+    ev.preventDefault(); const sel = window.getSelection && window.getSelection(); if (sel) sel.removeAllRanges();
+    openTaskSheet(r.dataset.row, r);
+  });
+  // Long-press on touch screens: timeline cards and work log rows
+  let lp = null, lpFired = 0;
+  const lpCancel = () => { if (!lp) return; clearTimeout(lp.timer); lp.el.classList.remove("lp-hold"); lp = null; };
+  document.addEventListener("pointerdown", (ev) => {
+    if (ev.pointerType === "mouse") return;
+    const el = ev.target.closest("#timeline [data-ev], #task-list [data-row]"); if (!el) return;
+    if (el.matches("[data-row]") && ev.target.closest("button, a, input, label, summary")) return;
+    lpCancel();
+    const id = el.dataset.ev || el.dataset.row;
+    lp = { el, id, x: ev.clientX, y: ev.clientY, pid: ev.pointerId, timer: setTimeout(() => {
+      const cur = lp; lp = null; if (!cur) return;
+      cur.el.classList.remove("lp-hold");
+      if (drag && drag.on) return;          // already dragging the card: no sheet
+      if (drag) { endDrag(); drag = null; } // stop a drag from starting after the sheet opens
+      lpFired = Date.now();
+      try { navigator.vibrate && navigator.vibrate(10); } catch (e) {}
+      openTaskSheet(cur.id, cur.el);
+    }, 500) };
+    el.classList.add("lp-hold");
+  }, true);
+  window.addEventListener("pointermove", (ev) => { if (lp && ev.pointerId === lp.pid && Math.hypot(ev.clientX - lp.x, ev.clientY - lp.y) > 8) lpCancel(); }, true);
+  window.addEventListener("pointerup", (ev) => { if (lp && ev.pointerId === lp.pid) lpCancel(); }, true);
+  window.addEventListener("pointercancel", (ev) => { if (lp && ev.pointerId === lp.pid) lpCancel(); }, true);
+  window.addEventListener("scroll", lpCancel, true);
+  // No browser menu or callout on a long-press, and no click right after it
+  document.addEventListener("contextmenu", (ev) => { if ((lp || Date.now() - lpFired < 800) && ev.target.closest("[data-ev], [data-row]")) ev.preventDefault(); });
+  // The finger lifting after a long-press sends one click, which would land on the sheet's backdrop: swallow it
+  document.addEventListener("click", (ev) => { if (lpFired && Date.now() - lpFired < 1500) { lpFired = 0; ev.preventDefault(); ev.stopImmediatePropagation(); } }, true);
   $("timeline").addEventListener("keydown", (ev) => {
     const e = ev.target.closest("[data-ev]"); if (!e) return;
     if (ev.key === "e" || ev.key === "E") { ev.preventDefault(); openEditTask(e.dataset.ev, e); }
