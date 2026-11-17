@@ -184,7 +184,7 @@
    "area": "Coach",
    "assignee": "Ryan",
    "createdAt": 1792642000009,
-   "date": "2026-10-22",
+   "date": "2026-11-22",
    "highlight": false,
    "links": [
     {
@@ -194,7 +194,27 @@
    ],
    "notes": "Q4 2026. Scheduled to go live later in October per the October 2026 release notes. Mark done once it ships.",
    "status": "in-progress",
-   "title": "Coach Shopping Assistant (launching later this month)"
+   "title": "Coach Shopping Assistant (launching later this month)",
+   "start": "2026-10-22",
+   "end": "2026-11-22",
+   "ready": false,
+   "dateHistory": [
+    {
+     "at": 1794893694928,
+     "by": null,
+     "from": {
+      "start": "2026-10-22",
+      "end": "2026-10-22"
+     },
+     "to": {
+      "start": "2026-10-22",
+      "end": "2026-11-22"
+     },
+     "reason": "",
+     "late": true
+    }
+   ],
+   "updatedAt": 1794893694928
   }
  },
  {
