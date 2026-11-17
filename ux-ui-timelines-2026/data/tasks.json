@@ -468,7 +468,7 @@
   "id": "gymshark-plp-interrupter",
   "data": {
    "area": "Gymshark Web",
-   "assignee": "Ryan",
+   "assignee": "Anjali",
    "createdAt": 1794480000000,
    "date": "2026-11-19",
    "end": "2026-11-19",
@@ -483,7 +483,8 @@
    "ready": false,
    "start": "2026-11-12",
    "status": "in-progress",
-   "title": "Gymshark PLP Interrupter"
+   "title": "Gymshark PLP Interrupter",
+   "updatedAt": 1794893662546
   }
  },
  {
