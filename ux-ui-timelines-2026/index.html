@@ -86,10 +86,21 @@
       rows[c] = (await loadJson("data/" + c + ".json")) || [];
     }
   }
+  // The passwords file: the Pages copy, or straight from the repo while Pages is still publishing a new one.
+  async function loadKey() {
+    const k = await loadJson("data/edit-key.json");
+    if (k && k.people) return k;
+    try {
+      const r = await fetch(API + KEY_PATH + "?ref=" + BRANCH, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
+      if (r.ok) { const j = await r.json(); if (j && j.people) return j; }
+    } catch (e) {}
+    return null;
+  }
   const ready = (async () => {
-    const [p, m, k] = await Promise.all([loadJson("data/people.json"), loadJson("data/meta.json"), loadJson("data/edit-key.json")]);
-    people = p || {}; meta = m; editKey = k && k.people ? k : null;
-    if (token && !(editKey && editKey.people[who])) { token = null; who = null; ls.del(TOK); ls.del(WHO); } // access was removed
+    const [p, m, k] = await Promise.all([loadJson("data/people.json"), loadJson("data/meta.json"), loadKey()]);
+    people = p || {}; meta = m; editKey = k;
+    // Log out only when the passwords file was read and no longer lists this person (Ryan removed their access).
+    if (token && editKey && !editKey.people[who]) { token = null; who = null; ls.del(TOK); ls.del(WHO); }
     await loadRows();
   })();
 
