@@ -620,7 +620,7 @@
    "end": "2026-11-17",
    "date": "2026-11-17",
    "status": "in-progress",
-   "ready": false,
+   "ready": true,
    "highlight": false,
    "area": "Coach",
    "assignee": "Talal",
@@ -637,7 +637,7 @@
    ],
    "createdAt": 1794900326698,
    "createdBy": "gh-talal",
-   "updatedAt": 1794903916346,
+   "updatedAt": 1794904788610,
    "dateHistory": [
     {
      "at": 1794903916345,
