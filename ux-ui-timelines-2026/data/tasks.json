@@ -45,10 +45,12 @@
     }
    ],
    "notes": "Rating & Result",
-   "ready": false,
+   "ready": true,
    "start": "2026-11-09",
-   "status": "in-progress",
-   "title": "Bazaarvoice Integration - Email"
+   "status": "done",
+   "title": "Bazaarvoice Integration - Email",
+   "completedOn": "2026-11-17",
+   "updatedAt": 1794893641125
   }
  },
  {
