@@ -41,5 +41,7 @@ as Ryan and open `#setup-editing` again: empty fields keep the current passwords
 ## Sync with Claude
 
 An hourly scheduled task runs `sync/two_way.py`. For each task, the side that changed since the last sync wins; if both
-changed the same task, the Claude version wins and the task's report says so. Tasks added or deleted on either side are
-added or deleted on the other.
+changed the same task, the Claude version wins and the task's report says so. Tasks added on either side are added on the
+other. A deletion always wins: a task deleted in either place is deleted in the other, even if someone edited it there
+meanwhile. An open GitHub page refreshes itself (every 45 seconds when logged in, every 3 minutes otherwise, and when
+you switch back to the tab), so others' adds, edits and deletes show without reloading.

@@ -3,8 +3,8 @@
 
 Tasks (and KPI readings) can be added, edited and deleted in the Claude artifact or on the GitHub Pages copy.
 For each document, the side that changed since the last sync wins. If both sides changed the same document,
-the Claude version wins and the change list says so. Deletions on either side are carried over, unless the other
-side edited that document after the last sync (then it is kept, or restored).
+the Claude version wins and the change list says so. A deletion on either side always wins: it is carried over to
+the other side even if someone edited that task there since the last sync, so a deleted task disappears for everyone.
 
   two_way.py run TASKS_DIR TASKS_COUNT KPIS_DIR KPIS_COUNT OUT_DIR
       TASKS_DIR / KPIS_DIR  either a folder with one <doc_id>.json file per Claude document, holding the document's
@@ -109,18 +109,17 @@ def run(tasks_dir, tasks_n, kpis_dir, kpis_n, out_dir):
                     final[i] = c
                     notes.append(("Both changed, kept Claude's: " if hg != s and s is not None else "Claude → GitHub: ") + label(c, i))
             elif c is not None:
-                if i in tomb and s is not None:
-                    if h(c) != s:
-                        final[i] = c; notes.append("Kept (edited in Claude, deleted on GitHub): " + label(c, i))
-                    else:
-                        writes.append({"op": "delete", "collection": coll, "doc_id": i, "exists": True})
-                        notes.append("Deleted in Claude (removed on GitHub): " + label(c, i))
+                if i in tomb:
+                    # deleted on GitHub: delete it in Claude too, even if it was edited there since
+                    writes.append({"op": "delete", "collection": coll, "doc_id": i, "exists": True})
+                    notes.append("Deleted in Claude (removed on GitHub): " + label(c, i))
                 else:
                     final[i] = c
                     if s is None:
                         notes.append("Claude → GitHub (new): " + label(c, i))
             elif g is not None:
-                if s is not None and h(g) == s:
+                if s is not None:
+                    # was in Claude at the last sync and is gone now: deleted in Claude, so remove it here too
                     notes.append("Removed on GitHub (deleted in Claude): " + label(g, i))
                 else:
                     final[i] = g; to_claude(i, g, False)

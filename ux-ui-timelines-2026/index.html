@@ -141,6 +141,33 @@
   }
   window.addEventListener("beforeunload", (e) => { if (pending.tasks.length || pending.kpis.length || saving.tasks || saving.kpis) { e.preventDefault(); e.returnValue = ""; } });
 
+  // ---------- keep an open page up to date: others' adds, edits and deletes show without reloading ----------
+  async function pull(c) {
+    if (token) return (await fetchRemote(c)).rows;
+    try {  // straight from the repo (fresher than the Pages copy, which can lag a few minutes)
+      const r = await fetch(API + FILES[c] + "?ref=" + BRANCH, { cache: "no-store", headers: { Accept: "application/vnd.github.raw+json" } });
+      if (r.ok) return await r.json();
+    } catch (e) {}
+    return await loadJson("data/" + c + ".json");
+  }
+  let refreshing = false, lastRefresh = Date.now();
+  async function refresh() {
+    if (refreshing || document.hidden || Date.now() - lastRefresh < 20000) return;
+    refreshing = true; lastRefresh = Date.now();
+    try {
+      // Logged out: tasks only (GitHub allows about 60 reads an hour without a login); logged in: tasks and KPIs
+      for (const c of token ? Object.keys(FILES) : ["tasks"]) {
+        if (pending[c].length || saving[c]) continue;   // don't overwrite an edit that is still saving
+        const next = await pull(c);
+        if (Array.isArray(next) && JSON.stringify(next) !== JSON.stringify(rows[c])) { rows[c] = next; emit(c); }
+      }
+    } catch (e) {}
+    refreshing = false;
+  }
+  ready.then(() => setInterval(refresh, token ? 45000 : 180000));
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+  window.addEventListener("focus", refresh);
+
   // ---------- the db and user stand-ins the page uses ----------
   const stamp = (d) => ({ ...d, updatedAt: Date.now() });
   const docRef = (path) => {
