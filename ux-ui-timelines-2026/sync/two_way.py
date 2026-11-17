@@ -135,7 +135,8 @@ def run(tasks_dir, tasks_n, kpis_dir, kpis_n, out_dir):
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     if notes or not META.exists():
         META.write_text(json.dumps({"snapshotAt": now}, indent=1) + "\n", encoding="utf-8")
-    STATE.write_text(json.dumps({"syncedAt": int(time.time() * 1000), **new_state}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    if notes or {c: st.get(c, {}) for c in COLLS} != new_state:  # nothing changed: leave the files alone (no empty commits)
+        STATE.write_text(json.dumps({"syncedAt": int(time.time() * 1000), **new_state}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (out / "to_claude.json").write_text(json.dumps(writes, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({**counts, "to_claude": len(writes), "changes": notes}, ensure_ascii=False))
 
