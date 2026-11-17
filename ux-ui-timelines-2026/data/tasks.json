@@ -479,23 +479,23 @@
  {
   "id": "gh-mwkbrolq-6oqym",
   "data": {
-   "title": "Web - Dior Category Component",
-   "start": "2026-11-17",
-   "end": "2026-11-20",
-   "date": "2026-11-20",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "",
+   "createdAt": 1794897735758,
+   "date": "2026-11-20",
+   "end": "2026-11-20",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #BLMHW-4241",
      "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-4241"
     }
    ],
-   "createdAt": 1794897735758,
+   "notes": "",
+   "ready": false,
+   "start": "2026-11-17",
+   "status": "in-progress",
+   "title": "Web - Dior Category Component",
    "updatedAt": 1794897735758
   }
  },
@@ -529,18 +529,18 @@
  {
   "id": "gh-mwkbut4l-boo15",
   "data": {
-   "title": "Web/App - Return Process",
-   "start": "2026-11-23",
-   "end": "2026-11-27",
-   "date": "2026-11-27",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Talal",
-   "notes": "",
-   "links": [],
    "createdAt": 1794897881589,
+   "date": "2026-11-27",
+   "end": "2026-11-27",
+   "highlight": false,
+   "links": [],
+   "notes": "",
+   "ready": false,
+   "start": "2026-11-23",
+   "status": "in-progress",
+   "title": "Web/App - Return Process",
    "updatedAt": 1794897947155
   }
  },
