@@ -477,6 +477,29 @@
   }
  },
  {
+  "id": "gh-mwkbrolq-6oqym",
+  "data": {
+   "title": "Web - Dior Category Component",
+   "start": "2026-11-17",
+   "end": "2026-11-20",
+   "date": "2026-11-20",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "notes": "",
+   "links": [
+    {
+     "label": "Jira #BLMHW-4241",
+     "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-4241"
+    }
+   ],
+   "createdAt": 1794897735758,
+   "updatedAt": 1794897735758
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
