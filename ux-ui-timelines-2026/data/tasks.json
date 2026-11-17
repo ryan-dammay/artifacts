@@ -660,7 +660,7 @@
   "id": "gh-mwkdf0la-075ou",
   "data": {
    "title": "Virtual Waiting Room",
-   "start": "2026-11-01",
+   "start": "2026-11-09",
    "end": "2026-11-18",
    "date": "2026-11-18",
    "status": "in-progress",
@@ -677,7 +677,7 @@
    ],
    "createdAt": 1794900503998,
    "createdBy": "gh-talal",
-   "updatedAt": 1794903929655,
+   "updatedAt": 1794904199745,
    "dateHistory": [
     {
      "at": 1794903929654,
@@ -688,6 +688,20 @@
      },
      "to": {
       "start": "2026-11-01",
+      "end": "2026-11-18"
+     },
+     "reason": "",
+     "late": false
+    },
+    {
+     "at": 1794904199745,
+     "by": "gh-talal",
+     "from": {
+      "start": "2026-11-01",
+      "end": "2026-11-18"
+     },
+     "to": {
+      "start": "2026-11-09",
       "end": "2026-11-18"
      },
      "reason": "",
