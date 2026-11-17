@@ -617,8 +617,8 @@
   "data": {
    "title": "Shopping Assistant",
    "start": "2026-10-01",
-   "end": "2027-02-01",
-   "date": "2027-02-01",
+   "end": "2026-11-17",
+   "date": "2026-11-17",
    "status": "in-progress",
    "ready": false,
    "highlight": false,
@@ -637,7 +637,23 @@
    ],
    "createdAt": 1794900326698,
    "createdBy": "gh-talal",
-   "updatedAt": 1794900326698
+   "updatedAt": 1794903916346,
+   "dateHistory": [
+    {
+     "at": 1794903916345,
+     "by": "gh-talal",
+     "from": {
+      "start": "2026-10-01",
+      "end": "2027-02-01"
+     },
+     "to": {
+      "start": "2026-10-01",
+      "end": "2026-11-17"
+     },
+     "reason": "",
+     "late": false
+    }
+   ]
   }
  },
  {
