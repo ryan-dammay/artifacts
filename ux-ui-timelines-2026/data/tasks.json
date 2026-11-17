@@ -402,6 +402,30 @@
   }
  },
  {
+  "id": "gh-mwk9604t-7fpwk",
+  "data": {
+   "title": "GS Pixel Perfection Web",
+   "start": "2026-11-23",
+   "end": "2026-11-27",
+   "date": "2026-11-27",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Gymshark Web",
+   "assignee": "Anjali",
+   "notes": "Pick up previously blocked pixel perfection tickets for gymshark web and share the feedback on the tickets",
+   "links": [
+    {
+     "label": "URL",
+     "url": "https://bloomingdalesme.atlassian.net/issues/?jql=project+%3D+GSW+AND+%28summary+%7E+%22Pixel+Perfection%22+OR+description+%7E+%22Pixel+Perfection%22%29+ORDER+BY+created+DESC"
+    }
+   ],
+   "createdAt": 1794893365037,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "updatedAt": 1794893365037
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
