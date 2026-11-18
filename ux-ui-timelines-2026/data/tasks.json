@@ -732,6 +732,34 @@
   }
  },
  {
+  "id": "gh-mwloa7s6-k3odm",
+  "data": {
+   "title": "GS Timer Banner Pixel Perfection",
+   "start": "2026-11-18",
+   "end": "2026-11-20",
+   "date": "2026-11-20",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Gymshark",
+   "assignee": "Anjali",
+   "notes": "There are a number of small fixes required for variations of the hero banner to improve usability and options for the Content team.",
+   "links": [
+    {
+     "label": "Jira #GSA-1504",
+     "url": "https://bloomingdalesme.atlassian.net/browse/GSA-1504"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=14237-91312"
+    }
+   ],
+   "createdAt": 1794979221990,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "updatedAt": 1794979221990
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
