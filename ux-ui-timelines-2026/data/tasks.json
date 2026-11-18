@@ -463,9 +463,10 @@
    "notes": "Pick up previously blocked pixel perfection tickets for gymshark app and share the feedback on the tickets",
    "ready": false,
    "start": "2026-11-16",
-   "status": "in-progress",
+   "status": "done",
    "title": "GS Pixel Perfection App",
-   "updatedAt": 1794893392179
+   "updatedAt": 1794980752268,
+   "completedOn": "2026-11-18"
   }
  },
  {
