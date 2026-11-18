@@ -251,6 +251,22 @@
    "createdAt": 1794287924239,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-20",
+   "dateHistory": [
+    {
+     "at": 1794979293860,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-11-09",
+      "start": "2026-11-09"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-20",
+      "start": "2026-11-09"
+     }
+    }
+   ],
    "end": "2026-11-20",
    "highlight": false,
    "links": [
@@ -272,23 +288,7 @@
    "start": "2026-11-09",
    "status": "in-progress",
    "title": "MNP Bazaar Voice Updates",
-   "updatedAt": 1794979307993,
-   "dateHistory": [
-    {
-     "at": 1794979293860,
-     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
-     "from": {
-      "start": "2026-11-09",
-      "end": "2026-11-09"
-     },
-     "to": {
-      "start": "2026-11-09",
-      "end": "2026-11-20"
-     },
-     "reason": "",
-     "late": true
-    }
-   ]
+   "updatedAt": 1794979307993
   }
  },
  {
@@ -429,6 +429,7 @@
   "data": {
    "area": "Gymshark App",
    "assignee": "Anjali",
+   "completedOn": "2026-11-18",
    "createdAt": 1794893302446,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-20",
@@ -465,8 +466,7 @@
    "start": "2026-11-16",
    "status": "done",
    "title": "GS Pixel Perfection App",
-   "updatedAt": 1794980752268,
-   "completedOn": "2026-11-18"
+   "updatedAt": 1794980752268
   }
  },
  {
@@ -746,16 +746,13 @@
  {
   "id": "gh-mwloa7s6-k3odm",
   "data": {
-   "title": "GS Timer Banner Pixel Perfection",
-   "start": "2026-11-18",
-   "end": "2026-11-20",
-   "date": "2026-11-20",
-   "status": "in-progress",
-   "ready": true,
-   "highlight": false,
    "area": "Gymshark",
    "assignee": "Anjali",
-   "notes": "There are a number of small fixes required for variations of the hero banner to improve usability and options for the Content team.",
+   "createdAt": 1794979221990,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-20",
+   "end": "2026-11-20",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #GSA-1504",
@@ -766,8 +763,11 @@
      "url": "https://www.figma.com/design/OjBbNdL7AsmsVvn2umxTeL/GS-App?node-id=14237-91312"
     }
    ],
-   "createdAt": 1794979221990,
-   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "notes": "There are a number of small fixes required for variations of the hero banner to improve usability and options for the Content team.",
+   "ready": true,
+   "start": "2026-11-18",
+   "status": "in-progress",
+   "title": "GS Timer Banner Pixel Perfection",
    "updatedAt": 1794980737626
   }
  },
