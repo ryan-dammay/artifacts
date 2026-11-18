@@ -250,8 +250,8 @@
    "completedOn": "2026-11-05",
    "createdAt": 1794287924239,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
-   "date": "2026-11-09",
-   "end": "2026-11-09",
+   "date": "2026-11-20",
+   "end": "2026-11-20",
    "highlight": false,
    "links": [
     {
@@ -267,12 +267,28 @@
      "url": "https://bloomingdalesme.atlassian.net/browse/MI-2245"
     }
    ],
-   "notes": "Add alert message for language switching, adapted updates from BLM",
+   "notes": "Add alert message for language switching, adapted updates from BLM, prepare for discovery session",
    "ready": false,
    "start": "2026-11-09",
    "status": "done",
    "title": "MNP Bazaar Voice Updates",
-   "updatedAt": 1794897404687
+   "updatedAt": 1794979293860,
+   "dateHistory": [
+    {
+     "at": 1794979293860,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "start": "2026-11-09",
+      "end": "2026-11-09"
+     },
+     "to": {
+      "start": "2026-11-09",
+      "end": "2026-11-20"
+     },
+     "reason": "",
+     "late": true
+    }
+   ]
   }
  },
  {
