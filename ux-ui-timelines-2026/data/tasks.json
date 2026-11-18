@@ -755,7 +755,7 @@
    "end": "2026-11-20",
    "date": "2026-11-20",
    "status": "in-progress",
-   "ready": false,
+   "ready": true,
    "highlight": false,
    "area": "Gymshark",
    "assignee": "Anjali",
@@ -772,7 +772,7 @@
    ],
    "createdAt": 1794979221990,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
-   "updatedAt": 1794979221990
+   "updatedAt": 1794980737626
   }
  },
  {
