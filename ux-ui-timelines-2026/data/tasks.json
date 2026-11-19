@@ -802,23 +802,23 @@
  {
   "id": "gh-mwn1hcay-oqsb1",
   "data": {
-   "title": "Contextual Search (Help Customers Discover)",
-   "start": "2026-11-19",
-   "end": "2026-11-19",
-   "date": "2026-11-19",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Coach",
    "assignee": "Ryan",
-   "notes": "ed, including an occasion or style, to find relevant products.",
+   "createdAt": 1795061855626,
+   "date": "2026-11-19",
+   "end": "2026-11-19",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #COACH-2085",
      "url": "https://bloomingdalesme.atlassian.net/browse/COACH-2085"
     }
    ],
-   "createdAt": 1795061855626,
+   "notes": "ed, including an occasion or style, to find relevant products.",
+   "ready": false,
+   "start": "2026-11-19",
+   "status": "in-progress",
+   "title": "Contextual Search (Help Customers Discover)",
    "updatedAt": 1795061855626
   }
  },
