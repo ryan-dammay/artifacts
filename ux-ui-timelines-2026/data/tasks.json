@@ -823,6 +823,30 @@
   }
  },
  {
+  "id": "gh-mwnfw3uo-2v4g1",
+  "data": {
+   "title": "Amber Journey Analysis",
+   "start": "2026-11-19",
+   "end": "2026-11-20",
+   "date": "2026-11-20",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Bloomingdale's",
+   "assignee": "Anjali",
+   "notes": "Perform competitor analysis and research to identify CRO opportunities on the Amber Journey, specifically to increase redemption of points",
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/v4BRJYXLrvdxyl0Cplztzr/BLM-App-Headless?node-id=96683-15669"
+    }
+   ],
+   "createdAt": 1795086059136,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "updatedAt": 1795086059136
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
