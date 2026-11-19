@@ -800,6 +800,29 @@
   }
  },
  {
+  "id": "gh-mwn1hcay-oqsb1",
+  "data": {
+   "title": "Contextual Search (Help Customers Discover)",
+   "start": "2026-11-19",
+   "end": "2026-11-19",
+   "date": "2026-11-19",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Coach",
+   "assignee": "Ryan",
+   "notes": "ed, including an occasion or style, to find relevant products.",
+   "links": [
+    {
+     "label": "Jira #COACH-2085",
+     "url": "https://bloomingdalesme.atlassian.net/browse/COACH-2085"
+    }
+   ],
+   "createdAt": 1795061855626,
+   "updatedAt": 1795061855626
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
