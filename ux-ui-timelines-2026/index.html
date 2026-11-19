@@ -577,6 +577,9 @@ details.grp[open] > summary { margin-bottom: 8px; }
 .hdr-acts { display: flex; align-items: center; gap: 10px; }
 .goprod { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; font-size: 13px; }
 .goprod svg { fill: currentColor; }
+a.goprod { text-decoration: none; }
+a.goprod:hover { background: var(--line); }
+.hdr-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 .who { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 99px; margin-left: 6px; vertical-align: 1px; }
 .who.r { background: var(--ryan-soft); color: var(--ryan); }
 .who.a { background: var(--anjali-soft); color: var(--anjali); }
@@ -776,6 +779,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--muted); }
     <div>
       <h1>2026 UX/UI Timelines</h1>
       <p class="sub">Tasks, design files and KPI readings toward the 2026–27 goals, kept for the year-end review.</p>
+      <div class="hdr-links"><a class="btn ghost goprod hdr-link" id="jira-board" href="https://bloomingdalesme.atlassian.net/jira/software/c/projects/SF/boards/575/backlog?selectedIssue=SF-6732" target="_blank" rel="noopener" title="Open the SF board backlog in Jira (SF-6732)"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="1" y="1.5" width="3.4" height="11" rx="1"/><rect x="5.3" y="1.5" width="3.4" height="7" rx="1"/><rect x="9.6" y="1.5" width="3.4" height="9" rx="1"/></svg>SF board (Jira) ↗</a></div>
     </div>
     <div class="hdr-r">
       <div class="seg" role="group" aria-label="Show tasks for"><button type="button" data-who="all" aria-pressed="true">Everyone</button><button type="button" data-who="Ryan" aria-pressed="false">Ryan</button><button type="button" data-who="Anjali" aria-pressed="false">Anjali</button><button type="button" data-who="Talal" aria-pressed="false">Talal</button></div>
