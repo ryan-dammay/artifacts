@@ -854,7 +854,7 @@
    "end": "2026-11-27",
    "date": "2026-11-27",
    "status": "in-progress",
-   "ready": false,
+   "ready": true,
    "highlight": false,
    "area": "Mamas & Papas",
    "assignee": "Ryan",
@@ -866,7 +866,7 @@
     }
    ],
    "createdAt": 1795421442794,
-   "updatedAt": 1795421442794
+   "updatedAt": 1795421447699
   }
  },
  {
