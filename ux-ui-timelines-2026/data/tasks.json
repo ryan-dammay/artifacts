@@ -847,6 +847,29 @@
   }
  },
  {
+  "id": "gh-mwszkjje-i7q83",
+  "data": {
+   "title": "PDP Pair it With Recommender",
+   "start": "2026-11-23",
+   "end": "2026-11-27",
+   "date": "2026-11-27",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Mamas & Papas",
+   "assignee": "Ryan",
+   "notes": "As a customer, I want to see which products match with my desired product, so that I can buy a full set.",
+   "links": [
+    {
+     "label": "Jira #MNPSF-3644",
+     "url": "https://bloomingdalesme.atlassian.net/browse/MNPSF-3644"
+    }
+   ],
+   "createdAt": 1795421442794,
+   "updatedAt": 1795421442794
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
