@@ -830,6 +830,22 @@
    "createdAt": 1795086059136,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-24",
+   "dateHistory": [
+    {
+     "at": 1795426321598,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "end": "2026-11-20",
+      "start": "2026-11-19"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-24",
+      "start": "2026-11-19"
+     }
+    }
+   ],
    "end": "2026-11-24",
    "highlight": false,
    "links": [
@@ -843,38 +859,18 @@
    "start": "2026-11-19",
    "status": "in-progress",
    "title": "Amber Journey Analysis",
-   "updatedAt": 1795426321598,
-   "dateHistory": [
-    {
-     "at": 1795426321598,
-     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
-     "from": {
-      "start": "2026-11-19",
-      "end": "2026-11-20"
-     },
-     "to": {
-      "start": "2026-11-19",
-      "end": "2026-11-24"
-     },
-     "reason": "",
-     "late": true
-    }
-   ]
+   "updatedAt": 1795426321598
   }
  },
  {
   "id": "gh-mwszkjje-i7q83",
   "data": {
-   "title": "WEB - PDP Pair it With Recommender",
-   "start": "2026-11-23",
-   "end": "2026-11-27",
-   "date": "2026-11-27",
-   "status": "in-progress",
-   "ready": true,
-   "highlight": false,
    "area": "Mamas & Papas",
    "assignee": "Ryan",
-   "notes": "As a customer, I want to see which products match with my desired product, so that I can buy a full set.",
+   "createdAt": 1795421442794,
+   "date": "2026-11-27",
+   "end": "2026-11-27",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #MNPSF-3644",
@@ -889,31 +885,35 @@
      "url": "https://www.figma.com/design/vUQnf8SRJjtvzkvET3dDCC/MNP-Web--CRO--Working-File?node-id=27836-81255&p=f&m=dev"
     }
    ],
-   "createdAt": 1795421442794,
+   "notes": "As a customer, I want to see which products match with my desired product, so that I can buy a full set.",
+   "ready": true,
+   "start": "2026-11-23",
+   "status": "in-progress",
+   "title": "WEB - PDP Pair it With Recommender",
    "updatedAt": 1795426327614
   }
  },
  {
   "id": "gh-mwt2jnld-8upjo",
   "data": {
-   "title": "Pair it With - App",
-   "start": "2026-11-23",
-   "end": "2026-11-24",
-   "date": "2026-11-24",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Mamas & Papas",
    "assignee": "Anjali",
-   "notes": "Create the 'Pair It With' component on M&P App",
+   "createdAt": 1795426440241,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "date": "2026-11-24",
+   "end": "2026-11-24",
+   "highlight": false,
    "links": [
     {
      "label": "Figma",
      "url": "https://www.figma.com/design/TYJ8R9muD8ANefWLUf4cbg/M-P-App-Designs?node-id=28311-61827&t=avoxIFkFWyBAHo4A-1"
     }
    ],
-   "createdAt": 1795426440241,
-   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "notes": "Create the 'Pair It With' component on M&P App",
+   "ready": false,
+   "start": "2026-11-23",
+   "status": "in-progress",
+   "title": "Pair it With - App",
    "updatedAt": 1795426440241
   }
  },
