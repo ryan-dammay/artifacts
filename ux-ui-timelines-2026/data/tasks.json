@@ -829,8 +829,8 @@
    "assignee": "Anjali",
    "createdAt": 1795086059136,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
-   "date": "2026-11-20",
-   "end": "2026-11-20",
+   "date": "2026-11-24",
+   "end": "2026-11-24",
    "highlight": false,
    "links": [
     {
@@ -843,7 +843,23 @@
    "start": "2026-11-19",
    "status": "in-progress",
    "title": "Amber Journey Analysis",
-   "updatedAt": 1795086059136
+   "updatedAt": 1795426321598,
+   "dateHistory": [
+    {
+     "at": 1795426321598,
+     "by": "u_XhpqJMkeIsGAbDcqsWXk3A",
+     "from": {
+      "start": "2026-11-19",
+      "end": "2026-11-20"
+     },
+     "to": {
+      "start": "2026-11-19",
+      "end": "2026-11-24"
+     },
+     "reason": "",
+     "late": true
+    }
+   ]
   }
  },
  {
