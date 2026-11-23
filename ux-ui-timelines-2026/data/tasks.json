@@ -894,6 +894,30 @@
   }
  },
  {
+  "id": "gh-mwt2jnld-8upjo",
+  "data": {
+   "title": "Pair it With - App",
+   "start": "2026-11-23",
+   "end": "2026-11-24",
+   "date": "2026-11-24",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Mamas & Papas",
+   "assignee": "Anjali",
+   "notes": "Create the 'Pair It With' component on M&P App",
+   "links": [
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/TYJ8R9muD8ANefWLUf4cbg/M-P-App-Designs?node-id=28311-61827&t=avoxIFkFWyBAHo4A-1"
+    }
+   ],
+   "createdAt": 1795426440241,
+   "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
+   "updatedAt": 1795426440241
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
