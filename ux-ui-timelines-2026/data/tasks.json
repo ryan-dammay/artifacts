@@ -869,11 +869,11 @@
     }
    ],
    "notes": "Perform competitor analysis and research to identify CRO opportunities on the Amber Journey, specifically to increase redemption of points",
-   "ready": false,
+   "ready": true,
    "start": "2026-11-19",
    "status": "in-progress",
    "title": "Amber Journey Analysis",
-   "updatedAt": 1795426321598
+   "updatedAt": 1795504119141
   }
  },
  {
