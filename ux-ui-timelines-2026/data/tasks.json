@@ -1199,8 +1199,10 @@
    "notes": "Documenting key changes in our current design system vs GS UK",
    "ready": true,
    "start": "2026-10-29",
-   "status": "in-progress",
-   "title": "Gymshark Component Audit"
+   "status": "done",
+   "title": "Gymshark Component Audit",
+   "completedOn": "2026-11-24",
+   "updatedAt": 1795510143563
   }
  },
  {
