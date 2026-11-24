@@ -247,7 +247,7 @@
   "data": {
    "area": "Mamas & Papas",
    "assignee": "Anjali",
-   "completedOn": null,
+   "completedOn": "2026-11-24",
    "createdAt": 1794287924239,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-20",
@@ -286,9 +286,9 @@
    "notes": "Add alert message for language switching, adapted updates from BLM, prepare for discovery session",
    "ready": false,
    "start": "2026-11-09",
-   "status": "in-progress",
+   "status": "done",
    "title": "MNP Bazaar Voice Updates",
-   "updatedAt": 1795007315230
+   "updatedAt": 1795510094888
   }
  },
  {
