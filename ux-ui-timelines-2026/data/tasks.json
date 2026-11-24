@@ -780,9 +780,10 @@
    "notes": "There are a number of small fixes required for variations of the hero banner to improve usability and options for the Content team.",
    "ready": true,
    "start": "2026-11-18",
-   "status": "in-progress",
+   "status": "done",
    "title": "GS Timer Banner Pixel Perfection",
-   "updatedAt": 1794980737626
+   "updatedAt": 1795510086613,
+   "completedOn": "2026-11-24"
   }
  },
  {
