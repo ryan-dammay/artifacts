@@ -868,11 +868,11 @@
     }
    ],
    "notes": "ed, including an occasion or style, to find relevant products.",
-   "ready": false,
+   "ready": true,
    "start": "2026-11-19",
-   "status": "in-progress",
+   "status": "done",
    "title": "Contextual Search (Help Customers Discover)",
-   "updatedAt": 1795597171244,
+   "updatedAt": 1795597181443,
    "dateHistory": [
     {
      "at": 1795597166250,
@@ -888,7 +888,8 @@
      "reason": "",
      "late": true
     }
-   ]
+   ],
+   "completedOn": "2026-11-25"
   }
  },
  {
