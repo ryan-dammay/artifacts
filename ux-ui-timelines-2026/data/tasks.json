@@ -1026,6 +1026,29 @@
   }
  },
  {
+  "id": "gh-mwvx3jue-q51rf",
+  "data": {
+   "title": "APP - Help Customers discover Contextual Search",
+   "start": "2026-12-07",
+   "end": "2026-12-11",
+   "date": "2026-12-11",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
+   "links": [
+    {
+     "label": "Jira #BLMHD-3581",
+     "url": "https://bloomingdalesme.atlassian.net/browse/BLMHD-3581"
+    }
+   ],
+   "createdAt": 1795598689334,
+   "updatedAt": 1795598689334
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
