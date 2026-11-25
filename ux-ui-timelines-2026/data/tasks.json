@@ -1006,9 +1006,9 @@
   "id": "gh-mwvwwo9t-sybkz",
   "data": {
    "title": "WEB - Help Customers discover Contextual Search",
-   "start": "2026-12-07",
-   "end": "2026-12-11",
-   "date": "2026-12-11",
+   "start": "2026-11-23",
+   "end": "2026-11-27",
+   "date": "2026-11-27",
    "status": "in-progress",
    "ready": false,
    "highlight": false,
@@ -1022,7 +1022,23 @@
     }
    ],
    "createdAt": 1795598368481,
-   "updatedAt": 1795598368481
+   "updatedAt": 1795628494848,
+   "dateHistory": [
+    {
+     "at": 1795628494837,
+     "by": null,
+     "from": {
+      "start": "2026-12-07",
+      "end": "2026-12-11"
+     },
+     "to": {
+      "start": "2026-11-23",
+      "end": "2026-11-27"
+     },
+     "reason": "",
+     "late": false
+    }
+   ]
   }
  },
  {
