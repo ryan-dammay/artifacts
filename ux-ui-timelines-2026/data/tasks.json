@@ -793,8 +793,8 @@
    "assignee": "Ryan",
    "completedOn": "2026-11-18",
    "createdAt": 1795001144923,
-   "date": "2026-11-18",
-   "end": "2026-11-18",
+   "date": "2026-11-25",
+   "end": "2026-11-25",
    "highlight": false,
    "links": [
     {
@@ -815,7 +815,23 @@
    "start": "2026-11-17",
    "status": "done",
    "title": "Shopping Assistant - Launcher Animation",
-   "updatedAt": 1795597123520
+   "updatedAt": 1795597133046,
+   "dateHistory": [
+    {
+     "at": 1795597133025,
+     "by": null,
+     "from": {
+      "start": "2026-11-17",
+      "end": "2026-11-18"
+     },
+     "to": {
+      "start": "2026-11-17",
+      "end": "2026-11-25"
+     },
+     "reason": "",
+     "late": true
+    }
+   ]
   }
  },
  {
