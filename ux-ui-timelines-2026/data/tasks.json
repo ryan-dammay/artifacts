@@ -854,8 +854,8 @@
    "area": "Coach",
    "assignee": "Ryan",
    "createdAt": 1795061855626,
-   "date": "2026-11-26",
-   "end": "2026-11-26",
+   "date": "2026-11-25",
+   "end": "2026-11-25",
    "highlight": false,
    "links": [
     {
@@ -872,7 +872,7 @@
    "start": "2026-11-19",
    "status": "done",
    "title": "Contextual Search (Help Customers Discover)",
-   "updatedAt": 1795597181443,
+   "updatedAt": 1795597195467,
    "dateHistory": [
     {
      "at": 1795597166250,
@@ -884,6 +884,20 @@
      "to": {
       "start": "2026-11-19",
       "end": "2026-11-26"
+     },
+     "reason": "",
+     "late": true
+    },
+    {
+     "at": 1795597195467,
+     "by": null,
+     "from": {
+      "start": "2026-11-19",
+      "end": "2026-11-26"
+     },
+     "to": {
+      "start": "2026-11-19",
+      "end": "2026-11-25"
      },
      "reason": "",
      "late": true
