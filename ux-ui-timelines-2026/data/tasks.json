@@ -1045,9 +1045,9 @@
   "id": "gh-mwvx3jue-q51rf",
   "data": {
    "title": "APP - Help Customers discover Contextual Search",
-   "start": "2026-12-07",
-   "end": "2026-12-11",
-   "date": "2026-12-11",
+   "start": "2026-11-23",
+   "end": "2026-11-27",
+   "date": "2026-11-27",
    "status": "in-progress",
    "ready": false,
    "highlight": false,
@@ -1061,7 +1061,23 @@
     }
    ],
    "createdAt": 1795598689334,
-   "updatedAt": 1795598689334
+   "updatedAt": 1795628497945,
+   "dateHistory": [
+    {
+     "at": 1795628497933,
+     "by": null,
+     "from": {
+      "start": "2026-12-07",
+      "end": "2026-12-11"
+     },
+     "to": {
+      "start": "2026-11-23",
+      "end": "2026-11-27"
+     },
+     "reason": "",
+     "late": false
+    }
+   ]
   }
  },
  {
