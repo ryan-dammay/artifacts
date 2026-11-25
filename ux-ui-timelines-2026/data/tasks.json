@@ -804,6 +804,10 @@
     {
      "label": "URL",
      "url": "https://coach-agentforce-ae.mobify-storefront.com/product/BAG219983776xDarkBrown?pid=219983974"
+    },
+    {
+     "label": "Figma",
+     "url": "https://www.figma.com/design/EUkA8EtNAR4TSQ6BUbXFa5/COACH---Web-and-Mobile-2024?node-id=29201-58795&t=WJIKR3GxrgynEFRv-11"
     }
    ],
    "notes": "Enhance the existing Shopping Assistant launcher (bubble) displayed at the bottom-right corner of the website with animations to improve visibility and encourage customer engagement.  The launcher should animate when the page loads and display a rotating set of shopping prompts. On desktop, customers should also be able to trigger the animation by hovering over the launcher.  The existing functionality to open and close the Shopping Assistant panel should remain unchanged.",
@@ -811,7 +815,7 @@
    "start": "2026-11-17",
    "status": "done",
    "title": "Shopping Assistant - Launcher Animation",
-   "updatedAt": 1795005641778
+   "updatedAt": 1795597123520
   }
  },
  {
