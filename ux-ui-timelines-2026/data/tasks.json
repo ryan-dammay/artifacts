@@ -1049,6 +1049,29 @@
   }
  },
  {
+  "id": "gh-mwvzhb8r-wpc7m",
+  "data": {
+   "title": "WEB - Holition",
+   "start": "2026-12-28",
+   "end": "2027-01-01",
+   "date": "2027-01-01",
+   "status": "in-progress",
+   "ready": false,
+   "highlight": false,
+   "area": "Bloomingdale's",
+   "assignee": "Ryan",
+   "notes": "",
+   "links": [
+    {
+     "label": "Jira #BLMHW-740",
+     "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-740"
+    }
+   ],
+   "createdAt": 1795602690602,
+   "updatedAt": 1795602690603
+  }
+ },
+ {
   "id": "gymshark-gwp-enhancement-live",
   "data": {
    "area": "Gymshark",
