@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BLM search modal prototype</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#111111;text-decoration:none}a:hover{color:#111111;text-decoration:underline}
+#mq::placeholder{color:#767676;opacity:1}
+.caret{display:inline-block;width:1px;height:16px;background:#111111;margin-left:2px;vertical-align:-3px;animation:caretblink 1s steps(1) infinite}
+@keyframes caretblink{50%{opacity:0}}
+@keyframes modalin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes modalout{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px)}}
+@keyframes fadeout{from{opacity:1}to{opacity:0}}
+.modal{animation:modalin 200ms ease-out}
+.scrim{animation:fadein 200ms ease-out}
+.modal.out{animation:modalout 200ms ease-in forwards;pointer-events:none}
+.scrim.out{animation:fadeout 200ms ease-in forwards;pointer-events:none}
+.searchbtn:hover .line{border-bottom-color:#111111 !important}
+.sugg{display:block;padding:8px 0;border:0;background:none;text-align:left;font-family:Inter,sans-serif;font-size:16px;line-height:24px;color:#111111;cursor:pointer}
+.sugg:hover{text-decoration:underline}
+.chip:hover{border-color:#111111 !important;color:#111111 !important}
+.res{display:block;padding:8px 0;border:0;background:none;text-align:left;font-family:Inter,sans-serif;font-size:16px;line-height:24px;color:#767676;cursor:pointer}
+.res:hover{text-decoration:underline}
+.navtip{animation:tipin 160ms ease-out}
+@keyframes tipin{from{opacity:0;margin-top:4px}to{opacity:1;margin-top:0}}
+@media (prefers-reduced-motion: reduce){.caret,.modal,.scrim{animation:none}}
+.spk path{transform-box:view-box}
+.spk-big{transform-origin:12.34px 12.71px;animation:twinkle 4s ease-in-out infinite}
+.spk-small{transform-origin:24.78px 24.41px;animation:twinkle 4s ease-in-out .25s infinite}
+@keyframes twinkle{0%,22%,100%{transform:scale(1);opacity:1}11%{transform:scale(.85);opacity:.75}}
+@media (prefers-reduced-motion: reduce){.spk-big,.spk-small{animation:none}}
+</style>
+</helmet>
+<div id="smroot" style="width: 1440px; height: 1000px; position: relative; overflow: hidden; background: #FFFFFF; color: #111111; font-family: Inter, sans-serif">
+
+  <header style="width: 1440px; height: 120px; box-sizing: border-box; background: #FFFFFF; border-bottom: 1px solid #CBCBCB; padding: 24px 48px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center">
+    <div style="width: 100%; max-width: 1344px; display: flex; align-items: center; justify-content: space-between">
+      <div style="width: 345px; min-height: 36px; display: flex; align-items: center">
+        <button type="button" class="searchbtn" aria-label="Search" aria-haspopup="dialog" aria-expanded="{{isOpen}}" onClick="{{open}}" style="display: flex; align-items: center; padding: 0; margin: 0; border: 0; background: none; cursor: text; font-family: Inter, sans-serif; text-align: left">
+          <span class="line" style="width: 264px; box-sizing: border-box; border-bottom: 1px solid #767676; padding: 6px 0; display: flex; align-items: center; gap: 16px">
+            <img src="/_blob/7f61b0fbe5e086568a16bc6b01bbc424" alt="" style="width: 20px; height: 20px; display: block; flex: none">
+            <span aria-hidden="true" dir="rtl" style="flex: 1 0 0; min-width: 0; height: 20px; line-height: 20px; white-space: nowrap; overflow: hidden; text-align: left; font-size: 14px; color: #767676"><span dir="ltr" style="unicode-bidi: isolate">Search&#160;‘<span>{{typed}}</span><span class="caret"></span>’</span></span>
+          </span>
+          <svg class="spk" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width: 32px; height: 32px; display: block; flex: none"><path class="spk-big" d="M12.3427 3.20001C13.2204 8.90518 16.1461 11.8309 21.8513 12.7086C16.1461 13.5863 13.2204 16.5121 12.3427 22.2172C11.465 16.5121 8.53924 13.5863 2.83408 12.7086C8.53924 11.8309 11.465 8.90518 12.3427 3.20001Z" stroke="#111111" stroke-width="1.44" stroke-linejoin="round"/><path class="spk-small" d="M24.7774 20.0229C25.2162 22.656 26.5328 23.9726 29.1659 24.4115C26.5328 24.8503 25.2162 26.1669 24.7774 28.8C24.3385 26.1669 23.0219 24.8503 20.3888 24.4115C23.0219 23.9726 24.3385 22.656 24.7774 20.0229Z" stroke="#111111" stroke-width="1.44" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <a href="#" aria-label="Bloomingdale's home" style="display: block; width: 214.2px; height: 34px; flex: none"><img src="/_blob/f5c372e75cd6c8d7b340856985eeb779" alt="bloomingdale's" style="width: 214.2px; height: 34px; display: block"></a>
+      <div style="width: 345px; height: 36px; display: flex; align-items: center; justify-content: flex-end; gap: 32px">
+        <a href="#" aria-label="Account" style="display: flex"><img src="/_blob/e16a2369b3bed045b9a9672b43612aab" alt="" style="width: 24px; height: 24px; display: block"></a>
+        <a href="#" aria-label="Wishlist" style="display: flex"><img src="/_blob/4197262082d9b349e723ce5da6a2f857" alt="" style="width: 24px; height: 24px; display: block"></a>
+        <a href="#" aria-label="Shopping bag, 0 items" style="display: flex"><img src="/_blob/90fec36409659dea411b5a3e97e03837" alt="" style="width: 24px; height: 24px; display: block"></a>
+      </div>
+    </div>
+    <nav aria-label="Primary" style="width: 100%; max-width: 1344px; display: flex; align-items: flex-end; justify-content: space-between; font-size: 14px; line-height: 20px; font-weight: 500">
+      <a href="#" style="padding-bottom: 8px">New In</a><a href="#" style="padding-bottom: 8px">Women</a><a href="#" style="padding-bottom: 8px">Men</a><a href="#" style="padding-bottom: 8px">Jewelry</a><a href="#" style="padding-bottom: 8px">Shoes</a><a href="#" style="padding-bottom: 8px">Bags &amp; Accessories</a><a href="#" style="padding-bottom: 8px">Kids</a><a href="#" style="padding-bottom: 8px">Home</a><a href="#" style="padding-bottom: 8px">Gifts</a><a href="#" style="padding-bottom: 8px">Designers</a><a href="#" style="padding-bottom: 8px; color: #F45D5D">Sale</a>
+    </nav>
+  </header>
+
+  <div style="max-width: 1344px; margin: 0 auto; padding-top: 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+    <div style="height: 800px; background: #F5F5F5"></div>
+    <div style="height: 800px; background: #F5F5F5"></div>
+  </div>
+
+  <sc-if value="{{isOpen}}" hint-placeholder-val="{{ true }}">
+    <button type="button" class="{{scrimCls}}" tabindex="-1" aria-label="Close search" onClick="{{close}}" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%; border: 0; padding: 0; margin: 0; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 4"></button>
+    <div role="dialog" aria-modal="true" aria-label="Search" class="{{modalCls}}" onKeyDown="{{onKey}}" style="position: absolute; top: 0; left: 0; width: 1440px; min-height: 568px; box-sizing: border-box; background: #FFFFFF; padding: 24px 48px 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; z-index: 5">
+
+      <form role="search" onSubmit="{{submit}}" style="width: 100%; max-width: 1344px; height: 72px; box-sizing: border-box; margin: 0; padding: 24px; background: #F9F9F9; display: flex; align-items: center; gap: 16px">
+        <div style="flex: 1 0 0; min-width: 0; display: flex; align-items: center; gap: 16px">
+          <img src="/_blob/cad3d6f36fa2238385ed87a89959a94d" alt="" aria-hidden="true" style="width: 24px; height: 24px; display: block; flex: none">
+          <label for="mq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Search Bloomingdale’s</label>
+          <div style="flex: 1 0 0; min-width: 0; height: 24px; position: relative; display: flex; align-items: center">
+            <input id="mq" type="text" autoFocus="{{ true }}" autocomplete="off" value="{{val}}" onChange="{{onType}}" aria-description="Search the way you’d describe it: a designer, occasion, colour or budget" style="width: 100%; border: 0; outline: none; padding: 0; margin: 0; background: transparent; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #111111; caret-color: {{caretColor}}">
+            <sc-if value="{{isEmpty}}" hint-placeholder-val="{{ true }}">
+              <span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 24px; display: flex; align-items: center; pointer-events: none; white-space: nowrap; overflow: hidden; font-size: 16px; line-height: 24px; color: #767676"><span class="caret" style="height: 20px; margin: 0 1px 0 0; vertical-align: 0; flex: none"></span>Search the way you’d describe it</span>
+            </sc-if>
+          </div>
+        </div>
+        <button type="button" aria-label="Close search" onClick="{{close}}" style="width: 40px; height: 40px; margin: -8px; padding: 8px; border: 0; background: none; cursor: pointer; flex: none"><img src="/_blob/0fa26563b2c24a60d896671a76315902" alt="" style="width: 24px; height: 24px; display: block"></button>
+      </form>
+
+      <div style="width: 100%; max-width: 1344px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; row-gap: 32px">
+
+        <sc-if value="{{showExplainer}}" hint-placeholder-val="{{ true }}">
+        <div style="grid-column: 1; grid-row: 1; padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Contextual search</p>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 0">
+            <svg class="spk" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width: 32px; height: 32px; display: block; flex: none"><path class="spk-big" d="M12.3427 3.20001C13.2204 8.90518 16.1461 11.8309 21.8513 12.7086C16.1461 13.5863 13.2204 16.5121 12.3427 22.2172C11.465 16.5121 8.53924 13.5863 2.83408 12.7086C8.53924 11.8309 11.465 8.90518 12.3427 3.20001Z" stroke="#111111" stroke-width="1.44" stroke-linejoin="round"/><path class="spk-small" d="M24.7774 20.0229C25.2162 22.656 26.5328 23.9726 29.1659 24.4115C26.5328 24.8503 25.2162 26.1669 24.7774 28.8C24.3385 26.1669 23.0219 24.8503 20.3888 24.4115C23.0219 23.9726 24.3385 22.656 24.7774 20.0229Z" stroke="#111111" stroke-width="1.44" stroke-linejoin="round"/></svg>
+            <p style="margin: 0; flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 24px; color: #111111"><strong style="font-weight: 600">Search the way you’d describe it.</strong> The designer, occasion, colour or budget, and we’ll find the match.</p>
+          </div>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Try</p>
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 10px">
+              <button type="button" class="chip" onClick="{{ex.a}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">A black bag for evening</button>
+              <button type="button" class="chip" onClick="{{ex.b}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">A dress for a summer wedding</button>
+              <button type="button" class="chip" onClick="{{ex.c}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">A gift for him under AED 1,000 that he can wear to the office every day</button>
+              <button type="button" class="chip" onClick="{{ex.d}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">Designer sneakers on sale</button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{showProducts}}" hint-placeholder-val="{{ false }}">
+          <sc-if value="{{showProductCards}}" hint-placeholder-val="{{ false }}">
+          <div style="grid-column: 1; grid-row: 2; padding-top: 16px; display: flex; flex-direction: column; gap: 16px">
+            <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Product results</p>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px">
+              <div style="min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                <div style="position: relative; aspect-ratio: 433 / 650; background: #F7F7F7">
+                  <a href="#" aria-label="CHANEL, Sublimage L'Extrait Huile Levres" style="position: absolute; inset: 0"></a>
+                  <span aria-hidden="true" style="position: absolute; left: 8px; top: 8px; background: #FFFFFF; border-radius: 2px; padding: 5px; display: flex"><img src="/_blob/ac5e30871e7f6b4fc948eaf00cd7d1d1" alt="" style="width: 16px; height: 16px; display: block"></span>
+                  <button type="button" aria-label="Add to wishlist" style="position: absolute; right: 8px; top: 8px; padding: 4px; border: 0; border-radius: 1000px; background: none; display: flex; cursor: pointer"><img src="/_blob/005723db19329f3bd8d1b00c78bdbcd9" alt="" style="width: 18px; height: 18px; display: block"></button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px; padding-right: 16px">
+                  <a href="#" style="display: flex; flex-direction: column; gap: 2px; font-size: 12px; line-height: 16px; color: #111111; text-decoration: none; min-width: 0"><span style="font-weight: 600; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">CHANEL</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Sublimage L'Extrait Huile Levres</span></a>
+                  <div style="display: flex; flex-direction: column; align-items: flex-start"><span style="background: #111111; color: #FFFFFF; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; padding: 2px 4px; margin-bottom: 4px">New</span><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: #AE1800">AED X,XXX</span><span style="display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; font-weight: 500; color: #111111"><s style="color: #767676">AED X,XXX</s><span aria-hidden="true" style="width: 1px; height: 8px; background: #111111"></span>XX% OFF</span></div>
+                </div>
+              </div>
+              <div style="min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                <div style="position: relative; aspect-ratio: 433 / 650; background: #F7F7F7">
+                  <a href="#" aria-label="VICTORIA BECKHAM BEAUTY VICTORIA BECKHAM BEAUTY, Sublimage L'Extrait Huile Levres" style="position: absolute; inset: 0"></a>
+                  <span aria-hidden="true" style="position: absolute; left: 8px; top: 8px; background: #FFFFFF; border-radius: 2px; padding: 5px; display: flex"><img src="/_blob/ac5e30871e7f6b4fc948eaf00cd7d1d1" alt="" style="width: 16px; height: 16px; display: block"></span>
+                  <button type="button" aria-label="Add to wishlist" style="position: absolute; right: 8px; top: 8px; padding: 4px; border: 0; border-radius: 1000px; background: none; display: flex; cursor: pointer"><img src="/_blob/005723db19329f3bd8d1b00c78bdbcd9" alt="" style="width: 18px; height: 18px; display: block"></button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px; padding-right: 16px">
+                  <a href="#" style="display: flex; flex-direction: column; gap: 2px; font-size: 12px; line-height: 16px; color: #111111; text-decoration: none; min-width: 0"><span style="font-weight: 600; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical">VICTORIA BECKHAM BEAUTY VICTORIA BECKHAM BEAUTY</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Sublimage L'Extrait Huile Levres</span></a>
+                  <div style="display: flex; flex-direction: column; align-items: flex-start"><span style="font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; color: #AE1800; padding: 2px 0">New to sale</span><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: #AE1800">AED X,XXX</span><span style="display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; font-weight: 500; color: #111111"><s style="color: #767676">AED X,XXX</s><span aria-hidden="true" style="width: 1px; height: 8px; background: #111111"></span>XX% OFF</span></div>
+                </div>
+              </div>
+              <div style="min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                <div style="position: relative; aspect-ratio: 433 / 650; background: #F7F7F7">
+                  <a href="#" aria-label="FUGAZZI, Sublimage L'Extrait Huile Levres" style="position: absolute; inset: 0"></a>
+                  <span aria-hidden="true" style="position: absolute; left: 8px; top: 8px; background: #FFFFFF; border-radius: 2px; padding: 5px; display: flex"><img src="/_blob/ac5e30871e7f6b4fc948eaf00cd7d1d1" alt="" style="width: 16px; height: 16px; display: block"></span>
+                  <button type="button" aria-label="Add to wishlist" style="position: absolute; right: 8px; top: 8px; padding: 4px; border: 0; border-radius: 1000px; background: none; display: flex; cursor: pointer"><img src="/_blob/005723db19329f3bd8d1b00c78bdbcd9" alt="" style="width: 18px; height: 18px; display: block"></button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px; padding-right: 16px">
+                  <a href="#" style="display: flex; flex-direction: column; gap: 2px; font-size: 12px; line-height: 16px; color: #111111; text-decoration: none; min-width: 0"><span style="font-weight: 600; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">FUGAZZI</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Sublimage L'Extrait Huile Levres</span></a>
+                  <div style="display: flex; flex-direction: column; align-items: flex-start"><span style="background: #111111; color: #FFFFFF; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; padding: 2px 4px; margin-bottom: 4px">New</span><span style="font-size: 14px; line-height: 20px; font-weight: 600; color: #111111">AED X,XXX</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </sc-if>
+          <div style="grid-column: 2; grid-row: 1; padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+            <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Results</p>
+            <div style="display: flex; flex-direction: column; align-items: flex-start">
+            <sc-for list="{{results}}" as="r" hint-placeholder-count="7">
+              <button type="button" class="res" onClick="{{r.go}}"><sc-for list="{{r.segs}}" as="g"><span style="color: {{g.color}}">{{g.text}}</span></sc-for><span style="color: #767676"> in </span><strong style="font-weight: 600; color: #111111">{{r.cat}}</strong></button>
+            </sc-for>
+            </div>
+            <div style="padding-bottom: 16px"><a href="#" onClick="{{goAll}}" style="font-size: 12px; line-height: 16px; font-weight: 600; color: #111111; text-decoration: underline">Show All Results</a></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showEmpty}}" hint-placeholder-val="{{ false }}">
+          <div style="grid-column: 2; grid-row: 1; padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+            <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Results</p>
+            <div style="display: flex; flex-direction: column; gap: 8px; padding: 10px 0; color: #111111">
+              <p style="margin: 0; font-size: 16px; line-height: 24px">Sorry, there are no results for</p>
+              <p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; overflow-wrap: anywhere">"{{val}}"</p>
+              <p style="margin: 0; font-size: 14px; line-height: 20px">Try searching a different word or check the spelling</p>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{hasRecent}}" hint-placeholder-val="{{ true }}">
+          <div style="grid-column: {{recentCol}}; grid-row: {{recentRow}}; padding-top: 16px; display: flex; flex-direction: column; gap: 16px">
+            <div style="display: flex; align-items: center; gap: 16px">
+              <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676; white-space: nowrap">Your recent searches</p>
+              <button type="button" onClick="{{clearRecent}}" style="padding: 0; border: 0; background: none; font-family: Inter, sans-serif; font-size: 12px; line-height: 16px; font-weight: 600; color: #767676; text-decoration: underline; cursor: pointer">Clear All</button>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-start">
+              <sc-for list="{{recent}}" as="r" hint-placeholder-count="7">
+                <button type="button" class="sugg" onClick="{{r.pick}}">{{r.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showTrending}}" hint-placeholder-val="{{ false }}">
+          <div style="grid-column: {{trendingCol}}; grid-row: {{trendingRow}}; padding-top: 16px; display: flex; flex-direction: column; gap: 16px">
+            <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Trending searches</p>
+            <div style="display: flex; flex-direction: column; align-items: flex-start">
+              <sc-for list="{{trending}}" as="t" hint-placeholder-count="7">
+                <button type="button" class="sugg" onClick="{{t.pick}}">{{t.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showDesigners}}" hint-placeholder-val="{{ true }}">
+        <div style="grid-column: {{designerCol}}; grid-row: {{designerRow}}; padding-top: 16px; display: flex; flex-direction: column; gap: 16px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Designers</p>
+          <div style="display: flex; flex-direction: column; align-items: flex-start; font-size: 16px; line-height: 24px">
+            <sc-for list="{{designers}}" as="d" hint-placeholder-count="4">
+              <a href="#" onClick="{{d.go}}" style="padding: 8px 0"><sc-for list="{{d.segs}}" as="g"><span style="color: {{g.color}}">{{g.text}}</span></sc-for></a>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+
+      <p style="margin: 0; width: 100%; max-width: 1344px; padding-top: 16px; font-size: 12px; line-height: 16px; color: #767676">Press Enter to search • Esc to close</p>
+    </div>
+  </sc-if>
+  <sc-if value="{{navTip}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="navtip" style="position: absolute; left: {{tipX}}px; top: {{tipY}}px; transform: {{tipTransform}}; z-index: 20; pointer-events: none; display: flex; flex-direction: {{tipFlow}}; align-items: center; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1))">
+      <span style="background: #111111; color: #FFFFFF; border-radius: 2px; padding: 8px 12px; font-size: 12px; line-height: 16px; white-space: nowrap">{{tipText}}</span>
+      <span aria-hidden="true" style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: {{tipArrowTop}}; border-bottom: {{tipArrowBottom}}"></span>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startOpen":{"editor":"boolean","default":true},"hasHistory":{"editor":"boolean","default":true},"noResults":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  queries() {
+    return [
+      'a black bag for evening',
+      'a dress for a summer wedding',
+      'a gift for him under AED 1,000',
+      'white leather sneakers',
+      'a fresh fragrance for her',
+      'a cashmere sweater for winter'
+    ];
+  }
+  componentDidMount() {
+    if (this.props.startOpen ?? true) this.focusField();
+    var Q = this.queries();
+    var reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce) { this.setState({ qi: 0, n: Q[0].length, phase: 'static' }); return; }
+    this.setState({ qi: 0, n: 0, phase: 'type' });
+    this.timer = setTimeout(() => this.step(), 600);
+  }
+  componentWillUnmount() { clearTimeout(this.timer); clearTimeout(this.closeTimer); clearTimeout(this.focusTimer); clearTimeout(this.navTimer); }
+  focusField() {
+    clearTimeout(this.focusTimer);
+    this.focusTimer = setTimeout(() => { try { var el = document.getElementById('mq'); if (el) el.focus(); } catch (e) {} }, 30);
+  }
+  openModal() {
+    clearTimeout(this.closeTimer);
+    this.setState({ open: true, closing: false });
+    this.focusField();
+  }
+  closeModal() {
+    var s = this.state || {};
+    if (s.closing) return;
+    var reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce) { this.setState({ open: false, closing: false, val: '' }); return; }
+    this.setState({ closing: true });
+    this.closeTimer = setTimeout(() => this.setState({ open: false, closing: false, val: '' }), 200);
+  }
+  step() {
+    var Q = this.queries();
+    var s = this.state || {};
+    var qi = s.qi || 0, n = s.n || 0, phase = s.phase || 'type';
+    var q = Q[qi], delay = 60;
+    if (phase === 'type') {
+      if (n < q.length) { this.setState({ n: n + 1 }); delay = 55 + Math.random() * 45; }
+      else { this.setState({ phase: 'hold' }); delay = 1800; }
+    } else if (phase === 'hold') {
+      this.setState({ phase: 'delete' }); delay = 30;
+    } else if (phase === 'delete') {
+      if (n > 0) { this.setState({ n: n - 1 }); delay = 28; }
+      else { this.setState({ phase: 'type', qi: (qi + 1) % Q.length }); delay = 400; }
+    }
+    this.timer = setTimeout(() => this.step(), delay);
+  }
+  showNav(e, text) {
+    if (e && e.preventDefault) e.preventDefault();
+    var x = 720, y = 300;
+    try {
+      var root = document.getElementById('smroot').getBoundingClientRect();
+      var k = 1440 / root.width;
+      var el = (e.target && e.target.closest) ? e.target.closest('a, button') : null; var b = (el || e.currentTarget).getBoundingClientRect();
+      x = (e.clientX ? e.clientX : b.left + b.width / 2) - root.left; x = x * k;
+      y = (b.top - root.top) * k;
+    } catch (err) {}
+    clearTimeout(this.navTimer);
+    this.setState({ nav: { x: Math.round(x), y: Math.round(y), text: text, below: false, n: Date.now() } });
+    this.navTimer = setTimeout(() => this.setState({ nav: null }), 1600);
+  }
+  showNavBelowField(text) {
+    var x = 220, y = 96;
+    try {
+      var root = document.getElementById('smroot').getBoundingClientRect();
+      var k = 1440 / root.width;
+      var b = document.getElementById('mq').getBoundingClientRect();
+      x = (b.left - root.left) * k + 120;
+      y = (b.bottom - root.top) * k + 24;
+    } catch (err) {}
+    clearTimeout(this.navTimer);
+    this.setState({ nav: { x: Math.round(x), y: Math.round(y), text: text, below: true, n: Date.now() } });
+    this.navTimer = setTimeout(() => this.setState({ nav: null }), 1600);
+  }
+  catalogue() {
+    return [
+      ['black evening bags', 'Handbags'], ['black leather jackets', "Women's Clothing"], ['black dresses', 'Dresses'],
+      ['black heels', 'Shoes'], ['evening clutches', 'Handbags'], ['evening dresses', 'Dresses'],
+      ['evening shoes', 'Shoes'], ['bags for women', 'Handbags'], ['shoulder bags', 'Handbags'],
+      ['crossbody bags', 'Handbags'], ['tote bags', 'Handbags'], ['dresses for a summer wedding', 'Dresses'],
+      ['wedding guest dresses', 'Dresses'], ['summer dresses', 'Dresses'], ['white leather sneakers', 'Shoes'],
+      ['white sneakers', 'Shoes'], ['sneakers for men', "Men's Shoes"], ['designer sneakers on sale', 'Sale'],
+      ['gifts for him', 'Gifts'], ['gifts for her', 'Gifts'], ['gift cards', 'Gifts'], ['gift sets', 'Beauty'],
+      ['office wear for men', "Men's Clothing"], ['watches for men', 'Watches'], ['leather wallets for men', "Men's Accessories"],
+      ['cashmere sweaters', "Women's Clothing"], ['cashmere scarves', 'Accessories'], ['fresh fragrance for her', 'Beauty'],
+      ['fragrance for him', 'Beauty'], ['gold earrings', 'Jewelry'], ['tinted moisturisers', 'Beauty'], ['sunglasses', 'Accessories']
+    ];
+  }
+  designerList() {
+    return ["Terres d'Afrique", 'F.R.S For Restless Sleepers', 'RHODE', 'Moresque Parfum', 'Saint Laurent', 'Bottega Veneta',
+      'Chloé', 'Jimmy Choo', 'Valentino', 'Loewe', 'Charlotte Tilbury', 'Tom Ford', 'Dior', 'Gucci', 'Hugo Boss', 'Ralph Lauren'];
+  }
+  tokens(q) {
+    var stop = { a: 1, an: 1, the: 1, for: 1, under: 1, with: 1, in: 1, of: 1, to: 1, and: 1, aed: 1, that: 1, he: 1, she: 1, can: 1, on: 1, every: 1, day: 1, my: 1, me: 1 };
+    return q.toLowerCase().replace(/[^a-zÀ-ɏ'\s]/g, ' ').split(/\s+/).filter((w) => w && !stop[w]);
+  }
+  stem(w) { return (w.length > 3 && /[^s]s$/.test(w)) ? w.slice(0, -1) : w; }
+  segs(text, toks, base) {
+    var lower = text.toLowerCase();
+    var mask = new Array(text.length).fill(false);
+    var hits = 0;
+    toks.forEach((t) => {
+      var st = this.stem(t);
+      var esc = st.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var re = new RegExp('(^|[^a-zÀ-ɏ])(' + esc + ')', 'g');
+      var m, found = false;
+      while ((m = re.exec(lower)) !== null) {
+        var from = m.index + m[1].length;
+        for (var i = from; i < from + st.length; i++) mask[i] = true;
+        found = true;
+        if (re.lastIndex === m.index) re.lastIndex++;
+      }
+      if (found) hits++;
+    });
+    var out = [], cur = null;
+    for (var i = 0; i < text.length; i++) {
+      var hl = mask[i];
+      if (!cur || cur.hl !== hl) { cur = { hl: hl, text: '' }; out.push(cur); }
+      cur.text += text[i];
+    }
+    return { hits: hits, segs: out.map((g) => ({ text: g.text, color: g.hl ? '#FA16C8' : base })) };
+  }
+  renderVals() {
+    var Q = this.queries();
+    var s = this.state || {};
+    var isOpen = (s.open === undefined) ? (this.props.startOpen ?? true) : s.open;
+    var withHistory = (this.props.hasHistory ?? true) && !s.cleared;
+    var recent = withHistory ? ['gift cards', 'flat shoes', 'womens trainers', 'mens trainers', 'Nike', 'Clothing', 'Dresses'] : [];
+    var trending = ['valentines', "women's denim", "women's coats", 'new parent starter kit', 'category', 'home storage', 'adidas'];
+    var q = (s.val || '').trim();
+    var hasQuery = q !== '';
+    var noRes = hasQuery && ((this.props.noResults ?? false) || (q.length >= 6 && /^[asdfghjkl]+$/i.test(q)));
+    var fill = (label) => ({ label: label, pick: (e) => this.showNav(e, 'Goes to results page') });
+    var toks = this.tokens(q);
+    var results = this.catalogue().map((c) => { var r = this.segs(c[0], toks, '#767676'); return { text: c[0], cat: c[1], hits: r.hits, segs: r.segs }; })
+      .filter((r) => r.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 7)
+      .map((r) => ({ cat: r.cat, segs: r.segs, go: (e) => this.showNav(e, 'Goes to results page') }));
+    var dl = this.designerList().map((d) => { var r = this.segs(d, toks, '#111111'); return { hits: r.hits, segs: r.segs, go: (e) => this.showNav(e, 'Goes to results page') }; });
+    var dMatch = dl.filter((d) => d.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 4);
+    var designers = dMatch.length ? dMatch : dl.slice(0, 4).map((d) => ({ go: d.go, segs: [{ text: d.segs.map((g) => g.text).join(''), color: '#111111' }] }));
+    if (!toks.length) results = this.catalogue().slice(0, 7).map((c) => ({ cat: c[1], segs: [{ text: c[0], color: '#767676' }], go: (e) => this.showNav(e, 'Goes to results page') }));
+    if (hasQuery && toks.length && !results.length && !dMatch.length) noRes = true;
+
+    return {
+      isOpen: isOpen,
+      typed: Q[s.qi || 0].slice(0, s.n || 0),
+      val: s.val || '',
+      hasQuery: hasQuery,
+      isEmpty: (s.val || '') === '',
+      caretColor: (s.val || '') === '' ? 'transparent' : '#111111',
+      results: results,
+      designers: designers,
+      navTip: !!s.nav,
+      tipX: s.nav ? s.nav.x : 0,
+      tipY: s.nav ? s.nav.y : 0,
+      tipText: s.nav ? s.nav.text : '',
+      tipTransform: (s.nav && s.nav.below) ? 'translate(-50%, 0)' : 'translate(-50%, calc(-100% - 12px))',
+      tipFlow: (s.nav && s.nav.below) ? 'column-reverse' : 'column',
+      tipArrowTop: (s.nav && s.nav.below) ? '0' : '6px solid #111111',
+      tipArrowBottom: (s.nav && s.nav.below) ? '6px solid #111111' : '0',
+      goAll: (e) => this.showNav(e, 'Goes to results page'),
+      showExplainer: !hasQuery,
+      showDesigners: true,
+      showProducts: hasQuery && !noRes,
+      showProductCards: false,
+      showEmpty: hasQuery && noRes,
+      showTrending: recent.length === 0,
+      trendingCol: 3,
+      trendingRow: 1,
+      recentCol: 3,
+      recentRow: 1,
+      designerCol: hasQuery ? 1 : 2,
+      designerRow: 1,
+      ex: {
+        a: () => this.setState({ val: 'A black bag for evening' }),
+        b: () => this.setState({ val: 'A dress for a summer wedding' }),
+        c: () => this.setState({ val: 'A gift for him under AED 1,000 that he can wear to the office every day' }),
+        d: () => this.setState({ val: 'Designer sneakers on sale' })
+      },
+      hasRecent: recent.length > 0,
+      noRecent: recent.length === 0,
+      recent: recent.map(fill),
+      trending: trending.map(fill),
+      clearRecent: () => this.setState({ cleared: true }),
+      onType: (e) => this.setState({ val: e.target.value }),
+      modalCls: s.closing ? 'modal out' : 'modal',
+      scrimCls: s.closing ? 'scrim out' : 'scrim',
+      open: () => this.openModal(),
+      close: () => this.closeModal(),
+      submit: (e) => { e.preventDefault(); },
+      onKey: (e) => { if (e.key === 'Escape') { this.closeModal(); return; } if (e.key === 'Enter' && !e.isComposing && e.target && e.target.id === 'mq') { e.preventDefault(); if ((e.target.value || '').trim()) this.showNavBelowField('Goes to results page'); } }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BLM mobile search prototype</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#111111;text-decoration:none}a:hover{color:#111111;text-decoration:underline}
+.caret{display:inline-block;width:1px;height:20px;background:#111111;margin-right:1px;animation:caretblink 1s steps(1) infinite}
+@keyframes caretblink{50%{opacity:0}}
+@keyframes sheetin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes sheetout{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}@keyframes fadeout{from{opacity:1}to{opacity:0}}
+.sheet{animation:sheetin 200ms ease-out}.sheet.out{animation:sheetout 200ms ease-in forwards;pointer-events:none}
+.scrim{animation:fadein 200ms ease-out}.scrim.out{animation:fadeout 200ms ease-in forwards;pointer-events:none}
+.sugg,.res{display:block;padding:8px 0;border:0;background:none;text-align:left;font-family:Inter,sans-serif;font-size:16px;line-height:24px;cursor:pointer}
+.sugg{color:#111111}.res{color:#767676}.sugg:hover,.res:hover{text-decoration:underline}
+.chip:hover{border-color:#111111 !important;color:#111111 !important}
+.navtip{animation:fadein 160ms ease-out}
+.tip{transition:opacity 360ms ease, transform 360ms cubic-bezier(.2,.7,.2,1)}
+.spk path{transform-box:view-box}
+.spk-big{transform-origin:12.34px 12.71px;animation:twinkle 4s ease-in-out infinite}
+.spk-small{transform-origin:24.78px 24.41px;animation:twinkle 4s ease-in-out .25s infinite}
+@keyframes twinkle{0%,22%,100%{transform:scale(1);opacity:1}11%{transform:scale(.85);opacity:.75}}
+.spk-sm .spk-big,.spk-sm .spk-small{animation-name:twinkle-sm}
+@keyframes twinkle-sm{0%,22%,100%{transform:scale(1);opacity:1}11%{transform:scale(.7);opacity:.55}}
+@media (prefers-reduced-motion: reduce){.caret,.sheet,.scrim,.navtip,.spk-big,.spk-small{animation:none}.tip{transition:opacity 200ms linear;transform:none !important}}
+</style>
+</helmet>
+<div id="mroot" style="width: 375px; height: 812px; position: relative; overflow: hidden; background: #FFFFFF; color: #111111; font-family: Inter, sans-serif">
+
+  <header style="width: 375px; height: 56px; box-sizing: border-box; background: #FFFFFF; border-bottom: 1px solid #CBCBCB; padding: 0 16px; display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; align-items: center; gap: 16px; min-width: 76px; position: relative">
+      <a href="#" aria-label="Menu" style="display: flex"><img src="/_blob/a13bd0ef1439510db5cab89c1df1a9b5" alt="" style="width: 20px; height: 20px; display: block"></a>
+      <button type="button" aria-label="Search" aria-haspopup="dialog" aria-expanded="{{isOpen}}" onClick="{{open}}" style="display: flex; align-items: center; padding: 12px; margin: -12px; border: 0; background: none; cursor: pointer"><img src="/_blob/7f61b0fbe5e086568a16bc6b01bbc424" alt="" style="width: 20px; height: 20px; display: block"><svg class="spk spk-sm" width="16" height="16" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width: 16px; height: 16px; display: block; flex: none"><path class="spk-big" d="M12.3427 3.20001C13.2204 8.90518 16.1461 11.8309 21.8513 12.7086C16.1461 13.5863 13.2204 16.5121 12.3427 22.2172C11.465 16.5121 8.53924 13.5863 2.83408 12.7086C8.53924 11.8309 11.465 8.90518 12.3427 3.20001Z" stroke="#111111" stroke-width="1.92" stroke-linejoin="round"/><path class="spk-small" d="M24.7774 20.0229C25.2162 22.656 26.5328 23.9726 29.1659 24.4115C26.5328 24.8503 25.2162 26.1669 24.7774 28.8C24.3385 26.1669 23.0219 24.8503 20.3888 24.4115C23.0219 23.9726 24.3385 22.656 24.7774 20.0229Z" stroke="#111111" stroke-width="1.92" stroke-linejoin="round"/></svg></button>
+      <sc-if value="{{tipMounted}}" hint-placeholder-val="{{ false }}">
+        <div role="dialog" aria-label="Contextual search tip" class="tip" style="position: absolute; left: 0; top: 31px; width: 340px; z-index: 3; display: flex; flex-direction: column; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); opacity: {{tipOpacity}}; transform: {{tipTransform2}}; pointer-events: {{tipPointer}}">
+          <span aria-hidden="true" style="margin-left: 46px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #111111"></span>
+          <div style="background: #111111; color: #FFFFFF; border-radius: 2px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+            <p style="margin: 0; font-size: 10px; line-height: 16px; font-weight: 600">NEW • CONTEXTUAL SEARCH</p>
+            <p style="margin: 0; font-size: 12px; line-height: 16px">Search the way you’d describe it: a designer, occasion, colour or budget.</p>
+            <button type="button" onClick="{{dismissTip}}" style="align-self: flex-start; margin: -14px 0; padding: 14px 0; border: 0; background: none; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 12px; line-height: 16px; font-weight: 600; text-decoration: underline; cursor: pointer">Got It</button>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+    <a href="#" aria-label="Bloomingdale's home" style="display: block; width: 152px; height: 24.13px; flex: none"><img src="/_blob/f5c372e75cd6c8d7b340856985eeb779" alt="bloomingdale's" style="width: 152px; height: 24.13px; display: block"></a>
+    <div style="width: 76px; display: flex; align-items: center; justify-content: flex-end; gap: 16px">
+      <a href="#" aria-label="Wishlist" style="display: flex"><img src="/_blob/73297827a03cf01a0fd25f4b526842f3" alt="" style="width: 20px; height: 20px; display: block"></a>
+      <a href="#" aria-label="Shopping bag, 0 items" style="display: flex"><img src="/_blob/9687535707035d6301e25107f9b4b501" alt="" style="width: 24px; height: 24px; display: block"></a>
+    </div>
+  </header>
+
+  <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+    <div style="height: 440px; background: #F5F5F5"></div>
+    <div style="height: 16px; width: 60%; background: #F5F5F5"></div>
+    <div style="height: 16px; width: 40%; background: #F5F5F5"></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px"><div style="height: 240px; background: #F5F5F5"></div><div style="height: 240px; background: #F5F5F5"></div></div>
+  </div>
+
+  <sc-if value="{{isOpen}}" hint-placeholder-val="{{ true }}">
+    <button type="button" class="{{scrimCls}}" tabindex="-1" aria-label="Close search" onClick="{{close}}" style="position: absolute; inset: 0; width: 100%; border: 0; padding: 0; margin: 0; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 4"></button>
+    <div role="dialog" aria-modal="true" aria-label="Search" class="{{sheetCls}}" onKeyDown="{{onKey}}" style="position: absolute; top: 0; left: 0; width: 375px; max-height: 812px; overflow-y: auto; box-sizing: border-box; background: #FFFFFF; display: flex; flex-direction: column; z-index: 5">
+      <form role="search" onSubmit="{{submit}}" style="width: 375px; box-sizing: border-box; margin: 0; padding: 20px; background: #F9F9F9; display: flex; align-items: center; gap: 12px; flex: none">
+        <img src="/_blob/7f61b0fbe5e086568a16bc6b01bbc424" alt="" aria-hidden="true" style="width: 20px; height: 20px; display: block; flex: none">
+        <label for="mq2" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Search Bloomingdale’s</label>
+        <div style="flex: 1 0 0; min-width: 0; height: 24px; position: relative; display: flex; align-items: center">
+          <input id="mq2" type="text" autoFocus="{{ true }}" autocomplete="off" enterkeyhint="search" value="{{val}}" onChange="{{onType}}" aria-description="Search the way you’d describe it: a designer, occasion, colour or budget" style="width: 100%; border: 0; outline: none; padding: 0; margin: 0; background: transparent; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #111111; caret-color: {{caretColor}}">
+          <sc-if value="{{isEmpty}}" hint-placeholder-val="{{ true }}">
+            <span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 24px; display: flex; align-items: center; pointer-events: none; white-space: nowrap; overflow: hidden; font-size: 16px; line-height: 24px; color: #767676"><span class="caret"></span>Search the way you’d describe it</span>
+          </sc-if>
+        </div>
+        <button type="button" aria-label="Close search" onClick="{{close}}" style="width: 44px; height: 44px; margin: -12px; padding: 12px; border: 0; background: none; cursor: pointer; flex: none"><img src="/_blob/1a6db21b140e57f5b82528d443f998e9" alt="" style="width: 20px; height: 20px; display: block"></button>
+      </form>
+
+      <div style="padding: 16px 16px 24px; display: flex; flex-direction: column; gap: 16px">
+
+        <sc-if value="{{showExplainer}}" hint-placeholder-val="{{ true }}">
+        <div style="padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Contextual search</p>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 0">
+            <svg class="spk" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width: 32px; height: 32px; display: block; flex: none"><path class="spk-big" d="M12.3427 3.20001C13.2204 8.90518 16.1461 11.8309 21.8513 12.7086C16.1461 13.5863 13.2204 16.5121 12.3427 22.2172C11.465 16.5121 8.53924 13.5863 2.83408 12.7086C8.53924 11.8309 11.465 8.90518 12.3427 3.20001Z" stroke="#111111" stroke-width="1.44" stroke-linejoin="round"/><path class="spk-small" d="M24.7774 20.0229C25.2162 22.656 26.5328 23.9726 29.1659 24.4115C26.5328 24.8503 25.2162 26.1669 24.7774 28.8C24.3385 26.1669 23.0219 24.8503 20.3888 24.4115C23.0219 23.9726 24.3385 22.656 24.7774 20.0229Z" stroke="#111111" stroke-width="1.44" stroke-linejoin="round"/></svg>
+            <p style="margin: 0; flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 24px; color: #111111"><strong style="font-weight: 600">Search the way you’d describe it.</strong> The designer, occasion, colour or budget, and we’ll find the match.</p>
+          </div>
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Try</p>
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 10px">
+            <button type="button" class="chip" onClick="{{ex.a}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">A black bag for evening</button>
+            <button type="button" class="chip" onClick="{{ex.b}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">A dress for a summer wedding</button>
+            <button type="button" class="chip" onClick="{{ex.c}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">A gift for him under AED 1,000 that he can wear to the office every day</button>
+            <button type="button" class="chip" onClick="{{ex.d}}" style="max-width: 100%; padding: 6px 16px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; color: #767676; text-align: left; cursor: pointer">Designer sneakers on sale</button>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{showResults}}" hint-placeholder-val="{{ false }}">
+        <div style="padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Results</p>
+          <div style="display: flex; flex-direction: column; align-items: flex-start">
+            <sc-for list="{{results}}" as="r" hint-placeholder-count="7">
+              <button type="button" class="res" onClick="{{r.go}}"><sc-for list="{{r.segs}}" as="g"><span style="color: {{g.color}}">{{g.text}}</span></sc-for><span style="color: #767676"> in </span><strong style="font-weight: 600; color: #111111">{{r.cat}}</strong></button>
+            </sc-for>
+          </div>
+          <div style="padding-bottom: 16px"><a href="#" onClick="{{goAll}}" style="font-size: 12px; line-height: 16px; font-weight: 600; color: #111111; text-decoration: underline">Show All Results</a></div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{showEmpty}}" hint-placeholder-val="{{ false }}">
+        <div style="padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Results</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; padding: 10px 0; color: #111111">
+            <p style="margin: 0; font-size: 16px; line-height: 24px">Sorry, there are no results for</p>
+            <p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; overflow-wrap: anywhere">"{{val}}"</p>
+            <p style="margin: 0; font-size: 14px; line-height: 20px">Try searching a different word or check the spelling</p>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
+        <div style="padding-top: 16px; display: flex; flex-direction: column; gap: 16px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Designers</p>
+          <div style="display: flex; flex-direction: column; align-items: flex-start; font-size: 16px; line-height: 24px">
+            <sc-for list="{{designers}}" as="d" hint-placeholder-count="4">
+              <a href="#" onClick="{{d.go}}" style="padding: 8px 0"><sc-for list="{{d.segs}}" as="g"><span style="color: {{g.color}}">{{g.text}}</span></sc-for></a>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{hasRecent}}" hint-placeholder-val="{{ true }}">
+        <div style="padding-top: 16px; display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; align-items: center; gap: 16px">
+            <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676; white-space: nowrap">Your recent searches</p>
+            <button type="button" onClick="{{clearRecent}}" style="padding: 12px 0; margin: -12px 0; border: 0; background: none; font-family: Inter, sans-serif; font-size: 12px; line-height: 16px; font-weight: 600; color: #767676; text-decoration: underline; cursor: pointer">Clear All</button>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-start">
+            <sc-for list="{{recent}}" as="r" hint-placeholder-count="7">
+              <button type="button" class="sugg" onClick="{{r.pick}}">{{r.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{showTrending}}" hint-placeholder-val="{{ false }}">
+        <div style="padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #767676">Trending searches</p>
+          <div style="display: flex; flex-direction: column; align-items: flex-start">
+            <sc-for list="{{trending}}" as="t" hint-placeholder-count="7">
+              <button type="button" class="sugg" onClick="{{t.pick}}">{{t.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{navTip}}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="navtip" style="position: absolute; left: {{tipX}}px; top: {{tipY}}px; transform: {{tipTransform}}; z-index: 20; pointer-events: none; display: flex; flex-direction: {{tipFlow}}; align-items: center; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1))">
+      <span style="background: #111111; color: #FFFFFF; border-radius: 2px; padding: 8px 12px; font-size: 12px; line-height: 16px; white-space: nowrap">{{tipText}}</span>
+      <span aria-hidden="true" style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: {{tipArrowTop}}; border-bottom: {{tipArrowBottom}}"></span>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startOpen":{"editor":"boolean","default":false},"showTip":{"editor":"boolean","default":true},"hasHistory":{"editor":"boolean","default":true},"noResults":{"editor":"boolean","default":false},"$preview":{"width":375,"height":812}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (this.props.startOpen ?? false) this.focusField();
+    else if (this.props.showTip ?? true) this.showTip(1200);
+  }
+  showTip(delay) {
+    clearTimeout(this.tipTimer);
+    this.setState({ tip: 'mounted' });
+    this.tipTimer = setTimeout(() => this.setState({ tip: 'in' }), delay);
+  }
+  hideTip() {
+    var t = (this.state || {}).tip;
+    if (t !== 'in' && t !== 'mounted') return;
+    clearTimeout(this.tipTimer);
+    this.setState({ tip: 'out' });
+    this.tipTimer = setTimeout(() => this.setState({ tip: 'gone' }), 400);
+  }
+  componentWillUnmount() { clearTimeout(this.closeTimer); clearTimeout(this.focusTimer); clearTimeout(this.navTimer); clearTimeout(this.tipTimer); }
+  reduce() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  focusField() {
+    clearTimeout(this.focusTimer);
+    this.focusTimer = setTimeout(() => { try { var el = document.getElementById('mq2'); if (el) el.focus(); } catch (e) {} }, 30);
+  }
+  openSheet() { clearTimeout(this.closeTimer); var t = (this.state || {}).tip; if (t && t !== 'gone') { clearTimeout(this.tipTimer); this.setState({ tip: 'gone' }); } this.setState({ open: true, closing: false }); this.focusField(); }
+  closeSheet() {
+    var s = this.state || {};
+    if (s.closing) return;
+    if (this.reduce()) { this.setState({ open: false, closing: false, val: '' }); return; }
+    this.setState({ closing: true });
+    this.closeTimer = setTimeout(() => this.setState({ open: false, closing: false, val: '' }), 200);
+  }
+  scale() { var r = document.getElementById('mroot').getBoundingClientRect(); return { r: r, k: 375 / r.width }; }
+  showNav(e, text) {
+    if (e && e.preventDefault) e.preventDefault();
+    var x = 187, y = 300;
+    try {
+      var sc = this.scale(); var el = (e.target && e.target.closest) ? e.target.closest('a, button') : null; var b = (el || e.currentTarget).getBoundingClientRect();
+      x = ((e.clientX ? e.clientX : b.left + b.width / 2) - sc.r.left) * sc.k;
+      y = (b.top - sc.r.top) * sc.k;
+    } catch (err) {}
+    x = Math.max(90, Math.min(285, x));
+    clearTimeout(this.navTimer);
+    this.setState({ nav: { x: Math.round(x), y: Math.round(y), text: text, below: false } });
+    this.navTimer = setTimeout(() => this.setState({ nav: null }), 1600);
+  }
+  showNavBelowField(text) {
+    var x = 130, y = 76;
+    try {
+      var sc = this.scale(); var b = document.getElementById('mq2').getBoundingClientRect();
+      x = Math.max(90, (b.left - sc.r.left) * sc.k + 60);
+      y = (b.bottom - sc.r.top) * sc.k + 28;
+    } catch (err) {}
+    clearTimeout(this.navTimer);
+    this.setState({ nav: { x: Math.round(x), y: Math.round(y), text: text, below: true } });
+    this.navTimer = setTimeout(() => this.setState({ nav: null }), 1600);
+  }
+  catalogue() {
+    return [
+      ['black evening bags', 'Handbags'], ['black leather jackets', "Women's Clothing"], ['black dresses', 'Dresses'],
+      ['black heels', 'Shoes'], ['evening clutches', 'Handbags'], ['evening dresses', 'Dresses'],
+      ['evening shoes', 'Shoes'], ['bags for women', 'Handbags'], ['shoulder bags', 'Handbags'],
+      ['crossbody bags', 'Handbags'], ['tote bags', 'Handbags'], ['dresses for a summer wedding', 'Dresses'],
+      ['wedding guest dresses', 'Dresses'], ['summer dresses', 'Dresses'], ['white leather sneakers', 'Shoes'],
+      ['white sneakers', 'Shoes'], ['sneakers for men', "Men's Shoes"], ['designer sneakers on sale', 'Sale'],
+      ['gifts for him', 'Gifts'], ['gifts for her', 'Gifts'], ['gift cards', 'Gifts'], ['gift sets', 'Beauty'],
+      ['office wear for men', "Men's Clothing"], ['watches for men', 'Watches'], ['leather wallets for men', "Men's Accessories"],
+      ['cashmere sweaters', "Women's Clothing"], ['cashmere scarves', 'Accessories'], ['fresh fragrance for her', 'Beauty'],
+      ['fragrance for him', 'Beauty'], ['gold earrings', 'Jewelry'], ['tinted moisturisers', 'Beauty'], ['sunglasses', 'Accessories']
+    ];
+  }
+  designerList() {
+    return ["Terres d'Afrique", 'F.R.S For Restless Sleepers', 'RHODE', 'Moresque Parfum', 'Saint Laurent', 'Bottega Veneta',
+      'Chloé', 'Jimmy Choo', 'Valentino', 'Loewe', 'Charlotte Tilbury', 'Tom Ford', 'Dior', 'Gucci', 'Hugo Boss', 'Ralph Lauren'];
+  }
+  tokens(q) {
+    var stop = { a: 1, an: 1, the: 1, for: 1, under: 1, with: 1, in: 1, of: 1, to: 1, and: 1, aed: 1, that: 1, he: 1, she: 1, can: 1, on: 1, every: 1, day: 1, my: 1, me: 1 };
+    return q.toLowerCase().replace(/[^a-zÀ-ɏ'\s]/g, ' ').split(/\s+/).filter((w) => w && !stop[w]);
+  }
+  stem(w) { return w.length > 4 ? w.replace(/(es|s)$/, '') : w; }
+  segs(text, toks, base) {
+    var lower = text.toLowerCase();
+    var mask = new Array(text.length).fill(false);
+    var hits = 0;
+    toks.forEach((t) => {
+      var st = this.stem(t);
+      var esc = st.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var re = new RegExp('(^|[^a-zÀ-ɏ])(' + esc + ')', 'g');
+      var m, found = false;
+      while ((m = re.exec(lower)) !== null) {
+        var from = m.index + m[1].length;
+        for (var i = from; i < from + st.length; i++) mask[i] = true;
+        found = true;
+        if (re.lastIndex === m.index) re.lastIndex++;
+      }
+      if (found) hits++;
+    });
+    var out = [], cur = null;
+    for (var i = 0; i < text.length; i++) {
+      var hl = mask[i];
+      if (!cur || cur.hl !== hl) { cur = { hl: hl, text: '' }; out.push(cur); }
+      cur.text += text[i];
+    }
+    return { hits: hits, segs: out.map((g) => ({ text: g.text, color: g.hl ? '#FA16C8' : base })) };
+  }
+  renderVals() {
+    var s = this.state || {};
+    var isOpen = (s.open === undefined) ? (this.props.startOpen ?? false) : s.open;
+    var withHistory = (this.props.hasHistory ?? true) && !s.cleared;
+    var recent = withHistory ? ['gift cards', 'flat shoes', 'womens trainers', 'mens trainers', 'Nike', 'Clothing', 'Dresses'] : [];
+    var trending = ['valentines', "women's denim", "women's coats", 'new parent starter kit', 'category', 'home storage', 'adidas'];
+    var q = (s.val || '').trim();
+    var hasQuery = q !== '';
+    var noRes = hasQuery && ((this.props.noResults ?? false) || (q.length >= 6 && /^[asdfghjkl]+$/i.test(q)));
+    var go = (e) => this.showNav(e, 'Goes to results page');
+    var fill = (label) => ({ label: label, pick: go });
+    var toks = this.tokens(q);
+    var results = this.catalogue().map((c) => { var r = this.segs(c[0], toks, '#767676'); return { cat: c[1], hits: r.hits, segs: r.segs }; })
+      .filter((r) => r.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 7).map((r) => ({ cat: r.cat, segs: r.segs, go: go }));
+    var dl = this.designerList().map((d) => { var r = this.segs(d, toks, '#111111'); return { hits: r.hits, segs: r.segs, go: go }; });
+    var dMatch = dl.filter((d) => d.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 4);
+    var designers = dMatch.length ? dMatch : dl.slice(0, 4).map((d) => ({ go: go, segs: [{ text: d.segs.map((g) => g.text).join(''), color: '#111111' }] }));
+    if (!toks.length) results = this.catalogue().slice(0, 7).map((c) => ({ cat: c[1], segs: [{ text: c[0], color: '#767676' }], go: go }));
+    if (hasQuery && toks.length && !results.length && !dMatch.length) noRes = true;
+    var below = s.nav && s.nav.below;
+    var setVal = (t) => () => this.setState({ val: t });
+    return {
+      isOpen: isOpen,
+      tipMounted: !!s.tip && s.tip !== 'gone',
+      tipOpacity: s.tip === 'in' ? 1 : 0,
+      tipTransform2: s.tip === 'in' ? 'none' : (s.tip === 'out' ? 'translateY(-4px)' : 'translateY(8px)'),
+      tipPointer: s.tip === 'in' ? 'auto' : 'none',
+      dismissTip: () => this.hideTip(),
+      sheetCls: s.closing ? 'sheet out' : 'sheet',
+      scrimCls: s.closing ? 'scrim out' : 'scrim',
+      val: s.val || '',
+      isEmpty: (s.val || '') === '',
+      caretColor: (s.val || '') === '' ? 'transparent' : '#111111',
+      hasQuery: hasQuery,
+      showExplainer: !hasQuery,
+      showResults: hasQuery && !noRes,
+      showEmpty: hasQuery && noRes,
+      results: results,
+      designers: designers,
+      hasRecent: recent.length > 0,
+      showTrending: recent.length === 0,
+      recent: recent.map(fill),
+      trending: trending.map(fill),
+      clearRecent: () => this.setState({ cleared: true }),
+      ex: { a: setVal('A black bag for evening'), b: setVal('A dress for a summer wedding'), c: setVal('A gift for him under AED 1,000 that he can wear to the office every day'), d: setVal('Designer sneakers on sale') },
+      onType: (e) => this.setState({ val: e.target.value }),
+      open: () => this.openSheet(),
+      close: () => this.closeSheet(),
+      submit: (e) => { e.preventDefault(); },
+      onKey: (e) => { if (e.key === 'Escape') { this.closeSheet(); return; } if (e.key === 'Enter' && !e.isComposing && e.target && e.target.id === 'mq2') { e.preventDefault(); if ((e.target.value || '').trim()) this.showNavBelowField('Goes to results page'); } },
+      goAll: go,
+      navTip: !!s.nav,
+      tipX: s.nav ? s.nav.x : 0,
+      tipY: s.nav ? s.nav.y : 0,
+      tipText: s.nav ? s.nav.text : '',
+      tipTransform: below ? 'translate(-50%, 0)' : 'translate(-50%, calc(-100% - 12px))',
+      tipFlow: below ? 'column-reverse' : 'column',
+      tipArrowTop: below ? '0' : '6px solid #111111',
+      tipArrowBottom: below ? '6px solid #111111' : '0'
+    };
+  }
+}
+</script>
+</body>
+</html>

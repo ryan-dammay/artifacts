@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloomingdale's Contextual Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light}
+body{margin:0;background:#F5F5F5;color:#111111;font:15px/1.5 Inter,sans-serif}
+header.top{background:#FFFFFF;border-bottom:1px solid #CBCBCB;padding:40px 24px 32px;text-align:center}
+header.top img{width:214px;height:34px;display:block;margin:0 auto 20px}
+h1{margin:0;font-weight:600;font-size:32px;line-height:1.2}
+header.top p{margin:12px auto 0;max-width:720px;color:#4A4A4A}
+main{max-width:1480px;margin:0 auto;padding:16px 24px 80px}
+.sec{padding-top:48px}
+h2{margin:0 0 20px;font-weight:600;font-size:20px;line-height:1.3}
+.note{align-self:start;background:#FFFFFF;box-shadow:0 0 0 1px #CBCBCB;padding:20px 22px;font-size:14px;color:#333333;max-width:460px}
+.note h3{margin:0 0 8px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#767676;font-weight:600}
+.note ul{margin:0;padding-left:18px}
+.note li{margin:4px 0}
+.grid{display:grid;gap:28px;grid-template-columns:1fr}
+.grid-mobile{grid-template-columns:repeat(auto-fit,minmax(260px,420px))}
+.board{margin:0;min-width:0}
+figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px;font-size:13px}
+figcaption .t{flex:1 1 240px}
+figcaption a{color:#111111;text-underline-offset:3px;white-space:nowrap}
+.tag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid #111111;padding:3px 6px}
+.frame{position:relative;width:100%;aspect-ratio:var(--w)/var(--h);overflow:hidden;background:#FFFFFF;box-shadow:0 0 0 1px #CBCBCB}
+.frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0}
+footer{max-width:1480px;margin:0 auto;padding:0 24px 48px;color:#767676;font-size:13px}
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="assets/logo.svg" alt="bloomingdale's">
+  <h1>Contextual Search</h1>
+  <p>Contextual search for bloomingdales.ae, built from the BLM Design System and the BLMHW Sprint 2 search designs: an animated placeholder and first-visit tip in the header, and a search modal that explains contextual search, highlights matches as you type and handles no results. Boards marked Prototype are clickable.</p>
+</header>
+<main>
+  <section class="sec">
+    <h2>Desktop · 1440px</h2>
+    <div class="grid">
+      <figure class="board" data-w="1440" data-h="660" style="--w:1440;--h:660">
+        <figcaption><span class="t">Desktop 1440 · Default (animated placeholder + first-visit tip)</span><span class="tag">Prototype</span><a href="boards/Main.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/Main.html" title="Desktop 1440 · Default (animated placeholder + first-visit tip)" loading="lazy" scrolling="no" width="1440" height="660"></iframe></div>
+      </figure>
+<aside class="note"><h3>BLM notes</h3><ul><li>Header and search field follow the BLM Design System (Header / Status=DK, Search / Type=Contextual): Inter, #111 / #767676 / #CBCBCB.</li><li>On this board the sparkles replays the tip for review; in the flow, a click anywhere on the search (sparkles included) opens the search modal below.</li><li>Placeholder cycles BLM-specific queries and scrolls on one line, never wraps or truncates.</li></ul></aside>
+      <figure class="board" data-w="1440" data-h="1000" style="--w:1440;--h:1000">
+        <figcaption><span class="t">Desktop 1440 · Search modal (prototype: click anywhere on the search to open; ×, Esc or the overlay closes)</span><span class="tag">Prototype</span><a href="boards/SearchModal.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/SearchModal.html" title="Desktop 1440 · Search modal (prototype: click anywhere on the search to open; ×, Esc or the overlay closes)" loading="lazy" scrolling="no" width="1440" height="1000"></iframe></div>
+      </figure>
+<aside class="note"><h3>Search modal (BLMHW Sprint 2, Desktop)</h3><ul><li>The whole search (icon, field and sparkles) is one target: a click anywhere opens the modal over the header. Focus goes to the field.</li><li>Search box: #F9F9F9, 72px, “Search the way you’d describe it”, 24px search + 24px close (no sparkles in the box).</li><li>One grid for every state: 3 equal columns, 32px gaps (Figma Desktop), so nothing shifts while typing.<br>– Empty field: Contextual search explainer + Try examples | Designers | Your recent searches (+ Clear All), or Trending if no history<br>– Typing (suggestions): Designers | Results + Show All Results | Your recent searches (Trending if no history). Product results are hidden.<br>– No results: Designers | “Sorry, there are no results for …” | Your recent searches.</li><li>Preview: toggle “hasHistory” and “noResults” in Tweaks; typing keyboard mash (e.g. asdasdasd) also triggers no results.</li><li>Dummy live search: Results and Designers filter from a sample catalogue as you type; the typed words or letters are highlighted in magenta (#FA16C8, per Figma; 3.4:1 on white, below AA for 16px). Clicking any result, designer, recent or trending search, or Show All Results shows a “Goes to results page” tooltip (prototype stand-in for the PLP). The Try examples still fill the field. Pressing Enter with a query shows “Goes to results page” under the search box; Enter on an empty field does nothing. Try “a black bag for evening”, “dress”, “sne” or “gucci”.</li><li>Overlay: 70% black; ×, Esc or clicking it closes (animated) and clears the query.</li></ul></aside>
+    </div>
+  </section>
+  <section class="sec">
+    <h2>Mobile · 375px</h2>
+    <div class="grid grid-mobile">
+      <figure class="board" data-w="375" data-h="812" style="--w:375;--h:812">
+        <figcaption><span class="t">Mobile 375 · Homepage + search (prototype: tap the search to open; ×, Esc or the overlay closes)</span><span class="tag">Prototype</span><a href="boards/MobileSearch.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/MobileSearch.html" title="Mobile 375 · Homepage + search (prototype: tap the search to open; ×, Esc or the overlay closes)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
+      </figure>
+<aside class="note"><h3>Mobile search (BLMHW Sprint 2, Mobile)</h3><ul><li>Homepage header (BLM Design System): search icon + 16px sparkles as one tap target; first-visit tip (340px, “NEW • CONTEXTUAL SEARCH … Got It”) fades in after load and goes for good after Got It or opening search.</li><li>Tap the search: the search sheet drops over the header (same 200ms open/close as desktop), focus goes to the field, 16px text so iOS doesn’t zoom.</li><li>Search box: #F9F9F9, 20px padding, 20px search + close icons.</li><li>Sections stack in one column, same logic as desktop:<br>– Empty field: Contextual search explainer + Try examples → Your recent searches (Trending if no history)<br>– Typing: Results (live highlight) → Designers → Your recent searches<br>– No results: “Sorry, there are no results for …” → Designers → Your recent searches</li><li>Results, designers, recent and trending taps show “Goes to results page”; Enter does the same under the field.</li><li>Long content scrolls inside the sheet; the 70% overlay fills any space below it.</li><li>Tweaks: startOpen, showTip, hasHistory, noResults. Device status bar and Safari bar from the Figma are left out.</li></ul></aside>
+    </div>
+  </section>
+</main>
+<footer>Designed in Claude; this GitHub copy runs the same boards with a small stand-in runtime (source/dc-lite.js). Product, designer and result content is placeholder or demo data; links show a “Goes to results page” tooltip instead of navigating.</footer>
+<script>
+function fit(){document.querySelectorAll('.board').forEach(function(b){var f=b.querySelector('.frame'),i=b.querySelector('iframe');var s=f.clientWidth/Number(b.dataset.w);i.style.transform='scale('+s+')';});}
+window.addEventListener('resize',fit);window.addEventListener('load',fit);fit();
+</script>
+</body>
+</html>
