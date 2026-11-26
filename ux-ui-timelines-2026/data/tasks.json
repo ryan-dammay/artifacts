@@ -896,6 +896,10 @@
     {
      "label": "Figma",
      "url": "https://www.figma.com/design/EUkA8EtNAR4TSQ6BUbXFa5/COACH---Web-and-Mobile-2024?node-id=29201-58795&t=WJIKR3GxrgynEFRv-11"
+    },
+    {
+     "label": "URL",
+     "url": "https://ryan-dammay.github.io/artifacts/coach-contextual-search/"
     }
    ],
    "notes": "ed, including an occasion or style, to find relevant products.",
@@ -903,7 +907,7 @@
    "start": "2026-11-19",
    "status": "done",
    "title": "Contextual Search (Help Customers Discover)",
-   "updatedAt": 1795597195467
+   "updatedAt": 1795670066015
   }
  },
  {
