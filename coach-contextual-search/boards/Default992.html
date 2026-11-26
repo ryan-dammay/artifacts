@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COACH search · recommended default · 992px</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#555555}
+input::placeholder{color:#595959;opacity:1}
+.caret{display:inline-block;width:1px;height:16px;background:#111111;margin-left:2px;animation:caretblink 1s steps(1) infinite}
+@keyframes caretblink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.caret{animation:none}}
+.tip{transition:opacity 360ms ease, transform 360ms cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion: reduce){.tip{transition:opacity 200ms linear;transform:none !important}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+<style>html{background:#E9E9E9}body{margin:0}#stage{width:992px;margin:0 auto}#root{width:992px;height:700px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(0,0,0,.06)}</style>
+</head>
+<body>
+<div id="stage"><div id="root"></div></div>
+<template id="tpl">
+<div style="width: 992px; height: 700px; box-sizing: border-box; padding: 40px 0; background: #F5F5F5; color: #111111; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; display: flex; flex-direction: column; gap: 28px">
+
+  <p style="margin: 0 48px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">A · Returning visitor</p>
+  <div style="background: #FFFFFF">
+    <div style="background: #000000; color: #FFFFFF; font-size: 11px; letter-spacing: 0.1em; text-align: center; padding: 12px 0">BUY NOW, PAY LATER WITH TABBY &amp; TAMARA</div>
+    <header style="border-bottom: 1px solid #E5E5E5">
+      <div style="width: 928px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; padding: 26px 0 18px">
+        <div style="display: flex; align-items: center; gap: 24px; font-size: 14px">
+          <a href="#" style="display: flex; align-items: center; gap: 8px; text-decoration: none"><svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><rect width="6" height="14" fill="#EF3340"/><rect x="6" width="16" height="4.67" fill="#009739"/><rect x="6" y="4.67" width="16" height="4.67" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="0.5"/><rect x="6" y="9.33" width="16" height="4.67" fill="#000000"/></svg>UAE<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="#111111"/></svg></a>
+          <a href="#" style="display: flex; align-items: center; gap: 6px; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg>Stores</a>
+        </div>
+        <a href="#" aria-label="COACH home" style="display: block; line-height: 0"><img src="../assets/coach-logo.png" alt="COACH" style="width: 114px; height: 13.0px; display: block"></a>
+        <div style="display: flex; align-items: center; justify-content: flex-end; gap: 18px">
+          <form role="search" style="display: flex; align-items: center; gap: 8px; width: 220px; border-bottom: 1px solid #111111; padding: 6px 0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M10 3c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5C7.4 8.9 9.4 6.9 10 3z"/><path d="M18.5 14.5c.3 1.8 1.2 2.7 3 3-1.8.3-2.7 1.2-3 3-.3-1.8-1.2-2.7-3-3 1.8-.3 2.7-1.2 3-3z"/></svg>
+            <label for="qa" class="sr">Search</label>
+            <div style="flex: 1; min-width: 0; position: relative; display: flex; align-items: center">
+              <input id="qa" value="{{valA}}" onChange="{{typeA}}" autocomplete="off" style="width: 100%; border: 0; outline: 0; padding: 0; background: transparent; font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #111111">
+              <sc-if value="{{emptyA}}" hint-placeholder-val="{{ true }}">
+                <span aria-hidden="true" dir="rtl" style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none; white-space: nowrap; overflow: hidden; text-align: left; font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #595959"><span dir="ltr" style="unicode-bidi: isolate">Search&#160;‘<span>{{typed}}</span><span class="caret"></span>’</span></span>
+              </sc-if>
+            </div>
+            <button type="submit" aria-label="Search" style="border: 0; background: none; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></button>
+          </form>
+          <a href="#" aria-label="Wishlist"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></a>
+          <a href="#" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.5 3.8-5 7-5s6 1.5 7 5"/></svg></a>
+          <a href="#" aria-label="Bag"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></a>
+        </div>
+      </div>
+      <nav aria-label="Main" style="display: flex; justify-content: center; gap: 34px; font-size: 13px; letter-spacing: 0.1em; padding: 4px 0 18px">
+        <a href="#" style="text-decoration: none">SALE</a><a href="#" style="text-decoration: none">NEW</a><a href="#" style="text-decoration: none">WOMEN</a><a href="#" style="text-decoration: none">MEN</a><a href="#" style="text-decoration: none">BAGS</a><a href="#" style="text-decoration: none">SHOES</a><a href="#" style="text-decoration: none">GIFTS</a><a href="#" style="text-decoration: none">OUTLET</a>
+      </nav>
+    </header>
+  </div>
+
+  <div style="margin: 8px 48px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+    <p style="margin: 0; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">B · First visit · tip fades in after page load; fades out for good after “Got it” or first search</p>
+    <button type="button" onClick="{{replayTip}}" style="display: flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 10px; border: 1px dashed #8C8C8C; background: transparent; font-family: inherit; font-size: 12px; color: #4A4A4A; cursor: pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A4A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg>Prototype only · replay tip</button>
+  </div>
+  <div style="background: #FFFFFF; position: relative">
+    <div style="background: #000000; color: #FFFFFF; font-size: 11px; letter-spacing: 0.1em; text-align: center; padding: 12px 0">BUY NOW, PAY LATER WITH TABBY &amp; TAMARA</div>
+    <header style="border-bottom: 1px solid #E5E5E5">
+      <div style="width: 928px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; padding: 26px 0 18px">
+        <div style="display: flex; align-items: center; gap: 24px; font-size: 14px">
+          <a href="#" style="display: flex; align-items: center; gap: 8px; text-decoration: none"><svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><rect width="6" height="14" fill="#EF3340"/><rect x="6" width="16" height="4.67" fill="#009739"/><rect x="6" y="4.67" width="16" height="4.67" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="0.5"/><rect x="6" y="9.33" width="16" height="4.67" fill="#000000"/></svg>UAE<svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M0 0h10L5 6z" fill="#111111"/></svg></a>
+          <a href="#" style="display: flex; align-items: center; gap: 6px; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg>Stores</a>
+        </div>
+        <a href="#" aria-label="COACH home" style="display: block; line-height: 0"><img src="../assets/coach-logo.png" alt="COACH" style="width: 114px; height: 13.0px; display: block"></a>
+        <div style="display: flex; align-items: center; justify-content: flex-end; gap: 18px">
+          <div style="position: relative; flex: none">
+          <form role="search" style="display: flex; align-items: center; gap: 8px; width: 220px; border-bottom: 1px solid #111111; padding: 6px 0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M10 3c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5C7.4 8.9 9.4 6.9 10 3z"/><path d="M18.5 14.5c.3 1.8 1.2 2.7 3 3-1.8.3-2.7 1.2-3 3-.3-1.8-1.2-2.7-3-3 1.8-.3 2.7-1.2 3-3z"/></svg>
+            <label for="qb" class="sr">Search</label>
+            <div style="flex: 1; min-width: 0; position: relative; display: flex; align-items: center">
+              <input id="qb" value="{{valB}}" onChange="{{typeB}}" autocomplete="off" style="width: 100%; border: 0; outline: 0; padding: 0; background: transparent; font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #111111">
+              <sc-if value="{{emptyB}}" hint-placeholder-val="{{ true }}">
+                <span aria-hidden="true" dir="rtl" style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none; white-space: nowrap; overflow: hidden; text-align: left; font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #595959"><span dir="ltr" style="unicode-bidi: isolate">Search&#160;‘<span>{{typed}}</span><span class="caret"></span>’</span></span>
+              </sc-if>
+            </div>
+            <button type="submit" aria-label="Search" style="border: 0; background: none; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></button>
+          </form>
+          <sc-if value="{{tipMounted}}" hint-placeholder-val="{{ true }}">
+            <div role="dialog" aria-label="Contextual search tip" class="tip" style="position: absolute; top: calc(100% + 14px); left: 0; width: 260px; box-sizing: border-box; background: #111111; color: #FFFFFF; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; z-index: 3; opacity: {{tipOpacity}}; transform: {{tipTransform}}; pointer-events: {{tipPointer}}">
+              <div aria-hidden="true" style="position: absolute; top: -6px; left: 104px; width: 12px; height: 12px; background: #111111; transform: rotate(45deg)"></div>
+              <p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M10 3c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5C7.4 8.9 9.4 6.9 10 3z"/><path d="M18.5 14.5c.3 1.8 1.2 2.7 3 3-1.8.3-2.7 1.2-3 3-.3-1.8-1.2-2.7-3-3 1.8-.3 2.7-1.2 3-3z"/></svg>New · Contextual search</p>
+              <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 15px; line-height: 22px">Search the way you’d describe it: a style, occasion, colour or budget.</p>
+              <button type="button" onClick="{{dismissTip}}" style="align-self: flex-start; margin-top: 4px; border: 0; background: none; color: #FFFFFF; padding: 0; font-family: inherit; font-size: 13px; letter-spacing: 0.06em; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 24px">Got it</button>
+            </div>
+          </sc-if>
+          </div>
+          <a href="#" aria-label="Wishlist"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></a>
+          <a href="#" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.5 3.8-5 7-5s6 1.5 7 5"/></svg></a>
+          <a href="#" aria-label="Bag"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.4" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></a>
+          
+        </div>
+      </div>
+      <nav aria-label="Main" style="display: flex; justify-content: center; gap: 34px; font-size: 13px; letter-spacing: 0.1em; padding: 4px 0 18px">
+        <a href="#" style="text-decoration: none">SALE</a><a href="#" style="text-decoration: none">NEW</a><a href="#" style="text-decoration: none">WOMEN</a><a href="#" style="text-decoration: none">MEN</a><a href="#" style="text-decoration: none">BAGS</a><a href="#" style="text-decoration: none">SHOES</a><a href="#" style="text-decoration: none">GIFTS</a><a href="#" style="text-decoration: none">OUTLET</a>
+      </nav>
+    </header>
+  </div>
+</div>
+</template>
+<script>(function(global,factory){typeof exports==="object"&&typeof module!=="undefined"?module.exports=factory():typeof define==="function"&&define.amd?define(factory):(global=global||self,global.morphdom=factory())})(this,function(){"use strict";var DOCUMENT_FRAGMENT_NODE=11;function morphAttrs(fromNode,toNode){var toNodeAttrs=toNode.attributes;var attr;var attrName;var attrNamespaceURI;var attrValue;var fromValue;if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE||fromNode.nodeType===DOCUMENT_FRAGMENT_NODE){return}for(var i=toNodeAttrs.length-1;i>=0;i--){attr=toNodeAttrs[i];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;attrValue=attr.value;if(attrNamespaceURI){attrName=attr.localName||attrName;fromValue=fromNode.getAttributeNS(attrNamespaceURI,attrName);if(fromValue!==attrValue){if(attr.prefix==="xmlns"){attrName=attr.name}fromNode.setAttributeNS(attrNamespaceURI,attrName,attrValue)}}else{fromValue=fromNode.getAttribute(attrName);if(fromValue!==attrValue){fromNode.setAttribute(attrName,attrValue)}}}var fromNodeAttrs=fromNode.attributes;for(var d=fromNodeAttrs.length-1;d>=0;d--){attr=fromNodeAttrs[d];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;if(attrNamespaceURI){attrName=attr.localName||attrName;if(!toNode.hasAttributeNS(attrNamespaceURI,attrName)){fromNode.removeAttributeNS(attrNamespaceURI,attrName)}}else{if(!toNode.hasAttribute(attrName)){fromNode.removeAttribute(attrName)}}}}var range;var NS_XHTML="http://www.w3.org/1999/xhtml";var doc=typeof document==="undefined"?undefined:document;var HAS_TEMPLATE_SUPPORT=!!doc&&"content"in doc.createElement("template");var HAS_RANGE_SUPPORT=!!doc&&doc.createRange&&"createContextualFragment"in doc.createRange();function createFragmentFromTemplate(str){var template=doc.createElement("template");template.innerHTML=str;return template.content.childNodes[0]}function createFragmentFromRange(str){if(!range){range=doc.createRange();range.selectNode(doc.body)}var fragment=range.createContextualFragment(str);return fragment.childNodes[0]}function createFragmentFromWrap(str){var fragment=doc.createElement("body");fragment.innerHTML=str;return fragment.childNodes[0]}function toElement(str){str=str.trim();if(HAS_TEMPLATE_SUPPORT){return createFragmentFromTemplate(str)}else if(HAS_RANGE_SUPPORT){return createFragmentFromRange(str)}return createFragmentFromWrap(str)}function compareNodeNames(fromEl,toEl){var fromNodeName=fromEl.nodeName;var toNodeName=toEl.nodeName;var fromCodeStart,toCodeStart;if(fromNodeName===toNodeName){return true}fromCodeStart=fromNodeName.charCodeAt(0);toCodeStart=toNodeName.charCodeAt(0);if(fromCodeStart<=90&&toCodeStart>=97){return fromNodeName===toNodeName.toUpperCase()}else if(toCodeStart<=90&&fromCodeStart>=97){return toNodeName===fromNodeName.toUpperCase()}else{return false}}function createElementNS(name,namespaceURI){return!namespaceURI||namespaceURI===NS_XHTML?doc.createElement(name):doc.createElementNS(namespaceURI,name)}function moveChildren(fromEl,toEl){var curChild=fromEl.firstChild;while(curChild){var nextChild=curChild.nextSibling;toEl.appendChild(curChild);curChild=nextChild}return toEl}function syncBooleanAttrProp(fromEl,toEl,name){if(fromEl[name]!==toEl[name]){fromEl[name]=toEl[name];if(fromEl[name]){fromEl.setAttribute(name,"")}else{fromEl.removeAttribute(name)}}}var specialElHandlers={OPTION:function(fromEl,toEl){var parentNode=fromEl.parentNode;if(parentNode){var parentName=parentNode.nodeName.toUpperCase();if(parentName==="OPTGROUP"){parentNode=parentNode.parentNode;parentName=parentNode&&parentNode.nodeName.toUpperCase()}if(parentName==="SELECT"&&!parentNode.hasAttribute("multiple")){if(fromEl.hasAttribute("selected")&&!toEl.selected){fromEl.setAttribute("selected","selected");fromEl.removeAttribute("selected")}parentNode.selectedIndex=-1}}syncBooleanAttrProp(fromEl,toEl,"selected")},INPUT:function(fromEl,toEl){syncBooleanAttrProp(fromEl,toEl,"checked");syncBooleanAttrProp(fromEl,toEl,"disabled");if(fromEl.value!==toEl.value){fromEl.value=toEl.value}if(!toEl.hasAttribute("value")){fromEl.removeAttribute("value")}},TEXTAREA:function(fromEl,toEl){var newValue=toEl.value;if(fromEl.value!==newValue){fromEl.value=newValue}var firstChild=fromEl.firstChild;if(firstChild){var oldValue=firstChild.nodeValue;if(oldValue==newValue||!newValue&&oldValue==fromEl.placeholder){return}firstChild.nodeValue=newValue}},SELECT:function(fromEl,toEl){if(!toEl.hasAttribute("multiple")){var selectedIndex=-1;var i=0;var curChild=fromEl.firstChild;var optgroup;var nodeName;while(curChild){nodeName=curChild.nodeName&&curChild.nodeName.toUpperCase();if(nodeName==="OPTGROUP"){optgroup=curChild;curChild=optgroup.firstChild}else{if(nodeName==="OPTION"){if(curChild.hasAttribute("selected")){selectedIndex=i;break}i++}curChild=curChild.nextSibling;if(!curChild&&optgroup){curChild=optgroup.nextSibling;optgroup=null}}}fromEl.selectedIndex=selectedIndex}}};var ELEMENT_NODE=1;var DOCUMENT_FRAGMENT_NODE$1=11;var TEXT_NODE=3;var COMMENT_NODE=8;function noop(){}function defaultGetNodeKey(node){if(node){return node.getAttribute&&node.getAttribute("id")||node.id}}function morphdomFactory(morphAttrs){return function morphdom(fromNode,toNode,options){if(!options){options={}}if(typeof toNode==="string"){if(fromNode.nodeName==="#document"||fromNode.nodeName==="HTML"||fromNode.nodeName==="BODY"){var toNodeHtml=toNode;toNode=doc.createElement("html");toNode.innerHTML=toNodeHtml}else{toNode=toElement(toNode)}}else if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE$1){toNode=toNode.firstElementChild}var getNodeKey=options.getNodeKey||defaultGetNodeKey;var onBeforeNodeAdded=options.onBeforeNodeAdded||noop;var onNodeAdded=options.onNodeAdded||noop;var onBeforeElUpdated=options.onBeforeElUpdated||noop;var onElUpdated=options.onElUpdated||noop;var onBeforeNodeDiscarded=options.onBeforeNodeDiscarded||noop;var onNodeDiscarded=options.onNodeDiscarded||noop;var onBeforeElChildrenUpdated=options.onBeforeElChildrenUpdated||noop;var skipFromChildren=options.skipFromChildren||noop;var addChild=options.addChild||function(parent,child){return parent.appendChild(child)};var childrenOnly=options.childrenOnly===true;var fromNodesLookup=Object.create(null);var keyedRemovalList=[];function addKeyedRemoval(key){keyedRemovalList.push(key)}function walkDiscardedChildNodes(node,skipKeyedNodes){if(node.nodeType===ELEMENT_NODE){var curChild=node.firstChild;while(curChild){var key=undefined;if(skipKeyedNodes&&(key=getNodeKey(curChild))){addKeyedRemoval(key)}else{onNodeDiscarded(curChild);if(curChild.firstChild){walkDiscardedChildNodes(curChild,skipKeyedNodes)}}curChild=curChild.nextSibling}}}function removeNode(node,parentNode,skipKeyedNodes){if(onBeforeNodeDiscarded(node)===false){return}if(parentNode){parentNode.removeChild(node)}onNodeDiscarded(node);walkDiscardedChildNodes(node,skipKeyedNodes)}function indexTree(node){if(node.nodeType===ELEMENT_NODE||node.nodeType===DOCUMENT_FRAGMENT_NODE$1){var curChild=node.firstChild;while(curChild){var key=getNodeKey(curChild);if(key){fromNodesLookup[key]=curChild}indexTree(curChild);curChild=curChild.nextSibling}}}indexTree(fromNode);function handleNodeAdded(el){onNodeAdded(el);var curChild=el.firstChild;while(curChild){var nextSibling=curChild.nextSibling;var key=getNodeKey(curChild);if(key){var unmatchedFromEl=fromNodesLookup[key];if(unmatchedFromEl&&compareNodeNames(curChild,unmatchedFromEl)){curChild.parentNode.replaceChild(unmatchedFromEl,curChild);morphEl(unmatchedFromEl,curChild)}else{handleNodeAdded(curChild)}}else{handleNodeAdded(curChild)}curChild=nextSibling}}function cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey){while(curFromNodeChild){var fromNextSibling=curFromNodeChild.nextSibling;if(curFromNodeKey=getNodeKey(curFromNodeChild)){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}}function morphEl(fromEl,toEl,childrenOnly){var toElKey=getNodeKey(toEl);if(toElKey){delete fromNodesLookup[toElKey]}if(!childrenOnly){var beforeUpdateResult=onBeforeElUpdated(fromEl,toEl);if(beforeUpdateResult===false){return}else if(beforeUpdateResult instanceof HTMLElement){fromEl=beforeUpdateResult;indexTree(fromEl)}morphAttrs(fromEl,toEl);onElUpdated(fromEl);if(onBeforeElChildrenUpdated(fromEl,toEl)===false){return}}if(fromEl.nodeName!=="TEXTAREA"){morphChildren(fromEl,toEl)}else{specialElHandlers.TEXTAREA(fromEl,toEl)}}function morphChildren(fromEl,toEl){var skipFrom=skipFromChildren(fromEl,toEl);var curToNodeChild=toEl.firstChild;var curFromNodeChild=fromEl.firstChild;var curToNodeKey;var curFromNodeKey;var fromNextSibling;var toNextSibling;var matchingFromEl;outer:while(curToNodeChild){toNextSibling=curToNodeChild.nextSibling;curToNodeKey=getNodeKey(curToNodeChild);while(!skipFrom&&curFromNodeChild){fromNextSibling=curFromNodeChild.nextSibling;if(curToNodeChild.isSameNode&&curToNodeChild.isSameNode(curFromNodeChild)){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}curFromNodeKey=getNodeKey(curFromNodeChild);var curFromNodeType=curFromNodeChild.nodeType;var isCompatible=undefined;if(curFromNodeType===curToNodeChild.nodeType){if(curFromNodeType===ELEMENT_NODE){if(curToNodeKey){if(curToNodeKey!==curFromNodeKey){if(matchingFromEl=fromNodesLookup[curToNodeKey]){if(fromNextSibling===matchingFromEl){isCompatible=false}else{fromEl.insertBefore(matchingFromEl,curFromNodeChild);if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=matchingFromEl;curFromNodeKey=getNodeKey(curFromNodeChild)}}else{isCompatible=false}}}else if(curFromNodeKey){isCompatible=false}isCompatible=isCompatible!==false&&compareNodeNames(curFromNodeChild,curToNodeChild);if(isCompatible){morphEl(curFromNodeChild,curToNodeChild)}}else if(curFromNodeType===TEXT_NODE||curFromNodeType==COMMENT_NODE){isCompatible=true;if(curFromNodeChild.nodeValue!==curToNodeChild.nodeValue){curFromNodeChild.nodeValue=curToNodeChild.nodeValue}}}if(isCompatible){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}if(curToNodeKey&&(matchingFromEl=fromNodesLookup[curToNodeKey])&&compareNodeNames(matchingFromEl,curToNodeChild)){if(!skipFrom){addChild(fromEl,matchingFromEl)}morphEl(matchingFromEl,curToNodeChild)}else{var onBeforeNodeAddedResult=onBeforeNodeAdded(curToNodeChild);if(onBeforeNodeAddedResult!==false){if(onBeforeNodeAddedResult){curToNodeChild=onBeforeNodeAddedResult}if(curToNodeChild.actualize){curToNodeChild=curToNodeChild.actualize(fromEl.ownerDocument||doc)}addChild(fromEl,curToNodeChild);handleNodeAdded(curToNodeChild)}}curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling}cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey);var specialElHandler=specialElHandlers[fromEl.nodeName];if(specialElHandler){specialElHandler(fromEl,toEl)}}var morphedNode=fromNode;var morphedNodeType=morphedNode.nodeType;var toNodeType=toNode.nodeType;if(!childrenOnly){if(morphedNodeType===ELEMENT_NODE){if(toNodeType===ELEMENT_NODE){if(!compareNodeNames(fromNode,toNode)){onNodeDiscarded(fromNode);morphedNode=moveChildren(fromNode,createElementNS(toNode.nodeName,toNode.namespaceURI))}}else{morphedNode=toNode}}else if(morphedNodeType===TEXT_NODE||morphedNodeType===COMMENT_NODE){if(toNodeType===morphedNodeType){if(morphedNode.nodeValue!==toNode.nodeValue){morphedNode.nodeValue=toNode.nodeValue}return morphedNode}else{morphedNode=toNode}}}if(morphedNode===toNode){onNodeDiscarded(fromNode)}else{if(toNode.isSameNode&&toNode.isSameNode(morphedNode)){return}morphEl(morphedNode,toNode,childrenOnly);if(keyedRemovalList){for(var i=0,len=keyedRemovalList.length;i<len;i++){var elToRemove=fromNodesLookup[keyedRemovalList[i]];if(elToRemove){removeNode(elToRemove,elToRemove.parentNode,false)}}}}if(!childrenOnly&&morphedNode!==fromNode&&fromNode.parentNode){if(morphedNode.actualize){morphedNode=morphedNode.actualize(fromNode.ownerDocument||doc)}fromNode.parentNode.replaceChild(morphedNode,fromNode)}return morphedNode}}var morphdom=morphdomFactory(morphAttrs);return morphdom});
+/* dc-lite: a small stand-in for the Claude Design canvas runtime, so the COACH search
+   prototypes run on GitHub Pages. It renders a board's <template> with the component's
+   renderVals(): {{holes}}, <sc-if>, <sc-for>, onX handlers and ref, and patches the page
+   with morphdom so animations, transitions and input focus survive re-renders. */
+(function () {
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+  var EVENTS = { onclick: 'click', onchange: 'input', onfocus: 'focusin', onkeydown: 'keydown', onsubmit: 'submit' };
+
+  function lookup(path, scope) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    if (/^(['"]).*\1$/.test(path)) return path.slice(1, -1);
+    var parts = path.split('.'), v = scope;
+    for (var i = 0; i < parts.length; i++) {
+      if (v == null) return undefined;
+      v = v[parts[i]];
+    }
+    return v;
+  }
+  function str(v) { return v == null ? '' : String(v); }
+
+  function DCLogic(props) { this.props = props || {}; this.state = null; }
+  DCLogic.prototype.setState = function (patch) {
+    var prev = this.state || {};
+    var next = typeof patch === 'function' ? patch(prev, this.props) : patch;
+    this.state = Object.assign({}, prev, next);
+    if (this.__schedule) this.__schedule();
+  };
+  DCLogic.prototype.forceUpdate = function () { if (this.__schedule) this.__schedule(); };
+
+  function mount(Component, tpl, root, defaults) {
+    var comp = new Component(Object.assign({}, defaults));
+    comp.props = Object.assign({}, defaults);
+    var registry = {}, seq = 0, pending = false, mounted = false;
+
+    function reg(fn) { var id = 'h' + (seq++); registry[id] = fn; return id; }
+
+    function renderChildren(srcParent, outParent, scope) {
+      for (var n = srcParent.firstChild; n; n = n.nextSibling) renderNode(n, outParent, scope);
+    }
+    function renderNode(n, out, scope) {
+      if (n.nodeType === 3) { out.appendChild(document.createTextNode(n.nodeValue.replace(HOLE, function (_, p) { return str(lookup(p, scope)); }))); return; }
+      if (n.nodeType !== 1) return;
+      var tag = n.tagName.toLowerCase();
+      if (tag === 'sc-if') {
+        var m = (n.getAttribute('value') || '').match(WHOLE);
+        if (m && lookup(m[1], scope)) renderChildren(n, out, scope);
+        return;
+      }
+      if (tag === 'sc-for') {
+        var lm = (n.getAttribute('list') || '').match(WHOLE);
+        var list = lm ? lookup(lm[1], scope) : null, as = n.getAttribute('as') || 'item';
+        (list || []).forEach(function (item, i) {
+          var s = Object.create(scope); s[as] = item; s.$index = i;
+          renderChildren(n, out, s);
+        });
+        return;
+      }
+      var el = n.namespaceURI === 'http://www.w3.org/2000/svg'
+        ? document.createElementNS(n.namespaceURI, n.tagName)
+        : document.createElement(n.tagName);
+      for (var i = 0; i < n.attributes.length; i++) {
+        var a = n.attributes[i], name = a.name, val = a.value, lname = name.toLowerCase();
+        if (lname.indexOf('hint-') === 0) continue;
+        var whole = val.match(WHOLE);
+        if (EVENTS[lname] && whole) {
+          var fn = lookup(whole[1], scope);
+          if (typeof fn === 'function') el.setAttribute('data-dc-on-' + EVENTS[lname], reg(fn));
+          continue;
+        }
+        if (lname === 'ref' && whole) {
+          var rf = lookup(whole[1], scope);
+          if (typeof rf === 'function') el.setAttribute('data-dc-ref', reg(rf));
+          continue;
+        }
+        var v = whole ? str(lookup(whole[1], scope)) : val.replace(HOLE, function (_, p) { return str(lookup(p, scope)); });
+        if (lname === 'class') { el.setAttribute('class', v); continue; }
+        el.setAttribute(name, v);
+      }
+      if (tag === 'input' && n.hasAttribute('value')) el.value = el.getAttribute('value');
+      renderChildren(n, el, scope);
+      out.appendChild(el);
+    }
+
+    function render() {
+      pending = false;
+      registry = {}; seq = 0;
+      var vals = comp.renderVals ? comp.renderVals() || {} : {};
+      var next = document.createElement('div');
+      next.id = root.id;
+      renderChildren(tpl.content, next, vals);
+      morphdom(root, next, {
+        onBeforeElUpdated: function (from, to) {
+          if (from.tagName === 'INPUT' && from === document.activeElement) {
+            if (from.value !== to.getAttribute('value')) from.value = to.getAttribute('value') || '';
+            for (var i = 0; i < to.attributes.length; i++) {
+              var a = to.attributes[i];
+              if (a.name !== 'value' && from.getAttribute(a.name) !== a.value) from.setAttribute(a.name, a.value);
+            }
+            for (var j = from.attributes.length - 1; j >= 0; j--) {
+              var b = from.attributes[j].name;
+              if (b !== 'value' && !to.hasAttribute(b)) from.removeAttribute(b);
+            }
+            return false;
+          }
+          return true;
+        }
+      });
+      var refs = root.querySelectorAll('[data-dc-ref]');
+      for (var k = 0; k < refs.length; k++) { var f = registry[refs[k].getAttribute('data-dc-ref')]; if (f) f(refs[k]); }
+      if (!mounted) { mounted = true; if (comp.componentDidMount) comp.componentDidMount(); }
+    }
+    comp.__schedule = function () { if (!pending) { pending = true; Promise.resolve().then(render); } };
+
+    ['click', 'input', 'focusin', 'keydown', 'submit'].forEach(function (type) {
+      root.addEventListener(type, function (e) {
+        var stopped = false, orig = e.stopPropagation;
+        e.stopPropagation = function () { stopped = true; orig.call(e); };
+        for (var t = e.target; t && t !== root.parentNode; t = t.parentNode) {
+          if (t.getAttribute && t.hasAttribute('data-dc-on-' + type)) {
+            var fn = registry[t.getAttribute('data-dc-on-' + type)];
+            if (fn) fn(e);
+            if (stopped) break;
+          }
+          if (t === root) break;
+        }
+      });
+    });
+    render();
+    window.addEventListener('pagehide', function () { if (comp.componentWillUnmount) comp.componentWillUnmount(); });
+    return comp;
+  }
+
+  window.DCLogic = DCLogic;
+  window.DCLite = { mount: mount };
+})();
+</script>
+<script>
+
+class Component extends DCLogic {
+  queries() {
+    return [
+  'a black bag for evening',
+  'a Tabby shoulder bag for everyday',
+  'a Brooklyn shoulder bag for work',
+  'a gift for him under AED 1,000',
+  'white leather sneakers',
+  'a small wallet that fits cards'
+];
+  }
+  showTipSoon(delay) {
+    clearTimeout(this.tipTimer);
+    this.setState({ tip: 'mounted' });
+    this.tipTimer = setTimeout(() => this.setState({ tip: 'in' }), delay);
+  }
+  hideTip() {
+    var s = this.state || {};
+    if (s.tip !== 'in' && s.tip !== 'mounted') return;
+    clearTimeout(this.tipTimer);
+    this.setState({ tip: 'out' });
+    this.tipTimer = setTimeout(() => this.setState({ tip: 'gone' }), 400);
+  }
+  componentDidMount() {
+    this.showTipSoon(1200);
+    var QUERIES = this.queries();
+    var reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce) { this.setState({ qi: 0, n: QUERIES[0].length, phase: 'static' }); return; }
+    this.setState({ qi: 0, n: 0, phase: 'type' });
+    this.timer = setTimeout(() => this.step(), 600);
+  }
+  componentWillUnmount() { clearTimeout(this.timer); clearTimeout(this.tipTimer); }
+  step() {
+    var QUERIES = this.queries();
+    var s = this.state || {};
+    var qi = s.qi || 0, n = s.n || 0, phase = s.phase || 'type';
+    var q = QUERIES[qi];
+    var delay = 60;
+    if (phase === 'type') {
+      if (n < q.length) { this.setState({ n: n + 1 }); delay = 55 + Math.random() * 45; }
+      else { this.setState({ phase: 'hold' }); delay = 1800; }
+    } else if (phase === 'hold') {
+      this.setState({ phase: 'delete' }); delay = 30;
+    } else if (phase === 'delete') {
+      if (n > 0) { this.setState({ n: n - 1 }); delay = 28; }
+      else { this.setState({ phase: 'type', qi: (qi + 1) % QUERIES.length }); delay = 400; }
+    }
+    this.timer = setTimeout(() => this.step(), delay);
+  }
+  renderVals() {
+    var QUERIES = this.queries();
+    var s = this.state || {};
+    var q = QUERIES[s.qi || 0];
+    var valA = s.valA || '', valB = s.valB || '';
+    return {
+      tipMounted: (this.props.showTip ?? true) && !!s.tip && s.tip !== 'gone',
+      tipOpacity: s.tip === 'in' ? 1 : 0,
+      tipTransform: s.tip === 'in' ? 'none' : (s.tip === 'out' ? 'translateY(-4px)' : 'translateY(8px)'),
+      tipPointer: s.tip === 'in' ? 'auto' : 'none',
+      dismissTip: () => this.hideTip(),
+      replayTip: () => this.showTipSoon(1200),
+      typed: q.slice(0, s.n || 0),
+      valA: valA, valB: valB,
+      emptyA: valA === '', emptyB: valB === '',
+      typeA: (e) => this.setState({ valA: e.target.value }),
+      typeB: (e) => { this.setState({ valB: e.target.value }); this.hideTip(); }
+    };
+  }
+}
+
+DCLite.mount(Component, document.getElementById('tpl'), document.getElementById('root'), {"showTip": true});
+</script>
+</body>
+</html>

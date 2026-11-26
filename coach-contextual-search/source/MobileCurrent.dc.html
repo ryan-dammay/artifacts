@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>COACH mobile search · current state</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#111111}a:hover{color:#555555}
+</style>
+</helmet>
+<div style="width: 2100px; height: 960px; box-sizing: border-box; padding: 48px; background: #FFFFFF; color: #111111; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; display: flex; gap: 32px">
+  <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px; width: 375px">
+    <figcaption style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">1 · On load · sign-up pop-up</figcaption>
+    <img src="/_blob/79d5ae0c2d007708501cd7bc5acde9d6" alt="Mobile home on load with the 10% off email sign-up pop-up covering the lower half" style="width: 375px; height: 812px; display: block; border: 1px solid #E5E5E5">
+  </figure>
+  <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px; width: 375px">
+    <figcaption style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">2 · Default · search is an icon only</figcaption>
+    <img src="/_blob/c6265edf85b420f42c454049909d8f96" alt="Mobile header with menu, store, COACH logo, magnifier icon and bag" style="width: 375px; height: 812px; display: block; border: 1px solid #E5E5E5">
+  </figure>
+  <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px; width: 375px">
+    <figcaption style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">3 · Active · left drawer</figcaption>
+    <img src="/_blob/551705fbd387b27d18419614f47c1607" alt="Search drawer with Popular Searches and Best Searches list; Elora bag listed twice" style="width: 375px; height: 812px; display: block; border: 1px solid #E5E5E5">
+  </figure>
+  <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px; width: 375px">
+    <figcaption style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">4 · Typing ‘black bag for evening’</figcaption>
+    <img src="/_blob/b89d4bc23c2514172fd4175191a2316a" alt="Typing state: Top suggestions show Backpacks twice; Top products show four black evening bags" style="width: 375px; height: 812px; object-fit: cover; object-position: top; display: block; border: 1px solid #E5E5E5">
+  </figure>
+  <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px; width: 375px">
+    <figcaption style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #595959">5 · Query cleared · drops into menu</figcaption>
+    <img src="/_blob/2575ef6c37e415e067ba9b7a67698721" alt="After clearing the query the drawer shows the main menu with a plain Search field at the top" style="width: 375px; height: 812px; display: block; border: 1px solid #E5E5E5">
+  </figure>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2100,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
