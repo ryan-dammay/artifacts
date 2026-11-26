@@ -32,12 +32,18 @@ a{color:#111111;text-decoration:none}a:hover{color:#111111;text-decoration:under
 @keyframes twinkle{0%,22%,100%{transform:scale(1);opacity:1}11%{transform:scale(.85);opacity:.75}}
 .spk-sm .spk-big,.spk-sm .spk-small{animation-name:twinkle-sm}
 @keyframes twinkle-sm{0%,22%,100%{transform:scale(1);opacity:1}11%{transform:scale(.7);opacity:.55}}
-@media (prefers-reduced-motion: reduce){.caret,.sheet,.scrim,.navtip,.spk-big,.spk-small{animation:none}.tip{transition:opacity 200ms linear;transform:none !important}}
+.pagein{animation:fadein 240ms ease-out}
+.gridin{animation:gridin 320ms ease-out}
+@keyframes gridin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.skel{background:linear-gradient(90deg,#F5F5F5 0%,#ECECEC 50%,#F5F5F5 100%);background-size:200% 100%;animation:shimmer 1.2s linear infinite}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:-100% 0}}
+.hscroll{scrollbar-width:none}.hscroll::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: reduce){.caret,.sheet,.scrim,.navtip,.spk-big,.spk-small,.pagein,.gridin,.skel{animation:none}.tip{transition:opacity 200ms linear;transform:none !important}}
 </style>
 </helmet>
 <div id="mroot" style="width: 375px; height: 812px; position: relative; overflow: hidden; background: #FFFFFF; color: #111111; font-family: Inter, sans-serif">
 
-  <header style="width: 375px; height: 56px; box-sizing: border-box; background: #FFFFFF; border-bottom: 1px solid #CBCBCB; padding: 0 16px; display: flex; align-items: center; justify-content: space-between">
+  <header style="position: relative; z-index: 3; width: 375px; height: 56px; box-sizing: border-box; background: #FFFFFF; border-bottom: 1px solid #CBCBCB; padding: 0 16px; display: flex; align-items: center; justify-content: space-between">
     <div style="display: flex; align-items: center; gap: 16px; min-width: 76px; position: relative">
       <a href="#" aria-label="Menu" style="display: flex"><img src="/_blob/a13bd0ef1439510db5cab89c1df1a9b5" alt="" style="width: 20px; height: 20px; display: block"></a>
       <button type="button" aria-label="Search" aria-haspopup="dialog" aria-expanded="{{isOpen}}" onClick="{{open}}" style="display: flex; align-items: center; padding: 12px; margin: -12px; border: 0; background: none; cursor: pointer"><img src="/_blob/7f61b0fbe5e086568a16bc6b01bbc424" alt="" style="width: 20px; height: 20px; display: block"><svg class="spk spk-sm" width="16" height="16" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width: 16px; height: 16px; display: block; flex: none"><path class="spk-big" d="M12.3427 3.20001C13.2204 8.90518 16.1461 11.8309 21.8513 12.7086C16.1461 13.5863 13.2204 16.5121 12.3427 22.2172C11.465 16.5121 8.53924 13.5863 2.83408 12.7086C8.53924 11.8309 11.465 8.90518 12.3427 3.20001Z" stroke="#111111" stroke-width="1.92" stroke-linejoin="round"/><path class="spk-small" d="M24.7774 20.0229C25.2162 22.656 26.5328 23.9726 29.1659 24.4115C26.5328 24.8503 25.2162 26.1669 24.7774 28.8C24.3385 26.1669 23.0219 24.8503 20.3888 24.4115C23.0219 23.9726 24.3385 22.656 24.7774 20.0229Z" stroke="#111111" stroke-width="1.92" stroke-linejoin="round"/></svg></button>
@@ -59,12 +65,90 @@ a{color:#111111;text-decoration:none}a:hover{color:#111111;text-decoration:under
     </div>
   </header>
 
-  <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
-    <div style="height: 440px; background: #F5F5F5"></div>
-    <div style="height: 16px; width: 60%; background: #F5F5F5"></div>
-    <div style="height: 16px; width: 40%; background: #F5F5F5"></div>
-    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px"><div style="height: 240px; background: #F5F5F5"></div><div style="height: 240px; background: #F5F5F5"></div></div>
-  </div>
+  <main id="mmain" style="position: absolute; left: 0; top: 56px; width: 375px; height: 756px; overflow-y: auto; overflow-x: hidden">
+    <sc-if value="{{onHome}}" hint-placeholder-val="{{ true }}">
+      <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="height: 440px; background: #F5F5F5"></div>
+        <div style="height: 16px; width: 60%; background: #F5F5F5"></div>
+        <div style="height: 16px; width: 40%; background: #F5F5F5"></div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px"><div style="height: 240px; background: #F5F5F5"></div><div style="height: 240px; background: #F5F5F5"></div></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{onResults}}" hint-placeholder-val="{{ false }}">
+      <div class="pagein">
+        <div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 6px; text-align: center; color: #111111">
+          <p style="margin: 0; font-size: 14px; line-height: 20px">Search results for</p>
+          <h1 style="margin: 0; font-size: 18px; line-height: 26px; font-weight: 600">“{{pageTitle}}”</h1>
+        </div>
+        <sc-if value="{{hasFacets}}" hint-placeholder-val="{{ true }}">
+          <div role="group" aria-label="What we searched for" class="hscroll" style="display: flex; align-items: center; gap: 8px; padding: 0 16px 16px; overflow-x: auto; white-space: nowrap">
+            <span style="flex: none; font-size: 12px; line-height: 16px; color: #767676">We searched for</span>
+            <sc-for list="{{facets}}" as="f" hint-placeholder-count="3">
+              <span class="facet" style="flex: none; display: inline-flex; align-items: center; gap: 4px; height: 32px; box-sizing: border-box; padding: 0 10px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-size: 12px; line-height: 16px; color: #111111"><span style="color: #767676">{{f.type}}</span><span style="font-weight: 500">{{f.value}}</span><sc-if value="{{f.removable}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="{{f.aria}}" onClick="{{f.remove}}" style="width: 32px; height: 32px; margin: 0 -10px 0 -6px; padding: 9px; border: 0; background: none; cursor: pointer; display: flex"><img src="/_blob/1a6db21b140e57f5b82528d443f998e9" alt="" style="width: 14px; height: 14px; display: block"></button></sc-if></span>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div role="group" aria-label="Refine your search" style="background: #F9F9F9; padding: 16px 0; display: flex; flex-direction: column; gap: 12px">
+          <div style="padding: 0 16px; display: flex; align-items: center; gap: 8px">
+            <svg class="spk" width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width: 20px; height: 20px; display: block; flex: none"><path class="spk-big" d="M12.3427 3.20001C13.2204 8.90518 16.1461 11.8309 21.8513 12.7086C16.1461 13.5863 13.2204 16.5121 12.3427 22.2172C11.465 16.5121 8.53924 13.5863 2.83408 12.7086C8.53924 11.8309 11.465 8.90518 12.3427 3.20001Z" stroke="#111111" stroke-width="1.92" stroke-linejoin="round"/><path class="spk-small" d="M24.7774 20.0229C25.2162 22.656 26.5328 23.9726 29.1659 24.4115C26.5328 24.8503 25.2162 26.1669 24.7774 28.8C24.3385 26.1669 23.0219 24.8503 20.3888 24.4115C23.0219 23.9726 24.3385 22.656 24.7774 20.0229Z" stroke="#111111" stroke-width="1.92" stroke-linejoin="round"/></svg>
+            <p style="margin: 0; font-size: 14px; line-height: 20px; font-weight: 600; color: #111111">Refine your search</p>
+          </div>
+          <div class="hscroll" style="display: flex; gap: 8px; padding: 0 16px; overflow-x: auto">
+            <sc-for list="{{refine}}" as="r" hint-placeholder-count="4">
+              <button type="button" class="chip" onClick="{{r.go}}" style="flex: none; padding: 6px 12px; border: 1px solid #CBCBCB; border-radius: 1px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; line-height: 20px; color: #111111; cursor: pointer; white-space: nowrap">{{r.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid #CBCBCB; padding: 20px 12px 20px 16px; display: flex; align-items: center; gap: 16px">
+          <button type="button" onClick="{{openFilter}}" style="display: flex; align-items: center; gap: 8px; padding: 0; border: 0; background: none; font-family: Inter, sans-serif; cursor: pointer"><img src="/_blob/91685208fc32a5d0482a63e535c194a6" alt="" style="width: 20px; height: 20px; display: block"><span style="display: flex; align-items: baseline; gap: 12px; white-space: nowrap"><span style="font-size: 14px; line-height: 20px; font-weight: 500; color: #111111">Filter</span><span style="font-size: 14px; line-height: 20px; color: #767676">{{itemCount}}</span></span></button>
+          <button type="button" aria-haspopup="listbox" onClick="{{openSort}}" style="flex: 1 0 0; display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 0; border: 0; background: none; font-family: Inter, sans-serif; cursor: pointer"><span style="font-size: 14px; line-height: 20px; color: #111111">Recommended</span><img src="/_blob/8a1f978ad21de0c18bad5fb3db9b5afa" alt="" style="width: 20px; height: 20px; display: block"></button>
+        </div>
+
+        <sc-if value="{{loading}}" hint-placeholder-val="{{ false }}">
+          <div aria-busy="true" aria-label="Loading results" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 11px; row-gap: 32px">
+            <sc-for list="{{skeletons}}" as="k" hint-placeholder-count="8">
+              <div style="display: flex; flex-direction: column; gap: 10px"><div class="skel" style="aspect-ratio: 433 / 650"></div><div style="padding: 0 12px; display: flex; flex-direction: column; gap: 10px"><div class="skel" style="height: 14px; width: 60%"></div><div class="skel" style="height: 12px; width: 90%"></div><div class="skel" style="height: 14px; width: 40%"></div></div></div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{loaded}}" hint-placeholder-val="{{ true }}">
+          <div class="gridin" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 11px; row-gap: 32px">
+            <sc-for list="{{products}}" as="p" hint-placeholder-count="8">
+              <div style="min-width: 0; display: flex; flex-direction: column">
+                <div style="position: relative; aspect-ratio: 433 / 650; background: #F7F7F7">
+                  <a href="#" aria-label="{{p.aria}}" onClick="{{p.go}}" style="position: absolute; inset: 0"></a>
+                  <span aria-hidden="true" style="position: absolute; left: 8px; top: 8px; background: #FFFFFF; border-radius: 2px; padding: 5px; display: flex"><img src="/_blob/ac5e30871e7f6b4fc948eaf00cd7d1d1" alt="" style="width: 16px; height: 16px; display: block"></span>
+                  <button type="button" aria-label="Add to wishlist" style="position: absolute; right: 4px; top: 4px; padding: 8px; border: 0; background: none; display: flex; cursor: pointer"><img src="/_blob/005723db19329f3bd8d1b00c78bdbcd9" alt="" style="width: 18px; height: 18px; display: block"></button>
+                  <span aria-hidden="true" style="position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); background: rgba(255,255,255,0.5); border-radius: 100px; padding: 4px 12px; display: flex; gap: 4px"><span style="width: 5px; height: 5px; border-radius: 50%; background: #111111"></span><span style="width: 5px; height: 5px; border-radius: 50%; background: #CBCBCB"></span><span style="width: 5px; height: 5px; border-radius: 50%; background: #CBCBCB"></span></span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px; padding: 12px 12px 8px">
+                  <a href="#" onClick="{{p.go}}" style="display: flex; flex-direction: column; gap: 2px; min-width: 0; color: #111111; text-decoration: none"><span style="font-size: 14px; line-height: 20px; font-weight: 600; text-transform: uppercase; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{p.designer}}</span><span style="font-size: 12px; line-height: 16px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{p.desc}}</span></a>
+                  <div style="display: flex; flex-direction: column; align-items: flex-start">
+                    <span style="font-size: 14px; line-height: 20px; font-weight: 600; color: {{p.priceColor}}">{{p.price}}</span>
+                    <sc-if value="{{p.sale}}" hint-placeholder-val="{{ false }}"><span style="display: flex; align-items: center; gap: 6px; font-size: 10px; line-height: 16px; font-weight: 500; color: #111111"><s style="color: #767676">{{p.was}}</s><span aria-hidden="true" style="width: 1px; height: 8px; background: #111111"></span>{{p.off}}</span></sc-if>
+                  </div>
+                  <sc-if value="{{p.promo}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 12px; line-height: 16px; color: #111111">Extra <strong style="font-weight: 600">10% OFF</strong>, use code: <strong style="font-weight: 600">EXTRA10</strong></p></sc-if>
+                  <div style="display: flex; align-items: center; gap: 4px; height: 16px"><span aria-hidden="true" style="display: flex; gap: 4px"><img src="/_blob/357a8252e7d6abbe645da93d1edadbe7" alt="" style="width: 14px; height: 14px; display: block"><img src="/_blob/357a8252e7d6abbe645da93d1edadbe7" alt="" style="width: 14px; height: 14px; display: block"><img src="/_blob/357a8252e7d6abbe645da93d1edadbe7" alt="" style="width: 14px; height: 14px; display: block"><img src="/_blob/357a8252e7d6abbe645da93d1edadbe7" alt="" style="width: 14px; height: 14px; display: block"><img src="/_blob/9b1d1d4286d6038d1d0351fd503007ec" alt="" style="width: 14px; height: 14px; display: block"></span><span style="margin-left: 2px; font-size: 12px; line-height: 16px; color: #111111">{{p.rating}}</span><span style="font-size: 12px; line-height: 16px; color: #767676">{{p.reviews}}</span></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding: 40px 16px; display: flex; flex-direction: column; align-items: center; gap: 32px">
+            <div style="width: 280px; display: flex; flex-direction: column; align-items: center; gap: 16px">
+              <p style="margin: 0; font-size: 14px; line-height: 20px; color: #767676">You’ve viewed <span style="color: #111111">{{viewed}}</span> / {{totalTxt}}</p>
+              <div style="width: 280px; height: 4px; border-radius: 100px; background: #ECECEC; overflow: hidden"><div style="width: {{progressW}}px; height: 4px; border-radius: 100px; background: #767676; transition: width 300ms ease"></div></div>
+            </div>
+            <sc-if value="{{canLoadMore}}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{loadMore}}" style="min-width: 125px; min-height: 44px; padding: 12px 16px; border: 1px solid #111111; border-radius: 2px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; line-height: 20px; font-weight: 500; color: #111111; cursor: pointer">Load More</button>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div style="height: 120px; background: #CBCBCB; padding: 24px 16px; box-sizing: border-box; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 1.2px; color: #767676">FOOTER</div>
+      </div>
+    </sc-if>
+  </main>
 
   <sc-if value="{{isOpen}}" hint-placeholder-val="{{ true }}">
     <button type="button" class="{{scrimCls}}" tabindex="-1" aria-label="Close search" onClick="{{close}}" style="position: absolute; inset: 0; width: 100%; border: 0; padding: 0; margin: 0; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 4"></button>
@@ -170,10 +254,11 @@ a{color:#111111;text-decoration:none}a:hover{color:#111111;text-decoration:under
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"startOpen":{"editor":"boolean","default":false},"showTip":{"editor":"boolean","default":true},"hasHistory":{"editor":"boolean","default":true},"noResults":{"editor":"boolean","default":false},"$preview":{"width":375,"height":812}}'>
+<script type="text/x-dc" data-dc-script data-props='{"startOpen":{"editor":"boolean","default":false},"showTip":{"editor":"boolean","default":true},"hasHistory":{"editor":"boolean","default":true},"noResults":{"editor":"boolean","default":false},"startOnResults":{"editor":"boolean","default":false},"$preview":{"width":375,"height":812}}'>
 class Component extends DCLogic {
   componentDidMount() {
-    if (this.props.startOpen ?? false) this.focusField();
+    if (this.props.startOnResults ?? false) this.setState({ open: false, tip: 'gone', page: { q: 'A black bag for evening', facets: this.parseQuery('A black bag for evening'), edited: false, shown: 8 } });
+    else if (this.props.startOpen ?? false) this.focusField();
     else if (this.props.showTip ?? true) this.showTip(1200);
   }
   showTip(delay) {
@@ -188,13 +273,15 @@ class Component extends DCLogic {
     this.setState({ tip: 'out' });
     this.tipTimer = setTimeout(() => this.setState({ tip: 'gone' }), 400);
   }
-  componentWillUnmount() { clearTimeout(this.closeTimer); clearTimeout(this.focusTimer); clearTimeout(this.navTimer); clearTimeout(this.tipTimer); }
+  componentWillUnmount() { clearTimeout(this.closeTimer); clearTimeout(this.focusTimer); clearTimeout(this.navTimer); clearTimeout(this.tipTimer); clearTimeout(this.loadTimer); }
+  closeSearch() { var s = this.state || {}; var o = (s.open === undefined) ? (this.props.startOpen ?? false) : s.open; if (o) this.closeSheet(); }
+  scrollTop() { try { var m = document.getElementById('mmain'); if (m) m.scrollTop = 0; } catch (e) {} }
   reduce() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
   focusField() {
     clearTimeout(this.focusTimer);
     this.focusTimer = setTimeout(() => { try { var el = document.getElementById('mq2'); if (el) el.focus(); } catch (e) {} }, 30);
   }
-  openSheet() { clearTimeout(this.closeTimer); var t = (this.state || {}).tip; if (t && t !== 'gone') { clearTimeout(this.tipTimer); this.setState({ tip: 'gone' }); } this.setState({ open: true, closing: false }); this.focusField(); }
+  openSheet() { clearTimeout(this.closeTimer); var t = (this.state || {}).tip; if (t && t !== 'gone') { clearTimeout(this.tipTimer); this.setState({ tip: 'gone' }); } var pg = (this.state || {}).page; this.setState({ open: true, closing: false, val: pg ? this.pageTitle(pg) : '' }); this.focusField(); }
   closeSheet() {
     var s = this.state || {};
     if (s.closing) return;
@@ -227,6 +314,197 @@ class Component extends DCLogic {
     this.setState({ nav: { x: Math.round(x), y: Math.round(y), text: text, below: true } });
     this.navTimer = setTimeout(() => this.setState({ nav: null }), 1600);
   }
+  // ---- Results page (dummy PLP with contextual search suggestions) ----
+  parseQuery(q) {
+    var lower = ' ' + q.toLowerCase().replace(/[’]/g, "'") + ' ';
+    var f = [];
+    var add = (type, value) => { if (!f.some((x) => x.type === type && x.value === value)) f.push({ type: type, value: value }); };
+    var has = (re) => re.test(lower);
+    this.designerList().forEach((d) => { if (lower.indexOf(d.toLowerCase()) >= 0) add('designer', d); });
+    ['black', 'white', 'gold', 'silver', 'red', 'pink', 'blue', 'navy', 'green', 'beige', 'brown', 'cream'].forEach((c) => { if (has(new RegExp('\\b' + c + '\\b'))) add('colour', c); });
+    ['leather', 'cashmere', 'silk', 'denim', 'suede', 'linen'].forEach((m) => { if (has(new RegExp('\\b' + m + '\\b'))) add('material', m); });
+    ['fresh', 'midi', 'maxi', 'mini', 'shoulder', 'crossbody', 'cocktail'].forEach((w) => { if (has(new RegExp('\\b' + w + '\\b'))) add('style', w); });
+    ['summer', 'winter', 'evening', 'wedding', 'office', 'party', 'holiday', 'beach'].forEach((o) => { if (has(new RegExp('\\b' + o + '\\b'))) add('occasion', o); });
+    var cats = [
+      [/\bgift cards?\b/, 'gift cards', 'gift'], [/\bclutch(es)?\b/, 'clutches', 'bag'], [/\b(bags?|totes?|handbags?)\b/, 'bags', 'bag'], [/\bdress(es)?\b/, 'dresses', 'dress'],
+      [/\b(sneakers?|trainers?)\b/, 'sneakers', 'sneaker'], [/\bheels?\b/, 'heels', 'shoe'], [/\b(shoes?|flats?|loafers?)\b/, 'shoes', 'shoe'],
+      [/\b(fragrances?|perfumes?|parfums?)\b/, 'fragrance', 'fragrance'], [/\b(sweaters?|cardigans?|knitwear)\b/, 'sweaters', 'knit'],
+      [/\bscar(f|ves)\b/, 'scarves', 'knit'], [/\bwatch(es)?\b/, 'watches', 'watch'], [/\b(jackets?|coats?)\b/, 'coats & jackets', 'clothing'],
+      [/\bclothing\b/, 'clothing', 'clothing'], [/\b(jewel(le)?ry|earrings?|necklaces?)\b/, 'jewelry', 'jewelry'], [/\bwallets?\b/, 'wallets', 'gift'],
+      [/\b(moisturi[sz]ers?|makeup|beauty)\b/, 'beauty', 'beauty'], [/\bgifts?\b/, 'gifts', 'gift']
+    ];
+    for (var i = 0; i < cats.length; i++) { if (cats[i][0].test(lower)) { f.push({ type: 'category', value: cats[i][1], key: cats[i][2] }); break; } }
+    if (has(/\b(for him|men'?s?|mens)\b/)) add('recipient', 'him');
+    else if (has(/\b(for her|women'?s?|womens)\b/)) add('recipient', 'her');
+    var b = lower.match(/under\s+(?:aed\s*)?([\d,]+)/);
+    if (b) add('budget', 'under AED ' + Number(b[1].replace(/,/g, '')).toLocaleString('en-US'));
+    if (has(/\bsale\b/)) add('sale', 'on sale');
+    return f;
+  }
+  composeQuery(f) {
+    var get = (t) => f.filter((x) => x.type === t).map((x) => x.value);
+    var parts = [].concat(get('designer'), get('colour'), get('material'), get('style'), get('occasion'));
+    var cat = get('category');
+    parts.push(cat.length ? cat[0] : (parts.length ? 'styles' : 'new in'));
+    get('recipient').forEach((r) => parts.push('for ' + r));
+    get('budget').forEach((v) => parts.push(v));
+    get('sale').forEach((v) => parts.push(v));
+    return parts.join(' ');
+  }
+  cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+  hash(s) { var h = 7; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; }
+  facetLabel(t) { return { designer: 'Designer', colour: 'Colour', material: 'Material', style: 'Style', occasion: 'Occasion', category: 'Category', recipient: 'For', budget: 'Budget', sale: 'Offer' }[t] || ''; }
+  pools() {
+    return {
+      bag: [['Saint Laurent', 'Small leather shoulder bag', 9450], ['Bottega Veneta', 'Woven leather pouch clutch', 12900], ['Loewe', 'Small leather top-handle bag', 11300], ['Valentino', 'Studded leather crossbody bag', 8700], ['Jimmy Choo', 'Crystal-embellished mini bag', 6950], ['Chloé', 'Mini leather saddle bag', 7200], ['Gucci', 'Leather shoulder bag', 10500], ['Tom Ford', 'Leather evening clutch', 9900]],
+      dress: [['Valentino', 'Silk crepe midi dress', 14800], ['Chloé', 'Ruffled silk maxi dress', 11200], ['Saint Laurent', 'Satin wrap dress', 13500], ['Ralph Lauren', 'Pleated chiffon gown', 6400], ['Dior', 'Pleated midi dress', 18900], ['Gucci', 'Lace-trim slip dress', 9800], ['Loewe', 'Draped jersey dress', 7600], ['Hugo Boss', 'Belted shirt dress', 2150]],
+      sneaker: [['Gucci', 'Leather low-top sneakers', 3650], ['Saint Laurent', 'Leather court sneakers', 2950], ['Valentino', 'Studded leather sneakers', 3900], ['Loewe', 'Suede runner sneakers', 2750], ['Hugo Boss', 'Leather lace-up sneakers', 1150], ['Ralph Lauren', 'Canvas court sneakers', 650], ['Dior', 'High-top sneakers', 4300], ['Bottega Veneta', 'Leather trainers', 3400]],
+      shoe: [['Jimmy Choo', 'Satin pointed pumps', 3550], ['Saint Laurent', 'Leather slingback heels', 4150], ['Valentino', 'Studded leather pumps', 4450], ['Gucci', 'Leather loafers', 3600], ['Dior', 'Patent ballet flats', 3900], ['Bottega Veneta', 'Square-toe leather mules', 4700], ['Chloé', 'Leather ankle boots', 5200], ['Tom Ford', 'Leather sandals', 4950]],
+      gift: [['Hugo Boss', 'Leather card holder', 450], ['Tom Ford', 'Silk tie', 1150], ['Ralph Lauren', 'Cashmere quarter-zip sweater', 1890], ['Saint Laurent', 'Leather bifold wallet', 1950], ['Gucci', 'Leather belt', 2150], ['Hugo Boss', 'Chronograph watch', 995], ['Tom Ford', 'Eau de parfum 50ml', 1300], ['Loewe', 'Leather keyring', 850]],
+      fragrance: [['Tom Ford', 'Eau de parfum 50ml', 1300], ['Moresque Parfum', 'Eau de parfum 50ml', 1150], ['Dior', 'Eau de toilette 100ml', 620], ["Terres d'Afrique", 'Eau de parfum 50ml', 890], ['Gucci', 'Eau de parfum 90ml', 560], ['Valentino', 'Eau de parfum 50ml', 540], ['Hugo Boss', 'Eau de toilette 100ml', 395], ['Ralph Lauren', 'Eau de toilette 75ml', 410]],
+      knit: [['Loewe', 'Cashmere crew-neck sweater', 4200], ['Ralph Lauren', 'Cable-knit cashmere sweater', 2490], ['Hugo Boss', 'Wool-cashmere sweater', 990], ['Valentino', 'Cashmere cardigan', 5400], ['Saint Laurent', 'Mohair-blend cardigan', 6100], ['Chloé', 'Wool-cashmere scarf', 1350], ['Dior', 'Cashmere scarf', 3100], ['Gucci', 'Wool knit sweater', 4700]],
+      watch: [['Hugo Boss', 'Chronograph watch, 44mm', 995], ['Gucci', 'Steel watch, 38mm', 5100], ['Dior', 'Steel and diamond watch', 21000], ['Tom Ford', 'Automatic steel watch', 9800], ['Ralph Lauren', 'Leather-strap watch', 7400]],
+      clothing: [['Saint Laurent', 'Leather biker jacket', 21500], ['Loewe', 'Wool coat', 13900], ['Ralph Lauren', 'Denim jacket', 1490], ['Valentino', 'Wool-cashmere coat', 18200], ['Hugo Boss', 'Slim-fit wool blazer', 2350], ['Gucci', 'Leather bomber jacket', 19900], ['Chloé', 'Cotton trench coat', 9300], ['Bottega Veneta', 'Shearling jacket', 32000]],
+      jewelry: [['Dior', 'Gold-finish earrings', 2450], ['Valentino', 'Crystal drop earrings', 1650], ['Saint Laurent', 'Gold-tone cuff', 2900], ['Gucci', 'Sterling silver necklace', 1750], ['Chloé', 'Gold-tone hoop earrings', 1450], ['Loewe', 'Enamel pendant necklace', 1800]],
+      beauty: [['Charlotte Tilbury', 'Tinted moisturiser SPF 30', 230], ['RHODE', 'Peptide lip treatment', 95], ['Dior', 'Lip glow oil', 185], ['Tom Ford', 'Lip colour', 265], ["Terres d'Afrique", 'Face oil', 420], ['Charlotte Tilbury', 'Setting spray', 180]]
+    };
+  }
+  pageKey(f) {
+    var c = f.filter((x) => x.type === 'category')[0];
+    return c ? c.key : 'mixed';
+  }
+  productList(f, title, count) {
+    var P = this.pools();
+    var key = this.pageKey(f);
+    var get = (t) => f.filter((x) => x.type === t).map((x) => x.value);
+    var pool;
+    if (key !== 'mixed') pool = P[key];
+    else { pool = []; Object.keys(P).forEach((k) => { pool = pool.concat(P[k].slice(0, 2)); }); }
+    var ds = get('designer');
+    if (ds.length) {
+      var all = []; Object.keys(P).forEach((k) => { all = all.concat(P[k]); });
+      var own = (key === 'mixed' ? all : pool).filter((p) => ds.indexOf(p[0]) >= 0);
+      if (own.length) pool = own;
+    }
+    var colour = get('colour')[0];
+    var bud = get('budget')[0];
+    var cap = bud ? Number(bud.replace(/[^\d]/g, '')) : 0;
+    var sale = get('sale').length > 0;
+    var h = this.hash(title);
+    var out = [];
+    for (var i = 0; i < count; i++) {
+      var p = pool[(i + h) % pool.length];
+      var price = p[2];
+      if (cap && price > cap) price = Math.round((cap * (0.55 + ((h + i * 13) % 40) / 100)) / 5) * 5;
+      var was = sale ? Math.round(price / 0.7 / 5) * 5 : 0;
+      var r = 3.8 + ((h + i * 7) % 12) / 10;
+      if (r > 5) r = 5;
+      var row = Math.floor(i / 4) % 2;
+      out.push({
+        designer: p[0],
+        desc: p[1] + (colour && p[1].indexOf('Eau') !== 0 ? ', ' + colour : ''),
+        price: 'AED ' + price.toLocaleString('en-US'),
+        priceColor: sale ? '#AE1800' : '#111111',
+        sale: sale,
+        was: 'AED ' + was.toLocaleString('en-US'),
+        off: sale ? '30% OFF' : '',
+        promo: !sale && row === 1,
+        swatches: row === 1,
+        rating: r.toFixed(1),
+        reviews: '(' + (3 + ((h + i * 11) % 40)) + ')',
+        aria: p[0] + ', ' + p[1]
+      });
+    }
+    return out;
+  }
+  suggestionList(f, title) {
+    var get = (t) => f.filter((x) => x.type === t).map((x) => x.value);
+    var key = this.pageKey(f);
+    var c = get('colour')[0] ? get('colour')[0] + ' ' : '';
+    var d = get('designer')[0];
+    var T = {
+      bag: [c + 'evening clutches', c + 'shoulder bags', c + 'bags under AED 2,000', 'Saint Laurent ' + c + 'bags', 'Heels to match'],
+      dress: [c + 'midi dresses', c + 'dresses under AED 2,000', 'Valentino ' + c + 'dresses', 'Heels to go with it', 'Evening clutches'],
+      sneaker: [c + 'leather sneakers', c + 'sneakers on sale', 'Gucci ' + c + 'sneakers', 'Sneakers for men'],
+      shoe: [c + 'heels for evening', c + 'flats', c + 'shoes on sale', 'Jimmy Choo ' + c + 'heels'],
+      gift: ['Gifts for him under AED 500', 'Leather wallets for men', 'Watches for men', 'Fragrance for him', 'Gift cards'],
+      fragrance: ['Fragrance gift sets', 'Fresh fragrance for him', 'Tom Ford fragrance', 'Travel-size fragrance'],
+      knit: [c + 'cashmere scarves', c + 'cashmere cardigans', 'Cashmere sweaters for men', 'Loewe knitwear'],
+      watch: ['Watches under AED 5,000', 'Gold watches', 'Leather wallets for men', 'Gifts for him'],
+      clothing: [c + 'leather jackets', c + 'coats for winter', "Women's denim", 'Ralph Lauren ' + c + 'coats'],
+      jewelry: ['Gold earrings', 'Gold necklaces', 'Jewelry under AED 1,000', 'Gifts for her'],
+      beauty: ['Tinted moisturisers', 'Charlotte Tilbury makeup', 'Beauty gift sets', 'Lip treatments'],
+      mixed: ['New in for her', 'Bestsellers under AED 1,000', 'Gifts for her', 'Designer sneakers on sale']
+    };
+    var list = (d && key === 'mixed') ? [d + ' bags', d + ' shoes', d + ' sneakers', d + ' on sale'] : T[key];
+    var seen = {}; var t = title.toLowerCase(); var cur = this.composeQuery(f);
+    return list.map((s) => this.cap(s.replace(/\s+/g, ' ').trim())).filter((s) => {
+      var k = s.toLowerCase(); if (seen[k] || k === t || this.composeQuery(this.parseQuery(s)) === cur) return false; seen[k] = 1; return true;
+    }).slice(0, 4);
+  }
+  goResults(q, e) {
+    if (e && e.preventDefault) e.preventDefault();
+    q = (q || '').trim();
+    if (!q) return;
+    clearTimeout(this.loadTimer); clearTimeout(this.navTimer);
+    this.setState({ page: { q: q, facets: this.parseQuery(q), edited: false, shown: 8 }, loading: true, nav: null });
+    this.closeSearch();
+    this.scrollTop();
+    var ms = this.reduce() ? 0 : 550;
+    this.loadTimer = setTimeout(() => this.setState({ loading: false }), ms);
+  }
+  removeFacet(i) {
+    var pg = (this.state || {}).page; if (!pg) return;
+    var f = pg.facets.slice(); f.splice(i, 1);
+    clearTimeout(this.loadTimer);
+    this.setState({ page: { q: pg.q, facets: f, edited: true, shown: 8 }, loading: true });
+    this.loadTimer = setTimeout(() => this.setState({ loading: false }), this.reduce() ? 0 : 400);
+  }
+  loadMore() {
+    var pg = (this.state || {}).page; if (!pg) return;
+    this.setState({ page: Object.assign({}, pg, { shown: Math.min(pg.shown + 8, 24) }) });
+  }
+  pageTitle(pg) { return this.cap(pg.edited ? this.composeQuery(pg.facets) : pg.q); }
+  resultVals() {
+    var s = this.state || {};
+    var pg = s.page;
+    if (!pg) return { onResults: false, onHome: true };
+    var title = this.pageTitle(pg);
+    var h = this.hash(title.toLowerCase());
+    var n = pg.facets.length || 1;
+    var total = Math.round(((h % 400) + 120) * (5 - Math.min(n, 4)));
+    var products = this.productList(pg.facets, title, pg.shown);
+    var removable = pg.facets.length > 1;
+    var facets = pg.facets.map((x, i) => ({
+      type: this.facetLabel(x.type),
+      value: x.type === 'designer' ? x.value : this.cap(x.value),
+      removable: removable,
+      aria: 'Remove ' + this.facetLabel(x.type).toLowerCase() + ' ' + x.value,
+      remove: () => this.removeFacet(i)
+    }));
+    var sugg = this.suggestionList(pg.facets, title).map((t) => ({ label: t, go: (e) => this.goResults(t, e) }));
+    return {
+      onResults: true,
+      onHome: false,
+      pageTitle: title,
+      pageKey: title + '|' + pg.facets.length,
+      facets: facets,
+      hasFacets: facets.length > 0,
+      refine: sugg,
+      loading: !!s.loading,
+      loaded: !s.loading,
+      skeletons: [1, 2, 3, 4, 5, 6, 7, 8],
+      products: products.map((p) => Object.assign(p, { go: (e) => this.showNav(e, 'Goes to product page') })),
+      itemCount: total.toLocaleString('en-US') + ' Items',
+      viewed: String(Math.min(pg.shown, total)),
+      totalTxt: total.toLocaleString('en-US'),
+      progressW: Math.max(8, Math.round(280 * Math.min(pg.shown, total) / total)),
+      canLoadMore: pg.shown < 24 && pg.shown < total,
+      loadMore: () => this.loadMore(),
+      openFilter: (e) => this.showNav(e, 'Opens filters'),
+      openSort: (e) => this.showNav(e, 'Opens sort options')
+    };
+  }
   catalogue() {
     return [
       ['black evening bags', 'Handbags'], ['black leather jackets', "Women's Clothing"], ['black dresses', 'Dresses'],
@@ -249,7 +527,7 @@ class Component extends DCLogic {
     var stop = { a: 1, an: 1, the: 1, for: 1, under: 1, with: 1, in: 1, of: 1, to: 1, and: 1, aed: 1, that: 1, he: 1, she: 1, can: 1, on: 1, every: 1, day: 1, my: 1, me: 1 };
     return q.toLowerCase().replace(/[^a-zÀ-ɏ'\s]/g, ' ').split(/\s+/).filter((w) => w && !stop[w]);
   }
-  stem(w) { return w.length > 4 ? w.replace(/(es|s)$/, '') : w; }
+  stem(w) { return (w.length > 3 && /[^s]s$/.test(w)) ? w.slice(0, -1) : w; }
   segs(text, toks, base) {
     var lower = text.toLowerCase();
     var mask = new Array(text.length).fill(false);
@@ -284,19 +562,17 @@ class Component extends DCLogic {
     var q = (s.val || '').trim();
     var hasQuery = q !== '';
     var noRes = hasQuery && ((this.props.noResults ?? false) || (q.length >= 6 && /^[asdfghjkl]+$/i.test(q)));
-    var go = (e) => this.showNav(e, 'Goes to results page');
-    var fill = (label) => ({ label: label, pick: go });
+    var fill = (label) => ({ label: label, pick: (e) => this.goResults(label, e) });
     var toks = this.tokens(q);
-    var results = this.catalogue().map((c) => { var r = this.segs(c[0], toks, '#767676'); return { cat: c[1], hits: r.hits, segs: r.segs }; })
-      .filter((r) => r.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 7).map((r) => ({ cat: r.cat, segs: r.segs, go: go }));
-    var dl = this.designerList().map((d) => { var r = this.segs(d, toks, '#111111'); return { hits: r.hits, segs: r.segs, go: go }; });
+    var results = this.catalogue().map((c) => { var r = this.segs(c[0], toks, '#767676'); return { text: c[0], cat: c[1], hits: r.hits, segs: r.segs }; })
+      .filter((r) => r.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 7).map((r) => ({ cat: r.cat, segs: r.segs, go: (e) => this.goResults(r.text, e) }));
+    var dl = this.designerList().map((d) => { var r = this.segs(d, toks, '#111111'); return { name: d, hits: r.hits, segs: r.segs, go: (e) => this.goResults(d, e) }; });
     var dMatch = dl.filter((d) => d.hits > 0).sort((x, y) => y.hits - x.hits).slice(0, 4);
-    var designers = dMatch.length ? dMatch : dl.slice(0, 4).map((d) => ({ go: go, segs: [{ text: d.segs.map((g) => g.text).join(''), color: '#111111' }] }));
-    if (!toks.length) results = this.catalogue().slice(0, 7).map((c) => ({ cat: c[1], segs: [{ text: c[0], color: '#767676' }], go: go }));
+    var designers = dMatch.length ? dMatch : dl.slice(0, 4).map((d) => ({ go: d.go, segs: [{ text: d.segs.map((g) => g.text).join(''), color: '#111111' }] }));
+    if (!toks.length) results = this.catalogue().slice(0, 7).map((c) => ({ cat: c[1], segs: [{ text: c[0], color: '#767676' }], go: (e) => this.goResults(c[0], e) }));
     if (hasQuery && toks.length && !results.length && !dMatch.length) noRes = true;
     var below = s.nav && s.nav.below;
-    var setVal = (t) => () => this.setState({ val: t });
-    return {
+    return Object.assign(this.resultVals(), {
       isOpen: isOpen,
       tipMounted: !!s.tip && s.tip !== 'gone',
       tipOpacity: s.tip === 'in' ? 1 : 0,
@@ -319,13 +595,13 @@ class Component extends DCLogic {
       recent: recent.map(fill),
       trending: trending.map(fill),
       clearRecent: () => this.setState({ cleared: true }),
-      ex: { a: setVal('A black bag for evening'), b: setVal('A dress for a summer wedding'), c: setVal('A gift for him under AED 1,000 that he can wear to the office every day'), d: setVal('Designer sneakers on sale') },
+      ex: { a: (e) => this.showNav(e, 'Goes to results page'), b: (e) => this.showNav(e, 'Goes to results page'), c: (e) => this.showNav(e, 'Goes to results page'), d: (e) => this.showNav(e, 'Goes to results page') },
       onType: (e) => this.setState({ val: e.target.value }),
       open: () => this.openSheet(),
       close: () => this.closeSheet(),
       submit: (e) => { e.preventDefault(); },
-      onKey: (e) => { if (e.key === 'Escape') { this.closeSheet(); return; } if (e.key === 'Enter' && !e.isComposing && e.target && e.target.id === 'mq2') { e.preventDefault(); if ((e.target.value || '').trim()) this.showNavBelowField('Goes to results page'); } },
-      goAll: go,
+      onKey: (e) => { if (e.key === 'Escape') { this.closeSheet(); return; } if (e.key === 'Enter' && !e.isComposing && e.target && e.target.id === 'mq2') { e.preventDefault(); var v = (e.target.value || '').trim(); if (!v) return; if (noRes) this.showNavBelowField('Goes to the no results page'); else this.goResults(v); } },
+      goAll: (e) => this.goResults(s.val, e),
       navTip: !!s.nav,
       tipX: s.nav ? s.nav.x : 0,
       tipY: s.nav ? s.nav.y : 0,
@@ -334,7 +610,7 @@ class Component extends DCLogic {
       tipFlow: below ? 'column-reverse' : 'column',
       tipArrowTop: below ? '0' : '6px solid #111111',
       tipArrowBottom: below ? '6px solid #111111' : '0'
-    };
+    });
   }
 }
 </script>
