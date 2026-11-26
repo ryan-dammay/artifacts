@@ -762,6 +762,7 @@
   "data": {
    "area": "Gymshark",
    "assignee": "Anjali",
+   "completedOn": "2026-11-24",
    "createdAt": 1794979221990,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-20",
@@ -782,8 +783,7 @@
    "start": "2026-11-18",
    "status": "done",
    "title": "GS Timer Banner Pixel Perfection",
-   "updatedAt": 1795510086613,
-   "completedOn": "2026-11-24"
+   "updatedAt": 1795510086613
   }
  },
  {
@@ -794,6 +794,36 @@
    "completedOn": "2026-11-18",
    "createdAt": 1795001144923,
    "date": "2026-11-18",
+   "dateHistory": [
+    {
+     "at": 1795597133025,
+     "by": null,
+     "from": {
+      "end": "2026-11-18",
+      "start": "2026-11-17"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-25",
+      "start": "2026-11-17"
+     }
+    },
+    {
+     "at": 1795597162671,
+     "by": null,
+     "from": {
+      "end": "2026-11-25",
+      "start": "2026-11-17"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-18",
+      "start": "2026-11-17"
+     }
+    }
+   ],
    "end": "2026-11-18",
    "highlight": false,
    "links": [
@@ -815,37 +845,7 @@
    "start": "2026-11-17",
    "status": "done",
    "title": "Shopping Assistant - Launcher Animation",
-   "updatedAt": 1795597162690,
-   "dateHistory": [
-    {
-     "at": 1795597133025,
-     "by": null,
-     "from": {
-      "start": "2026-11-17",
-      "end": "2026-11-18"
-     },
-     "to": {
-      "start": "2026-11-17",
-      "end": "2026-11-25"
-     },
-     "reason": "",
-     "late": true
-    },
-    {
-     "at": 1795597162671,
-     "by": null,
-     "from": {
-      "start": "2026-11-17",
-      "end": "2026-11-25"
-     },
-     "to": {
-      "start": "2026-11-17",
-      "end": "2026-11-18"
-     },
-     "reason": "",
-     "late": true
-    }
-   ]
+   "updatedAt": 1795597162690
   }
  },
  {
@@ -853,8 +853,39 @@
   "data": {
    "area": "Coach",
    "assignee": "Ryan",
+   "completedOn": "2026-11-25",
    "createdAt": 1795061855626,
    "date": "2026-11-25",
+   "dateHistory": [
+    {
+     "at": 1795597166250,
+     "by": null,
+     "from": {
+      "end": "2026-11-19",
+      "start": "2026-11-19"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-26",
+      "start": "2026-11-19"
+     }
+    },
+    {
+     "at": 1795597195467,
+     "by": null,
+     "from": {
+      "end": "2026-11-26",
+      "start": "2026-11-19"
+     },
+     "late": true,
+     "reason": "",
+     "to": {
+      "end": "2026-11-25",
+      "start": "2026-11-19"
+     }
+    }
+   ],
    "end": "2026-11-25",
    "highlight": false,
    "links": [
@@ -872,38 +903,7 @@
    "start": "2026-11-19",
    "status": "done",
    "title": "Contextual Search (Help Customers Discover)",
-   "updatedAt": 1795597195467,
-   "dateHistory": [
-    {
-     "at": 1795597166250,
-     "by": null,
-     "from": {
-      "start": "2026-11-19",
-      "end": "2026-11-19"
-     },
-     "to": {
-      "start": "2026-11-19",
-      "end": "2026-11-26"
-     },
-     "reason": "",
-     "late": true
-    },
-    {
-     "at": 1795597195467,
-     "by": null,
-     "from": {
-      "start": "2026-11-19",
-      "end": "2026-11-26"
-     },
-     "to": {
-      "start": "2026-11-19",
-      "end": "2026-11-25"
-     },
-     "reason": "",
-     "late": true
-    }
-   ],
-   "completedOn": "2026-11-25"
+   "updatedAt": 1795597195467
   }
  },
  {
@@ -982,6 +982,7 @@
   "data": {
    "area": "Mamas & Papas",
    "assignee": "Anjali",
+   "completedOn": "2026-11-24",
    "createdAt": 1795426440241,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-24",
@@ -998,125 +999,124 @@
    "start": "2026-11-23",
    "status": "done",
    "title": "Pair it With - App",
-   "updatedAt": 1795504140082,
-   "completedOn": "2026-11-24"
+   "updatedAt": 1795504140082
   }
  },
  {
   "id": "gh-mwvwwo9t-sybkz",
   "data": {
-   "title": "WEB - Help Customers discover Contextual Search",
-   "start": "2026-11-23",
-   "end": "2026-11-27",
-   "date": "2026-11-27",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
+   "createdAt": 1795598368481,
+   "date": "2026-11-27",
+   "dateHistory": [
+    {
+     "at": 1795628494837,
+     "by": null,
+     "from": {
+      "end": "2026-12-11",
+      "start": "2026-12-07"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-27",
+      "start": "2026-11-23"
+     }
+    }
+   ],
+   "end": "2026-11-27",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #BLMHW-4312",
      "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-4312"
     }
    ],
-   "createdAt": 1795598368481,
-   "updatedAt": 1795628494848,
-   "dateHistory": [
-    {
-     "at": 1795628494837,
-     "by": null,
-     "from": {
-      "start": "2026-12-07",
-      "end": "2026-12-11"
-     },
-     "to": {
-      "start": "2026-11-23",
-      "end": "2026-11-27"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
+   "ready": false,
+   "start": "2026-11-23",
+   "status": "in-progress",
+   "title": "WEB - Help Customers discover Contextual Search",
+   "updatedAt": 1795628494848
   }
  },
  {
   "id": "gh-mwvx3jue-q51rf",
   "data": {
-   "title": "APP - Help Customers discover Contextual Search",
-   "start": "2026-11-23",
-   "end": "2026-11-27",
-   "date": "2026-11-27",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
+   "createdAt": 1795598689334,
+   "date": "2026-11-27",
+   "dateHistory": [
+    {
+     "at": 1795628497933,
+     "by": null,
+     "from": {
+      "end": "2026-12-11",
+      "start": "2026-12-07"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2026-11-27",
+      "start": "2026-11-23"
+     }
+    }
+   ],
+   "end": "2026-11-27",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #BLMHD-3581",
      "url": "https://bloomingdalesme.atlassian.net/browse/BLMHD-3581"
     }
    ],
-   "createdAt": 1795598689334,
-   "updatedAt": 1795628497945,
-   "dateHistory": [
-    {
-     "at": 1795628497933,
-     "by": null,
-     "from": {
-      "start": "2026-12-07",
-      "end": "2026-12-11"
-     },
-     "to": {
-      "start": "2026-11-23",
-      "end": "2026-11-27"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
+   "ready": false,
+   "start": "2026-11-23",
+   "status": "in-progress",
+   "title": "APP - Help Customers discover Contextual Search",
+   "updatedAt": 1795628497945
   }
  },
  {
   "id": "gh-mwvzhb8r-wpc7m",
   "data": {
-   "title": "WEB - Holition",
-   "start": "2026-12-21",
-   "end": "2027-01-01",
-   "date": "2027-01-01",
-   "status": "in-progress",
-   "ready": false,
-   "highlight": false,
    "area": "Bloomingdale's",
    "assignee": "Ryan",
-   "notes": "",
+   "createdAt": 1795602690602,
+   "date": "2027-01-01",
+   "dateHistory": [
+    {
+     "at": 1795602721926,
+     "by": null,
+     "from": {
+      "end": "2027-01-01",
+      "start": "2026-12-28"
+     },
+     "late": false,
+     "reason": "",
+     "to": {
+      "end": "2027-01-01",
+      "start": "2026-12-21"
+     }
+    }
+   ],
+   "end": "2027-01-01",
+   "highlight": false,
    "links": [
     {
      "label": "Jira #BLMHW-740",
      "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-740"
     }
    ],
-   "createdAt": 1795602690602,
-   "updatedAt": 1795602721941,
-   "dateHistory": [
-    {
-     "at": 1795602721926,
-     "by": null,
-     "from": {
-      "start": "2026-12-28",
-      "end": "2027-01-01"
-     },
-     "to": {
-      "start": "2026-12-21",
-      "end": "2027-01-01"
-     },
-     "reason": "",
-     "late": false
-    }
-   ]
+   "notes": "",
+   "ready": false,
+   "start": "2026-12-21",
+   "status": "in-progress",
+   "title": "WEB - Holition",
+   "updatedAt": 1795602721941
   }
  },
  {
@@ -1355,6 +1355,7 @@
   "data": {
    "area": "Gymshark",
    "assignee": "Anjali",
+   "completedOn": "2026-11-24",
    "createdAt": 1793618295831,
    "createdBy": "u_XhpqJMkeIsGAbDcqsWXk3A",
    "date": "2026-11-04",
@@ -1387,7 +1388,6 @@
    "start": "2026-10-29",
    "status": "done",
    "title": "Gymshark Component Audit",
-   "completedOn": "2026-11-24",
    "updatedAt": 1795510143563
   }
  },
