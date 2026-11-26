@@ -1,0 +1,144 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Active.dc.html": {
+      "h": 940,
+      "is_interactive": true,
+      "title": "Recommended · Active (prototype: click the search to open, Esc or Close to dismiss)",
+      "w": 1440,
+      "x": 0,
+      "y": 2444
+    },
+    "Active992.dc.html": {
+      "h": 940,
+      "is_interactive": true,
+      "title": "992px · Active (prototype: click the search to open, Esc or Close to dismiss)",
+      "w": 992,
+      "x": 1072,
+      "y": 6140
+    },
+    "Default.dc.html": {
+      "h": 700,
+      "is_interactive": true,
+      "title": "Recommended · Default (animated placeholder)",
+      "w": 1440,
+      "x": 0,
+      "y": 1050
+    },
+    "Default992.dc.html": {
+      "h": 700,
+      "is_interactive": true,
+      "title": "992px · Default (animated placeholder + first-visit tip)",
+      "w": 992,
+      "x": 0,
+      "y": 6140
+    },
+    "MobileActive.dc.html": {
+      "h": 812,
+      "is_interactive": true,
+      "title": "Mobile · Active, empty (prototype: tap an example)",
+      "w": 375,
+      "x": 455,
+      "y": 4840
+    },
+    "MobileDefault.dc.html": {
+      "h": 812,
+      "is_interactive": true,
+      "title": "Mobile · Default + first-visit tip (prototype: tap the search icon)",
+      "w": 375,
+      "x": 0,
+      "y": 4840
+    },
+    "MobileTyping.dc.html": {
+      "h": 812,
+      "is_interactive": true,
+      "title": "Mobile · Typing, query understood (prototype: remove a tag)",
+      "w": 375,
+      "x": 910,
+      "y": 4840
+    },
+    "Typing.dc.html": {
+      "h": 820,
+      "title": "Recommended · Active (typing, query understood)",
+      "w": 1440,
+      "x": 1520,
+      "y": 2444
+    },
+    "Typing992.dc.html": {
+      "h": 820,
+      "title": "992px · Active (typing, query understood)",
+      "w": 992,
+      "x": 2144,
+      "y": 6140
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-17T09:25:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "t3",
+    "t5",
+    "m1",
+    "t6",
+    "n992"
+  ],
+  "notes": {
+    "m1": {
+      "fill": "gray",
+      "text": "Mobile notes\n• Header icon uses the contextual-search glyph (option B): icon-only, so the sparkle sits inside the lens.\n• Search opens as a full-screen sheet instead of the left drawer: more room, one Cancel instead of back + ✕, and clearing the query never drops into the menu.\n• First-visit tip waits until the sign-up pop-up is closed.\n• Input text is 17px so iOS doesn’t zoom the page on focus.\n• Product data in the typing state is demo data.",
+      "w": 420,
+      "x": 1400,
+      "y": 4840
+    },
+    "n992": {
+      "fill": "gray",
+      "text": "992px notes\n• Content width 928px (32px side margins).\n• Search field 220px at rest, 300px when focused (live site: ~118px / ~250px).\n• Panel columns 300px + fluid, 40px gap; 3 product cards stay.\n• First-visit tip 260px wide, arrow centred on the 220px field.\n• Long queries scroll on one line, as at 1440px.",
+      "w": 400,
+      "x": 3216,
+      "y": 6140
+    },
+    "t3": {
+      "kind": "title1",
+      "maxW": 2960,
+      "text": "Recommended · active states that show the search understands context",
+      "w": 240,
+      "x": 0,
+      "y": 2164
+    },
+    "t5": {
+      "kind": "title1",
+      "maxW": 1285,
+      "text": "Mobile · recommended",
+      "w": 240,
+      "x": 0,
+      "y": 4590
+    },
+    "t6": {
+      "kind": "title1",
+      "maxW": 3136,
+      "text": "Desktop · 992px breakpoint",
+      "w": 240,
+      "x": 0,
+      "y": 5900
+    }
+  },
+  "order": [
+    "Default.dc.html",
+    "Active.dc.html",
+    "Typing.dc.html",
+    "MobileDefault.dc.html",
+    "MobileActive.dc.html",
+    "MobileTyping.dc.html",
+    "Default992.dc.html",
+    "Active992.dc.html",
+    "Typing992.dc.html"
+  ],
+  "pages": [],
+  "title": "COACH Contextual Search – Audit & Recommended Active State"
+}

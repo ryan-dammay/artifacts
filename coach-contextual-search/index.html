@@ -14,10 +14,14 @@ h1{margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:40p
 header.top p{margin:12px auto 0;max-width:720px;color:#4A4A4A}
 main{max-width:1480px;margin:0 auto;padding:16px 24px 80px}
 .sec{padding-top:48px}
-h2{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#595959;font-weight:400}
+h2{margin:0 0 20px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;line-height:1.2}
+.note{align-self:start;background:#FFFFFF;box-shadow:0 0 0 1px #E5E5E5;padding:20px 22px;font-size:14px;color:#333333;max-width:420px}
+.note h3{margin:0 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#595959;font-weight:400}
+.note ul{margin:0;padding-left:18px}
+.note li{margin:4px 0}
 .lede{margin:8px 0 20px;max-width:760px;color:#333333}
 .grid{display:grid;gap:28px;grid-template-columns:1fr}
-.grid-default,.grid-active,.grid-d992{grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr))}
+.grid-rec,.grid-d992{grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr))}
 .grid-mobile{grid-template-columns:repeat(auto-fit,minmax(260px,375px))}
 .board{margin:0;min-width:0}
 figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px;font-size:13px}
@@ -33,89 +37,59 @@ footer{max-width:1480px;margin:0 auto;padding:0 24px 48px;color:#595959;font-siz
 <header class="top">
   <img src="assets/coach-logo.png" alt="COACH">
   <h1>Contextual Search</h1>
-  <p>Audit of the live coach.ae search and the recommended design: a contextual-search icon, an animated placeholder, a first-visit tip, and active states that show what the search understood. Boards marked Prototype are clickable.</p>
+  <p>Recommended design for contextual search on coach.ae: a contextual-search icon, an animated placeholder, a first-visit tip, and active states that show what the search understood. Boards marked Prototype are clickable.</p>
 </header>
 <main>
-  <section class="sec sec-current">
-    <h2>Current state</h2>
-    <p class="lede">The live coach.ae search on desktop: a plain field, and an active panel with products and Popular searches.</p>
-    <div class="grid grid-current">
+  <section class="sec sec-rec">
+    <h2>Recommended · active states that show the search understands context</h2>
+    <div class="grid grid-rec">
       <figure class="board" data-w="1440" data-h="700" style="--w:1440;--h:700">
-        <figcaption><span class="t">Current · live on coach.ae (Default + Active)</span><a href="boards/Main.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/Main.html" title="Current · live on coach.ae (Default + Active)" loading="lazy" scrolling="no" width="1440" height="700"></iframe></div>
-      </figure>
-    </div>
-  </section>
-  <section class="sec sec-default">
-    <h2>Recommended · default state</h2>
-    <p class="lede">A sparkle icon, an animated “Search ‘…’” placeholder with COACH sample queries, and a one-time tip on first visit.</p>
-    <div class="grid grid-default">
-      <figure class="board" data-w="1440" data-h="700" style="--w:1440;--h:700">
-        <figcaption><span class="t">Recommended · Default (animated placeholder + first-visit tip)</span><span class="tag">Prototype</span><a href="boards/Default.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/Default.html" title="Recommended · Default (animated placeholder + first-visit tip)" loading="lazy" scrolling="no" width="1440" height="700"></iframe></div>
-      </figure><figure class="board" data-w="1440" data-h="700" style="--w:1440;--h:700">
-        <figcaption><span class="t">Search icon · options</span><a href="boards/IconOptions.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/IconOptions.html" title="Search icon · options" loading="lazy" scrolling="no" width="1440" height="700"></iframe></div>
-      </figure>
-    </div>
-  </section>
-  <section class="sec sec-active">
-    <h2>Recommended · active states</h2>
-    <p class="lede">The open panel teaches contextual search; while typing, the panel shows what the search understood as removable tags.</p>
-    <div class="grid grid-active">
-      <figure class="board" data-w="1440" data-h="940" style="--w:1440;--h:940">
-        <figcaption><span class="t">Recommended · Active (click the search to open, Esc or Close to dismiss)</span><span class="tag">Prototype</span><a href="boards/Active.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/Active.html" title="Recommended · Active (click the search to open, Esc or Close to dismiss)" loading="lazy" scrolling="no" width="1440" height="940"></iframe></div>
+        <figcaption><span class="t">Recommended · Default (animated placeholder)</span><span class="tag">Prototype</span><a href="boards/Default.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/Default.html" title="Recommended · Default (animated placeholder)" loading="lazy" scrolling="no" width="1440" height="700"></iframe></div>
+      </figure><figure class="board" data-w="1440" data-h="940" style="--w:1440;--h:940">
+        <figcaption><span class="t">Recommended · Active (prototype: click the search to open, Esc or Close to dismiss)</span><span class="tag">Prototype</span><a href="boards/Active.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/Active.html" title="Recommended · Active (prototype: click the search to open, Esc or Close to dismiss)" loading="lazy" scrolling="no" width="1440" height="940"></iframe></div>
       </figure><figure class="board" data-w="1440" data-h="820" style="--w:1440;--h:820">
         <figcaption><span class="t">Recommended · Active (typing, query understood)</span><a href="boards/Typing.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
         <div class="frame"><iframe src="boards/Typing.html" title="Recommended · Active (typing, query understood)" loading="lazy" scrolling="no" width="1440" height="820"></iframe></div>
       </figure>
-    </div>
-  </section>
-  <section class="sec sec-mcurrent">
-    <h2>Mobile · current state</h2>
-    <p class="lede">The live mobile search: icon-only header, left drawer, and a typing state with unrelated suggestions.</p>
-    <div class="grid grid-mcurrent">
-      <figure class="board" data-w="2100" data-h="960" style="--w:2100;--h:960">
-        <figcaption><span class="t">Mobile · current · live on coach.ae</span><a href="boards/MobileCurrent.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/MobileCurrent.html" title="Mobile · current · live on coach.ae" loading="lazy" scrolling="no" width="2100" height="960"></iframe></div>
-      </figure>
+      
     </div>
   </section>
   <section class="sec sec-mobile">
     <h2>Mobile · recommended</h2>
-    <p class="lede">Header from the COACH 2024 library (sparkles + search), a full-screen search sheet, and the same contextual states as desktop.</p>
     <div class="grid grid-mobile">
       <figure class="board" data-w="375" data-h="812" style="--w:375;--h:812">
-        <figcaption><span class="t">Mobile · Default + first-visit tip (tap the search icon)</span><span class="tag">Prototype</span><a href="boards/MobileDefault.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/MobileDefault.html" title="Mobile · Default + first-visit tip (tap the search icon)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
+        <figcaption><span class="t">Mobile · Default + first-visit tip (prototype: tap the search icon)</span><span class="tag">Prototype</span><a href="boards/MobileDefault.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/MobileDefault.html" title="Mobile · Default + first-visit tip (prototype: tap the search icon)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
       </figure><figure class="board" data-w="375" data-h="812" style="--w:375;--h:812">
-        <figcaption><span class="t">Mobile · Active, empty (tap an example)</span><span class="tag">Prototype</span><a href="boards/MobileActive.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/MobileActive.html" title="Mobile · Active, empty (tap an example)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
+        <figcaption><span class="t">Mobile · Active, empty (prototype: tap an example)</span><span class="tag">Prototype</span><a href="boards/MobileActive.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/MobileActive.html" title="Mobile · Active, empty (prototype: tap an example)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
       </figure><figure class="board" data-w="375" data-h="812" style="--w:375;--h:812">
-        <figcaption><span class="t">Mobile · Typing, query understood (remove a tag)</span><span class="tag">Prototype</span><a href="boards/MobileTyping.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/MobileTyping.html" title="Mobile · Typing, query understood (remove a tag)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
+        <figcaption><span class="t">Mobile · Typing, query understood (prototype: remove a tag)</span><span class="tag">Prototype</span><a href="boards/MobileTyping.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/MobileTyping.html" title="Mobile · Typing, query understood (prototype: remove a tag)" loading="lazy" scrolling="no" width="375" height="812"></iframe></div>
       </figure>
+      <aside class="note"><h3>Mobile notes</h3><ul><li>Header icon uses the contextual-search glyph (option B): icon-only, so the sparkle sits inside the lens.</li><li>Search opens as a full-screen sheet instead of the left drawer: more room, one Cancel instead of back + ✕, and clearing the query never drops into the menu.</li><li>First-visit tip waits until the sign-up pop-up is closed.</li><li>Input text is 17px so iOS doesn’t zoom the page on focus.</li><li>Product data in the typing state is demo data.</li></ul></aside>
     </div>
   </section>
   <section class="sec sec-d992">
     <h2>Desktop · 992px breakpoint</h2>
-    <p class="lede">Content width 928px; field 220px at rest and 255px when focused, 32px from the logo.</p>
     <div class="grid grid-d992">
       <figure class="board" data-w="992" data-h="700" style="--w:992;--h:700">
         <figcaption><span class="t">992px · Default (animated placeholder + first-visit tip)</span><span class="tag">Prototype</span><a href="boards/Default992.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
         <div class="frame"><iframe src="boards/Default992.html" title="992px · Default (animated placeholder + first-visit tip)" loading="lazy" scrolling="no" width="992" height="700"></iframe></div>
       </figure><figure class="board" data-w="992" data-h="940" style="--w:992;--h:940">
-        <figcaption><span class="t">992px · Active (click the search to open, Esc or Close to dismiss)</span><span class="tag">Prototype</span><a href="boards/Active992.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
-        <div class="frame"><iframe src="boards/Active992.html" title="992px · Active (click the search to open, Esc or Close to dismiss)" loading="lazy" scrolling="no" width="992" height="940"></iframe></div>
+        <figcaption><span class="t">992px · Active (prototype: click the search to open, Esc or Close to dismiss)</span><span class="tag">Prototype</span><a href="boards/Active992.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+        <div class="frame"><iframe src="boards/Active992.html" title="992px · Active (prototype: click the search to open, Esc or Close to dismiss)" loading="lazy" scrolling="no" width="992" height="940"></iframe></div>
       </figure><figure class="board" data-w="992" data-h="820" style="--w:992;--h:820">
         <figcaption><span class="t">992px · Active (typing, query understood)</span><a href="boards/Typing992.html" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
         <div class="frame"><iframe src="boards/Typing992.html" title="992px · Active (typing, query understood)" loading="lazy" scrolling="no" width="992" height="820"></iframe></div>
       </figure>
+      <aside class="note"><h3>992px notes</h3><ul><li>Content width 928px (32px side margins).</li><li>Search field 220px at rest, 300px when focused (live site: ~118px / ~250px).</li><li>Panel columns 300px + fluid, 40px gap; 3 product cards stay.</li><li>First-visit tip 260px wide, arrow centred on the 220px field.</li><li>Long queries scroll on one line, as at 1440px.</li></ul></aside>
     </div>
   </section>
 </main>
-<footer>Designed in Claude; this GitHub copy runs the same boards with a small stand-in runtime (source/dc-lite.js). Products and prices are from coach.ae at the time of the audit.</footer>
+<footer>Designed in Claude; this GitHub copy runs the same boards with a small stand-in runtime (source/dc-lite.js). Products and prices are from coach.ae at the time of the design; product data in the typing states is demo data.</footer>
 <script>
 function fit(){document.querySelectorAll('.board').forEach(function(b){var f=b.querySelector('.frame'),i=b.querySelector('iframe');var s=f.clientWidth/Number(b.dataset.w);i.style.transform='scale('+s+')';});}
 window.addEventListener('resize',fit);window.addEventListener('load',fit);fit();
