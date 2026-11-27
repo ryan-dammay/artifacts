@@ -1035,6 +1035,10 @@
     {
      "label": "Jira #BLMHW-4312",
      "url": "https://bloomingdalesme.atlassian.net/browse/BLMHW-4312"
+    },
+    {
+     "label": "URL",
+     "url": "https://ryan-dammay.github.io/artifacts/blm-contextual-search/"
     }
    ],
    "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
@@ -1042,7 +1046,7 @@
    "start": "2026-11-23",
    "status": "in-progress",
    "title": "WEB - Help Customers discover Contextual Search",
-   "updatedAt": 1795628494848
+   "updatedAt": 1795752691105
   }
  },
  {
