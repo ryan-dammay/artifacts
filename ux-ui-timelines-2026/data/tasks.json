@@ -1015,6 +1015,7 @@
   "data": {
    "area": "Bloomingdale's",
    "assignee": "Ryan",
+   "completedOn": "2026-11-27",
    "createdAt": 1795598368481,
    "date": "2026-11-27",
    "dateHistory": [
@@ -1050,8 +1051,7 @@
    "start": "2026-11-23",
    "status": "done",
    "title": "WEB - Help Customers discover Contextual Search",
-   "updatedAt": 1795756345843,
-   "completedOn": "2026-11-27"
+   "updatedAt": 1795756345843
   }
  },
  {
