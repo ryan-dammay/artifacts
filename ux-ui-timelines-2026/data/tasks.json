@@ -1042,11 +1042,12 @@
     }
    ],
    "notes": "As a shopper, I want to see example searches written in everyday language so that I know I can describe what I need, including an occasion or style, to find relevant products.",
-   "ready": false,
+   "ready": true,
    "start": "2026-11-23",
-   "status": "in-progress",
+   "status": "done",
    "title": "WEB - Help Customers discover Contextual Search",
-   "updatedAt": 1795752691105
+   "updatedAt": 1795756345843,
+   "completedOn": "2026-11-27"
   }
  },
  {
